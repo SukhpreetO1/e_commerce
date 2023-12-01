@@ -1,0 +1,10 @@
+body{ 
+    font: 14px sans-serif; 
+}
+.wrapper{ 
+    width: 360px;
+    padding: 20px;
+    position: absolute;
+    left: 43%;
+    top: 25%;
+}

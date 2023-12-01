@@ -1,6 +1,6 @@
 <?php
-require_once "..\session.php";
-require_once "..\config\config.php";
+require_once "../session.php";
+require_once "../config/config.php";
  
 $email = $password = "";
 $email_err = $password_err = $login_err = "";
@@ -59,10 +59,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+    <link rel="stylesheet" href="../login/login.css">
+    <script src="login.js"></script> 
 </head>
 <body>
     <div class="wrapper">
@@ -75,21 +73,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }        
         ?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form method="post" onsubmit="validate_form(event)">
             <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
-                <span class="invalid-feedback"><?php echo $email_err; ?></span>
+                <label name="email" >Email</label>
+                <input type="text" id="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                <span class="invalid-feedback" id="email_err"></span>
             </div>    
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                <label name="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password ?>">
+                <span class="invalid-feedback" id="password_err"></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
             </div>
-            <p>Don't have an account? <a href="..\signup\signup.php">Sign up now</a>.</p>
+            <p>Don't have an account? <a href="../signup/signup.php">Sign up now</a>.</p>
         </form>
     </div>
 </body>

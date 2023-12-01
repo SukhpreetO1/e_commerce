@@ -1,0 +1,11 @@
+body{ 
+    font: 14px sans-serif; 
+}
+.wrapper{ 
+    width: 360px; 
+    padding: 20px; 
+    position: absolute;
+    left: 42%;
+    right: 50%;
+    top: 15%;
+}
