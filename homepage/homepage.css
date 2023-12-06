@@ -1,0 +1,13 @@
+.nav-item.dropdown{
+    position: absolute;
+    right: 2%;
+}
+
+a#navbarDropdownMenuLink, a.nav-link {
+    color: white !important;
+}
+
+.dropdown-menu.show{
+    position: absolute;
+    left: -3rem;
+}
