@@ -1,6 +1,6 @@
-.nav-item.dropdown{
+div#search_filter{
     position: absolute;
-    right: 2%;
+    right: 1%;
 }
 
 a#navbarDropdownMenuLink, a.nav-link {
@@ -10,4 +10,9 @@ a#navbarDropdownMenuLink, a.nav-link {
 .dropdown-menu.show{
     position: absolute;
     left: -3rem;
+}
+
+#home_content{
+    position: absolute;
+    left: 5%;
 }
