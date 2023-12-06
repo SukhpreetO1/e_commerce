@@ -1,200 +1,200 @@
-var fieldValidationStatus = {
-  first_name: { isValid: false, errorMessage: '' },
-  last_name: { isValid: false, errorMessage: '' },
-  username: { isValid: false, errorMessage: '' },
-  email: { isValid: false, errorMessage: '' },
-  password: { isValid: false, errorMessage: '' },
-  confirm_password: { isValid: false, errorMessage: '' }
+var field_validation_status = {
+  first_name: { is_valid: false, error_message: '' },
+  last_name: { is_valid: false, error_message: '' },
+  username: { is_valid: false, error_message: '' },
+  email: { is_valid: false, error_message: '' },
+  password: { is_valid: false, error_message: '' },
+  confirm_password: { is_valid: false, error_message: '' }
 };
 
 document.getElementById('first_name').addEventListener('blur', function () {
-  validateFieldAndUpdateStatus('first_name', 'First Name', /^[a-zA-Z]+$/);
+  validate_field_and_update_status('first_name', 'First Name', /^[a-zA-Z]+$/);
 });
 
 document.getElementById('last_name').addEventListener('blur', function () {
-  validateFieldAndUpdateStatus('last_name', 'Last Name', /^[a-zA-Z]+$/);
+  validate_field_and_update_status('last_name', 'Last Name', /^[a-zA-Z]+$/);
 });
 
 document.getElementById('username').addEventListener('blur', function () {
-  validateFieldAndUpdateStatus('username', 'Username', /^[a-zA-Z0-9]+$/);
+  validate_field_and_update_status('username', 'Username', /^[a-zA-Z0-9]+$/);
 });
 
 document.getElementById('email').addEventListener('blur', function () {
-  validateEmailAndUpdateStatus();
+  validate_email_and_update_status();
 });
 
 document.getElementById('password').addEventListener('blur', function () {
-  validatePasswordAndUpdateStatus();
+  validate_password_and_update_status();
 });
 
 document.getElementById('confirm_password').addEventListener('blur', function () {
-  validateConfirmPasswordAndUpdateStatus();
+  validate_confirm_password_and_update_status();
 });
 
 // Event listeners for input events on input fields
 document.getElementById('first_name').addEventListener('input', function () {
-  clearErrorMessages('first_name_err');
-  clearInvalidClass('first_name');
-  validateFieldOnInput('first_name', 'First Name', /^[a-zA-Z]+$/);
+  clear_error_messages('first_name_err');
+  clear_invalid_class('first_name');
+  validate_field_on_input('first_name', 'First Name', /^[a-zA-Z]+$/);
 });
 
 document.getElementById('last_name').addEventListener('input', function () {
-  clearErrorMessages('last_name_err');
-  clearInvalidClass('last_name');
-  validateFieldOnInput('last_name', 'Last Name', /^[a-zA-Z]+$/);
+  clear_error_messages('last_name_err');
+  clear_invalid_class('last_name');
+  validate_field_on_input('last_name', 'Last Name', /^[a-zA-Z]+$/);
 });
 
 document.getElementById('username').addEventListener('input', function () {
-  clearErrorMessages('username_err');
-  clearInvalidClass('username');
-  validateFieldOnInput('username', 'Username', /^[a-zA-Z0-9]+$/);
+  clear_error_messages('username_err');
+  clear_invalid_class('username');
+  validate_field_on_input('username', 'Username', /^[a-zA-Z]+[a-zA-Z0-9]*$/);
 });
 
 document.getElementById('email').addEventListener('input', function () {
-  clearErrorMessages('email_err');
-  clearInvalidClass('email');
-  validateFieldOnInput('email', 'Email', /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
+  clear_error_messages('email_err');
+  clear_invalid_class('email');
+  validate_field_on_input('email', 'Email', /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
 });
 
 document.getElementById('password').addEventListener('input', function () {
-  clearErrorMessages('password_err');
-  clearInvalidClass('password');
-  validateFieldOnInput('password', 'Password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
+  clear_error_messages('password_err');
+  clear_invalid_class('password');
+  validate_field_on_input('password', 'Password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
 });
 
 document.getElementById('confirm_password').addEventListener('input', function () {
-  clearErrorMessages('confirm_password_err');
-  clearInvalidClass('confirm_password');
-  validateFieldOnInput('confirm_password', 'Confirm Password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
+  clear_error_messages('confirm_password_err');
+  clear_invalid_class('confirm_password');
+  validate_field_on_input('confirm_password', 'Confirm Password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
 });
 
 // Event listener for form submission
 document.getElementById('submit_button').addEventListener('click', function (event) {
-  clearErrorMessages();
+  clear_error_messages();
 
   // Validate all fields
-  var isValid = true;
+  var is_valid = true;
 
-  isValid = isValid && validateFieldAndUpdateStatus('first_name', 'First Name', /^[a-zA-Z]+$/);
-  isValid = isValid && validateFieldAndUpdateStatus('last_name', 'Last Name', /^[a-zA-Z]+$/);
-  isValid = isValid && validateFieldAndUpdateStatus('username', 'Username', /^[a-zA-Z0-9]+$/);
-  isValid = isValid && validateEmailAndUpdateStatus();
-  isValid = isValid && validatePasswordAndUpdateStatus();
-  isValid = isValid && validateConfirmPasswordAndUpdateStatus();
+  is_valid = is_valid && validate_field_and_update_status('first_name', 'First Name', /^[a-zA-Z]+$/);
+  is_valid = is_valid && validate_field_and_update_status('last_name', 'Last Name', /^[a-zA-Z]+$/);
+  is_valid = is_valid && validate_field_and_update_status('username', 'Username', /^[a-zA-Z0-9]+$/);
+  is_valid = is_valid && validate_email_and_update_status();
+  is_valid = is_valid && validate_password_and_update_status();
+  is_valid = is_valid && validate_confirm_password_and_update_status();
 
-  if (!isValid) {
+  if (!is_valid) {
     event.preventDefault(); // Prevent form submission if there are validation errors
   }
 });
 
 // Validation functions
-function validateFieldAndUpdateStatus(fieldId, fieldName, regex) {
-  clearErrorMessages();
-  var isValid = true;
-  var fieldValue = document.getElementById(fieldId).value;
+function validate_field_and_update_status(field_id, field_name, regex) {
+  clear_error_messages();
+  var is_valid = true;
+  var field_value = document.getElementById(field_id).value;
 
-  if (isEmpty(fieldValue)) {
-    displayError(fieldId + '_err', fieldName + ' cannot be empty');
-    addInvalidClass(fieldId);
-    isValid = false;
-  } else if (!regex.test(fieldValue)) {
-    displayError(fieldId + '_err', fieldName + ' should contain only specified characters');
-    addInvalidClass(fieldId);
-    isValid = false;
+  if (is_empty(field_value)) {
+    display_error(field_id + '_err', field_name + ' cannot be empty');
+    add_invalid_class(field_id);
+    is_valid = false;
+  } else if (!regex.test(field_value)) {
+    display_error(field_id + '_err', field_name + ' should contain only specified characters');
+    add_invalid_class(field_id);
+    is_valid = false;
   }
 
-  fieldValidationStatus[fieldId] = isValid;
-  return isValid;
+  field_validation_status[field_id] = is_valid;
+  return is_valid;
 }
 
-function validateFieldOnInput(fieldId, fieldName, regex) {
-  var fieldValue = document.getElementById(fieldId).value;
+function validate_field_on_input(field_id, field_name, regex) {
+  var field_value = document.getElementById(field_id).value;
 
-  if (!isEmpty(fieldValue) && regex.test(fieldValue)) {
-    clearErrorMessages();
-    clearInvalidClass(fieldId);
-    fieldValidationStatus[fieldId] = true;
+  if (!is_empty(field_value) && regex.test(field_value)) {
+    clear_error_messages();
+    clear_invalid_class(field_id);
+    field_validation_status[field_id] = true;
   }
 }
 
-function validateEmailAndUpdateStatus() {
+function validate_email_and_update_status() {
   var email = document.getElementById('email').value;
   var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-  if (isEmpty(email)) {
-    displayError('email_err', 'Email cannot be empty');
-    addInvalidClass('email');
+  if (is_empty(email)) {
+    display_error('email_err', 'Email cannot be empty');
+    add_invalid_class('email');
     return false;
   } else if (!emailRegex.test(email)) {
-    displayError('email_err', 'Invalid email format. Format should be like abc@gmail.com');
-    addInvalidClass('email');
+    display_error('email_err', 'Invalid email format. Format should be like abc@gmail.com');
+    add_invalid_class('email');
     return false;
   }
 
   return true;
 }
 
-function validatePasswordAndUpdateStatus() {
+function validate_password_and_update_status() {
   var password = document.getElementById('password').value;
-  var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+  var password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
-  if (isEmpty(password)) {
-    displayError('password_err', 'Password cannot be empty');
-    addInvalidClass('password');
+  if (is_empty(password)) {
+    display_error('password_err', 'Password cannot be empty');
+    add_invalid_class('password');
     return false;
-  } else if (!passwordRegex.test(password)) {
-    displayError('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
-    addInvalidClass('password');
+  } else if (!password_regex.test(password)) {
+    display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
+    add_invalid_class('password');
     return false;
   }
 
   return true;
 }
 
-function validateConfirmPasswordAndUpdateStatus() {
+function validate_confirm_password_and_update_status() {
   var password = document.getElementById('password').value;
-  var confirmPassword = document.getElementById('confirm_password').value;
+  var confirm_password = document.getElementById('confirm_password').value;
 
-  if (isEmpty(confirmPassword)) {
-    displayError('confirm_password_err', 'Confirm Password cannot be empty');
-    addInvalidClass('confirm_password');
+  if (is_empty(confirm_password)) {
+    display_error('confirm_password_err', 'Confirm Password cannot be empty');
+    add_invalid_class('confirm_password');
     return false;
-  } else if (password !== confirmPassword) {
-    displayError('confirm_password_err', 'Passwords do not match');
-    addInvalidClass('confirm_password');
+  } else if (password !== confirm_password) {
+    display_error('confirm_password_err', 'Passwords do not match');
+    add_invalid_class('confirm_password');
     return false;
   }
 
   return true;
 }
 
-function addInvalidClass(field) {
+function add_invalid_class(field) {
   document.getElementById(field).classList.add('is-invalid');
 }
 
-function clearInvalidClass(field) {
+function clear_invalid_class(field) {
   document.getElementById(field).classList.remove('is-invalid');
 }
 
-function isEmpty(value) {
+function is_empty(value) {
   return value.trim() === '';
 }   
 
-function displayError(elementId, message) {
-  var errorMessageElement = document.getElementById(elementId);
-  errorMessageElement.textContent = message;
+function display_error(element_id, message) {
+  var error_message_element = document.getElementById(element_id);
+  error_message_element.text_content = message;
 }
 
-function clearErrorMessages() {
-  clearErrorMessage('first_name_err');
-  clearErrorMessage('last_name_err');
-  clearErrorMessage('username_err');
-  clearErrorMessage('email_err');
-  clearErrorMessage('password_err');
-  clearErrorMessage('confirm_password_err');
+function clear_error_messages() {
+  clear_error_message('first_name_err');
+  clear_error_message('last_name_err');
+  clear_error_message('username_err');
+  clear_error_message('email_err');
+  clear_error_message('password_err');
+  clear_error_message('confirm_password_err');
 }
 
-function clearErrorMessage(elementId) {
-  var errorMessageElement = document.getElementById(elementId);
-  errorMessageElement.textContent = '';
+function clear_error_message(element_id) {
+  var error_message_element = document.getElementById(element_id);
+  error_message_element.text_content = '';
 }

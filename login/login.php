@@ -3,27 +3,29 @@ require_once "../session.php";
 require_once "../config/config.php";
 require_once "../login/login_php.php";
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../login/login.css">
 </head>
+
 <body>
     <div class="wrapper">
         <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
 
-        <?php 
-        if(!empty($login_err)){
+        <?php
+        if (!empty($login_err)) {
             echo '<div class="alert alert-danger">' . $login_err . '</div>';
-        }        
+        }
         ?>
 
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"  onsubmit="validateForm(event)">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="validateForm(event)">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo htmlspecialchars($email); ?>">
@@ -40,6 +42,7 @@ require_once "../login/login_php.php";
             <p>Don't have an account? <a href="../signup/signup.php">Sign up now</a>.</p>
         </form>
     </div>
-    <script src="login.js"></script> 
+    <script src="login.js"></script>
 </body>
+
 </html>

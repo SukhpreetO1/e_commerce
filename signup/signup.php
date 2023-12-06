@@ -2,15 +2,17 @@
 require_once "../config/config.php";
 require_once "../signup/signup_php.php";
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="./signup.css">
 </head>
+
 <body>
     <div class="wrapper">
         <h2>Sign Up</h2>
@@ -51,7 +53,8 @@ require_once "../signup/signup_php.php";
             </div>
             <p>Already have an account? <a href="..\login\login.php">Login here</a>.</p>
         </form>
-    </div>    
+    </div>
     <script type="text/javascript" src="../signup/signup.js"></script>
 </body>
+
 </html>
