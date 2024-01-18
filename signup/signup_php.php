@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate email
     if(empty(trim($_POST["email"]))) {
         $email_err = "Please enter your email.";
-    } elseif(!filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL)) {
+    } elseif(!filter_var(!preg_match('/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/', trim($_POST["username"])), FILTER_VALIDATE_EMAIL)) {
         $email_err = "Invalid email format.";
     } else {
         $email = trim($_POST["email"]);
@@ -46,8 +46,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate username
     if(empty(trim($_POST["username"]))) {
         $username_err = "Please enter a username.";
-    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))) {
-        $username_err = "Username can only contain letters, numbers, and underscores.";
+    } elseif(!preg_match('/^(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$/', trim($_POST["username"]))) {
+        $username_err = "Username must contain 1 capital letter and 1 numbers.";
     } else {
         $username = trim($_POST["username"]);
 
@@ -71,15 +71,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate password
     if(empty(trim($_POST["password"]))) {
         $password_err = "Please enter a password.";
-    } elseif(strlen(trim($_POST["password"])) < 6) {
-        $password_err = "Password must have at least 6 characters.";
+    } elseif(trim(!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/', $_POST["password"]))) {
+        $password_err = "Password must have atleast 6 characters, 1 capital letter and 1 special character";
     } else {
         $password = trim($_POST["password"]);
     }
 
     // Validate confirm password
     if(empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Please confirm password.";
+        $confirm_password_err = "Please enter the confirm password.";
     } else {
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($password_err) && ($password != $confirm_password)) {

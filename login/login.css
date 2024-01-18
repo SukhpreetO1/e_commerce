@@ -5,6 +5,14 @@ body{
     width: 360px;
     padding: 20px;
     position: absolute;
-    left: 43%;
+    left: 40%;
     top: 25%;
+}
+
+h2.login_page_heading {
+    margin: 0 0 3% 35%;
+}
+
+.form-group.login_submit_details {
+    text-align: center;
 }
