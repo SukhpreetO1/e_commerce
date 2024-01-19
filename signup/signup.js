@@ -32,34 +32,6 @@ document.getElementById('confirm_password').addEventListener('blur', function ()
   validate_confirm_password_and_update_status();
 });
 
-function validate_field_and_update_status(field_id, field_name, regex) {
-  var is_valid = true;
-  var field_element = document.getElementById(field_id);
-  
-  if (field_element) {
-    var field_value = field_element.value;
-
-    if (is_empty(field_value)) {
-      display_error(field_id + '_err', field_name + ' cannot be empty');
-      add_invalid_class(field_id);
-      is_valid = false;
-    } else if (!regex.test(field_value)) {
-      display_error(field_id + '_err', field_name + ' should contain only specified characters');
-      add_invalid_class(field_id);
-      is_valid = false;
-    }
-
-    if (!is_empty(field_value)) {
-      clear_error_messages(field_id + '_err');
-      clear_invalid_class(field_id);
-    }
-
-    field_validation_status[field_id] = is_valid;
-  }
-  
-  return is_valid;
-}
-
 function validate_first_name() {
   var first_name = document.getElementById('first_name').value;
   var firstNameRegex = /^[a-zA-Z]+$/;
@@ -109,6 +81,81 @@ function validate_username() {
   }
 
   return true;
+}
+
+
+
+
+// Event listener for form submission
+document.getElementById('submit_button').addEventListener('click', function (event) {
+  clear_error_messages();
+
+  // Validate all fields
+  var is_valid = true;
+  var empty_fields = [];
+
+  if (!validate_field_and_update_status('first_name', 'First Name', /^[a-zA-Z]+$/)) {
+    empty_fields.push('first_name');
+    is_valid = false;
+  }
+
+  if (!validate_field_and_update_status('last_name', 'Last Name', /^[a-zA-Z]+$/)) {
+    empty_fields.push('last_name');
+    is_valid = false;
+  }
+
+  if (!validate_field_and_update_status('username', 'Username', /^[a-zA-Z0-9]+$/)) {
+    empty_fields.push('username');
+    is_valid = false;
+  }
+
+  if (!validate_email_and_update_status()) {
+    empty_fields.push('email');
+    is_valid = false;
+  }
+
+  if (!validate_password_and_update_status()) {
+    empty_fields.push('password');
+    is_valid = false;
+  }
+
+  if (!validate_confirm_password_and_update_status()) {
+    empty_fields.push('confirm_password');
+    is_valid = false;
+  }
+
+  if (!is_valid) {
+    event.preventDefault(); // Prevent form submission if there are validation errors
+    display_error_messages(empty_fields);
+  }
+});
+
+function validate_field_and_update_status(field_id, field_name, regex) {
+  var is_valid = true;
+  var field_element = document.getElementById(field_id);
+  
+  if (field_element) {
+    var field_value = field_element.value;
+
+    if (is_empty(field_value)) {
+      display_error(field_id + '_err', field_name + ' cannot be empty');
+      add_invalid_class(field_id);
+      is_valid = false;
+    } else if (!regex.test(field_value)) {
+      display_error(field_id + '_err', field_name + ' should contain only specified characters');
+      add_invalid_class(field_id);
+      is_valid = false;
+    }
+
+    if (!is_empty(field_value)) {
+      clear_error_messages(field_id + '_err');
+      clear_invalid_class(field_id);
+    }
+
+    field_validation_status[field_id] = is_valid;
+  }
+  
+  return is_valid;
 }
 
 function validate_email_and_update_status() {
@@ -163,49 +210,9 @@ function validate_confirm_password_and_update_status() {
   return true;
 }
 
-// Event listener for form submission
-document.getElementById('submit_button').addEventListener('click', function (event) {
-  clear_error_messages();
 
-  // Validate all fields
-  var is_valid = true;
-  var empty_fields = [];
 
-  if (!validate_field_and_update_status('first_name', 'First Name', /^[a-zA-Z]+$/)) {
-    empty_fields.push('first_name');
-    is_valid = false;
-  }
 
-  if (!validate_field_and_update_status('last_name', 'Last Name', /^[a-zA-Z]+$/)) {
-    empty_fields.push('last_name');
-    is_valid = false;
-  }
-
-  if (!validate_field_and_update_status('username', 'Username', /^[a-zA-Z0-9]+$/)) {
-    empty_fields.push('username');
-    is_valid = false;
-  }
-
-  if (!validate_email_and_update_status()) {
-    empty_fields.push('email');
-    is_valid = false;
-  }
-
-  if (!validate_password_and_update_status()) {
-    empty_fields.push('password');
-    is_valid = false;
-  }
-
-  if (!validate_confirm_password_and_update_status()) {
-    empty_fields.push('confirm_password');
-    is_valid = false;
-  }
-
-  if (!is_valid) {
-    event.preventDefault(); // Prevent form submission if there are validation errors
-    display_error_messages(empty_fields);
-  }
-});
 
 // Function to display error messages for empty fields
 function display_error_messages(fields) {
