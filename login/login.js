@@ -16,26 +16,35 @@ function validateForm() {
     var password = document.getElementById('password').value;
     var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    
+    var isEmailValid = emailRegex.test(email);
+    var isPasswordValid = passwordRegex.test(password);
 
     // Validate email
     if (email === '') {
         displayError('email_err', 'Email cannot be empty');
         addInvalidClass('email');
-        return false;
-    } else if (!emailRegex.test(email)) {
+    } else if (!isEmailValid) {
         displayError('email_err', 'Invalid email format');
         addInvalidClass('email');
-        return false;
     }
 
     // Validate password
     if (password === '') {
         displayError('password_err', 'Password cannot be empty');
         addInvalidClass('password');
-        return false;
-    } else if (!passwordRegex.test(password)) {
+    } else if (!isPasswordValid || !/\d/.test(password) || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || password.length < 6 || password.length > 20) {
         displayError('password_err', 'Invalid password format');
         addInvalidClass('password');
+        return false;
+    }
+
+    // Check if either field has an error
+    if (email === '' || password === '') {
+        return false;
+    } 
+    
+    if (!isEmailValid && !isPasswordValid) {
         return false;
     }
 

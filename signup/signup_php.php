@@ -3,7 +3,6 @@ $first_name = $last_name = $email = $username = $password = $confirm_password = 
 $first_name_err = $last_name_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-
     // Validate first name
     if(empty(trim($_POST["first_name"]))) {
         $first_name_err = "Please enter your first name.";
@@ -21,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate email
     if(empty(trim($_POST["email"]))) {
         $email_err = "Please enter your email.";
-    } elseif(!filter_var(!preg_match('/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/', trim($_POST["username"])), FILTER_VALIDATE_EMAIL)) {
+    } elseif (!preg_match('/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/', trim($_POST["email"]))) {
         $email_err = "Invalid email format.";
     } else {
         $email = trim($_POST["email"]);
@@ -101,6 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_password = password_hash($password, PASSWORD_DEFAULT);
 
             if(mysqli_stmt_execute($stmt)) {
+                echo "Account Created Successfully.";
                 header("location: ../login/login.php");
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
