@@ -1,0 +1,98 @@
+/* login CSS */
+body{ 
+    font: 14px sans-serif; 
+}
+.wrapper.login{ 
+    width: 360px;
+    padding: 20px;
+    position: absolute;
+    left: 40%;
+    top: 25%;
+}
+
+h2.login_page_heading {
+    margin: 0 0 3% 35%;
+}
+
+.form-group.login_submit_details {
+    text-align: center;
+}
+
+
+/* signup CSS */
+.wrapper.signup{ 
+    width: 50%;
+    padding: 20px;
+    position: absolute;
+    left: 36%;
+    top: 15%;
+}
+
+.asterik_important{
+    color: red;
+}
+
+.name_details, .username_email_detail, .username_password_detail {
+    display: flex;
+    width: 32rem;
+}
+
+.signup_submit_details{
+    text-align: center;
+    position: absolute;
+    left: 15%;
+}
+
+.signup_heading{
+    margin: 0 0 2% 20%;
+}
+
+
+.first_name, .last_name, .username, .email, .password, .confirm_password{
+    width: 15rem
+}
+
+.form-group.mr-3 {
+    width: 15rem;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+
+/* Navbar css */
+nav.navbar.navbar-expand-lg.bg-dark {
+    height: 4rem;
+}
+
+.navbar_dropdown, .navbar_text {
+    color: white !important;
+}
+
+.dropdown-menu.show{
+    position: absolute;
+    left: -3rem;
+}
+
+.navbar_dropdown_menu.show {
+    margin-left: -50%;
+    margin-top: 6%;
+}
+
+.navbar_logo{
+    width: 50%;
+}
+
+.navbar_search_bar {
+    width: 16rem;
+}
+
+.navbar_text_items{
+    position: absolute;
+    right: 31rem;
+}
+.navbar_dashboard_search_bar{
+    position: absolute;
+    right: 14px;
+}

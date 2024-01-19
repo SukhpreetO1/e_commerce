@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
         }
     });
-
-    document.getElementById('email').addEventListener('blur', validateEmail);
-    document.getElementById('password').addEventListener('blur', validatePassword);
+    document.getElementById('email').addEventListener('blur', function () {
+        validateEmail();
+    });
+    document.getElementById('password').addEventListener('blur', function () {
+        validatePassword();
+    });
 });
 
 function validateForm() {
@@ -51,34 +54,35 @@ function validateForm() {
     return true;
 }
 
-function addInvalidClass(field) {
-    document.getElementById(field).classList.add('is-invalid');
-}
-
 function validateEmail() {
-    clearErrorMessage('email_err');
-
     var email = document.getElementById('email').value;
     var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-
-    if (email === '') {
+  
+    if (isEmpty(email)) {
         displayError('email_err', 'Email cannot be empty');
+        addInvalidClass('email');
+      return false;
     } else if (!emailRegex.test(email)) {
-        displayError('email_err', 'Invalid email format');
+        displayError('email_err', 'Invalid email format. Format should be like abc@gmail.com');
+        addInvalidClass('email');
+      return false;
     }
+    return true;
 }
 
 function validatePassword() {
-    clearErrorMessage('password_err');
-
     var password = document.getElementById('password').value;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-
-    if (password === '') {
+  
+    if (isEmpty(password)) {
         displayError('password_err', 'Password cannot be empty');
+        addInvalidClass('password');
     } else if (!passwordRegex.test(password)) {
-        displayError('password_err', 'Invalid password format');
+        displayError('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
+        addInvalidClass('password');
     }
+  
+    return true;
 }
 
 function displayError(elementId, message) {
@@ -86,12 +90,21 @@ function displayError(elementId, message) {
     errorMessageElement.textContent = message;
 }
 
-function clearErrorMessage(elementId) {
-    var errorMessageElement = document.getElementById(elementId);
-    errorMessageElement.textContent = '';
+function clearErrorMessages() {
+    var errorElements = document.getElementsByClassName('error-message');
+    for (var i = 0; i < errorElements.length; i++) {
+      errorElements[i].textContent = '';
+    }
+  }
+
+  function isEmpty(value) {
+    return typeof value === 'string' && value.trim() === '';
+  } 
+
+  function addInvalidClass(field) {
+    document.getElementById(field).classList.add('is-invalid');
 }
 
-function clearErrorMessages() {
-    clearErrorMessage('email_err');
-    clearErrorMessage('password_err');
-}
+function addInvalidClass(field) {
+    document.getElementById(field).classList.add('is-invalid');
+  }

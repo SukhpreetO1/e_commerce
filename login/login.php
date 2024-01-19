@@ -10,12 +10,12 @@ require_once "../login/login_php.php";
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../login/login.css">
+    <?php require_once "../common/links.php" ?>
+    <link rel="stylesheet" href="../common/common.css">
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper login">
         <h2 class="login_page_heading">Login</h2>
 
         <?php
@@ -25,18 +25,18 @@ require_once "../login/login_php.php";
         ?>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="validateForm(event)">
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" class="form-control email <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo htmlspecialchars($email); ?>">
+                <input type="text" id="email" name="email" class="form-control login_email <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo htmlspecialchars($email); ?>">
                 <span class="invalid-feedback" id="email_err"><?php echo $email_err; ?></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label name="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control password <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password ?>">
+                <input type="password" id="password" name="password" class="form-control password_password <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password ?>">
                 <span class="invalid-feedback" id="password_err"><?php echo $password_err; ?></span>
             </div>
-            <div class="form-group login_submit_details">
-                <input type="submit" class="btn btn-primary" value="Login">
+            <div class="form-group login_submit_details mt-3">
+                <input type="submit" id="login_submit" class="btn btn-primary" value="Login">
                 <p class="signup_page_redirect mt-2">Don't have an account? <a href="../signup/signup.php">Sign up now</a>.</p>
             </div>
         </form>
