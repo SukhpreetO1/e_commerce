@@ -34,6 +34,9 @@ require_once "../login/login_php.php";
                 <label name="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control password_password <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password ?>">
                 <span class="invalid-feedback" id="password_err"><?php echo $password_err; ?></span>
+                <div class="form-group forgot_password mt-3">
+                    <p class="login_forgot_password mt-2"><a href="./forgot_password.php">Forgot Password?</a></p>
+                </div>
             </div>
             <div class="form-group login_submit_details mt-3">
                 <input type="submit" id="login_submit" class="btn btn-primary" value="Login">
