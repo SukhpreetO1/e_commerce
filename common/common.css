@@ -100,3 +100,10 @@ nav.navbar.navbar-expand-lg.bg-dark {
     position: absolute;
     right: 14px;
 }
+
+
+/* forgot password mail */
+.container.forgot_password_mail_form {
+    width: 25rem;
+    margin-top: 11rem;
+}
