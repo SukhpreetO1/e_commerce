@@ -16,10 +16,10 @@
         </div>
         <form action="send_token_email.php" method="post">
             <div class="form-group">
-                <label for="email" class="email mt-2">Email address</label>
+                <label for="email" class="email mt-2">Email :</label>
                 <input type="email" name="email" class="form-control" id="email">
             </div>
-            <input type="submit" name="send-link" class="btn btn-primary mt-2">
+            <input type="submit" name="send-link" class="btn btn-primary mt-2 send_link">
         </form>
     </div>
 </body>

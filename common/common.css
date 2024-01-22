@@ -107,3 +107,7 @@ nav.navbar.navbar-expand-lg.bg-dark {
     width: 25rem;
     margin-top: 11rem;
 }
+
+.send_link{
+    float: right;
+}
