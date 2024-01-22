@@ -6,14 +6,12 @@
     <title>Upadte Password</title>
     <link rel="stylesheet" href="../../common/common.css">
     <?php require_once '../../common/links.php' ?>
+    <script src="forgot_password.js"></script>
 </head>
 <body>
     <?php 
-        
         require ('../../config/config.php');
-
         if (isset($_GET['email']) && isset($_GET['reset_token'])) {
-
             date_default_timezone_set('Asia/kolkata');
             $date = date("Y-m-d");
             
@@ -33,10 +31,11 @@
                                     <h1 class="text-center">Creat New Password</h1>
                                 </div>
                                 <div class="card-body">
-                                    <form method="post">
+                                    <form method="post" onsubmit="return forgot_password_validation();">
                                         <div class="mt-2">
-                                            <label for="Password">Password : </label>
-                                            <input type="password" name="Password" class="form-control forgot_password_updation" id="forgot_password_updation" placeholder="Creat New Password">
+                                            <label for="password">Password : </label>
+                                            <input type="password" name="password" class="form-control forgot_password_updation" id="forgot_password_updation" placeholder="Creat New Password">
+                                            <span class="invalid-feedback" id="password_err"><?php echo $password_err; ?></span>
                                             <input type="hidden" name="email" class="form-control" value='.$email.'>
                                         </div>
                                         <div class="mt-4 text-end">
@@ -50,7 +49,7 @@
                 }else{
                     echo "
                         <script>
-                            alert('invelid or Expired link');
+                            alert('Invalid or Expired link');
                             window.location.href='../login.php'
                         </script>";
                 }
@@ -66,9 +65,9 @@
         
         if (isset($_POST['update'])) {
             $pass = $_POST['Password'];
-            echo $pass;
+            // echo $pass;
             $email = $_POST['email'];
-            echo $email;
+            // echo $email;
 
             $update = "UPDATE users SET password='$pass',reset_link_token='NULL',reset_token_exp=NULL WHERE email = '$email'";
 

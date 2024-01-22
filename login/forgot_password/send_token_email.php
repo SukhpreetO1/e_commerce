@@ -16,8 +16,8 @@ function sendmail($email, $reset_token)
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'ssingh77022@gmail.com';
-        $mail->Password = '12345678';
+        $mail->Username = 'qorutopel@gmail.com';
+        $mail->Password = 'scyb oifg byxa zjfs';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
@@ -26,7 +26,7 @@ function sendmail($email, $reset_token)
 
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset link';
-        $mail->Body = "we got a request form you to reset Password! <br>Click the link bellow: <br>
+        $mail->Body = "we got a request from you regarding the reset password <br>Click the link below: <br>
         <a href='http://localhost/php/php_e-commerce/login/forgot_password/update_password.php?email=$email&reset_token=$reset_token'>reset password</a>";
 
         $mail->send();

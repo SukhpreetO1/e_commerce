@@ -19,7 +19,7 @@
                 <label for="email" class="email mt-2">Email address</label>
                 <input type="email" name="email" class="form-control" id="email">
             </div>
-            <input type="submit"    name="send-link" class="btn btn-primary mt-2">
+            <input type="submit" name="send-link" class="btn btn-primary mt-2">
         </form>
     </div>
 </body>
