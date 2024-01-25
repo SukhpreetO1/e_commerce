@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $email_err = "This email is already registered.";
                 }
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "email - Oops! Something went wrong. Please try again later.";
             }
             mysqli_stmt_close($stmt);
         }
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username_err = "This username is already taken.";
                 }
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "username - Oops! Something went wrong. Please try again later.";
             }
             mysqli_stmt_close($stmt);
         }
@@ -85,7 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $confirm_password_err = "Password did not match.";
         }
     }
-
     // If all fields are validated, proceed with the database insertion
     if (empty($first_name_err) && empty($last_name_err) && empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
         $sql = "INSERT INTO users (first_name, last_name, username, email, password) VALUES (?, ?, ?, ?, ?)";
@@ -98,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_username = $username;
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
-
             if (mysqli_stmt_execute($stmt)) {
                 echo "Account Created Successfully.";
                 header("location: ../login/login.php");
