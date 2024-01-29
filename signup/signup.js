@@ -269,7 +269,31 @@ document.getElementById('password').addEventListener('input', function () {
 
 document.getElementById('confirm_password').addEventListener('input', function () {
   validate_field_on_input('confirm_password', 'Confirm Password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
+  var passwordValue = document.getElementById('password').value;
+  var confirmPasswordValue = document.getElementById('confirm_password').value;
+
+  if (passwordValue !== confirmPasswordValue) {
+    display_error('confirm_password_err', 'Password do not match');
+    add_invalid_class('confirm_password');
+    clear_password_match_classes(); // New function to clear the green border
+    field_validation_status['confirm_password'] = false;
+  } else {
+    clear_error_messages('confirm_password_err');
+    clear_invalid_class('confirm_password');
+    add_password_match_classes(); // New function to add green border
+    field_validation_status['confirm_password'] = true;
+  }
 });
+
+function clear_password_match_classes() {
+  document.getElementById('password').classList.remove('password-match');
+  document.getElementById('confirm_password').classList.remove('password-match');
+}
+
+function add_password_match_classes() {
+  document.getElementById('password').classList.add('password-match');
+  document.getElementById('confirm_password').classList.add('password-match');
+}
 
 function validate_field_on_input(field_id, field_name, regex) {
   var field_value = document.getElementById(field_id).value;

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#forgotPasswordForm').submit(function(e) {
+    $('#forgot_password_form').submit(function(e) {
         e.preventDefault();
         var formData = $(this).serialize();
         $.ajax({
@@ -7,8 +7,17 @@ $(document).ready(function() {
             url: 'send_token_email.php',
             data: formData,
             success: function(response) {
-                alert(response);
-                // window.location.href = "../login.php";
+                try {
+                    var jsonResponse = JSON.parse(response);
+                    if (jsonResponse.redirect_url) {
+                        alert(jsonResponse.message);
+                        window.location.href = jsonResponse.redirect_url;
+                    } else {
+                        alert('An error occurred while processing the request.');
+                    }
+                } catch (e) {
+                    alert('An error occurred while processing the response.');
+                }
             },
             error: function(error) {
                 alert('An error occurred while processing the request.');
@@ -17,44 +26,32 @@ $(document).ready(function() {
     });
 });
 
-function forgot_password_validation() {
-    var password = document.getElementById('forgot_password_updation').value;
-    var forgot_password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
-    if (forgot_password_is_empty(password)) {
-        forgot_password_display_error('password_err', 'Password cannot be empty');
-        forgot_password_add_invalid_class('password');
-    } else if (!forgot_password_regex.test(password)) {
-        forgot_password_display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
-        forgot_password_add_invalid_class('password');
-    } else {
-        clear_error_and_invalid_class('password_err');
-    }
+const field_validation_status = {};
 
-    return true;
-}
-
-function forgot_password_is_empty(value) {
-    return value.trim() === '';
-}
-
-function forgot_password_display_error(elementId, errorMessage) {
-    document.getElementById(elementId).innerHTML = errorMessage;
-}
-
-function forgot_password_add_invalid_class(elementId) {
-    document.getElementById('forgot_password_updation').classList.add('is-invalid');
-}
-
-// Add an event listener for input validation
-document.getElementById('forgot_password_updation').addEventListener('input', function () {
-    forgot_password_validation();
+document.getElementById('email').addEventListener('input', function () {
+  const emailField = document.getElementById('email');
+  const isValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailField.value.trim());
+  updateFieldStatus('email', isValid, 'Invalid email format. Format should be like abc@gmail.com');
 });
 
-function clear_error_and_invalid_class(elementId) {
-    document.getElementById(elementId).innerHTML = '';
-    document.getElementById('forgot_password_updation').classList.remove('is-invalid');
+function updateFieldStatus(field_id, isValid, errorMessage) {
+  const field = document.getElementById(field_id);
+  if (isValid) {
+    clearError(field_id);
+    field.classList.remove('is-invalid');
+    field_validation_status[field_id] = true;
+  } else {
+    displayError(`${field_id}_err`, errorMessage);
+    field.classList.add('is-invalid');
+    field_validation_status[field_id] = false;
+  }
 }
 
-// Call this function when the password is valid
-clear_error_and_invalid_class('password_err');
+function displayError(error_id, error_message) {
+  document.getElementById(error_id).textContent = error_message;
+}
+
+function clearError(field_id) {
+  displayError(`${field_id}_err`, '');
+}

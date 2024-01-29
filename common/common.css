@@ -22,6 +22,13 @@ p.login_forgot_password.mt-2 {
     text-align: right;
 }
 
+.account_created_alert_dismissible {
+    width: 20rem;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
 
 /* signup CSS */
 .wrapper.signup{ 
@@ -64,6 +71,18 @@ label {
     margin-bottom: 5px;
 }
 
+.password-match {
+   border: 2.5px solid green;
+}
+
+/* Homepage css */
+.logged_in_alert_dismissible{
+    width: 15rem;
+    position: absolute;
+    right: 9px;
+    top: 6px;
+    z-index: 9; 
+}
 
 /* Navbar css */
 nav.navbar.navbar-expand-lg.bg-dark {
@@ -121,4 +140,10 @@ nav.navbar.navbar-expand-lg.bg-dark {
 
 .send_link{
     float: right;
+}
+
+.visible_update_password, .visible_update_confirm_password {
+    position: absolute;
+    top: 37px;
+    right: 11px;
 }

@@ -7,7 +7,6 @@ require '../../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
 function sendmail($email, $reset_token)
 {
     $mail = new PHPMailer(true);
@@ -24,12 +23,9 @@ function sendmail($email, $reset_token)
         $mail->addAddress($email);
 
         $mail->isHTML(true);
-        $reset_token = urlencode($reset_token);
-        $hashed_reset_token = password_hash($reset_token, PASSWORD_DEFAULT);
-        $encoded_hashed_reset_token = urlencode($hashed_reset_token);
         $mail->Subject = 'Password Reset link';
         $mail->Body = "we got a request from you regarding the reset password <br>Click the link below: <br>
-        <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?reset_token=$encoded_hashed_reset_token'>Reset Password</a>";
+        <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?reset_token=$reset_token'>Reset Password</a>";
 
         $mail->send();
         return true;
@@ -38,7 +34,7 @@ function sendmail($email, $reset_token)
         return false;
     }    
 }
-if (isset($_POST['send-link'])) {
+if (isset($_POST['email'])) {
     $email = $_POST['email'];
     $sql = "SELECT * FROM users WHERE email = '$email'";
     $result = $link->query($sql);
@@ -52,33 +48,21 @@ if (isset($_POST['send-link'])) {
             $sql = "UPDATE users SET reset_link_token ='$reset_token', reset_token_exp = '$date' WHERE email = '$email'";
 
             if (($link->query($sql) === TRUE) && sendmail($email, $reset_token) === TRUE) {
-                echo "
-                        <script>
-                            alert('Password reset link send to mail.');
-                            window.location.href='../login.php'    
-                        </script>";
+                $response = array("redirect_url" => "../login.php", "message" => "Password reset link sent to email. You will be redirected to the login page shortly.");
+                echo json_encode($response);
             } else {
-                echo "
-                        <script>
-                            alert('Something got Wrong');
-                            window.location.href='../forgot_password/forgot_password.php'
-                        </script>";
+                $response = array("redirect_url" => "../forgot_password/forgot_password.php", "message" => "Something got Wrong.");
+                echo json_encode($response);
             }
 
         } else {
-            echo "
-                <script>
-                    alert('Email Address Not Found');
-                    window.location.href='../forgot_password/forgot_password.php'
-                </script>";
+            $response = array("redirect_url" => "../forgot_password/forgot_password.php", "message" => "Email Address Not Found.");
+            echo json_encode($response);
         }
 
     } else {
-        echo "
-            <script>
-                alert('Server Down');
-                window.location.href='../forgot_password/forgot_password.php'
-            </script>";
+        $response = array("redirect_url" => "../forgot_password/forgot_password.php", "message" => "Server Down.");
+        echo json_encode($response);
     }
 }
 ?>

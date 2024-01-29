@@ -15,15 +15,12 @@
     if (isset($_GET['reset_token'])) {
         date_default_timezone_set('Asia/kolkata');
         $date = date("Y-m-d");
-        $reset_token = urldecode($_GET['reset_token']);
+        $reset_token = $_GET['reset_token'];
         
         $sql = "SELECT * FROM users WHERE reset_link_token = '$reset_token' AND reset_token_exp = '$date'";
         $result = $link->query($sql);
 
-        if ($result && $row = $result->fetch_assoc()) {
-            if ($row = $result->fetch_assoc()) {
-                $hashed_token_from_database = $row['reset_link_token'];
-                if (password_verify($reset_token, $hashed_token_from_database)) {     
+        if ($row = $result->fetch_assoc()) {
                     $email = $row['email'];
                     echo '
                             <div class="container d-flex justify-content-center mt-5 pt-5">
@@ -37,64 +34,62 @@
                                                 <label for="password">Email Address :  </label>
                                                 <input type="email" name="email" class="form-control email" id="email" placeholder="Email" value="' .$email .' " readonly>
                                             </div>
-                                            <div class="mt-2">
+                                            <div class="mt-2" style="position:relative">
                                                 <label for="password">Password : </label>
-                                                <input type="password" name="password" class="form-control forgot_password_updation" id="forgot_password_updation" placeholder="Create New Password">
+                                                <input type="password" name="password" class="form-control forgot_password_updation" id="forgot_password_updation" placeholder="New Password"><span class="visible_update_password" onclick="toggle_update_password_visibility()"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                                 <span class="invalid-feedback password_err" id="password_err"><?php echo $password_err; ?></span>
                                             </div>
+                                            <div class="mt-2" style="position:relative">
+                                                <label for="password">Confirm Password : </label>
+                                                <input type="password" name="confirm_password" class="form-control forgot_confirm_password_updation" id="forgot_confirm_password_updation" placeholder="Retype New Password"><span class="visible_update_confirm_password" onclick="toggle_update_confirm_password_visibility()"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                                <span class="invalid-feedback confirm_password_err" id="confirm_password_err"><?php echo $confirm_password_err; ?></span>
+                                            </div>
                                             <div class="mt-4 text-end">
-                                                <input type="submit" name="update" value="Reset Password" class="btn btn-primary">
+                                                <input type="submit" name="update" value="Reset Password" class="btn btn-primary" id="submit_button">
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>';
-                } else {
-                    echo '
-                    <script>
-                        alert("Invalid token");
-                        window.location.href="../login.php";
-                    </script>';
-                }
-            } else {
-                echo '
-                        <script>
-                            alert("Invalid or Expired link");
-                            // window.location.href="../login.php";
-                        </script>';
-            }
+        } else {
+            header("location: ../../login/login.php?forgot_password=token_expire");
         }
     } else {
-        echo "
-                <script>
-                    alert('server down!!');
-                    window.location.href='../login.php'
-                </script>";
+        header("location: ../../login/login.php?forgot_password=server_down");
     }
 
     if (isset($_POST['update'])) {
-        $pass = $_POST['password'];
-        $forgot_hashed_password = password_hash($pass, PASSWORD_DEFAULT);
-        $email = $_GET['email'];
-        $update = "UPDATE users SET password='$forgot_hashed_password',reset_link_token='NULL',reset_token_exp=NULL WHERE email = '$email'";
-
-        if ($link->query($update) === TRUE) {
+        $password = $_POST['password'];
+        $confirm_password = $_POST['confirm_password'];
+        if($password != $confirm_password){
             echo "
-                <script>
-                    alert('New Password Created Successfully');
-                    window.location.href='../login.php'                
-                    </script>"; 
+            <script>
+                alert('Password did not match.');
+                window.location.href='../login.php'                     
+            </script>";
         } else {
-            echo "Error: ".$sql."<br>".$link->error;
-            echo "
+            $forgot_hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $email = $_POST['email'];
+            if($email == NULL){
+                echo "
                 <script>
-                    alert('Password not updated');
+                    alert('Email not found.');
                     window.location.href='../login.php'                     
                 </script>";
+
+            } else {
+                $update = "UPDATE users SET password='$forgot_hashed_password',reset_link_token='NULL',reset_token_exp=NULL WHERE email = '$email'";
+        
+                if ($link->query($update) === TRUE) {
+                    header("location: ../../login/login.php?forgot_password=true");
+                } else {
+                    header("location: ../../login/login.php?forgot_password=password_not_match");
+                }
+            }
         }
     }
     ?>
-    <script src="forgot_password.js"></script>
+    <script src="update_password.js"></script>
 </body>
 
 </html>

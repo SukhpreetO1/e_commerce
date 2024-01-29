@@ -14,16 +14,16 @@
         <div class="heading">
             <h3>Forgot Password</h3>
         </div>
-        <form action="send_token_email.php" method="post">
-        <!-- <form method="post" id="forgotPasswordForm" > -->
+        <!-- <form action="send_token_email.php" method="post"> -->
+        <form method="post" id="forgot_password_form" >
             <div class="form-group">
                 <label for="email" class="email mt-2">Email :</label>
-                <input type="email" name="email" class="form-control" id="email">
+                <input type="email" name="email" class="form-control forgot_email" id="email">
+                <span class="invalid-feedback" id="email_err"><?php echo $email_err; ?></span>
             </div>
             <input type="submit" name="send-link" class="btn btn-primary mt-2 send_link">
         </form>
     </div>
-    <script type="text/javascript" src="../forgot_password/forgot_password.js"></script>
 </body>
-
+<script src="./forgot_password.js"></script>
 </html>

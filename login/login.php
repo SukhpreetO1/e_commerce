@@ -3,21 +3,22 @@ require_once "../session.php";
 require_once "../config/config.php";
 require_once "../login/login_php.php";
 ?>
-<?php
-if (isset($_SESSION['account_created']) && $_SESSION['account_created']) {
-    echo '<div id="accountCreatedAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-            Account Created Successfully.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>';
-    unset($_SESSION['account_created']);
-    echo '<script>
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(function(){
-                    document.getElementById("accountCreatedAlert").remove();
-                }, 3000);
-            });
-          </script>';
+<?php 
+if (isset($_GET['account_created']) && $_GET['account_created'] === "true") {
+    echo '<div class="alert alert-success account_created_alert_dismissible" role="alert">Account created successfully!</div>';
+} 
+
+if (isset($_GET['forgot_password']) && $_GET['forgot_password'] === "true") {
+    echo '<div class="alert alert-success account_created_alert_dismissible" role="alert">New Password Created Successfully!</div>';
+} else if(isset($_GET['forgot_password']) && $_GET['forgot_password'] === "token_expire") {
+    echo '<div class="alert alert-danger account_created_alert_dismissible" role="alert">Invalid or Expired link!</div>';
+} else if(isset($_GET['forgot_password']) && $_GET['forgot_password'] === "server_down") {
+    echo '<div class="alert alert-danger account_created_alert_dismissible" role="alert">Server Down</div>';
+} else if(isset($_GET['forgot_password']) && $_GET['forgot_password'] === "password_not_match") {
+    echo '<div class="alert alert-danger account_created_alert_dismissible" role="alert">Password not updated</div>';
 }
+echo '<script>setTimeout(function() { document.querySelector(".alert").remove(); }, 3000);</script>';
+echo '<script>history.replaceState(null, null, "login.php");</script>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
