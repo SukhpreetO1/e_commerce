@@ -147,3 +147,14 @@ nav.navbar.navbar-expand-lg.bg-dark {
     top: 37px;
     right: 11px;
 }
+
+.login_redirection_from_forgot_password{
+    position: absolute;
+    right: 11rem;
+    top: 7.5rem;
+}
+
+input#send_link {
+    position: absolute;
+    left: 5rem;
+}

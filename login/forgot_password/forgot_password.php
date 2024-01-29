@@ -24,13 +24,14 @@ echo '<script>history.replaceState(null, null, "forgot_password.php");</script>'
         <div class="heading">
             <h3>Forgot Password</h3>
         </div>
-        <form method="post" id="forgot_password_form" >
+        <form method="post" id="forgot_password_form" style="position: relative;">
             <div class="form-group">
                 <label for="email" class="email mt-2">Email :</label>
                 <input type="email" name="email" class="form-control forgot_email" id="email">
                 <span class="invalid-feedback" id="email_err"><?php echo $email_err; ?></span>
             </div>
-            <input type="submit" name="send-link" class="btn btn-primary mt-2 send_link" id="send_link">
+            <input type="submit" name="send-link" class="btn btn-primary mt-2 send_link" id="send_link" value="Send Password Reset Link">
+            <span class="login_redirection_from_forgot_password"><a href="../login.php">Login</a></span>
         </form>
     </div>
 </body>
