@@ -1,7 +1,6 @@
 <?php
-require('../../config/config.php');
 session_start();
-
+require('../../config/config.php');
 require '../../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -24,7 +23,7 @@ function sendmail($email, $reset_token)
 
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset link';
-        $mail->Body = "we got a request from you regarding the reset password <br>Click the link below: <br>
+        $mail->Body = "We got a request from you regarding the reset password <br>Click the link below: <br>
         <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?reset_token=$reset_token'>Reset Password</a>";
 
         $mail->send();
@@ -48,15 +47,15 @@ if (isset($_POST['email'])) {
             $sql = "UPDATE users SET reset_link_token ='$reset_token', reset_token_exp = '$date' WHERE email = '$email'";
 
             if (($link->query($sql) === TRUE) && sendmail($email, $reset_token) === TRUE) {
-                $response = array("redirect_url" => "../login.php", "message" => "Password reset link sent to email. You will be redirected to the login page shortly.");
+                $response = array("redirect_url" => "../login.php?mail_send=true");
                 echo json_encode($response);
             } else {
-                $response = array("redirect_url" => "../forgot_password/forgot_password.php", "message" => "Something got Wrong.");
+                $response = array("redirect_url" => "../forgot_password/forgot_password.php?mail_send=false");
                 echo json_encode($response);
             }
 
         } else {
-            $response = array("redirect_url" => "../forgot_password/forgot_password.php", "message" => "Email Address Not Found.");
+            $response = array("redirect_url" => "../forgot_password/forgot_password.php?mail_send=email_not_found");
             echo json_encode($response);
         }
 

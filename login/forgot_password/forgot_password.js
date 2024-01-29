@@ -4,13 +4,13 @@ $(document).ready(function() {
         var formData = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: 'send_token_email.php',
+            // url: 'send_token_email.php',
             data: formData,
             success: function(response) {
+              // window.location.href = "../login.php?mail_send=true";
                 try {
                     var jsonResponse = JSON.parse(response);
                     if (jsonResponse.redirect_url) {
-                        alert(jsonResponse.message);
                         window.location.href = jsonResponse.redirect_url;
                     } else {
                         alert('An error occurred while processing the request.');
@@ -27,8 +27,24 @@ $(document).ready(function() {
 });
 
 
-const field_validation_status = {};
+document.getElementById('send_link').addEventListener('click', function (event) {
+  clearError();
 
+  var is_valid = true;
+  var empty_fields = [];
+
+  if (!updateFieldStatus('email', 'Email', /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)) {
+    empty_fields.push('email');
+    is_valid = false;
+  }
+
+  if (!is_valid) {
+    event.preventDefault();
+    displayError(empty_fields);
+  }
+});  
+
+const field_validation_status = {};
 document.getElementById('email').addEventListener('input', function () {
   const emailField = document.getElementById('email');
   const isValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(emailField.value.trim());
@@ -37,21 +53,26 @@ document.getElementById('email').addEventListener('input', function () {
 
 function updateFieldStatus(field_id, isValid, errorMessage) {
   const field = document.getElementById(field_id);
-  if (isValid) {
+  if (isValid == true) {
     clearError(field_id);
     field.classList.remove('is-invalid');
     field_validation_status[field_id] = true;
   } else {
-    displayError(`${field_id}_err`, errorMessage);
+    displayError('email_err', errorMessage);
     field.classList.add('is-invalid');
     field_validation_status[field_id] = false;
   }
 }
 
-function displayError(error_id, error_message) {
-  document.getElementById(error_id).textContent = error_message;
+function displayError() {
+  var errorMessageElement = document.getElementById('email_err');
+  errorMessageElement.textContent = 'Email cannot be empty';
 }
 
-function clearError(field_id) {
-  displayError(`${field_id}_err`, '');
+function clearError() {
+  displayError('email_err', '');
 }
+
+function isEmpty(value) {
+  return typeof value === 'string' && value.trim() === '';
+} 
