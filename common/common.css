@@ -101,6 +101,17 @@ nav.navbar.navbar-expand-lg.bg-dark {
     right: 14px;
 }
 
+.visible_password {
+    position: absolute;
+    top: 33px;
+    right: 11px;
+}
+
+.visible_confirm_password {
+    position: absolute;
+    top: 33px;
+    right: 11px;
+}
 
 /* forgot password mail */
 .container.forgot_password_mail_form {

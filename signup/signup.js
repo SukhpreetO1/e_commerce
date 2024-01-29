@@ -320,3 +320,33 @@ function clear_error_messages() {
     errorElements[i].textContent = '';
   }
 }
+
+function toggle_password_visibility() {
+  var passwordInput = document.getElementById('password');
+  var eyeIcon = document.querySelector('.visible_password i');
+
+  if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeIcon.classList.remove('fa-eye');
+      eyeIcon.classList.add('fa-eye-slash');
+  } else {
+      passwordInput.type = 'password';
+      eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye');
+  }
+}
+
+function toggle_confirm_password_visibility() {
+  var passwordInput = document.getElementById('confirm_password');
+  var eyeIcon = document.querySelector('.visible_confirm_password i');
+
+  if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeIcon.classList.remove('fa-eye');
+      eyeIcon.classList.add('fa-eye-slash');
+  } else {
+      passwordInput.type = 'password';
+      eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye');
+  }
+}

@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
             if (mysqli_stmt_execute($stmt)) {
-                echo "Account Created Successfully.";
+                $_SESSION['account_created'] = true;
                 header("location: ../login/login.php");
             } else {
                 echo "Oops! Something went wrong. Please try again later.";

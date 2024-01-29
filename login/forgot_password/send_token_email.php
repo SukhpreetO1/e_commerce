@@ -11,7 +11,6 @@ use PHPMailer\PHPMailer\Exception;
 function sendmail($email, $reset_token)
 {
     $mail = new PHPMailer(true);
-
     try {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
@@ -25,9 +24,12 @@ function sendmail($email, $reset_token)
         $mail->addAddress($email);
 
         $mail->isHTML(true);
+        $reset_token = urlencode($reset_token);
+        $hashed_reset_token = password_hash($reset_token, PASSWORD_DEFAULT);
+        $encoded_hashed_reset_token = urlencode($hashed_reset_token);
         $mail->Subject = 'Password Reset link';
         $mail->Body = "we got a request from you regarding the reset password <br>Click the link below: <br>
-        <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?email=$email&reset_token=$reset_token'>reset password</a>";
+        <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?reset_token=$encoded_hashed_reset_token'>Reset Password</a>";
 
         $mail->send();
         return true;

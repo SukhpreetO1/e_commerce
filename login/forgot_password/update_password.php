@@ -12,46 +12,55 @@
 <body>
     <?php
     require('../../config/config.php');
-    if (isset($_GET['email']) && isset($_GET['reset_token'])) {
+    if (isset($_GET['reset_token'])) {
         date_default_timezone_set('Asia/kolkata');
         $date = date("Y-m-d");
-
-        $email = $_GET['email'];
-        $reset_token = $_GET['reset_token'];
-
-        $sql = "SELECT * FROM users WHERE email = '$email' AND reset_link_token = '$reset_token' AND reset_token_exp = '$date'";
+        $reset_token = urldecode($_GET['reset_token']);
+        
+        $sql = "SELECT * FROM users WHERE reset_link_token = '$reset_token' AND reset_token_exp = '$date'";
         $result = $link->query($sql);
 
-        if ($result) {
-
-            if ($result->num_rows == 1) {
-                echo '
-                        <div class="container d-flex justify-content-center mt-5 pt-5">
-                            <div class="card mt-5" style="width:500px">
-                                <div class="card-header">
-                                    <h1 class="text-center">Create New Password</h1>
-                                </div>
-                                <div class="card-body">
-                                    <form method="post" onsubmit="return forgot_password_validation();">
-                                        <div class="mt-2">
-                                            <label for="password">Password : </label>
-                                            <input type="password" name="password" class="form-control forgot_password_updation" id="forgot_password_updation" placeholder="Create New Password">
-                                            <span class="invalid-feedback password_err" id="password_err"><?php echo $password_err; ?></span>
-                                            <input type="hidden" name="email" class="form-control email" value="<?php echo $email; ?>">
+        if ($result && $row = $result->fetch_assoc()) {
+            if ($row = $result->fetch_assoc()) {
+                $hashed_token_from_database = $row['reset_link_token'];
+                if (password_verify($reset_token, $hashed_token_from_database)) {     
+                    $email = $row['email'];
+                    echo '
+                            <div class="container d-flex justify-content-center mt-5 pt-5">
+                                <div class="card mt-5" style="width:500px">
+                                    <div class="card-header">
+                                        <h1 class="text-center">Create New Password</h1>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="post" onsubmit="return forgot_password_validation();">
+                                            <div class="mt-2">
+                                                <label for="password">Email Address :  </label>
+                                                <input type="email" name="email" class="form-control email" id="email" placeholder="Email" value="' .$email .' " readonly>
                                             </div>
-                                        <div class="mt-4 text-end">
-                                            <input type="submit" name="update" value="Update" class="btn btn-primary">
-                                            <a href="../login.php" class="btn btn-danger">Back</a>
-                                        </div>
-                                    </form>
+                                            <div class="mt-2">
+                                                <label for="password">Password : </label>
+                                                <input type="password" name="password" class="form-control forgot_password_updation" id="forgot_password_updation" placeholder="Create New Password">
+                                                <span class="invalid-feedback password_err" id="password_err"><?php echo $password_err; ?></span>
+                                            </div>
+                                            <div class="mt-4 text-end">
+                                                <input type="submit" name="update" value="Reset Password" class="btn btn-primary">
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>';
+                            </div>';
+                } else {
+                    echo '
+                    <script>
+                        alert("Invalid token");
+                        window.location.href="../login.php";
+                    </script>';
+                }
             } else {
                 echo '
                         <script>
                             alert("Invalid or Expired link");
-                            window.location.href="../login.php";
+                            // window.location.href="../login.php";
                         </script>';
             }
         }
@@ -79,8 +88,8 @@
             echo "Error: ".$sql."<br>".$link->error;
             echo "
                 <script>
-                alert('Password not updated');
-                window.location.href='../login.php'                     
+                    alert('Password not updated');
+                    window.location.href='../login.php'                     
                 </script>";
         }
     }

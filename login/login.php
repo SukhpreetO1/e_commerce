@@ -3,7 +3,22 @@ require_once "../session.php";
 require_once "../config/config.php";
 require_once "../login/login_php.php";
 ?>
-
+<?php
+if (isset($_SESSION['account_created']) && $_SESSION['account_created']) {
+    echo '<div id="accountCreatedAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+            Account Created Successfully.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+    unset($_SESSION['account_created']);
+    echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                setTimeout(function(){
+                    document.getElementById("accountCreatedAlert").remove();
+                }, 3000);
+            });
+          </script>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +55,7 @@ require_once "../login/login_php.php";
             </div>
             <div class="form-group login_submit_details mt-3">
                 <input type="submit" id="login_submit" class="btn btn-primary" value="Login">
-                <p class="signup_page_redirect mt-2">Don't have an account? <a href="../signup/signup.php">Sign up now</a>.</p>
+                <p class="signup_page_redirect mt-2">Don't have an account? <a href="../signup/signup.php">Create now</a>.</p>
             </div>
         </form>
     </div>

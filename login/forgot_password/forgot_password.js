@@ -1,3 +1,22 @@
+$(document).ready(function() {
+    $('#forgotPasswordForm').submit(function(e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+            type: 'POST',
+            url: 'send_token_email.php',
+            data: formData,
+            success: function(response) {
+                alert(response);
+                // window.location.href = "../login.php";
+            },
+            error: function(error) {
+                alert('An error occurred while processing the request.');
+            }
+        });
+    });
+});
+
 function forgot_password_validation() {
     var password = document.getElementById('forgot_password_updation').value;
     var forgot_password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;

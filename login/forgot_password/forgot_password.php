@@ -15,6 +15,7 @@
             <h3>Forgot Password</h3>
         </div>
         <form action="send_token_email.php" method="post">
+        <!-- <form method="post" id="forgotPasswordForm" > -->
             <div class="form-group">
                 <label for="email" class="email mt-2">Email :</label>
                 <input type="email" name="email" class="form-control" id="email">
@@ -22,6 +23,7 @@
             <input type="submit" name="send-link" class="btn btn-primary mt-2 send_link">
         </form>
     </div>
+    <script type="text/javascript" src="../forgot_password/forgot_password.js"></script>
 </body>
 
 </html>
