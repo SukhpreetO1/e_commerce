@@ -91,13 +91,13 @@ function forgot_confirm_password_validation() {
 }
 
 function clear_password_match_classes() {
-    document.getElementById('forgot_password_updation').classList.remove('password-match');
-    document.getElementById('forgot_confirm_password_updation').classList.remove('password-match');
+    document.getElementById('forgot_password_updation').classList.remove('password_match');
+    document.getElementById('forgot_confirm_password_updation').classList.remove('password_match');
   }
   
   function add_password_match_classes() {
-    document.getElementById('forgot_password_updation').classList.add('password-match');
-    document.getElementById('forgot_confirm_password_updation').classList.add('password-match');
+    document.getElementById('forgot_password_updation').classList.add('password_match');
+    document.getElementById('forgot_confirm_password_updation').classList.add('password_match');
   }
 
 function forgot_password_is_empty(value) {

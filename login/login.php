@@ -7,29 +7,34 @@ function displayAlert($message, $type = 'success') {
     echo '<div class="alert alert-' . $type . ' account_created_alert_dismissible" role="alert">' . $message . '</div>';
 }
 
-if (isset($_GET['account_created']) && $_GET['account_created'] === "true") {
-    displayAlert('Account created successfully!');
-}
+$alerts = [
+    'account_created' => 'Account created successfully!',
+    'forgot_password' => [
+        'true' => 'New Password Created Successfully!',
+        'token_expire' => 'Invalid or Expired link!',
+        'server_down' => 'Server Down',
+        'password_not_match' => 'Password not updated'
+    ],
+    'mail_send' => 'Password reset link sent to your email address!',
+    'logout' => 'Logout successfully'
+];
 
-if (isset($_GET['forgot_password'])) {
-    if ($_GET['forgot_password'] === "true") {
-        displayAlert('New Password Created Successfully!');
-    } else if ($_GET['forgot_password'] === "token_expire") {
-        displayAlert('Invalid or Expired link!', 'danger');
-    } else if ($_GET['forgot_password'] === "server_down") {
-        displayAlert('Server Down', 'danger');
-    } else if ($_GET['forgot_password'] === "password_not_match") {
-        displayAlert('Password not updated', 'danger');
+foreach ($alerts as $key => $value) {
+    if (isset($_GET[$key])) {
+        if (is_array($value)) {
+            if (array_key_exists($_GET[$key], $value)) {
+                displayAlert($value[$_GET[$key]], ($_GET[$key] === 'true' ? 'success' : 'danger'));
+            }
+        } else {
+            displayAlert($value);
+        }
     }
 }
 
-if (isset($_GET['mail_send']) && $_GET['mail_send'] === "true") {
-    displayAlert('Password reset link sent to your email address!');
-}
-
-echo '<script>setTimeout(function() { document.querySelector(".alert").remove(); }, 3000);</script>';
+echo '<script>if(document.querySelector(".alert")) {setTimeout(function() { document.querySelector(".alert").remove(); }, 3000);}</script>';
 echo '<script>history.replaceState(null, null, "login.php");</script>';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
