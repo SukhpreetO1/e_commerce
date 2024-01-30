@@ -25,7 +25,7 @@ function sendmail($email, $reset_token)
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset link';
         $mail->Body = "We got a request from you regarding the reset password <br>Click the link below: <br>
-        <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?reset_token=$reset_token'>Reset Password</a";
+        <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?reset_token=$reset_token'>Reset Password</a>";
 
         $mail->send();
         return true;
@@ -45,7 +45,7 @@ if (isset($_POST['email'])) {
     if ($result) {
         $row = $result->fetch_assoc();
         if ($row) {
-            $reset_token = bin2hex(random_bytes(16));
+            $reset_token = bin2hex(random_bytes(50));
             date_default_timezone_set('Asia/kolkata');
             $date = date("Y-m-d");
 
