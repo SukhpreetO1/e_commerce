@@ -4,21 +4,21 @@ $first_name_err = $last_name_err = $email_err = $username_err = $password_err = 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate first name
-    if (empty(trim($_POST["first_name"]))) {
+    if (empty($_POST["first_name"])) {
         $first_name_err = "Please enter your first name.";
     } else {
         $first_name = trim($_POST["first_name"]);
     }
 
     // Validate last name
-    if (empty(trim($_POST["last_name"]))) {
+    if (empty($_POST["last_name"])) {
         $last_name_err = "Please enter your last name.";
     } else {
         $last_name = trim($_POST["last_name"]);
     }
 
     // Validate email
-    if (empty(trim($_POST["email"]))) {
+    if (empty($_POST["email"])) {
         $email_err = "Please enter your email.";
     } elseif (!preg_match('/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/', trim($_POST["email"]))) {
         $email_err = "Invalid email format.";
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate username
-    if (empty(trim($_POST["username"]))) {
+    if (empty($_POST["username"])) {
         $username_err = "Please enter a username.";
     } elseif (!preg_match('/^(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$/', trim($_POST["username"]))) {
         $username_err = "Username must contain 1 capital letter and 1 numbers.";
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate password
-    if (empty(trim($_POST["password"]))) {
+    if (empty($_POST["password"])) {
         $password_err = "Please enter a password.";
     } elseif (trim(!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/', $_POST["password"]))) {
         $password_err = "Password must have atleast 6 characters, 1 capital letter and 1 special character";
@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate confirm password
-    if (empty(trim($_POST["confirm_password"]))) {
+    if (empty($_POST["confirm_password"])) {
         $confirm_password_err = "Please enter the confirm password.";
     } else {
         $confirm_password = trim($_POST["confirm_password"]);
@@ -99,8 +99,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_password = password_hash($password, PASSWORD_DEFAULT);
             if (mysqli_stmt_execute($stmt)) {
                 header("location: ../login/login.php?account_created=true");
-            } else {
-                echo "Oops! Something went wrong. Please try again later.";
             }
             mysqli_stmt_close($stmt);
         }

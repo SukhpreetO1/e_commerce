@@ -12,6 +12,8 @@ if (isset($_GET['mail_send'])) {
         displayAlert('Email address not found. Please check it again.');
     }
 }
+
+require_once "../../common/links.php"
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +22,6 @@ if (isset($_GET['mail_send'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
-    <?php require_once "../../common/links.php" ?>
     <link rel="stylesheet" href="../../common/common.css">
 </head>
 
@@ -36,7 +37,7 @@ if (isset($_GET['mail_send'])) {
                 <span class="invalid-feedback" id="email_err"><?php echo $email_err; ?></span>
             </div>
             <div class="forgot_submit_button">
-                <input type="submit" name="send-link" class="btn btn-primary mt-2 send_link" id="send_link" value="Send Password Reset Link">
+                <button type="submit" name="send-link" class="btn btn-primary mt-2 send_link" id="send_link" value="Send Password Reset Link">Send Password Reset Link</button>
                 <span class="login_redirection_from_forgot_password"><a href="../login.php">Login</a></span>
             </div>
         </form>

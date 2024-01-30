@@ -3,13 +3,13 @@ $email = $password = "";
 $email_err = $password_err = $login_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["email"]) && !empty(trim($_POST["email"]))) {
+    if (isset($_POST["email"]) && !empty($_POST["email"])) {
         $email = trim($_POST["email"]);
     } else {
         $email_err = "Please enter email.";
     }
 
-    if (empty(trim($_POST["password"]))) {
+    if (empty($_POST["password"])) {
         $password_err = "Please enter your password.";
     } else {
         $password = trim($_POST["password"]);
@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT id, email, password FROM users WHERE email = ?";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
+            die($stmt);
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
             if (mysqli_stmt_execute($stmt)) {

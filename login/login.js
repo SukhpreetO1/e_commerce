@@ -1,15 +1,12 @@
 var field_validation_status = {
-    email: { is_valid: false, error_message: '' },
-    password: { is_valid: false, error_message: '' },
-  };
+  email: { is_valid: false, error_message: '' },
+  password: { is_valid: false, error_message: '' },
+};
 
 // Showing validaton message when press tab button
-    document.getElementById('email').addEventListener('blur', function () {
-        validateEmail();
-    });
-    document.getElementById('password').addEventListener('blur', function () {
-        validatePassword();
-    });
+document.getElementById('email').addEventListener('blur', function () {
+    validateEmail();
+});
 
 function validateEmail() {
     var email = document.getElementById('email').value;
@@ -29,24 +26,19 @@ function validateEmail() {
 
 function validatePassword() {
     var password = document.getElementById('password').value;
-    var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
   
     if (isEmpty(password)) {
         displayError('password_err', 'Password cannot be empty');
         addInvalidClass('password');
-    } else if (!passwordRegex.test(password)) {
-        displayError('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
-        addInvalidClass('password');
-    }
-  
+    }   
     return true;
 }
 
 
 
 // Event listener for form submission
-  document.getElementById('login_submit').addEventListener('click', function (event) {
-    clearErrorMessages();
+document.getElementById('login_submit').addEventListener('click', function (event) {
+  clearErrorMessages();
 
   // Validate all fields
   var is_valid = true;
@@ -61,6 +53,7 @@ function validatePassword() {
     empty_fields.push('password');
     is_valid = false;
   }
+
   if (!is_valid) {
     event.preventDefault(); // Prevent form submission if there are validation errors
     displayErrorMessages(empty_fields);
@@ -68,73 +61,82 @@ function validatePassword() {
 });
 
 function displayErrorMessages(fields) {
-    var customMessages = {
-      email: "Email cannot be empty",
-      password: "Password cannot be empty",
-    };
-  
-    fields.forEach(function (field) {
-      var customMessage = customMessages[field] || field + " cannot be empty";
-      var errorElement = document.getElementById(field + "_err");
-      var fieldElement = document.getElementById(field);
-      
-      if (errorElement) {
-        errorElement.textContent = customMessage;
-      }
-      
-      if (fieldElement) {
-        fieldElement.classList.add("invalid");
-      }
-    });
-  }
+  var customMessages = {
+    email: "Email cannot be empty",
+    password: "Password cannot be empty",
+  };
 
-
-  // Event listeners for input events on input fields
-  var field_validation_status = {};
-
-  document.getElementById('email').addEventListener('input', function () {
-    validateFieldOnInput('email', 'Email', /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
+  fields.forEach(function (field) {
+    var customMessage = customMessages[field] || field + " cannot be empty";
+    var errorElement = document.getElementById(field + "_err");
+    var fieldElement = document.getElementById(field);
+    
+    if (errorElement) {
+      errorElement.textContent = customMessage;
+    }
+    
+    if (fieldElement) {
+      fieldElement.classList.add("invalid");
+    }
   });
+}
 
-  document.getElementById('password').addEventListener('input', function () {
-    validateFieldOnInput('password', 'Password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
-  });
 
-  function validateFieldOnInput(field_id, field_name, regex) {
-    var field_value = document.getElementById(field_id).value;
-  
-    if (!isEmpty(field_value) && regex.test(field_value)) {
-        clearErrorMessages();
-        clearInvalidClass(field_id);
+// Event listeners for input events on input fields
+var field_validation_status = {};
+document.getElementById('email').addEventListener('input', function () {
+  validateFieldOnInput('email', 'Email', /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
+});
+
+function validateFieldOnInput(field_id, field_name, regex) {
+  var field_value = document.getElementById(field_id).value;
+
+  if (!isEmpty(field_value) && regex.test(field_value)) {
+      clearErrorMessages();
+      clearInvalidClass(field_id);
       field_validation_status[field_id] = true;
-    } else {
-        displayError('email_err', 'Invalid email format. Format should be like abc@gmail.com');
-      displayError('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
+  } else {
+      displayError('email_err', 'Invalid email format. Format should be like abc@gmail.com');
       addInvalidClass(field_id);
       field_validation_status[field_id] = false;
-    }
   }
+}
 
 function displayError(elementId, message) {
-    var errorMessageElement = document.getElementById(elementId);
-    errorMessageElement.textContent = message;
+  var errorMessageElement = document.getElementById(elementId);
+  errorMessageElement.textContent = message;
 }
 
 function clearErrorMessages() {
-    var errorElements = document.getElementsByClassName('error-message');
-    for (var i = 0; i < errorElements.length; i++) {
-      errorElements[i].textContent = '';
-    }
+  var errorElements = document.getElementsByClassName('error-message');
+  for (var i = 0; i < errorElements.length; i++) {
+    errorElements[i].textContent = '';
   }
-
-  function isEmpty(value) {
-    return typeof value === 'string' && value.trim() === '';
-  } 
-
-  function addInvalidClass(field) {
-    document.getElementById(field).classList.add('is-invalid');
 }
 
-  function clearInvalidClass(field) {
-    document.getElementById(field).classList.remove('is-invalid');
+function isEmpty(value) {
+  return typeof value === 'string' && value.trim() === '';
+} 
+
+function addInvalidClass(field) {
+  document.getElementById(field).classList.add('is-invalid');
+}
+
+function clearInvalidClass(field) {
+  document.getElementById(field).classList.remove('is-invalid');
+}
+
+function toggle_password() {
+  var passwordInput = document.getElementById('password');
+  var eyeIcon = document.querySelector('.visible_password i');
+
+  if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye');
+  } else {
+      passwordInput.type = 'password';
+      eyeIcon.classList.remove('fa-eye');
+      eyeIcon.classList.add('fa-eye-slash');
   }
+}

@@ -1,6 +1,7 @@
 <?php
 require_once "../config/config.php";
 require_once "../signup/signup_php.php";
+require_once "../common/links.php";
 ?>
 
 <!DOCTYPE html>
@@ -9,15 +10,13 @@ require_once "../signup/signup_php.php";
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <?php require_once "../common/links.php" ?>
     <link rel="stylesheet" href="../common/common.css">
-
 </head>
 
 <body>
     <div class="wrapper signup">
         <h2 class="signup_heading">Sign Up</h2>
-        <form id="registrationForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" onsubmit="return validateForm()">
+        <form id="registrationForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="name_details">
                 <div class="form-group me-3 mt-3">
                     <label>First Name <span class="asterik_important">*</span></label>
@@ -45,17 +44,17 @@ require_once "../signup/signup_php.php";
             <div class="username_password_detail">
                 <div class="form-group me-3 mt-3" style="position:relative">
                     <label>Password <span class="asterik_important">*</span></label>
-                    <input type="password" id="password" name="password" class="form-control password <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>" placeholder="Enter Password"><span class="visible_password" onclick="toggle_password_visibility()"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                    <input type="password" id="password" name="password" class="form-control password <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>" placeholder="Enter Password"><span class="visible_password" onclick="toggle_password_visibility()"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                     <span class="invalid-feedback" id="password_err"><?php echo $password_err; ?></span>
                 </div>
                 <div class="form-group me-3 mt-3" style="position:relative">
                     <label>Confirm Password <span class="asterik_important">*</span></label>
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control confirm_password <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>" placeholder="Enter Confirm Password"><span class="visible_confirm_password" onclick="toggle_confirm_password_visibility()"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control confirm_password <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>" placeholder="Enter Confirm Password"><span class="visible_confirm_password" onclick="toggle_confirm_password_visibility()"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                     <span class="invalid-feedback" id="confirm_password_err"><?php echo $confirm_password_err; ?></span>
                 </div>
             </div>
             <div class="form-group me-3 mt-3 mt-2 signup_submit_details">
-                <input type="submit" class="btn btn-primary" value="Submit" id="submit_button">
+                <button type="submit" class="btn btn-primary" value="Submit" id="submit_button">Submit</button>
                 <p class="login_redirect mt-3">Already have an account? <a href="..\login\login.php">Login here</a>.</p>
             </div>
         </form>
