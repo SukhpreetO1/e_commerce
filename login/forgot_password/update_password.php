@@ -1,4 +1,8 @@
-<?php require_once '../../common/links.php' ?>
+<?php 
+require_once '../../common/links.php';
+require('../../config/config.php');
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -11,10 +15,9 @@
 
 <body>
     <?php
-    require('../../config/config.php');
     if (isset($_GET['reset_token'])) {
         date_default_timezone_set('Asia/kolkata');
-        $date = date("Y-m-d");
+        $date = date("Y-m-d H:i:s");
         $reset_token = $_GET['reset_token'];
         
         $sql = "SELECT * FROM users WHERE reset_link_token = '$reset_token' AND reset_token_exp = '$date'";
@@ -78,8 +81,7 @@
                 </script>";
 
             } else {
-                $update = "UPDATE users SET password='$forgot_hashed_password',reset_link_token='NULL',reset_token_exp=NULL WHERE email = '$email'";
-        
+                $update = "UPDATE users SET password='$forgot_hashed_password', reset_link_token = 'NULL', reset_token_exp = NULL WHERE email = '$email'";
                 if ($link->query($update) === TRUE) {
                     header("location: ../../login/login.php?forgot_password=true");
                 } else {
