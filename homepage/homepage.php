@@ -1,4 +1,7 @@
-<?php require_once "../common/links.php" ?>
+<?php 
+require_once "../common/links.php" ;
+require_once "../alerts/homepage_alerts.php";
+?>
 
 <!DOCTYPE html>
 <html lang="en">

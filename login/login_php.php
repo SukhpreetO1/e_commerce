@@ -19,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "SELECT id, email, password FROM users WHERE email = ?";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
-            die($stmt);
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
             if (mysqli_stmt_execute($stmt)) {

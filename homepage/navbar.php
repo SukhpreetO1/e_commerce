@@ -1,10 +1,3 @@
-<?php 
-if (isset($_GET['logged_in']) && $_GET['logged_in'] === "true") {
-    echo '<div class="alert alert-success logged_in_alert_dismissible" role="alert">Log in successfully</div>';
-    echo '<script>setTimeout(function() { document.querySelector(".alert").remove(); }, 3000);</script>'; 
-    echo '<script>history.replaceState(null, null, "homepage.php");</script>';
-}
-?>
 <nav class="navbar navbar-expand-lg bg-dark">
     <div class="container-fluid">
         <div class="logo col-1">
