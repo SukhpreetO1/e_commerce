@@ -6,6 +6,7 @@ require '../../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 function sendmail($email, $reset_token)
 {
     $mail = new PHPMailer(true);
@@ -24,29 +25,34 @@ function sendmail($email, $reset_token)
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset link';
         $mail->Body = "We got a request from you regarding the reset password <br>Click the link below: <br>
-        <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?reset_token=$reset_token'>Reset Password</a>";
+        <a href='http://localhost/php_e-commerce/login/forgot_password/update_password.php?reset_token=$reset_token'>Reset Password</a";
 
         $mail->send();
         return true;
     } catch (Exception $e) {
-        echo "Mailer Error: {$mail->ErrorInfo}";
         return false;
     }    
 }
+
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
-    $sql = "SELECT * FROM users WHERE email = '$email'";
-    $result = $link->query($sql);
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result) {
-        if ($row = $result->fetch_assoc()) {
+        $row = $result->fetch_assoc();
+        if ($row) {
             $reset_token = bin2hex(random_bytes(16));
             date_default_timezone_set('Asia/kolkata');
             $date = date("Y-m-d");
 
-            $sql = "UPDATE users SET reset_link_token ='$reset_token', reset_token_exp = '$date' WHERE email = '$email'";
-
-            if (($link->query($sql) === TRUE) && sendmail($email, $reset_token) === TRUE) {
+            $sql = "UPDATE users SET reset_link_token = ?, reset_token_exp = ? WHERE email = ?";
+            $stmt = $link->prepare($sql);
+            $stmt->bind_param("sss", $reset_token, $date, $email);
+            if ($stmt->execute() && sendmail($email, $reset_token)) {
                 $response = array("redirect_url" => "../login.php?mail_send=true");
                 echo json_encode($response);
             } else {
