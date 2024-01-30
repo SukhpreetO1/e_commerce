@@ -75,6 +75,10 @@ label {
    border: 2.5px solid green;
 }
 
+.password.is-invalid, .confirm_password.is-invalid {
+    background-image: none;
+}
+
 /* Homepage css */
 .logged_in_alert_dismissible{
     width: 15rem;
@@ -148,10 +152,14 @@ nav.navbar.navbar-expand-lg.bg-dark {
     right: 11px;
 }
 
+.forgot_submit_button{
+    position: relative;
+}
+
 .login_redirection_from_forgot_password{
     position: absolute;
     right: 11rem;
-    top: 7.5rem;
+    top: 3.5rem;
 }
 
 input#send_link {

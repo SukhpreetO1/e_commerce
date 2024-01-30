@@ -3,26 +3,29 @@ require_once "../session.php";
 require_once "../config/config.php";
 require_once "../login/login_php.php";
 
-// when user create a new accout then show this alert message
-if (isset($_GET['account_created']) && $_GET['account_created'] === "true") {
-    echo '<div class="alert alert-success account_created_alert_dismissible" role="alert">Account created successfully!</div>';
-} 
-
-// when user generated password then show this alert message
-if (isset($_GET['forgot_password']) && $_GET['forgot_password'] === "true") {
-    echo '<div class="alert alert-success account_created_alert_dismissible" role="alert">New Password Created Successfully!</div>';
-} else if(isset($_GET['forgot_password']) && $_GET['forgot_password'] === "token_expire") {
-    echo '<div class="alert alert-danger account_created_alert_dismissible" role="alert">Invalid or Expired link!</div>';
-} else if(isset($_GET['forgot_password']) && $_GET['forgot_password'] === "server_down") {
-    echo '<div class="alert alert-danger account_created_alert_dismissible" role="alert">Server Down</div>';
-} else if(isset($_GET['forgot_password']) && $_GET['forgot_password'] === "password_not_match") {
-    echo '<div class="alert alert-danger account_created_alert_dismissible" role="alert">Password not updated</div>';
+function displayAlert($message, $type = 'success') {
+    echo '<div class="alert alert-' . $type . ' account_created_alert_dismissible" role="alert">' . $message . '</div>';
 }
 
-// when user send mail for forgot password then show this alert message
+if (isset($_GET['account_created']) && $_GET['account_created'] === "true") {
+    displayAlert('Account created successfully!');
+}
+
+if (isset($_GET['forgot_password'])) {
+    if ($_GET['forgot_password'] === "true") {
+        displayAlert('New Password Created Successfully!');
+    } else if ($_GET['forgot_password'] === "token_expire") {
+        displayAlert('Invalid or Expired link!', 'danger');
+    } else if ($_GET['forgot_password'] === "server_down") {
+        displayAlert('Server Down', 'danger');
+    } else if ($_GET['forgot_password'] === "password_not_match") {
+        displayAlert('Password not updated', 'danger');
+    }
+}
+
 if (isset($_GET['mail_send']) && $_GET['mail_send'] === "true") {
-    echo '<div class="alert alert-success account_created_alert_dismissible" role="alert">Password reset link sent to your email address.</div>';
-} 
+    displayAlert('Password reset link sent to your email address!');
+}
 
 echo '<script>setTimeout(function() { document.querySelector(".alert").remove(); }, 3000);</script>';
 echo '<script>history.replaceState(null, null, "login.php");</script>';
