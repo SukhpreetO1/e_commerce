@@ -15,7 +15,7 @@
                 <h1 class="text-center">Create New Password</h1>
             </div>
             <div class="card-body">
-                <form method="post" onsubmit="return forgot_password_validation();">
+                <form method="post">
                     <div class="mt-2">
                         <label for="password">Email Address : </label>
                         <input type="email" name="email" class="form-control update_email" id="email" placeholder="Email" value=<?= $email ?> readonly>
