@@ -177,13 +177,13 @@ function validate_email_and_update_status() {
 
 function validate_password_and_update_status() {
   var password = document.getElementById('password').value;
-  var password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+  var password_regex = /^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/;
 
   if (is_empty(password)) {
     display_error('password_err', 'Password cannot be empty');
     add_invalid_class('password');
   } else if (!password_regex.test(password)) {
-    display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
+    display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter and 1 number.');
     add_invalid_class('password');
   }
 
@@ -264,11 +264,11 @@ document.getElementById('email').addEventListener('input', function () {
 });
 
 document.getElementById('password').addEventListener('input', function () {
-  validate_field_on_input('password', 'Password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
+  validate_field_on_input('password', 'Password', /^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/);
 });
 
 document.getElementById('confirm_password').addEventListener('input', function () {
-  validate_field_on_input('confirm_password', 'Confirm Password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
+  validate_field_on_input('confirm_password', 'Confirm Password', /^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/);
   var passwordValue = document.getElementById('password').value;
   var confirmPasswordValue = document.getElementById('confirm_password').value;
 
@@ -308,7 +308,7 @@ function validate_field_on_input(field_id, field_name, regex) {
     display_error('last_name_err', 'Last Name should contain only letters');
     display_error('username_err', 'Username must contain 1 capital letter and 1 numbers.');
     display_error('email_err', 'Invalid email format. Format should be like abc@gmail.com');
-    display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
+    display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter and 1 number.');
     display_error('confirm_password_err', 'Password do not match');
     add_invalid_class(field_id);
     field_validation_status[field_id] = false;

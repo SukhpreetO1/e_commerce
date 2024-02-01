@@ -46,13 +46,13 @@ fields.forEach(function (field) {
 
 function forgot_password_validation() {
     var password = document.getElementById('forgot_password_updation').value;
-    var forgot_password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    var forgot_password_regex = /^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/;
 
     if (forgot_password_is_empty(password)) {
         forgot_password_display_error('password_err', 'Password cannot be empty');
         forgot_password_add_invalid_class('forgot_password_updation');
     } else if (!forgot_password_regex.test(password)) {
-        forgot_password_display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
+        forgot_password_display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter and 1 number.');
         forgot_password_add_invalid_class('forgot_password_updation');
     } else {
         clear_error_and_invalid_class('password_err');
@@ -65,14 +65,14 @@ var field_validation_status = {};
 function forgot_confirm_password_validation() {
     var password_value = document.getElementById('forgot_password_updation').value;
     var confirm_password = document.getElementById('forgot_confirm_password_updation').value;
-    var forgot_confirm_password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    var forgot_confirm_password_regex = /^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/;
 
     if (forgot_password_is_empty(confirm_password)) {
         forgot_password_display_error('confirm_password_err', 'Confirm Password cannot be empty');
         forgot_password_add_invalid_class('forgot_confirm_password_updation');
         return false;
     } else if (!forgot_confirm_password_regex.test(confirm_password)) {
-        forgot_password_display_error('confirm_password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter');
+        forgot_password_display_error('confirm_password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter and 1 number.');
         forgot_password_add_invalid_class('forgot_confirm_password_updation');
         return false;
     }

@@ -43,7 +43,7 @@ require('../../config/config.php');
                                     <form method="post" onsubmit="return forgot_password_validation();">
                                         <div class="mt-2">
                                             <label for="password">Email Address :  </label>
-                                            <input type="email" name="email" class="form-control email" id="email" placeholder="Email" value="' .$email .' " readonly>
+                                            <input type="email" name="email" class="form-control update_email" id="email" placeholder="Email" value="' .$email .' " readonly>
                                         </div>
                                         <div class="mt-2" style="position:relative">
                                             <label for="password">Password : </label>
