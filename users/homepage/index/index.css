@@ -1,0 +1,7 @@
+.logged_in_alert_dismissible{
+    width: 15rem;
+    position: absolute;
+    right: 9px;
+    top: 6px;
+    z-index: 9; 
+}

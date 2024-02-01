@@ -1,0 +1,59 @@
+.wrapper.signup{ 
+    width: 50%;
+    padding: 20px;
+    position: absolute;
+    left: 36%;
+    top: 15%;
+}
+
+.asterik_important{
+    color: red;
+}
+
+.name_details, .username_email_detail, .username_password_detail {
+    display: flex;
+    width: 32rem;
+}
+
+.signup_submit_details{
+    text-align: center;
+    position: absolute;
+    left: 15%;
+}
+
+.signup_heading{
+    margin: 0 0 2% 20%;
+}
+
+
+.first_name, .last_name, .username, .email, .password, .confirm_password{
+    width: 15rem
+}
+
+.form-group.mr-3 {
+    width: 15rem;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+.password-match {
+   border: 2.5px solid green;
+}
+
+.password.is-invalid, .confirm_password.is-invalid {
+    background-image: none;
+}
+
+.visible_password {
+    position: absolute;
+    top: 40px;
+    right: 11px;
+}
+
+.visible_confirm_password {
+    position: absolute;
+    top: 40px;
+    right: 11px;
+}
