@@ -1,13 +1,14 @@
 $(document).ready(function() {
     $('#forgot_password_form').submit(function(e) {
         e.preventDefault();
+        $('.spinner').show();
         var formData = $(this).serialize();
         $.ajax({
             type: 'POST',
             url: 'send_token_email.php',
             data: formData,
             success: function(response) {
-              // window.location.href = "../login.php?mail_send=true";
+              $('.spinner').hide();
                 try {
                     var jsonResponse = JSON.parse(response);
                     if (jsonResponse.redirect_url) {
@@ -20,7 +21,8 @@ $(document).ready(function() {
                 }
             },
             error: function(error) {
-                alert('An error occurred while processing the request.');
+              $('.spinner').hide();
+                alert('An error occurred while processing the request.' . e);
             }
         });
     });

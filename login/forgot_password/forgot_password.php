@@ -13,6 +13,11 @@ require_once "../../alerts/forgot_password_alerts.php";
 </head>
 
 <body>
+    <div class="loader">
+        <div class="spinner" style="display: none;">
+            <img src="../../common/images/159.gif" alt="loader">
+        </div>
+    </div>
     <div class="container forgot_password_mail_form">
         <div class="heading">
             <h3>Forgot Password</h3>
