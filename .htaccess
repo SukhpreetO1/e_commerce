@@ -1,0 +1,33 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Remove .php extension
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.+?)/?$ $1.php [NC,L]
+
+    # Redirect to HTTPS (uncomment these lines if you have SSL enabled)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Custom error pages (comment these lines for now)
+# ErrorDocument 404 /error404.php
+# ErrorDocument 500 /error500.php
+
+# Deny access to sensitive files
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Limit file upload size (remove these lines if not needed)
+php_value upload_max_filesize 20M
+php_value post_max_size 20M
+
+# Disable directory listing
+Options -Indexes
+
+# Set default index file
+DirectoryIndex index.php

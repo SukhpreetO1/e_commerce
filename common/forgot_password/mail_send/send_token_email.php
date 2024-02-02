@@ -54,20 +54,21 @@ if (isset($_POST['email'])) {
             $stmt = $link->prepare($sql);
             $stmt->bind_param("sss", $reset_token, $date, $email);
             if ($stmt->execute() && sendmail($email, $reset_token)) {
-                $response = array("redirect_url" => "../login.php?mail_send=true");
+                $response = array("redirect_url" => $_ENV['BASE_URL'] . "/common/login.php?mail_send=true");
                 echo json_encode($response);
             } else {
-                $response = array("redirect_url" => "../forgot_password/forgot_password.php?mail_send=false");
+                $response = array("redirect_url" =>  $_ENV['BASE_URL'] . "/common/forgot_password/forgot_password.php?mail_send=false");
+                die($response);
                 echo json_encode($response);
             }
 
         } else {
-            $response = array("redirect_url" => "../forgot_password/forgot_password.php?mail_send=email_not_found");
+            $response = array("redirect_url" => $_ENV['BASE_URL'] . "/common/forgot_password/forgot_password.php?mail_send=email_not_found");
             echo json_encode($response);
         }
 
     } else {
-        $response = array("redirect_url" => "../forgot_password/forgot_password.php", "message" => "Server Down.");
+        $response = array("redirect_url" => $_ENV['BASE_URL'] . "/common/forgot_password/forgot_password.php", "message" => "Server Down.");
         echo json_encode($response);
     }
 }

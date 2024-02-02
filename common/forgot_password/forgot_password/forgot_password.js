@@ -5,7 +5,7 @@ $(document).ready(function() {
         var formData = $(this).serialize();
         $.ajax({
             type: 'POST',
-            url: '../mail_send/send_token_email.php',
+            url: BASE_URL + '/common/forgot_password/mail_send/send_token_email.php',
             data: formData,
             success: function(response) {
               $('.spinner').hide();

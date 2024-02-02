@@ -29,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["email"] = $email;
                     $_SESSION["is_admin"] = $is_admin;
                     if ($is_admin == 2) {
-                        header("location: ../../users/homepage/homepage.php?logged_in=true");
+                        header("location:" . $_ENV['BASE_URL'] . "users/homepage/homepage.php?logged_in=true");
                         exit;
                     } else {
-                        header("location: ../../admin/homepage/homepage.php?logged_in=true");
+                        header("location:" . $_ENV['BASE_URL'] . "admin/homepage/homepage.php?logged_in=true");
                         exit;
                     }
                 } else {
