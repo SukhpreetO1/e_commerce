@@ -4,30 +4,28 @@
 
     # Remove .php extension
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME}.php -f
-    RewriteRule ^(.+?)/?$ $1.php [NC,L]
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^(.*)$ $1.php [L]
 
     # Redirect to HTTPS (uncomment these lines if you have SSL enabled)
     # RewriteCond %{HTTPS} off
     # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
-# Custom error pages (comment these lines for now)
+<Directory /var/www/html/e_commerce>
+    Options -Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+# Custom error pages
 # ErrorDocument 404 /error404.php
 # ErrorDocument 500 /error500.php
 
 # Deny access to sensitive files
 <FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
-    Order Allow,Deny
-    Deny from all
+    Require all denied
 </FilesMatch>
-
-# Limit file upload size (remove these lines if not needed)
-php_value upload_max_filesize 20M
-php_value post_max_size 20M
-
-# Disable directory listing
-Options -Indexes
 
 # Set default index file
 DirectoryIndex index.php

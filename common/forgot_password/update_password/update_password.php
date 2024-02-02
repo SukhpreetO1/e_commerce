@@ -1,6 +1,7 @@
 <?php 
-require_once '../../common/links.php';
-require_once '../../config/config.php';
+require_once dirname(__DIR__, 2) . '/base_url.php';
+require_once dirname(__DIR__, 2) . '/links.php';
+require_once dirname(__DIR__, 2) . '/config/config.php';
 
 if (isset($_GET['reset_token'])) {
     date_default_timezone_set('Asia/kolkata');
@@ -8,25 +9,29 @@ if (isset($_GET['reset_token'])) {
     $reset_token = $_GET['reset_token'];
     
     $sql = "SELECT * FROM users WHERE reset_link_token = '$reset_token'";
-    $result = $link->query($sql);
-
+    $result = $database_connection->query($sql);
+    die($database_connection->error);
     if ($row = $result->fetch_assoc()) {
+        die('zxczczc');
         $email = $row['email'];
         $resetTokenExp = strtotime($row['reset_token_exp']);
         $currentTime = strtotime($date);
         $timeDifference = $currentTime - $resetTokenExp;
         if ($timeDifference > 300) {
             $sql = "UPDATE users SET reset_link_token = NULL, reset_token_exp = NULL WHERE email = '$email'";
-            $link->query($sql);
-            header("location: ../../login/login.php?forgot_password=token_expire");
+            $database_connection->query($sql);
+            header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=token_expire");
         } else {
+            die("asdasd654646");
             include "../forgot_password/update_password_form.php";
         }
     } else {
-        header("location: ../../login/login.php?forgot_password=token_expire");
+        die("afasfasfsdf");
+        header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=token_expire");
     }
 } else {
-    header("location: ../../login/login.php?forgot_password=server_down");
+    die("6466464");
+    header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=server_down");
 }
 
 if (isset($_POST['update'])) {
@@ -36,7 +41,7 @@ if (isset($_POST['update'])) {
         echo "
         <script>
             alert('Password did not match.');
-            window.location.href='../login.php'                     
+            window.location.href='../login.php'
         </script>";
     } else {
         $forgot_hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -45,15 +50,15 @@ if (isset($_POST['update'])) {
             echo "
             <script>
                 alert('Email not found.');
-                window.location.href='../login.php'                     
+                window.location.href='../login.php'
             </script>";
 
         } else {
             $update = "UPDATE users SET password='$forgot_hashed_password', reset_link_token = 'NULL', reset_token_exp = NULL WHERE email = '$email'";
-            if ($link->query($update) === TRUE) {
-                header("location: ../../login/login.php?forgot_password=true");
+            if ($database_connection->query($update) === TRUE) {
+                header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=true");
             } else {
-                header("location: ../../login/login.php?forgot_password=password_not_match");
+                header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=password_not_match");
             }
         }
     }

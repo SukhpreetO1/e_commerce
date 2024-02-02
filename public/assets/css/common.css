@@ -1,10 +1,3 @@
-
-/* signup CSS */
-
-
-/* Homepage css */
-
-
 /* Navbar css */
 nav.navbar.navbar-expand-lg.bg-dark {
     height: 4rem;
@@ -39,59 +32,4 @@ nav.navbar.navbar-expand-lg.bg-dark {
 .navbar_dashboard_search_bar{
     position: absolute;
     right: 14px;
-}
-
-
-
-/* forgot password mail */
-.container.forgot_password_mail_form {
-    width: 25rem;
-    margin-top: 11rem;
-}
-
-.send_link{
-    position: absolute;
-    right: 5rem;
-}
-
-.visible_update_password, .visible_update_confirm_password {
-    position: absolute;
-    top: 35px;
-    right: 11px;
-}
-
-.forgot_submit_button{
-    position: relative;
-}
-
-.login_redirection_from_forgot_password{
-    position: absolute;
-    right: 11rem;
-    top: 3.5rem;
-}
-
-input#send_link {
-    position: absolute;
-    left: 5rem;
-}
-
-.forgot_password_updation.is-invalid, .forgot_confirm_password_updation.is-invalid {
-    background-image: none !important;
-}
-
-.password_match {
-    border: 2.5px solid green !important;
-}
-
-.spinner {
-    position: fixed;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
-    background-color: rgb(255 255 255 / 80%);
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }

@@ -20,9 +20,9 @@ $(document).ready(function() {
                     alert(e);
                 }
             },
-            error: function(error) {
+            error: function(xhr, status, error) {
               $('.spinner').hide();
-                alert('An error occurred while processing the request.' . e);
+              alert('An error occurred while processing the request: ' + status + ' - ' + error);
             }
         });
     });

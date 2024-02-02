@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Check if the email already exists
         $sql = "SELECT id FROM users WHERE email = ?";
-        if ($stmt = mysqli_prepare($link, $sql)) {
+        if ($stmt = mysqli_prepare($database_connection, $sql)) {
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
             if (mysqli_stmt_execute($stmt)) {
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Check if the username already exists
         $sql = "SELECT id FROM users WHERE username = ?";
-        if ($stmt = mysqli_prepare($link, $sql)) {
+        if ($stmt = mysqli_prepare($database_connection, $sql)) {
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             $param_username = $username;
             if (mysqli_stmt_execute($stmt)) {
@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($first_name_err) && empty($last_name_err) && empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
         $sql = "INSERT INTO users (first_name, last_name, username, email, password) VALUES (?, ?, ?, ?, ?)";
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
+        if ($stmt = mysqli_prepare($database_connection, $sql)) {
             mysqli_stmt_bind_param($stmt, "sssss", $param_first_name, $param_last_name, $param_username, $param_email, $param_password);
 
             $param_first_name = $first_name;
@@ -104,5 +104,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    mysqli_close($link);
+    mysqli_close($database_connection);
 }

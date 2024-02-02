@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($email_err) && empty($password_err)) {
         $sql = "SELECT id, email, password, is_admin FROM users WHERE email = ?";
     
-        if ($stmt = mysqli_prepare($link, $sql)) {
+        if ($stmt = mysqli_prepare($database_connection, $sql)) {
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
             if (mysqli_stmt_execute($stmt)) {
@@ -29,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["email"] = $email;
                     $_SESSION["is_admin"] = $is_admin;
                     if ($is_admin == 2) {
-                        header("location:" . $_ENV['BASE_URL'] . "users/homepage/homepage.php?logged_in=true");
+                        header("location:" . $_ENV['BASE_URL'] . "/users/homepage/homepage.php?logged_in=true");
                         exit;
                     } else {
-                        header("location:" . $_ENV['BASE_URL'] . "admin/homepage/homepage.php?logged_in=true");
+                        header("location:" . $_ENV['BASE_URL'] . "/admin/homepage/homepage.php?logged_in=true");
                         exit;
                     }
                 } else {
@@ -44,5 +44,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
         }
     }
-    mysqli_close($link);
+    mysqli_close($database_connection);
 }

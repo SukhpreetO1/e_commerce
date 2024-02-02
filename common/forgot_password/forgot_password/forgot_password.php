@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../base_url.php';
+require_once dirname(__DIR__, 2 ) . '/base_url.php';
 require_once BASE_DIR . "/common/links.php";
 require_once BASE_DIR . "/common/alerts/forgot_password_alerts.php";
 
@@ -17,7 +17,7 @@ require_once BASE_DIR . "/common/alerts/forgot_password_alerts.php";
 <body>
     <div class="loader">
         <div class="spinner" style="display: none;">
-            <img src="<?= $_ENV['BASE_URL']?>/public/assets/images/159.gif" alt="loader">
+            <img src="<?= $_ENV['BASE_URL']?>/public/assets/images/loader.gif" alt="loader">
         </div>
     </div>
     <div class="container forgot_password_mail_form">
@@ -32,7 +32,7 @@ require_once BASE_DIR . "/common/alerts/forgot_password_alerts.php";
             </div>
             <div class="forgot_submit_button">
                 <button type="submit" name="send-link" class="btn btn-primary mt-2 send_link" id="send_link" value="Send Password Reset Link">Send Password Reset Link</button>
-                <span class="login_redirection_from_forgot_password"><a href="<?= $_ENV['BASE_URL']?>common/login/login.php">Login</a></span>
+                <span class="login_redirection_from_forgot_password"><a href="<?= $_ENV['BASE_URL']?>/common/login/login.php">Login</a></span>
             </div>
         </form>
     </div>
