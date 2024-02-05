@@ -54,7 +54,7 @@ if (isset($_POST['update'])) {
             </script>";
 
         } else {
-            $update = "UPDATE users SET password='$forgot_hashed_password', reset_link_token = 'NULL', reset_token_exp = NULL WHERE email = '$email'";
+            $update = "UPDATE users SET password='$forgot_hashed_password', reset_link_token = 'NULL', reset_token_exp = NULL, updated_at = NOW() WHERE email = '$email'";
             if ($database_connection->query($update) === TRUE) {
                 header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=true");
             } else {
