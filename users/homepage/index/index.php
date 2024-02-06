@@ -3,7 +3,6 @@ session_start();
 require_once dirname(__DIR__, 3) . "/common/base_url.php";
 require_once dirname(__DIR__, 3) . "/common/links.php";
 require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +14,9 @@ require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
     <title>Homepage</title>
 </head>
 <body>
-    <div class="homepage_navbar">
-        <?php require dirname(__DIR__) . "/navbar/navbar.php" ?>
+    <div class="homepage_header">
+        <?php require dirname(__DIR__, 2) . "/navbar/navbar.php"?>
     </div>
-
     <div class="homepage_slider">
         <?php require dirname(__DIR__) . "/slider/slider.php"?>
     </div>

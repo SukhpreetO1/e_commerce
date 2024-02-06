@@ -5,39 +5,3 @@
     top: 6px;
     z-index: 9; 
 }
-
-/* Navbar CSS */
-nav.navbar.navbar-expand-lg.bg-dark {
-    height: 4rem;
-}
-
-.navbar_dropdown, .navbar_text {
-    color: white !important;
-}
-
-.dropdown-menu.show{
-    position: absolute;
-    left: -3rem;
-}
-
-.navbar_dropdown_menu.show {
-    margin-left: -50%;
-    margin-top: 6%;
-}
-
-.navbar_logo{
-    width: 50%;
-}
-
-.navbar_search_bar {
-    width: 16rem;
-}
-
-.navbar_text_items{
-    position: absolute;
-    right: 31rem;
-}
-.navbar_dashboard_search_bar{
-    position: absolute;
-    right: 14px;
-}
