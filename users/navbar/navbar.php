@@ -7,10 +7,10 @@
             </div>
             <div class="navbar_items">
                 <div class="nav_item">
-                    <a class="nav-link navbar_text" href="./homepage.php">Home</a>
-                </div>
-                <div class="nav_item">
-                    <a class="nav-link navbar_text" href="./navbar_list_section/men.php">Men</a>
+                    <a class="nav-link navbar_text">Men</a>
+                    <div class="dropdown_content">
+                        <?php include_once dirname(__DIR__) . "/navbar/men_dropdown/men_dropdown_list.php" ?>
+                    </div>
                 </div>
                 <div class="nav_item">
                     <a class="nav-link navbar_text" href="./navbar_list_section/women.php">Women</a>
@@ -19,7 +19,10 @@
                     <a class="nav-link navbar_text" href="#">Kids</a>
                 </div>
                 <div class="nav_item">
-                    <a class="nav-link navbar_text" href="#">Items</a>
+                    <a class="nav-link navbar_text" href="./homepage.php">Home & Living</a>
+                </div>
+                <div class="nav_item">
+                    <a class="nav-link navbar_text" href="#">Beauty</a>
                 </div>
             </div>
             <div class="navbar_collapse" id="search_filter">

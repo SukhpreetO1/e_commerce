@@ -35,3 +35,13 @@
 .header_profile, .header_wishlist, .header_bag{
     margin: 0 10px;
 }
+
+.dropdown_content {
+    display: none;
+    position: absolute;
+    z-index: 9;
+}
+  
+.nav_item:hover .dropdown_content {
+    display: block;
+}
