@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__DIR__) . "/session.php";
 require_once "../config/config.php";
 require_once "./signup_php.php";
 require_once "../links.php";
