@@ -1,0 +1,33 @@
+ul {
+    display: flex;
+    flex-direction: column; /* Change to row for horizontal display */
+    padding: 0;
+    list-style: none;
+}
+  
+ul li {
+    margin-bottom: 5px; /* Adjust as needed */
+}
+
+ul li a {
+    color: black;
+    text-decoration: none;
+}
+
+.men_list{
+    display: flex;
+    background-color: white;
+    padding: 11px 4%;
+    margin: 0 -1%;
+    font-size: 11px;
+}
+
+.men_section_heading{
+    font-size: 13px;
+    color: mediumvioletred;
+}
+
+.section1, .section2, .section3, .section4, .section5, .section6, .section7, .section8, .section9, .section10, .section11, .section12, .section13, .section14{
+    width: 14rem;
+    margin-top: 5%;
+}
