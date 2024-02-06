@@ -7,12 +7,9 @@ if (isset($_GET['reset_token'])) {
     date_default_timezone_set('Asia/kolkata');
     $date = date("Y-m-d H:i:s");
     $reset_token = $_GET['reset_token'];
-    
     $sql = "SELECT * FROM users WHERE reset_link_token = '$reset_token'";
     $result = $database_connection->query($sql);
-    die($database_connection->error);
     if ($row = $result->fetch_assoc()) {
-        die('zxczczc');
         $email = $row['email'];
         $resetTokenExp = strtotime($row['reset_token_exp']);
         $currentTime = strtotime($date);
@@ -22,15 +19,12 @@ if (isset($_GET['reset_token'])) {
             $database_connection->query($sql);
             header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=token_expire");
         } else {
-            die("asdasd654646");
-            include "../forgot_password/update_password_form.php";
+            include dirname(__DIR__, 2) . "/forgot_password/update_password/update_password_form.php";
         }
     } else {
-        die("afasfasfsdf");
         header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=token_expire");
     }
 } else {
-    die("6466464");
     header("location:" .$_ENV['BASE_URL'] . "/common/login/login.php?forgot_password=server_down");
 }
 

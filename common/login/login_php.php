@@ -24,15 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) == 1 && mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $is_admin) && mysqli_stmt_fetch($stmt)) {
+                    session_start();
                     $_SESSION["loggedin"] = true;
                     $_SESSION["id"] = $id;
                     $_SESSION["email"] = $email;
                     $_SESSION["is_admin"] = $is_admin;
                     if ($is_admin == 2) {
-                        header("location:" . $_ENV['BASE_URL'] . "/users/homepage/homepage.php?logged_in=true");
+                        header("location:" . $_ENV['BASE_URL'] . "/users/homepage/index/index.php?logged_in=true");
                         exit;
                     } else {
-                        header("location:" . $_ENV['BASE_URL'] . "/admin/homepage/homepage.php?logged_in=true");
+                        header("location:" . $_ENV['BASE_URL'] . "/admin/homepage/index/index.php?logged_in=true");
                         exit;
                     }
                 } else {

@@ -24,7 +24,7 @@ function sendmail($email, $reset_token)
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset link';
         $mail->Body = "We received a request from you to reset your password. Please click the link below to reset your password. This link is only valid for 5 minutes.<br>
-        <a href=".$_ENV['BASE_URL']."/common/forgot_password/update_password/update_password.php?reset_token=$reset_token'>Reset Password</a>";
+        <a href=".$_ENV['BASE_URL']."/common/forgot_password/update_password/update_password.php?reset_token=$reset_token>Reset Password</a>";
         
         $mail->send();
         return true;

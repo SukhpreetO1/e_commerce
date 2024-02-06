@@ -2,6 +2,6 @@
 session_start();
 $_SESSION = array();
 session_destroy();
-header("location: ../common/login/login.php");
+header("location: " . $_ENV['BASE_URL'] . "/e_commerce" . "/common/login/login.php");
 exit;
 ?>

@@ -1,9 +1,10 @@
 <?php
+require_once dirname(__DIR__) . "/session.php";
 require_once dirname(__DIR__) . '/base_url.php';
-require_once BASE_DIR . "/common/config/config.php";
-require_once BASE_DIR . "/common/login/login_php.php";
-require_once BASE_DIR . "/common/links.php";
-require_once BASE_DIR . "/common/alerts/login_alerts.php";
+require_once dirname(__DIR__) . "/config/config.php";
+require_once dirname(__DIR__) . "/login/login_php.php";
+require_once dirname(__DIR__) . "/links.php";
+require_once dirname(__DIR__) . "/alerts/login_alerts.php";
 ?>
 
 <!DOCTYPE html>

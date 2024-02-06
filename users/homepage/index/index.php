@@ -1,19 +1,10 @@
 <?php 
 session_start();
-require_once "../../common/links.php" ;
-require_once "../../common/alerts/homepage_alerts.php";
+require_once dirname(__DIR__, 3) . "/common/base_url.php";
+require_once dirname(__DIR__, 3) . "/common/links.php";
+require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
 
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    if ($_SESSION["is_admin"] == 2) {
-        header("location: ../../users/homepage/index/index.php?logged_in=true");
-        exit;
-    } else {
-        header("location: ../../admin/homepage/index/index.php?logged_in=true");
-        exit;
-    }
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,15 +16,15 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 </head>
 <body>
     <div class="homepage_navbar">
-        <?php require_once "../navbar/navbar.php" ?>
+        <?php require dirname(__DIR__) . "/navbar/navbar.php" ?>
     </div>
 
     <div class="homepage_slider">
-        <?php require "../slider/slider.php"?>
+        <?php require dirname(__DIR__) . "/slider/slider.php"?>
     </div>
 
     <div class="homepage_content">
-        <?php require "../content/content.php"?>
+        <?php require dirname(__DIR__) . "/content/content.php"?>
     </div>
 </body>
 
