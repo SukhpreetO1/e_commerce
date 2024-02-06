@@ -41,20 +41,20 @@ CREATE TABLE `categories_heading` (
 --
 
 INSERT INTO `categories_heading` (`id`, `clothes_category_id`, `name`, `created_at`, `updated_at`) VALUES
-(3, 1, 'Topwear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(4, 1, 'Indians & Festive Wear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(7, 1, 'Bottomwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(8, 1, 'Innerwear & sleepwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(9, 1, 'Plus Size', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(10, 1, 'Footwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(11, 1, 'Personal Care & Grooming', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(12, 1, 'Sunglasses & Frames', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(13, 1, 'Watches', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(14, 1, 'Sports & Active Wear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(15, 1, 'Gadgets', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(16, 1, 'Fashion Accessories', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(17, 1, 'Bags & Backpacks', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(18, 1, 'Luggages & Trolleys', '2024-02-06 18:48:18', '2024-02-06 18:48:18');
+(1, 1, 'Topwear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(2, 1, 'Indians & Festive Wear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(3, 1, 'Bottomwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(4, 1, 'Innerwear & sleepwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(5, 1, 'Plus Size', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(6, 1, 'Footwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(7, 1, 'Personal Care & Grooming', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(8, 1, 'Sunglasses & Frames', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(9, 1, 'Watches', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(10, 1, 'Sports & Active Wear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(11, 1, 'Gadgets', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(12, 1, 'Fashion Accessories', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(13, 1, 'Bags & Backpacks', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(14, 1, 'Luggages & Trolleys', '2024-02-06 18:48:18', '2024-02-06 18:48:18');
 
 -- --------------------------------------------------------
 
@@ -191,13 +191,16 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categories_heading`
   ADD CONSTRAINT `categories_heading_ibfk_1` FOREIGN KEY (`clothes_category_id`) REFERENCES `clothes_categories` (`id`);
+ALTER TABLE `categories_heading`
+  DROP FOREIGN KEY `categories_heading_ibfk_1`;
 
 --
 -- Constraints for table `categories_type`
 --
 ALTER TABLE `categories_type`
   ADD CONSTRAINT `categories_type_ibfk_1` FOREIGN KEY (`category_heading_id`) REFERENCES `categories_heading` (`id`);
-COMMIT;
+ALTER TABLE `categories_type`
+  DROP FOREIGN KEY `categories_type_ibfk_1`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
