@@ -9,7 +9,15 @@
                 echo "<div class='custom_section_group'>";
                 for ($i = 0; $i < $count; $i++) {
                     if ($category_heading = mysqli_fetch_assoc($result)) {
-                        echo "<div class='section" . $category_heading['id'] . "'><h6 class='men_section_heading'>" . $category_heading["name"] . "</h6></div>";
+                        echo "<div class='section" . $category_heading['id'] . "'><a href='#'><h6 class='men_section_heading'>" . $category_heading["name"] . "</h6></a>";
+                        $category_type_query = "SELECT * FROM categories_type WHERE category_heading_id = " . $category_heading['id'];
+                        $category_type_result = mysqli_query($database_connection, $category_type_query);
+                        if ($category_type_result) {
+                            foreach ($category_type_result as $category_type) {
+                                echo "<div class='heading_type" . $category_type['id'] . "'><a href='#'><h6 class='men_type_heading'>" . $category_type['name'] . "</h6></a></div>";
+                            }
+                        }
+                        echo "</div>";
                     }
                 }
                 echo "</div><br>";
