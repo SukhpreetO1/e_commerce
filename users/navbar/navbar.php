@@ -6,24 +6,9 @@
                 <a class="logo" href="#"><img src="<?php echo $_ENV['BASE_URL'] ?>/public/assets/images/m_letter.svg" alt="logo"></a>
             </div>
             <div class="navbar_items">
-                <div class="nav_item">
-                    <a class="nav-link navbar_text">Men</a>
-                    <div class="dropdown_content">
-                        <?php include_once dirname(__DIR__) . "/navbar/men_dropdown/men_dropdown_list.php" ?>
-                    </div>
-                </div>
-                <div class="nav_item">
-                    <a class="nav-link navbar_text" href="./navbar_list_section/women.php">Women</a>
-                </div>
-                <div class="nav_item">
-                    <a class="nav-link navbar_text" href="#">Kids</a>
-                </div>
-                <div class="nav_item">
-                    <a class="nav-link navbar_text" href="./homepage.php">Home & Living</a>
-                </div>
-                <div class="nav_item">
-                    <a class="nav-link navbar_text" href="#">Beauty</a>
-                </div>
+                <?php 
+                    include dirname(__DIR__) . "/navbar/navbar_dropdown.php";
+                ?>
             </div>
             <div class="navbar_collapse" id="search_filter">
                 <div class="navbar-nav navbar_dashboard_search_bar">
