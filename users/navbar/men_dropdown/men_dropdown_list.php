@@ -3,9 +3,7 @@
     <?php
         $query = "SELECT * FROM categories_heading WHERE clothes_category_id IN (SELECT id FROM categories_heading)";
         $result = mysqli_query($database_connection, $query);
-      
         $headings_per_section = array(2, 3, 4, 2, 3);
-        
         if ($result) {
             foreach ($headings_per_section as $count) {
                 echo "<div class='custom_section_group'>";
