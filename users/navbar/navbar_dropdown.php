@@ -39,10 +39,9 @@ if ($result) {
         $categories = json_decode($row['categories_heading'], true);
         echo "<div class='nav_item navbar_heading'><a href='#'>" . $row['name'] . "</a>
                   <div class='dropdown_content category_header'>";
-        foreach ($categories as $category) {
-            echo "<div class='category_heading_section" . $category['categories_heading_id'] . "'>" . $category['name'] . "<br></div>";
-            // Access the 'categories_heading_id' instead of 'id'
-        }
+                foreach ($categories as $category) {
+                    echo "<div class='category_heading_section" . $category['categories_heading_id'] . "'>" . $category['name'] . "<br></div>";
+                }
         echo "</div></div>";
     }
 }
