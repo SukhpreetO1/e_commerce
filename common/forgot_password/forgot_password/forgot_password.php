@@ -37,8 +37,5 @@ require_once BASE_DIR . "/common/alerts/forgot_password_alerts.php";
         </form>
     </div>
 </body>
-<script>
-    var BASE_URL = '<?php echo $_ENV['BASE_URL']; ?>';
-</script>
 <script src="./forgot_password.js"></script>
 </html>

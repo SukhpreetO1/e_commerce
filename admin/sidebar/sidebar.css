@@ -1,0 +1,16 @@
+.dropdown {
+    position: absolute;
+    bottom: 15px;
+}
+
+.admin_sidebar{
+    width: 12%;
+}
+
+.homepage_sidebar{
+    max-width: 12%;
+}
+
+li{
+    width: 11rem;
+}

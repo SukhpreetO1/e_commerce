@@ -19,6 +19,9 @@
                         <a class="nav-link navbar_dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Profile
                         </a>
+                        <ul class="dropdown-menu navbar_dropdown_menu">
+                            <li><a class="dropdown-item" href="<?php echo $_ENV['BASE_URL'] ?>/common/logout.php">Logout</a></li>
+                        </ul>
                     </div>
                     <div class="header_wishlist">
                         <a class="nav-link navbar_dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,14 +39,4 @@
     </nav>
 </div>
 
-<script>
-    document.querySelectorAll('.navbar_heading').forEach(item => {
-        item.addEventListener('mouseover', event => {
-            item.querySelector('.category_header').style.display = 'flex';
-        });
-
-        item.addEventListener('mouseout', event => {
-            item.querySelector('.category_header').style.display = 'none';
-        });
-    });
-</script>
+<script src="<?php echo $_ENV['BASE_URL'] ?>/users/navbar/navbar_dropdown.js"></script>
