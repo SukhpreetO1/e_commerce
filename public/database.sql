@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 06, 2024 at 06:58 PM
+-- Generation Time: Feb 12, 2024 at 10:25 AM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -54,7 +54,8 @@ INSERT INTO `categories_heading` (`id`, `clothes_category_id`, `name`, `created_
 (11, 1, 'Gadgets', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
 (12, 1, 'Fashion Accessories', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
 (13, 1, 'Bags & Backpacks', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(14, 1, 'Luggages & Trolleys', '2024-02-06 18:48:18', '2024-02-06 18:48:18');
+(14, 1, 'Luggages & Trolleys', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
+(15, 2, 'Indian & Fusion Wear', '2024-02-12 09:58:36', '2024-02-12 09:58:36');
 
 -- --------------------------------------------------------
 
@@ -66,10 +67,70 @@ CREATE TABLE `categories_type` (
   `id` int NOT NULL,
   `category_heading_id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories_type`
+--
+
+INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 1, 'T-Shirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(2, 1, 'Casual Shirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(3, 1, 'Formal Shirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(4, 1, 'Sweatshirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(5, 1, 'Sweaters', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(6, 1, 'Jackets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(7, 1, 'Blazers & Coats', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(8, 1, 'Suits', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(9, 1, 'Rain Jackets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(10, 2, 'Kurtas & Kurta Sets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(11, 2, 'Sherwanis', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(12, 2, 'Nehru Jackets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(13, 2, 'Dhotis', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(14, 3, 'Jeans', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(15, 3, 'Casual Trousers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(16, 3, 'Formal Trousers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(17, 3, 'Shorts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(18, 3, 'Track Pants & Joggers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(19, 4, 'Briefs & Trunks', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(20, 4, 'Boxers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(21, 4, 'Vests', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(22, 4, 'Sleepwear & Loungewear', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(23, 4, 'Thermals', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(24, 6, 'Casual Shoes', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(25, 6, 'Sports Shoes', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(26, 6, 'Formal Shoes', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(27, 6, 'Sneakers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(28, 6, 'Sandals & Floaters', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(29, 6, 'Flip Flops', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(30, 6, 'Socks', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(31, 10, 'Sports Shoes', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(32, 10, 'Sports Sandals', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(33, 10, 'Active T-Shirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(34, 10, 'Track Pants & Shorts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(35, 10, 'Tracksuits', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(36, 10, 'Jackets & Sweatshirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(37, 10, 'Sports Accessories', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(38, 10, 'Swimwear', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(39, 11, 'Smart Wearables', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(40, 11, 'Fitness Gadgets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(41, 11, 'Headphones', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(42, 11, 'Speakers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(43, 12, 'Wallets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(44, 12, 'Belts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(45, 12, 'Perfumes & Body Mists', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(46, 12, 'Trimmers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(47, 12, 'Deodorants', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(48, 12, 'Ties, Cufflinks & Pocket Squares', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(49, 12, 'Accessory Gift Sets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(50, 12, 'Caps & Hats', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(51, 12, 'Mufflers, Scarves & Gloves', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(52, 12, 'Phone Cases', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(53, 12, 'Rings & Wristwear', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(54, 12, 'Helmets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14');
 
 -- --------------------------------------------------------
 
@@ -162,13 +223,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories_heading`
 --
 ALTER TABLE `categories_heading`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `categories_type`
 --
 ALTER TABLE `categories_type`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `clothes_categories`
@@ -181,6 +242,7 @@ ALTER TABLE `clothes_categories`
 --
 ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 
 --
 -- Constraints for dumped tables
