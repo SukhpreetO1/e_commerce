@@ -1,3 +1,7 @@
+<?php
+require dirname(__DIR__, 2) . "/common/config/config.php";
+?>
+
 <link rel="stylesheet" href="<?php echo $_ENV['BASE_URL'] ?>/e_commerce/admin/categories_section/categories_section.css">
 <div class="category_section_page">
     <div class="container">
@@ -24,8 +28,8 @@
                     <?php
                     $query = "SELECT * FROM clothes_categories";
                     $result = mysqli_query($database_connection, $query);
-                    var_dump($result);
-                    foreach ($result as $category_data) {
+
+                    while ($category_data = mysqli_fetch_assoc($result)) {
                     ?>
                         <tr scope="col">
                             <td><?php echo $category_data['id']; ?></td>

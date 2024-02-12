@@ -7,10 +7,10 @@
 
         <div class="add_categories_name">
             <div class="add_section">
-                <form method="post" id="forgot_password_form">
+                <form method="post" id="add_categories_section_form">
                     <div class="form-group">
-                        <label for="add_categories_section_name" class="add_categories_section_name_name mt-2 mb-2">Category Name :</label>
-                        <input type="text" name="add_categories_section_name" class="form-control add_categories_section_name" id="add_categories_section_name">
+                        <label for="add_categories_section_name" class="add_categories_section_name mt-2 mb-2">Category Name :</label>
+                        <input type="text" name="add_categories_section_input_name" class="form-control add_categories_section_input_name" id="add_categories_section_input_name">
                         <span class="invalid-feedback" id="add_categories_section_name_err"><?php echo $add_categories_section_name_err; ?></span>
                     </div>
                     <div class="add_categories_section_name_button">
@@ -21,4 +21,4 @@
         </div>
     </div>
 </div>
-<script src="<?php echo $_ENV['BASE_URL'] ?>/e_commerce/admin/categories_section/categories_section.js"></script>
+<script src="<?php echo $_ENV['BASE_URL'] ?>/e_commerce/admin/categories_section/add_categories_section/add_categories_section.js"></script>

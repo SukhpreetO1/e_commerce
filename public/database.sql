@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 12, 2024 at 10:25 AM
+-- Generation Time: Feb 12, 2024 at 06:20 PM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -181,7 +181,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `is_admin`, `reset_link_token`, `reset_token_exp`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Sukhpreet', 'Singh', 'Sukhpreet9', 'ssingh77022@gmail.com', 2, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-06 12:43:37');
+(1, 'Sukhpreet', 'Singh', 'Sukhpreet9', 'ssingh77022@gmail.com', 2, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-06 12:43:37'),
+(2, 'Sukhpreet', 'Singh', 'Sukhpreet99', 'ssingh77021@gmail.com', 1, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-06 12:43:37');
 
 --
 -- Indexes for dumped tables
@@ -241,28 +242,8 @@ ALTER TABLE `clothes_categories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `categories_heading`
---
-ALTER TABLE `categories_heading`
-  ADD CONSTRAINT `categories_heading_ibfk_1` FOREIGN KEY (`clothes_category_id`) REFERENCES `clothes_categories` (`id`);
-ALTER TABLE `categories_heading`
-  DROP FOREIGN KEY `categories_heading_ibfk_1`;
-
---
--- Constraints for table `categories_type`
---
-ALTER TABLE `categories_type`
-  ADD CONSTRAINT `categories_type_ibfk_1` FOREIGN KEY (`category_heading_id`) REFERENCES `categories_heading` (`id`);
-ALTER TABLE `categories_type`
-  DROP FOREIGN KEY `categories_type_ibfk_1`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

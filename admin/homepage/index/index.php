@@ -23,5 +23,5 @@ require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
         <div class="container"></div>
     </div>
 </body>
-
+    <script src="<?php echo $_ENV['BASE_URL'] ?>/admin/homepage/index/index.js"></script>
 </html>
