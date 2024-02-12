@@ -6,8 +6,8 @@
                 <a class="logo" href="#"><img src="<?php echo $_ENV['BASE_URL'] ?>/public/assets/images/m_letter.svg" alt="logo"></a>
             </div>
             <div class="navbar_items">
-                <?php 
-                    include dirname(__DIR__) . "/navbar/navbar_dropdown.php";
+                <?php
+                include dirname(__DIR__) . "/navbar/navbar_dropdown.php";
                 ?>
             </div>
             <div class="navbar_collapse" id="search_filter">
@@ -35,3 +35,15 @@
         </div>
     </nav>
 </div>
+
+<script>
+    document.querySelectorAll('.navbar_heading').forEach(item => {
+        item.addEventListener('mouseover', event => {
+            item.querySelector('.category_header').style.display = 'flex';
+        });
+
+        item.addEventListener('mouseout', event => {
+            item.querySelector('.category_header').style.display = 'none';
+        });
+    });
+</script>

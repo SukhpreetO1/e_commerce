@@ -38,10 +38,40 @@ if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $categories = json_decode($row['categories_heading'], true);
         echo "<div class='nav_item navbar_heading'><a href='#'>" . $row['name'] . "</a>
-                  <div class='dropdown_content category_header'>";
-                foreach ($categories as $category) {
-                    echo "<div class='category_heading_section" . $category['categories_heading_id'] . "'>" . $category['name'] . "<br></div>";
+            <div class='dropdown_content category_header'>";
+        $current_pair = [];
+        foreach ($categories as $category) {
+            if (!empty($category['categories_types'])) {
+                if (count($current_pair) < 2) {
+                    $current_pair[] = $category;
+                } else {
+                    display_category_pair($current_pair);
+                    $current_pair = [$category];
                 }
+            } else {
+                $current_pair[] = $category;
+                if (count($current_pair) == 6) {
+                    display_category_pair($current_pair);
+                    $current_pair = [];
+                }
+            }
+        }
+        
+        if (!empty($current_pair)) {
+            display_category_pair($current_pair);
+        }
         echo "</div></div>";
     }
+}
+
+function display_category_pair($pair) {
+    echo "<div class='category_pair'>";
+    foreach ($pair as $category) {
+        echo "<div class='category_heading category_heading_section_" . $category['categories_heading_id'] . "'><span class='mb-2'>" . $category['name'] . "</span>";
+        foreach ($category['categories_types'] as $categoryType) {
+            echo "<div class='category_type category_type_" . $categoryType['categories_type_id'] . "'>" . $categoryType['name'] . "<br></div>";
+        }
+        echo "<br></div>";
+    }
+    echo "</div>";
 }
