@@ -1,5 +1,4 @@
 <?php
-require dirname(__DIR__, 2) . "/common/base_url.php";
 require dirname(__DIR__, 2) . "/common/config/config.php";
 ?>
 
@@ -31,12 +30,20 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                     $result = mysqli_query($database_connection, $query);
 
                     while ($category_data = mysqli_fetch_assoc($result)) {
-                    ?>
+                        ?>
                         <tr scope="col">
-                            <td><?php echo $category_data['id']; ?></td>
-                            <td><?php echo $category_data['name']; ?></td>
-                            <td><?php echo date('d-m-Y', strtotime($category_data['created_at'])); ?></td>
-                            <td><?php echo date('d-m-Y', strtotime($category_data['updated_at'])); ?></td>
+                            <td>
+                                <?php echo $category_data['id']; ?>
+                            </td>
+                            <td>
+                                <?php echo $category_data['name']; ?>
+                            </td>
+                            <td>
+                                <?php echo date('d-m-Y', strtotime($category_data['created_at'])); ?>
+                            </td>
+                            <td>
+                                <?php echo date('d-m-Y', strtotime($category_data['updated_at'])); ?>
+                            </td>
                             <td>
                                 <div class="category_title_action">
                                     <div class="category_title_edit">
@@ -48,7 +55,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                                 </div>
                             </td>
                         </tr>
-                    <?php
+                        <?php
                     }
                     ?>
                 </tbody>
@@ -56,3 +63,68 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
         </div>
     </div>
 </div>
+
+<script>
+    /*------------------------- Click on plus (+) JS --------------------------------------*/ 
+    function handle_icon_click(url) {
+        $.ajax({
+            type: 'GET',
+            url: BASE_URL + url,
+            success: function (data) {
+                $('.container').html(data);
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+    // redirection ajax for adding the category title
+    $(document).on('click', '.category_title_plus_icon', function (e) {
+        e.preventDefault();
+        handle_icon_click('/admin/category_title/add_category_title.php');
+    });
+
+    /*------------------------- Click on Edit Button JS --------------------------------------*/
+    function handle_icon_click(url) {
+        $.ajax({
+            type: 'GET',
+            url: BASE_URL + url,
+            success: function (data) {
+                $('.container').html(data);
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+    // redirection ajax for adding the category title
+    $(document).on('click', '.category_title_edit', function (e) {
+        e.preventDefault();
+        handle_icon_click('/admin/category_title/edit_category_title.php');
+    });
+
+    /*------------------------- Back Button JS on dashboard --------------------------------------*/
+    function handleButtonClick(url, e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: BASE_URL + url,
+            success: function (data) {
+                var container = $('.container');
+                if (!$(data).find('.homepage_header').length) {
+                    container.html(data);
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+    // redirection ajax for back button the category sections
+    $(document).on('click', '.category_title_back_button', function (e) {
+        handleButtonClick('/admin/homepage/dashboard/dashboard.php', e);
+    });
+</script>
