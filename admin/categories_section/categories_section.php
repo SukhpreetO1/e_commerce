@@ -1,16 +1,16 @@
 <?php
+require dirname(__DIR__, 2) . "/common/base_url.php";
 require dirname(__DIR__, 2) . "/common/config/config.php";
 ?>
 
-<link rel="stylesheet" href="<?php echo $_ENV['BASE_URL'] ?>/e_commerce/admin/categories_section/categories_section.css">
 <div class="category_section_page">
     <div class="container">
         <div class="categories_section_heading">
-            <h2>Categories Section</h2>
+            <h2>Category Section</h2>
         </div>
 
         <div class="add_categories_section">
-            <a href="#"><i class="fa-solid fa-plus plus_icon"></i></a>
+            <a href="#"><i class="fa-solid fa-plus categories_section_plus_icon"></i></a>
         </div>
 
         <div class="categories_section_table">
@@ -55,4 +55,4 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
         </div>
     </div>
 </div>
-<script src="<?php echo $_ENV['BASE_URL'] ?>/e_commerce/admin/categories_section/categories_section.js"></script>
+<script src="<?php echo $_ENV['BASE_URL'] ?>/admin/homepage/index/index.js"></script>

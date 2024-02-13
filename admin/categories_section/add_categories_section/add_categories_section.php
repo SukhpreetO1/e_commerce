@@ -1,4 +1,7 @@
-<link rel="stylesheet" href="<?php echo $_ENV['BASE_URL'] ?>/e_commerce/admin/categories_section/add_categories_section/add_categories_section.css">
+<?php
+require dirname(__DIR__, 3) . "/common/base_url.php";
+?>
+<link rel="stylesheet" href="<?php echo $_ENV['BASE_URL'] ?>/admin/categories_section/add_categories_section/add_categories_section.css">
 <div class="category_section_page">
     <div class="container">
         <div class="categories_section_heading">
@@ -7,9 +10,9 @@
 
         <div class="add_categories_name">
             <div class="add_section">
-                <form method="post" id="add_categories_section_form">
+                <form method="post" id="add_categories_section_form" class="add_categories_section_form">
                     <div class="form-group">
-                        <label for="add_categories_section_name" class="add_categories_section_name mt-2 mb-2">Category Name :</label>
+                        <label for="add_categories_section_input_name" class="add_categories_section_name mt-2 mb-2">Category Name :</label>
                         <input type="text" name="add_categories_section_input_name" class="form-control add_categories_section_input_name" id="add_categories_section_input_name">
                         <span class="invalid-feedback" id="add_categories_section_name_err"><?php echo $add_categories_section_name_err; ?></span>
                     </div>
@@ -21,4 +24,4 @@
         </div>
     </div>
 </div>
-<script src="<?php echo $_ENV['BASE_URL'] ?>/e_commerce/admin/categories_section/add_categories_section/add_categories_section.js"></script>
+<script src="<?php echo $_ENV['BASE_URL'] ?>/admin/categories_section/add_categories_section/add_categories_section.js"></script>
