@@ -10,7 +10,7 @@
 
         <div class="add_category_name">
             <div class="add_section">
-                <form method="post" id="add_category_title_form" class="add_category_title_form">
+                <form method="post" id="add_category_title_form" class="add_category_title_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                     <div class="form-group">
                         <label for="add_category_title_input_name" class="add_category_title_name mt-2 mb-2">Category Name <span class="important_mark">*</span></label>
                         <input type="text" name="add_category_title_input_name" class="form-control add_category_title_input_name" id="add_category_title_input_name">

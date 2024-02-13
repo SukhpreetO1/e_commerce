@@ -4,6 +4,9 @@ require_once dirname(__DIR__, 3) . "/common/base_url.php";
 require_once dirname(__DIR__, 3) . "/common/config/config.php";
 require_once dirname(__DIR__, 3) . "/common/links.php";
 require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
+
+require_once dirname(__DIR__, 3) . "/common/alerts/admin_alerts.php";
+require_once dirname(__DIR__, 2) . "/category_title/add_category_title_php.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +20,6 @@ require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
 <body>
     <div class="homepage_section">
         <div class="homepage_header">
-            <?php require dirname(__DIR__, 2) . "/sidebar/sidebar.php"?>
         </div>
 
         <div class="container">

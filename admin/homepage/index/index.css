@@ -1,74 +1,116 @@
-.logged_in_alert_dismissible{
-    width: 15rem;
-    position: absolute;
-    right: 9px;
-    top: 6px;
-    z-index: 9; 
+/* sidebar css only */
+.dropdown {
+    position: absolute !important;
+    bottom: 15px;
 }
 
-.homepage_section{
-    display: flex;
+.admin_sidebar{
+    width: 12%;
 }
 
-.category_section_page, .category_title_action, .category_header_page, .category_header_action{
-    display: flex;
+.homepage_sidebar{
+    max-width: 12%;
 }
 
-.category_title_heading, .category_header, .category_header_title {
-    text-align: center;
-    margin: 4% 4% 0;
+li{
+    width: 11rem;
+}
+/* -------------------------------------------------------- */
+
+.logged_in_alert_dismissible {
+  width: 15rem;
+  position: absolute;
+  right: 9px;
+  top: 6px;
+  z-index: 9;
 }
 
-.category_title_edit, .category_header_edit{
-    margin-right: 15px;
+.homepage_section {
+  display: flex;
 }
 
-.container{
-    position: relative;
+.category_section_page,
+.category_title_action,
+.category_header_page,
+.category_header_action {
+  display: flex;
 }
 
-.add_category_title, .add_category_header {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 1% 1%;
+.category_title_heading,
+.category_header,
+.category_header_title {
+  text-align: center;
+  margin: 4% 4% 0;
 }
 
-.category_title_plus_icon, .category_header_plus_icon {
-    font-size: 1.5rem;
-    border: 1px solid;
-    border-radius: 51%;
-    padding: 5px;
-    color: black;
+.category_title_edit,
+.category_header_edit {
+  margin-right: 15px;
 }
-.category_header_back_button, .category_title_back_button, .add_category_title_back_button, .add_category_header_back_button {
-    font-size: 1.5rem;
-    padding: 5px;
-    color: black;
+
+.container {
+  position: relative;
+}
+
+.add_category_title,
+.add_category_header,
+.edit_category_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1% 1%;
+}
+
+.category_title_plus_icon,
+.category_header_plus_icon {
+  font-size: 1.5rem;
+  border: 1px solid;
+  border-radius: 51%;
+  padding: 5px;
+  color: black;
+}
+
+.category_title_back_button,
+.add_category_title_back_button,
+.edit_category_title_back_button,
+.category_header_back_button,
+.add_category_header_back_button {
+  font-size: 1.5rem;
+  padding: 5px;
+  color: black;
 }
 
 .add_categories_header_name {
-    width: 30%;
-    margin-left: 36%;
-    text-align: center;
- }
+  width: 30%;
+  margin-left: 36%;
+  text-align: center;
+}
 
-
+.category_title_edit:hover,
+.category_title_delete:hover {
+  cursor: pointer;
+}
 
 /* CSS for the add category title page */
-.add_category_title_name_button, .add_category_header_name_button {
-    text-align: center;
+.add_category_title_name_button,
+.add_category_header_name_button,
+.edit_category_title_name_button {
+  text-align: center;
 }
 
-.add_category_name, .add_category_header_names {
-    width: 30%;
-    margin-left: 36%;
+.add_category_name,
+.add_category_header_names,
+.edit_category_name {
+  width: 30%;
+  margin-left: 36%;
 }
 
-#add_category_title_name_err, #add_category_header_name_err {
-    display: block;
-    text-align: start;
+#add_category_title_name_err,
+#add_category_header_name_err,
+#edit_category_title_name_err {
+  display: block;
+  text-align: start;
 }
 
-.important_mark{
-    color: red;
+.important_mark {
+  color: red;
 }
