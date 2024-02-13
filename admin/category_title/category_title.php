@@ -14,7 +14,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
         </div>
 
         <div class="category_title_table">
-            <table class="table">
+            <table class="category_title_table" id="category_title_table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -46,6 +46,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                             </td>
                             <td>
                                 <div class="category_title_action">
+                                    <input type="hidden" name="category_id" class="category_id" id="category_id" value="<?php echo $category_data['id']; ?>">
                                     <div class="category_title_edit">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </div>
@@ -86,10 +87,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     });
 
     /*------------------------- Click on Edit Button JS --------------------------------------*/
-    function handle_icon_click(url) {
+    function handle_icon_click(url, category_id) {
         $.ajax({
             type: 'GET',
-            url: BASE_URL + url,
+            url: BASE_URL + url + '?category_id=' + category_id,
             success: function (data) {
                 $('.container').html(data);
             },
@@ -102,7 +103,8 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     // redirection ajax for adding the category title
     $(document).on('click', '.category_title_edit', function (e) {
         e.preventDefault();
-        handle_icon_click('/admin/category_title/edit_category_title.php');
+        var category_id = $(this).siblings('.category_id').val();
+        handle_icon_click('/admin/category_title/edit_category_title.php', category_id);
     });
 
     /*------------------------- Back Button JS on dashboard --------------------------------------*/
@@ -126,5 +128,9 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     // redirection ajax for back button the category sections
     $(document).on('click', '.category_title_back_button', function (e) {
         handleButtonClick('/admin/homepage/dashboard/dashboard.php', e);
+    });
+
+    $(document).ready(function() {
+        $('#category_title_table').DataTable();
     });
 </script>

@@ -12,11 +12,11 @@
     # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
-<Directory /var/www/html/e_commerce>
-    Options -Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>
+# <Directory /var/www/html/e_commerce>
+#     Options -Indexes FollowSymLinks
+#     AllowOverride All
+#     Require all granted
+# </Directory>
 
 # Custom error pages
 # ErrorDocument 404 /error404.php
