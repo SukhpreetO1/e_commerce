@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories_heading`
+-- Table structure for table `category_header`
 --
 
-CREATE TABLE `categories_heading` (
+CREATE TABLE `category_header` (
   `id` int NOT NULL,
   `clothes_category_id` int NOT NULL COMMENT '1 for mens, 2 for womens, 3 for kids, 4 for living, 5 for beauty',
   `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE `categories_heading` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `categories_heading`
+-- Dumping data for table `category_header`
 --
 
-INSERT INTO `categories_heading` (`id`, `clothes_category_id`, `name`, `created_at`, `updated_at`) VALUES
+INSERT INTO `category_header` (`id`, `clothes_category_id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Topwear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
 (2, 1, 'Indians & Festive Wear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
 (3, 1, 'Bottomwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
@@ -189,9 +189,9 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `is_a
 --
 
 --
--- Indexes for table `categories_heading`
+-- Indexes for table `category_header`
 --
-ALTER TABLE `categories_heading`
+ALTER TABLE `category_header`
   ADD PRIMARY KEY (`id`),
   ADD KEY `clothes_category_id` (`clothes_category_id`);
 
@@ -221,9 +221,9 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `categories_heading`
+-- AUTO_INCREMENT for table `category_header`
 --
-ALTER TABLE `categories_heading`
+ALTER TABLE `category_header`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --

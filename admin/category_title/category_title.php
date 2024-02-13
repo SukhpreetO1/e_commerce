@@ -5,15 +5,16 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
 <div class="category_section_page">
     <div class="container">
-        <div class="categories_section_heading">
-            <h2>Category Section</h2>
+        <div class="category_title_heading">
+            <h2>Category Title</h2>
         </div>
 
-        <div class="add_categories_section">
-            <a href="#"><i class="fa-solid fa-plus categories_section_plus_icon"></i></a>
+        <div class="add_category_title">
+            <a href="#"><i class="fa-solid fa-arrow-left-long category_title_back_button"></i></a>
+            <a href="#"><i class="fa-solid fa-plus category_title_plus_icon"></i></a>
         </div>
 
-        <div class="categories_section_table">
+        <div class="category_title_table">
             <table class="table">
                 <thead>
                     <tr>
@@ -37,11 +38,11 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                             <td><?php echo date('d-m-Y', strtotime($category_data['created_at'])); ?></td>
                             <td><?php echo date('d-m-Y', strtotime($category_data['updated_at'])); ?></td>
                             <td>
-                                <div class="categories_section_action">
-                                    <div class="categories_section_edit">
+                                <div class="category_title_action">
+                                    <div class="category_title_edit">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </div>
-                                    <div class="categories_section_delete">
+                                    <div class="category_title_delete">
                                         <i class="fa-regular fa-trash-can"></i>
                                     </div>
                                 </div>
@@ -55,4 +56,3 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
         </div>
     </div>
 </div>
-<script src="<?php echo $_ENV['BASE_URL'] ?>/admin/homepage/index/index.js"></script>

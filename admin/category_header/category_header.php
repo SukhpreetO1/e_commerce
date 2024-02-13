@@ -2,17 +2,18 @@
 require dirname(__DIR__, 2) . "/common/base_url.php";
 require dirname(__DIR__, 2) . "/common/config/config.php";
 ?>
-<div class="categories_heading_page">
+<div class="category_header_page">
     <div class="container">
-        <div class="categories_heading">
-            <h2>Category Heading</h2>
+        <div class="category_header">
+            <h2>Category Header</h2>
         </div>
 
-        <div class="add_categories_heading">
-            <a href="#"><i class="fa-solid fa-plus categories_heading_plus_icon"></i></a>
+        <div class="add_category_header">
+            <a href="#"><i class="fa-solid fa-arrow-left-long category_header_back_button"></i></a>
+            <a href="#"><i class="fa-solid fa-plus category_header_plus_icon"></i></a>
         </div>
 
-        <div class="categories_heading_table">
+        <div class="category_header_table">
             <table class="table">
                 <thead>
                     <tr>
@@ -26,11 +27,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                 </thead>
                 <tbody>
                 <?php
-                    $query = "SELECT 
-                                ch.id AS categories_heading_id,
-                                ch.name AS categories_heading_name,
-                                ch.created_at AS categories_heading_created_at,
-                                ch.updated_at AS categories_heading_updated_at,
+                    $query = "SELECT ch.id AS category_header_id,
+                                ch.name AS category_header_name,
+                                ch.created_at AS category_header_created_at,
+                                ch.updated_at AS category_header_updated_at,
                                 JSON_ARRAYAGG(
                                     JSON_OBJECT(
                                         'clothes_categories_id', cc.id,
@@ -46,17 +46,17 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                     while ($category_data = mysqli_fetch_assoc($result)) {
                 ?>
                     <tr>
-                        <td><?php echo $category_data['categories_heading_id']; ?></td>
+                        <td><?php echo $category_data['category_header_id']; ?></td>
                         <td><?php echo json_decode($category_data['clothes_categories'], true)[0]['clothes_categories_name']; ?></td>
-                        <td><?php echo $category_data['categories_heading_name']; ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($category_data['categories_heading_created_at'])); ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($category_data['categories_heading_updated_at'])); ?></td>
+                        <td><?php echo $category_data['category_header_name']; ?></td>
+                        <td><?php echo date('d-m-Y', strtotime($category_data['category_header_created_at'])); ?></td>
+                        <td><?php echo date('d-m-Y', strtotime($category_data['category_header_updated_at'])); ?></td>
                         <td>
-                            <div class="categories_heading_action">
-                                <div class="categories_heading_edit">
+                            <div class="category_header_action">
+                                <div class="category_header_edit">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </div>
-                                <div class="categories_heading_delete">
+                                <div class="category_header_delete">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </div>
                             </div>
@@ -70,4 +70,3 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
         </div>
     </div>
 </div>
-<script src="<?php echo $_ENV['BASE_URL'] ?>/admin/homepage/index/index.js"></script>

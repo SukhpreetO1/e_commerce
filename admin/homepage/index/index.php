@@ -20,7 +20,9 @@ require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
             <?php require dirname(__DIR__, 2) . "/sidebar/sidebar.php"?>
         </div>
 
-        <div class="container"></div>
+        <div class="container">
+            <?php require dirname(__DIR__, 2) . "/homepage/dashboard/dashboard.php"?>
+        </div>
     </div>
 </body>
     <script src="<?php echo $_ENV['BASE_URL'] ?>/admin/homepage/index/index.js"></script>

@@ -27,18 +27,18 @@
                 </a>
             </li>
             <li>
+                <a href="#" class="nav-link link-dark category_title">
+                    Category Title
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link link-dark category_heading">
+                    Category Heading
+                </a>
+            </li>
+            <li>
                 <a href="#" class="nav-link link-dark categories_types">
-                    Categories - Types
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link link-dark categories">
-                    Categories
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link link-dark sub_categories">
-                    Sub - Categories
+                    Category Types
                 </a>
             </li>
         </ul>
