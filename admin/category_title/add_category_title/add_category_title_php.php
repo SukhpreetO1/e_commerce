@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $insert_stmt = mysqli_prepare($database_connection, $insert_sql);
          mysqli_stmt_bind_param($insert_stmt, "s", $add_category_title_input_name);
          mysqli_stmt_execute($insert_stmt);
-         $response['success'] = "Category created successfully.";
+         $response['success'] = "Category title created successfully.";
          $response['url'] = '/admin/category_title/category_title.php';
       }
       echo json_encode($response, JSON_UNESCAPED_SLASHES);
