@@ -19,7 +19,9 @@ li{
 
 .logged_in_alert_dismissible,
 .category_title_alert_dismissible,
-.category_title_delete_alert_dismissible{
+.category_title_delete_alert_dismissible,
+.category_title_success_dismissible{
+  font-size: 15px;
   position: absolute;
   right: 9px;
   top: 6px;
@@ -31,8 +33,9 @@ li{
 }
 
 .category_title_alert_dismissible,
-.category_title_delete_alert_dismissible {
-  width: 18rem;
+.category_title_delete_alert_dismissible,
+.category_title_success_dismissible {
+  width: 17rem;
 }
 
 .homepage_section {

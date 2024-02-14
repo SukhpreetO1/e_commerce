@@ -141,43 +141,55 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
     /*--------------------------------------------------------------- Delete Button JS on ADD PAGES ----------------------------------------------------------------------------*/
     function handle_delete_button_click(url, category_id) {
-        var parsed_response = null;
-        $.ajax({
-            type: 'DELETE',
-            url: BASE_URL + url + '?category_id=' + category_id,
-            success: function(response) {
-                if (parsed_response) {
-                    parsed_response = null;
-                } else {
-                    parsed_response = JSON.parse(response);
-                    if (parsed_response.error) {
-                        var alert_message = '<div class="alert alert-danger category_title_delete_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
-                        $('#alert_container').append(alert_message);
-                        setTimeout(function() {
-                            $('.alert').remove();
-                        }, 3000);
-                    } else {
-                        var alert_message = '<div class="alert alert-success category_title_delete_alert_dismissible" role="alert">' + parsed_response.success + '</div>';
-                        $('#alert_container').append(alert_message);
-                        setTimeout(function() {
-                            $('.alert').remove();
-                                $.ajax({
-                                url: BASE_URL + '/admin/category_title/category_title.php',
-                                type: 'GET',
-                                success: function(data) {
-                                    $(".container").empty();
-                                    $('.container').html(data);
-                                },
-                                error: function(xhr, status, error) {
-                                    console.log(error);
-                                }
-                            });
-                        }, 2000);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var parsed_response = null;
+                $.ajax({
+                    type: 'DELETE',
+                    url: BASE_URL + url + '?category_id=' + category_id,
+                    success: function(response) {
+                        if (parsed_response) {
+                            parsed_response = null;
+                        } else {
+                            parsed_response = JSON.parse(response);
+                            if (parsed_response.error) {
+                                var alert_message = '<div class="alert alert-danger category_title_delete_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                                $('#alert_container').append(alert_message);
+                                setTimeout(function() {
+                                    $('.alert').remove();
+                                }, 3000);
+                            } else {
+                                var alert_message = '<div class="alert alert-success category_title_delete_alert_dismissible" role="alert">' + parsed_response.success + '</div>';
+                                $('#alert_container').append(alert_message);
+                                setTimeout(function() {
+                                    $('.alert').remove();
+                                    $.ajax({
+                                        url: BASE_URL + '/admin/category_title/category_title.php',
+                                        type: 'GET',
+                                        success: function(data) {
+                                            $(".container").empty();
+                                            $('.container').html(data);
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.log(error);
+                                        }
+                                    });
+                                }, 2000);
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
                     }
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
+                });
             }
         });
     }

@@ -19,7 +19,7 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
                         <label for="add_category_title_input_name" class="add_category_title_name mt-2 mb-2">Category
                             Name <span class="important_mark">*</span></label>
                         <input type="text" name="add_category_title_input_name" class="form-control add_category_title_input_name" id="add_category_title_input_name">
-                        <span class="invalid-feedback add_category_title_name_err" id="add_category_title_name_err"><?php echo $add_category_title_name_err?></php></span>
+                        <span class="invalid-feedback add_category_title_name_err" id="add_category_title_name_err"><?php echo $add_category_title_name_err ?></php></span>
                     </div>
                     <div class="add_category_title_name_button">
                         <button type="submit" name="create_category" class="btn btn-primary mt-2 create_category" id="create_category" value="Create Category">Create Category</button>
@@ -53,7 +53,7 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
             return false;
         } else {
             var formData = $(this).serialize();
-            var parsed_response = null; 
+            var parsed_response = null;
             $.ajax({
                 type: "POST",
                 url: BASE_URL + "/admin/category_title/add_category_title/add_category_title_php.php",
@@ -62,18 +62,31 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
                     if (parsed_response) {
                         parsed_response = null;
                     } else {
-                        parsed_response = JSON.parse(response); 
+                        parsed_response = JSON.parse(response);
                         if (parsed_response.error) {
-                            var alert_message = '<div class="alert alert-danger category_title_alert_dismissible" role="alert">'+ parsed_response.error + '</div>';
+                            var alert_message = '<div class="alert alert-danger category_title_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                            $('#alert_container').append(alert_message);
+                            setTimeout(function() {
+                                $('.alert').remove();
+                            }, 3000);
                         } else {
-                            console.log("Success: " + parsed_response.success);
-                            console.log("URL: " + parsed_response.url + "?category_title=true");
-                            var alert_message = '<div class="alert alert-success category_title_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                            $.ajax({
+                                url: BASE_URL + '/admin/category_title/category_title.php',
+                                type: 'GET',
+                                success: function(data) {
+                                    $(".container").empty();
+                                    $('.container').html(data);
+                                    var alert_message = '<div class="alert alert-success category_title_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                                    $('#alert_container').append(alert_message);
+                                    setTimeout(function() {
+                                        $('.alert').remove();
+                                    }, 2000);
+                                },
+                                error: function(xhr, status, error) {
+                                    console.log(error);
+                                }
+                            });
                         }
-                        $('#alert_container').append(alert_message);
-                        setTimeout(function() {
-                            $('.alert').remove();
-                        }, 3000);
                     }
                 },
                 error: function(xhr, status, error) {
