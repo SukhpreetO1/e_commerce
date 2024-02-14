@@ -21,8 +21,8 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link link-dark customers">
-                    Customers
+                <a href="#" class="nav-link link-dark users">
+                    Users Details
                 </a>
             </li>
             <li>

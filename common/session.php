@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-    if ($_SESSION["is_admin"] == 2) {
+    if ($_SESSION["role_id"] == 2) {
         header("location: /e_commerce/users/homepage/index/index.php");
         exit;
     } else {

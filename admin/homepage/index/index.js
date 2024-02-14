@@ -37,3 +37,9 @@ $(document).on('click', '.category_title', function (e) {
     e.preventDefault();
     handle_ajax_redirection('/admin/category_title/category_title.php');
 });
+
+// redirection ajax for the category title
+$(document).on('click', '.users', function (e) {
+    e.preventDefault();
+    handle_ajax_redirection('/admin/user_detail/user_detail.php');
+});

@@ -16,20 +16,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($email_err) && empty($password_err)) {
-        $sql = "SELECT id, email, password, is_admin FROM users WHERE email = ?";
+        $sql = "SELECT id, email, password, role_id FROM users WHERE email = ?";
     
         if ($stmt = mysqli_prepare($database_connection, $sql)) {
             mysqli_stmt_bind_param($stmt, "s", $param_email);
             $param_email = $email;
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
-                if (mysqli_stmt_num_rows($stmt) == 1 && mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $is_admin) && mysqli_stmt_fetch($stmt)) {
+                if (mysqli_stmt_num_rows($stmt) == 1 && mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $role_id) && mysqli_stmt_fetch($stmt)) {
                     session_start();
                     $_SESSION["loggedin"] = true;
                     $_SESSION["id"] = $id;
                     $_SESSION["email"] = $email;
-                    $_SESSION["is_admin"] = $is_admin;
-                    if ($is_admin == 2) {
+                    $_SESSION["role_id"] = $role_id;
+                    if ($role_id == 2) {
                         header("location:" . $_ENV['BASE_URL'] . "/users/homepage/index/index.php?logged_in=true");
                         exit;
                     } else {
