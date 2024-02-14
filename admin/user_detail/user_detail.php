@@ -67,8 +67,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                                 <div class="users_detail_page_action">
                                     <input type="hidden" name="users_id" class="users_id" id="users_id" value="<?php echo $category_data['id']; ?>">
                                     <div class="users_detail_toogle_button">
-                                        <label class="switch"><input type="checkbox">
-                                        <span class="users_detail_toogle_button_role_change" id="users_detail_toogle_button_role_change" name='users_detail_toogle_button_role_change'></span></label>
+                                        <label class="switch">
+                                            <input type="checkbox" <?php echo ($category_data['role_id'] == 1) ? 'checked' : ''; ?>>
+                                            <span class="users_detail_toogle_button_role_change" id="users_detail_toogle_button_role_change" name='users_detail_toogle_button_role_change'></span>
+                                        </label>
                                     </div>
                                     <div class="users_detail_edit">
                                         <i class="fa-regular fa-pen-to-square"></i>
@@ -92,4 +94,24 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     $(document).ready(function() {
         $('#users_detail_table').DataTable();
     });
+
+    /* --------------------------------------------------------------- Toggle Button JS ----------------------------------------------------------------------------*/
+    // $(document).on('click', '.users_detail_toogle_button_role_change', function() {
+    //     var users_id = $(this).parent().parent().parent().find('.users_id').val();
+    //     var users_detail_toogle_button_role_change = $(this).parent().parent().parent().find('.users_detail_toogle_button_role_change').val();
+    //     $.ajax({
+    //         url: "user_detail/user_detail_action.php",
+    //         type: "POST",
+    //         data: {
+    //             users_id: users_id,
+    //             users_detail_toogle_button_role_change: users_detail_toogle_button_role_change
+    //         },
+    //         success: function(data) {
+    //             if (data == 1) {
+    //                 location.reload();
+    //             }
+    //         }
+    //     });
+    // });
+
 </script>
