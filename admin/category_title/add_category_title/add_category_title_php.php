@@ -1,4 +1,6 @@
 <?php
+include dirname(__DIR__, 3) . "/common/config/config.php";
+
 $add_category_title_input_name = $add_category_title_name_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,14 +21,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
 
+      $response = array();
       if (mysqli_stmt_num_rows($check_stmt) > 0) {
-         $add_category_title_name_err = "Category name already exists.";
+         $response['error'] = "Category name already exists.";
       } else {
          $insert_stmt = mysqli_prepare($database_connection, $insert_sql);
          mysqli_stmt_bind_param($insert_stmt, "s", $add_category_title_input_name);
          mysqli_stmt_execute($insert_stmt);
-         $add_category_title_success = "Category created successfully.";
+         $response['success'] = "Category created successfully.";
+         $response['url'] = '/admin/category_title/category_title.php';
       }
+      echo json_encode($response, JSON_UNESCAPED_SLASHES);
 
       mysqli_stmt_close($check_stmt);
       mysqli_stmt_close($insert_stmt);

@@ -9,7 +9,7 @@
 }
 
 .homepage_sidebar{
-    max-width: 12%;
+    max-width: 12rem;
 }
 
 li{
@@ -17,12 +17,22 @@ li{
 }
 /* -------------------------------------------------------- */
 
-.logged_in_alert_dismissible {
-  width: 15rem;
+.logged_in_alert_dismissible,
+.category_title_alert_dismissible,
+.category_title_delete_alert_dismissible{
   position: absolute;
   right: 9px;
   top: 6px;
   z-index: 9;
+}
+
+.logged_in_alert_dismissible{
+  width: 15rem;
+}
+
+.category_title_alert_dismissible,
+.category_title_delete_alert_dismissible {
+  width: 18rem;
 }
 
 .homepage_section {
