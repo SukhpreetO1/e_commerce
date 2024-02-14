@@ -8,9 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    if (empty($add_category_title_input_name)) {
       $add_category_title_name_err = "Category name is required.";
-   } elseif (strlen($add_category_title_input_name) < 3 || strlen($add_category_title_input_name) > 10) {
-      $add_category_title_name_err = "Category name must be between 3 and 10 characters long.";
-   } elseif (!preg_match('/^[a-zA-Z]+$/', $add_category_title_input_name)) {
+   } elseif (strlen($add_category_title_input_name) < 3 || strlen($add_category_title_input_name) > 15) {
+      $add_category_title_name_err = "Category name must be between 3 and 15 characters long.";
+   } elseif (!preg_match('/^[a-zA-Z\s]+$/', $add_category_title_input_name)) {
       $add_category_title_name_err = "Only alphabets are allowed.";
    } else {
       $check_sql = "SELECT * FROM clothes_categories WHERE name = ?";

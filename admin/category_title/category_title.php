@@ -167,22 +167,22 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                                     $('.alert').remove();
                                 }, 3000);
                             } else {
-                                var alert_message = '<div class="alert alert-success category_title_delete_alert_dismissible" role="alert">' + parsed_response.success + '</div>';
-                                $('#alert_container').append(alert_message);
-                                setTimeout(function() {
-                                    $('.alert').remove();
-                                    $.ajax({
-                                        url: BASE_URL + '/admin/category_title/category_title.php',
-                                        type: 'GET',
-                                        success: function(data) {
-                                            $(".container").empty();
-                                            $('.container').html(data);
-                                        },
-                                        error: function(xhr, status, error) {
-                                            console.log(error);
-                                        }
-                                    });
-                                }, 2000);
+                                $.ajax({
+                                    url: BASE_URL + '/admin/category_title/category_title.php',
+                                    type: 'GET',
+                                    success: function(data) {
+                                        $(".container").empty();
+                                        $('.container').html(data);
+                                        var alert_message = '<div class="alert alert-success category_title_delete_alert_dismissible" role="alert">' + parsed_response.success + '</div>';
+                                        $('#alert_container').append(alert_message);
+                                        setTimeout(function() {
+                                            $('.alert').remove();
+                                        }, 2000);
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.log(error);
+                                    }
+                                });
                             }
                         }
                     },

@@ -39,7 +39,7 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
             error_messages = 'Category name is required.';
         } else if (category_name.length < 3 || category_name.length > 15) {
             error_messages = 'Category name must be between 3 and 15 characters long.';
-        } else if (!/^[a-zA-Z]+$/.test(category_name)) {
+        } else if (!/^[a-zA-Z\s]+$/.test(category_name)) {
             error_messages = 'Only alphabets are allowed.';
         }
         $('.add_category_title_name_err').text(error_messages);
@@ -47,7 +47,7 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
     }
 
     // when submit the new category title file
-    $(document).on('submit', '#add_category_title_form', function(e) {
+    $(document).off('submit', '#add_category_title_form').on('submit', '#add_category_title_form', function(e) {
         e.preventDefault();
         if (!validate_category_name()) {
             return false;
@@ -59,33 +59,41 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
                 url: BASE_URL + "/admin/category_title/add_category_title/add_category_title_php.php",
                 data: formData,
                 success: function(response) {
-                    if (parsed_response) {
-                        parsed_response = null;
+                    if (response.trim() === "") {
+                        var alert_message = '<div class="alert alert-danger category_title_alert_dismissible" role="alert">Category title not saved.</div>';
+                        $('#alert_container').append(alert_message);
+                        setTimeout(function() {
+                            $('.alert').remove();
+                        }, 3000);
                     } else {
-                        parsed_response = JSON.parse(response);
-                        if (parsed_response.error) {
-                            var alert_message = '<div class="alert alert-danger category_title_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
-                            $('#alert_container').append(alert_message);
-                            setTimeout(function() {
-                                $('.alert').remove();
-                            }, 3000);
+                        if (parsed_response) {
+                            parsed_response = null;
                         } else {
-                            $.ajax({
-                                url: BASE_URL + '/admin/category_title/category_title.php',
-                                type: 'GET',
-                                success: function(data) {
-                                    $(".container").empty();
-                                    $('.container').html(data);
-                                    var alert_message = '<div class="alert alert-success category_title_success_dismissible" role="alert">' + parsed_response.success + '</div>';
-                                    $('#alert_container').append(alert_message);
-                                    setTimeout(function() {
-                                        $('.alert').remove();
-                                    }, 2000);
-                                },
-                                error: function(xhr, status, error) {
-                                    console.log(error);
-                                }
-                            });
+                            parsed_response = JSON.parse(response);
+                            if (parsed_response.error) {
+                                var alert_message = '<div class="alert alert-danger category_title_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                                $('#alert_container').append(alert_message);
+                                setTimeout(function() {
+                                    $('.alert').remove();
+                                }, 3000);
+                            } else {
+                                $.ajax({
+                                    url: BASE_URL + '/admin/category_title/category_title.php',
+                                    type: 'GET',
+                                    success: function(data) {
+                                        $(".container").empty();
+                                        $('.container').html(data);
+                                        var alert_message = '<div class="alert alert-success category_title_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                                        $('#alert_container').append(alert_message);
+                                        setTimeout(function() {
+                                            $('.alert').remove();
+                                        }, 2000);
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.log(error);
+                                    }
+                                });
+                            }
                         }
                     }
                 },
