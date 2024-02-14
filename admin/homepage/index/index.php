@@ -6,7 +6,6 @@ require_once dirname(__DIR__, 3) . "/common/links.php";
 require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
 
 require_once dirname(__DIR__, 3) . "/common/alerts/admin_alerts.php";
-require_once dirname(__DIR__, 2) . "/category_title/add_category_title_php.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +18,7 @@ require_once dirname(__DIR__, 2) . "/category_title/add_category_title_php.php";
 </head>
 <body>
     <div class="homepage_section">
-        <div class="homepage_header"></div>
+        <div class="homepage_sidebar"></div>
 
         <div class="container">
             <?php require dirname(__DIR__, 2) . "/homepage/dashboard/dashboard.php"?>

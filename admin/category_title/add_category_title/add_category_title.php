@@ -1,4 +1,3 @@
-<script>console.log('4656456456');</script>
 <div class="category_section_page">
     <div class="container">
         <div class="category_title_heading">
@@ -9,10 +8,14 @@
             <a href="#"><i class="fa-solid fa-arrow-left-long add_category_title_back_button"></i></a>
         </div>
 
+        <?php
+            include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_title_php.php";
+        ?>
+
         <div class="add_category_name">
             <div class="add_section">
                 <form method="post" id="add_category_title_form" class="add_category_title_form"
-                    action="#">
+                action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                     <div class="form-group">
                         <label for="add_category_title_input_name" class="add_category_title_name mt-2 mb-2">Category
                             Name <span class="important_mark">*</span></label>
@@ -31,15 +34,15 @@
     </div>
 </div>
 
-<script type="text/javascript"> 
+<script> 
     /*------------------------- Validation for submit button and input in add files --------------------------------------*/
     function validate_category_name() {
         var category_name = $('#add_category_title_input_name').val();
         var error_messages = '';
         if (category_name.trim() === '') {
             error_messages = 'Category name is required.';
-        } else if (category_name.length < 3 || category_name.length > 10) {
-            error_messages = 'Category name must be between 3 and 10 characters long.';
+        } else if (category_name.length < 3 || category_name.length > 15) {
+            error_messages = 'Category name must be between 3 and 15 characters long.';
         } else if (!/^[a-zA-Z]+$/.test(category_name)) {
             error_messages = 'Only alphabets are allowed.';
         }
@@ -82,16 +85,13 @@
     });
 
     /*------------------------- Back Button JS on ADD PAGES --------------------------------------*/
-    function handleButtonClick(url, e) {
-        e.preventDefault();
+    function handle_back_button_in_add_page(url, e) {
         $.ajax({
             type: 'GET',
             url: BASE_URL + url,
             success: function (data) {
-                var container = $('.container');
-                if (!$(data).find('.homepage_header').length) {
-                    container.html(data);
-                }
+                $(".container").empty();
+                $('.container').html(data);
             },
             error: function (e) {
                 console.log(e);
@@ -100,7 +100,8 @@
     }
 
     // redirection ajax for back button the add category title
-    $(document).on('click', '.add_category_title_back_button', function (e) {
-        handleButtonClick('/admin/category_title/category_title.php', e);
+    $(document).off('click', '.add_category_title_back_button').on('click', '.add_category_title_back_button', function (e) {
+        e.preventDefault();
+        handle_back_button_in_add_page('/admin/category_title/category_title.php', e);
     });
 </script>

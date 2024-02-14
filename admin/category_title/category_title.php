@@ -67,11 +67,12 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
 <script>
     /*------------------------- Click on plus (+) JS --------------------------------------*/ 
-    function handle_icon_click(url) {
+    function handle_plus_icon_click(url) {
         $.ajax({
             type: 'GET',
             url: BASE_URL + url,
             success: function (data) {
+                $(".container").empty();
                 $('.container').html(data);
             },
             error: function (e) {
@@ -81,17 +82,18 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     }
 
     // redirection ajax for adding the category title
-    $(document).on('click', '.category_title_plus_icon', function (e) {
+    $(document).off('click', '.category_title_plus_icon').on('click', '.category_title_plus_icon', function (e) {
         e.preventDefault();
-        handle_icon_click('/admin/category_title/add_category_title.php');
+        handle_plus_icon_click('/admin/category_title/add_category_title/add_category_title.php');
     });
 
     /*------------------------- Click on Edit Button JS --------------------------------------*/
-    function handle_icon_click(url, category_id) {
+    function handle_edit_icon_click(url, category_id) {
         $.ajax({
             type: 'GET',
             url: BASE_URL + url + '?category_id=' + category_id,
             success: function (data) {
+                $(".container").empty();
                 $('.container').html(data);
             },
             error: function (e) {
@@ -101,21 +103,21 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     }
 
     // redirection ajax for adding the category title
-    $(document).on('click', '.category_title_edit', function (e) {
+    $(document).off('click', '.category_title_edit').on('click', '.category_title_edit', function (e) {
         e.preventDefault();
         var category_id = $(this).siblings('.category_id').val();
-        handle_icon_click('/admin/category_title/edit_category_title.php', category_id);
+        handle_edit_icon_click('/admin/category_title/edit_category_title/edit_category_title.php', category_id);
     });
 
     /*------------------------- Back Button JS on dashboard --------------------------------------*/
-    function handleButtonClick(url, e) {
-        e.preventDefault();
+    function handle_back_button_click(url){ 
         $.ajax({
             type: 'GET',
             url: BASE_URL + url,
             success: function (data) {
                 var container = $('.container');
-                if (!$(data).find('.homepage_header').length) {
+                $(".container").empty();
+                if (!$(data).find('.homepage_sidebar').length) {
                     container.html(data);
                 }
             },
@@ -127,9 +129,11 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
     // redirection ajax for back button the category sections
     $(document).on('click', '.category_title_back_button', function (e) {
-        handleButtonClick('/admin/homepage/dashboard/dashboard.php', e);
+        e.preventDefault();
+        handle_back_button_click('/admin/homepage/dashboard/dashboard.php', e);
     });
 
+    // for creating the tables using datatables
     $(document).ready(function() {
         $('#category_title_table').DataTable();
     });
