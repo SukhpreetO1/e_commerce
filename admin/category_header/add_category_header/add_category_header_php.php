@@ -1,8 +1,8 @@
 <?php
 include dirname(__DIR__, 3) . "/common/config/config.php";
 
-$add_category_header_input_title = $add_category_header_input_title = "";
-$add_category_header_input_name = $add_category_header_input_name_err = "";
+$add_category_header_input_title = $add_category_header_title_err = "";
+$add_category_header_input_name = $add_category_header_name_err = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,15 +10,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $add_category_header_input_name = trim($_POST["add_category_header_input_name"]);
 
    if (empty($add_category_header_input_title)) {
-      $add_category_header_input_title_err = "Category title is required.";
+      $add_category_header_title_err = "Category title is required.";
    }
 
    if (empty($add_category_header_input_name)) {
-      $add_category_header_input_name_err = "Category header name is required.";
+      $add_category_header_name_err = "Category header name is required.";
    } elseif (strlen($add_category_header_input_name) < 3 || strlen($add_category_header_input_name) > 15) {
-      $add_category_header_input_name_err = "Category header name must be between 3 and 15 characters long.";
+      $add_category_header_name_err = "Category header name must be between 3 and 15 characters long.";
    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $add_category_header_input_name)) {
-      $add_category_header_input_name_err = "Only alphabets are allowed.";
+      $add_category_header_name_err = "Only alphabets are allowed.";
    } else {
       $check_sql = "SELECT * FROM categories_heading WHERE clothes_category_id = ? AND name = ?";
       $insert_sql = "INSERT INTO categories_heading (clothes_category_id, name) VALUES (?, ?)";

@@ -1,8 +1,8 @@
 <?php
 include dirname(__DIR__, 3) . "/common/config/config.php";
 
-$edit_category_header_input_title = $edit_category_header_input_title = "";
-$edit_category_header_input_name = $edit_category_header_input_name_err = "";
+$edit_category_header_input_title = $edit_category_header_title_err = "";
+$edit_category_header_input_name = $edit_category_header_name_err = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,15 +10,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $edit_category_header_input_name = trim($_POST["edit_category_header_input_name"]);
 
    if (empty($edit_category_header_input_title)) {
-      $edit_category_header_input_title_err = "Category title is required.";
+      $edit_category_header_title_err = "Category title is required.";
    }
 
    if (empty($edit_category_header_input_name)) {
-      $edit_category_header_input_name_err = "Category header name is required.";
+      $edit_category_header_name_err = "Category header name is required.";
    } elseif (strlen($edit_category_header_input_name) < 3 || strlen($edit_category_header_input_name) > 15) {
-      $edit_category_header_input_name_err = "Category header name must be between 3 and 15 characters long.";
+      $edit_category_header_name_err = "Category header name must be between 3 and 15 characters long.";
    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $edit_category_header_input_name)) {
-      $edit_category_header_input_name_err = "Only alphabets are allowed.";
+      $edit_category_header_name_err = "Only alphabets are allowed.";
    } else {
       $update_category_header_input_name = trim($_POST["edit_category_header_input_name"]);
       $edit_category_id = trim($_POST["edit_category_id"]);
