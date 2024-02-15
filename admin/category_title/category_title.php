@@ -68,7 +68,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
 <script>
     /*--------------------------------------------------------------- Click on plus (+) JS ----------------------------------------------------------------------------*/
-    function handle_plus_icon_click(url) {
+    function category_title_plus_icon(url) {
         $.ajax({
             type: 'GET',
             url: BASE_URL + url,
@@ -85,11 +85,11 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     // redirection ajax for adding the category title
     $(document).off('click', '.category_title_plus_icon').on('click', '.category_title_plus_icon', function(e) {
         e.preventDefault();
-        handle_plus_icon_click('/admin/category_title/add_category_title/add_category_title.php');
+        category_title_plus_icon('/admin/category_title/add_category_title/add_category_title.php');
     });
 
     /*--------------------------------------------------------------- Click on Edit Button JS ----------------------------------------------------------------------------*/
-    function handle_edit_icon_click(url, category_id) {
+    function category_title_edit_icon(url, category_id) {
         $.ajax({
             type: 'GET',
             url: BASE_URL + url + '?category_id=' + category_id,
@@ -107,11 +107,11 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     $(document).off('click', '.category_title_edit').on('click', '.category_title_edit', function(e) {
         e.preventDefault();
         var category_id = $(this).siblings('.category_id').val();
-        handle_edit_icon_click('/admin/category_title/edit_category_title/edit_category_title.php', category_id);
+        category_title_edit_icon('/admin/category_title/edit_category_title/edit_category_title.php', category_id);
     });
 
     /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
-    function handle_back_button_click(url) {
+    function category_title_back_button(url) {
         $.ajax({
             type: 'GET',
             url: BASE_URL + url,
@@ -131,16 +131,17 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     // redirection ajax for back button the category title
     $(document).off('click', '.category_title_back_button').on('click', '.category_title_back_button', function(e) {
         e.preventDefault();
-        handle_back_button_click('/admin/homepage/dashboard/dashboard.php', e);
+        category_title_back_button('/admin/homepage/dashboard/dashboard.php', e);
     });
 
+    /*--------------------------------------------------------------- Adding datatables ----------------------------------------------------------------------------*/
     // for creating the tables using datatables
     $(document).ready(function() {
         $('#category_title_table').DataTable();
     });
 
     /*--------------------------------------------------------------- Delete Button JS on ADD PAGES ----------------------------------------------------------------------------*/
-    function handle_delete_button_click(url, category_id) {
+    function category_title_delete_button(url, category_id) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -198,6 +199,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     $(document).on('click', '.category_title_delete', function(e) {
         e.preventDefault();
         var category_id = $(this).siblings('.category_id').val();
-        handle_delete_button_click('/admin/category_title/delete_category/delete_category_title.php', category_id);
+        category_title_delete_button('/admin/category_title/delete_category/delete_category_title.php', category_id);
     });
 </script>

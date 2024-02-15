@@ -32,14 +32,20 @@ $(document).on('click', '.title', function (e) {
     handle_ajax_redirection('/admin/homepage/dashboard/dashboard.php');
 });
 
+// redirection ajax for the user detials
+$(document).on('click', '.users', function (e) {
+    e.preventDefault();
+    handle_ajax_redirection('/admin/user_detail/user_detail.php');
+});
+
 // redirection ajax for the category title
 $(document).on('click', '.category_title', function (e) {
     e.preventDefault();
     handle_ajax_redirection('/admin/category_title/category_title.php');
 });
 
-// redirection ajax for the category title
-$(document).on('click', '.users', function (e) {
+// redirection ajax for the category heading
+$(document).on('click', '.category_heading', function (e) {
     e.preventDefault();
-    handle_ajax_redirection('/admin/user_detail/user_detail.php');
+    handle_ajax_redirection('/admin/category_header/category_header.php');
 });

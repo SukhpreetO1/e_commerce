@@ -20,7 +20,9 @@ li{
 .logged_in_alert_dismissible,
 .category_title_alert_dismissible,
 .category_title_delete_alert_dismissible,
-.category_title_success_dismissible{
+.category_title_success_dismissible,  
+.category_header_success_dismissible,
+.category_header_alert_dismissible{
   font-size: 15px;
   position: absolute;
   right: 9px;
@@ -34,8 +36,15 @@ li{
 
 .category_title_alert_dismissible,
 .category_title_delete_alert_dismissible,
-.category_title_success_dismissible {
+.category_title_success_dismissible, 
+.category_header_delete_alert_dismissible {
   width: 18rem;
+}
+
+.category_header_delete_alert_dismissible,
+.category_header_alert_dismissible,
+.category_header_success_dismissible {
+  width: 20rem;
 }
 
 .homepage_section {
@@ -93,7 +102,8 @@ li{
 .edit_category_title_back_button,
 .category_header_back_button,
 .add_category_header_back_button,
-.users_detail_back_button {
+.users_detail_back_button,
+.edit_category_header_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -108,27 +118,34 @@ li{
 .category_title_edit:hover,
 .category_title_delete:hover,
 .users_detail_edit:hover,
-.users_detail_delete:hover {
+.users_detail_delete:hover,
+.category_header_edit:hover,
+.category_header_delete:hover {
   cursor: pointer;
 }
 
 /* CSS for the add category title page */
 .add_category_title_name_button,
 .add_category_header_name_button,
-.edit_category_title_name_button {
+.edit_category_title_name_button,
+.edit_category_header_name_button {
   text-align: center;
 }
 
 .add_category_name,
 .add_category_header_names,
-.edit_category_name {
+.edit_category_name,
+.edit_category_header_names {
   width: 30%;
   margin-left: 36%;
 }
 
 #add_category_title_name_err,
 #add_category_header_name_err,
-#edit_category_title_name_err {
+#edit_category_title_name_err,
+#add_category_header_title_err,
+#edit_category_header_title_err,
+#edit_category_header_name_err {
   display: block;
   text-align: start;
 }
@@ -197,4 +214,8 @@ input:checked + .users_detail_toogle_button_role_change:before {
 
 .users_detail_toogle_button_role_change:before {
   border-radius: 50%;
+}
+
+.placeholder_grey {
+  color: grey;
 }

@@ -5,7 +5,7 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
     <div class="alert_container" id="alert_container"></div>
     <div class="container">
         <div class="category_title_heading">
-            <h2>Add Category</h2>
+            <h2>Add Category Title</h2>
         </div>
 
         <div class="add_category_title">
