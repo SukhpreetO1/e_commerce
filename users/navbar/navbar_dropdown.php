@@ -29,7 +29,7 @@ JSON_ARRAYAGG(
 FROM 
 clothes_categories cc
 LEFT JOIN 
-category_header ch ON cc.id = ch.clothes_category_id
+categories_heading ch ON cc.id = ch.clothes_category_id
 GROUP BY 
 cc.id, cc.name, cc.created_at, cc.updated_at";
 

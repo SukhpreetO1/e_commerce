@@ -1,0 +1,200 @@
+/* sidebar css only */
+.dropdown {
+    position: absolute !important;
+    bottom: 15px;
+}
+
+.admin_sidebar{
+    width: 12%;
+}
+
+.homepage_sidebar{
+    max-width: 12rem;
+}
+
+li{
+    width: 11rem;
+}
+/* -------------------------------------------------------- */
+
+.logged_in_alert_dismissible,
+.category_title_alert_dismissible,
+.category_title_delete_alert_dismissible,
+.category_title_success_dismissible{
+  font-size: 15px;
+  position: absolute;
+  right: 9px;
+  top: 6px;
+  z-index: 9;
+}
+
+.logged_in_alert_dismissible{
+  width: 15rem;
+}
+
+.category_title_alert_dismissible,
+.category_title_delete_alert_dismissible,
+.category_title_success_dismissible {
+  width: 18rem;
+}
+
+.homepage_section {
+  display: flex;
+}
+
+.category_section_page,
+.category_title_action,
+.category_header_page,
+.category_header_action,
+.users_detail_page_action {
+  display: flex;
+}
+
+.category_title_heading,
+.category_header,
+.category_header_title,
+.users_detail_heading {
+  text-align: center;
+  margin: 1% 0% 0;
+}
+
+.category_title_edit,
+.category_header_edit,
+.users_detail_edit,
+.users_detail_toogle_button {
+  margin-right: 15px;
+}
+
+.container {
+  position: relative;
+}
+
+.add_category_title,
+.add_category_header,
+.edit_category_header,
+.users_detail_page {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1% 1%;
+}
+
+.category_title_plus_icon,
+.category_header_plus_icon,
+.users_detail_plus_icon {
+  font-size: 1.5rem;
+  border: 1px solid;
+  border-radius: 51%;
+  padding: 5px;
+  color: black;
+}
+
+.category_title_back_button,
+.add_category_title_back_button,
+.edit_category_title_back_button,
+.category_header_back_button,
+.add_category_header_back_button,
+.users_detail_back_button {
+  font-size: 1.5rem;
+  padding: 5px;
+  color: black;
+}
+
+.add_categories_header_name {
+  width: 30%;
+  margin-left: 36%;
+  text-align: center;
+}
+
+.category_title_edit:hover,
+.category_title_delete:hover,
+.users_detail_edit:hover,
+.users_detail_delete:hover {
+  cursor: pointer;
+}
+
+/* CSS for the add category title page */
+.add_category_title_name_button,
+.add_category_header_name_button,
+.edit_category_title_name_button {
+  text-align: center;
+}
+
+.add_category_name,
+.add_category_header_names,
+.edit_category_name {
+  width: 30%;
+  margin-left: 36%;
+}
+
+#add_category_title_name_err,
+#add_category_header_name_err,
+#edit_category_title_name_err {
+  display: block;
+  text-align: start;
+}
+
+.important_mark {
+  color: red;
+}
+
+
+/* for toggle button in admin page */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 16px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.users_detail_toogle_button_role_change {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.users_detail_toogle_button_role_change:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 13px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .users_detail_toogle_button_role_change {
+  background-color: #2196F3;
+}
+
+input:focus + .users_detail_toogle_button_role_change {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .users_detail_toogle_button_role_change:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.users_detail_toogle_button_role_change {
+  border-radius: 34px;
+}
+
+.users_detail_toogle_button_role_change:before {
+  border-radius: 50%;
+}
