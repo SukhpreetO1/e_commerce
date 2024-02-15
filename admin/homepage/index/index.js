@@ -38,6 +38,12 @@ $(document).on('click', '.users', function (e) {
     handle_ajax_redirection('/admin/user_detail/user_detail.php');
 });
 
+// redirection ajax for the user detials
+$(document).on('click', '.roles', function (e) {
+    e.preventDefault();
+    handle_ajax_redirection('/admin/roles/roles.php');
+});
+
 // redirection ajax for the category title
 $(document).on('click', '.category_title', function (e) {
     e.preventDefault();

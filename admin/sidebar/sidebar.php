@@ -21,6 +21,11 @@
                 </a>
             </li>
             <li>
+                <a href="#" class="nav-link link-dark roles">
+                    Roles
+                </a>
+            </li>
+            <li>
                 <a href="#" class="nav-link link-dark users">
                     Users Details
                 </a>

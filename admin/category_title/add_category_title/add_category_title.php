@@ -119,7 +119,7 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
     });
 
     /*--------------------------------------------------------------- Back Button JS on ADD PAGES ----------------------------------------------------------------------------*/
-    function handle_back_button_in_add_page(url, e) {
+    function back_button_in_category_title_add_page(url, e) {
         $.ajax({
             type: 'GET',
             url: BASE_URL + url,
@@ -136,6 +136,6 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
     // redirection ajax for back button the add category title
     $(document).off('click', '.add_category_title_back_button').on('click', '.add_category_title_back_button', function(e) {
         e.preventDefault();
-        handle_back_button_in_add_page('/admin/category_title/category_title.php', e);
+        back_button_in_category_title_add_page('/admin/category_title/category_title.php', e);
     });
 </script>
