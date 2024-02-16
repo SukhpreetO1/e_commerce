@@ -1,7 +1,11 @@
+*{
+  margin: 0;
+  padding: 0 0 6px 0;
+}
 /* sidebar css only */
 .dropdown {
-    position: absolute !important;
-    bottom: 15px;
+    position: fixed;
+    bottom: 0px;
 }
 
 .admin_sidebar{
@@ -24,6 +28,7 @@ li{
 .category_header_success_dismissible,
 .category_header_alert_dismissible,
 .category_header_delete_alert_dismissible,
+.category_types_delete_alert_dismissible,
 .role_alert_dismissible, 
 .role_success_dismissible,
 .role_delete_alert_dismissible {
@@ -40,8 +45,9 @@ li{
 }
 
 .category_title_alert_dismissible,
-.category_title_delete_alert_dismissible,
 .category_title_success_dismissible,
+.category_title_delete_alert_dismissible,
+.category_types_delete_alert_dismissible, 
 .role_success_dismissible,
 .role_delete_alert_dismissible {
   width: 18rem;
@@ -61,6 +67,7 @@ li{
 .category_title_action,
 .category_header_page,
 .category_header_action,
+.category_types_action, 
 .users_detail_page_action,
 .roles_action,
 .roles_title {
@@ -70,6 +77,7 @@ li{
 .category_title_heading,
 .category_header,
 .category_header_title,
+.category_types_heading,
 .users_detail_heading,
 .roles_heading,
 .edit_role_heading {
@@ -80,6 +88,7 @@ li{
 .users_detail_toogle_button,
 .category_title_edit,
 .category_header_edit,
+.category_types_edit, 
 .users_detail_edit,
 .roles_edit {
   margin-right: 15px;
@@ -91,6 +100,7 @@ li{
 
 .add_category_title,
 .add_category_header,
+.add_category_types,
 .edit_category_header,
 .users_detail_page,
 .roles_title {
@@ -101,6 +111,7 @@ li{
 
 .category_title_plus_icon,
 .category_header_plus_icon,
+.category_types_plus_icon,
 .users_detail_plus_icon,
 .roles_plus_icon {
   font-size: 1.5rem;
@@ -116,6 +127,7 @@ li{
 .category_header_back_button,
 .add_category_header_back_button,
 .edit_category_header_back_button,
+.category_types_back_button,
 .users_detail_back_button,
 .roles_back_button,
 .add_role_back_button,
@@ -137,6 +149,8 @@ li{
 .users_detail_delete:hover,
 .category_header_edit:hover,
 .category_header_delete:hover,
+.category_types_edit:hover, 
+.category_types_delete:hover, 
 .roles_edit:hover,
 .roles_delete:hover {
   cursor: pointer;
@@ -241,4 +255,10 @@ input:checked + .users_detail_toogle_button_role_change:before {
 
 .placeholder_grey {
   color: grey;
+}
+
+@media screen and (max-width: 825px) {
+  .homepage_sidebar{
+    display: none;
+  }
 }

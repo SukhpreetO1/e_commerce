@@ -55,3 +55,9 @@ $(document).on('click', '.category_heading', function (e) {
     e.preventDefault();
     handle_ajax_redirection('/admin/category_header/category_header.php');
 });
+
+// redirection ajax for the category types
+$(document).on('click', '.categories_types', function (e) {
+    e.preventDefault();
+    handle_ajax_redirection('/admin/category_types/category_types.php');
+});
