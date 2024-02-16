@@ -1,35 +1,50 @@
-*{
+* {
   margin: 0;
   padding: 0 0 6px 0;
 }
 /* sidebar css only */
 .dropdown {
-    position: fixed;
-    bottom: 0px;
+  position: fixed;
+  bottom: 0px;
+  width: 10%;
+  padding-top: 10px;
 }
 
-.admin_sidebar{
-    width: 12%;
+.dropdown:hover .dropdown-menu {
+  display: block !important;
 }
 
-.homepage_sidebar{
-    max-width: 12rem;
+.dropdown-menu {
+  position: absolute;
+  inset: auto auto 0px 0px;
+  margin: 0px;
+  transform: translate(0px, -46px);
 }
 
-li{
-    width: 11rem;
+.admin_sidebar {
+  width: 12%;
+}
+
+.homepage_sidebar {
+  max-width: 12rem;
+}
+
+li {
+  width: 11rem;
 }
 /* -------------------------------------------------------- */
 
 .logged_in_alert_dismissible,
 .category_title_alert_dismissible,
 .category_title_delete_alert_dismissible,
-.category_title_success_dismissible,  
+.category_title_success_dismissible,
 .category_header_success_dismissible,
 .category_header_alert_dismissible,
 .category_header_delete_alert_dismissible,
 .category_types_delete_alert_dismissible,
-.role_alert_dismissible, 
+.category_types_alert_dismissible,
+.category_types_success_dismissible,
+.role_alert_dismissible,
 .role_success_dismissible,
 .role_delete_alert_dismissible {
   font-size: 15px;
@@ -39,7 +54,7 @@ li{
   z-index: 9;
 }
 
-.logged_in_alert_dismissible, 
+.logged_in_alert_dismissible,
 .role_alert_dismissible {
   width: 15rem;
 }
@@ -47,7 +62,9 @@ li{
 .category_title_alert_dismissible,
 .category_title_success_dismissible,
 .category_title_delete_alert_dismissible,
-.category_types_delete_alert_dismissible, 
+.category_types_delete_alert_dismissible,
+.category_types_alert_dismissible,
+.category_types_success_dismissible,
 .role_success_dismissible,
 .role_delete_alert_dismissible {
   width: 18rem;
@@ -67,7 +84,7 @@ li{
 .category_title_action,
 .category_header_page,
 .category_header_action,
-.category_types_action, 
+.category_types_action,
 .users_detail_page_action,
 .roles_action,
 .roles_title {
@@ -88,7 +105,7 @@ li{
 .users_detail_toogle_button,
 .category_title_edit,
 .category_header_edit,
-.category_types_edit, 
+.category_types_edit,
 .users_detail_edit,
 .roles_edit {
   margin-right: 15px;
@@ -128,6 +145,7 @@ li{
 .add_category_header_back_button,
 .edit_category_header_back_button,
 .category_types_back_button,
+.add_category_types_back_button,
 .users_detail_back_button,
 .roles_back_button,
 .add_role_back_button,
@@ -149,8 +167,8 @@ li{
 .users_detail_delete:hover,
 .category_header_edit:hover,
 .category_header_delete:hover,
-.category_types_edit:hover, 
-.category_types_delete:hover, 
+.category_types_edit:hover,
+.category_types_delete:hover,
 .roles_edit:hover,
 .roles_delete:hover {
   cursor: pointer;
@@ -161,6 +179,7 @@ li{
 .edit_category_title_name_button,
 .add_category_header_name_button,
 .edit_category_header_name_button,
+.add_category_types_name_button,
 .add_role_name_button,
 .edit_role_name_button {
   text-align: center;
@@ -182,6 +201,7 @@ li{
 #edit_category_header_name_err,
 #add_category_header_title_err,
 #edit_category_header_title_err,
+#add_category_types_name_err,
 #add_role_name_err {
   display: block;
   text-align: start;
@@ -191,7 +211,6 @@ li{
   color: red;
 }
 
-
 /* for toggle button in admin page */
 .switch {
   position: relative;
@@ -200,7 +219,7 @@ li{
   height: 16px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -214,8 +233,8 @@ li{
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .users_detail_toogle_button_role_change:before {
@@ -226,16 +245,16 @@ li{
   left: 4px;
   bottom: 2px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .users_detail_toogle_button_role_change {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 input:focus + .users_detail_toogle_button_role_change {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .users_detail_toogle_button_role_change:before {
@@ -258,7 +277,7 @@ input:checked + .users_detail_toogle_button_role_change:before {
 }
 
 @media screen and (max-width: 825px) {
-  .homepage_sidebar{
+  .homepage_sidebar {
     display: none;
   }
 }
