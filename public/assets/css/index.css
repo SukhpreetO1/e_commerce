@@ -22,7 +22,9 @@ li{
 .category_title_delete_alert_dismissible,
 .category_title_success_dismissible,  
 .category_header_success_dismissible,
-.category_header_alert_dismissible{
+.category_header_alert_dismissible,
+.role_alert_dismissible, 
+.role_success_dismissible {
   font-size: 15px;
   position: absolute;
   right: 9px;
@@ -30,14 +32,16 @@ li{
   z-index: 9;
 }
 
-.logged_in_alert_dismissible{
+.logged_in_alert_dismissible, 
+.role_alert_dismissible {
   width: 15rem;
 }
 
 .category_title_alert_dismissible,
 .category_title_delete_alert_dismissible,
 .category_title_success_dismissible, 
-.category_header_delete_alert_dismissible {
+.category_header_delete_alert_dismissible,
+.role_success_dismissible {
   width: 18rem;
 }
 
