@@ -1,6 +1,6 @@
 <?php
 include dirname(__DIR__, 3) . "/common/config/config.php";
-include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_title_php.php";
+include dirname(__DIR__, 2) . "/category_title/eidt_category_title/edit_category_title_php.php";
 ?>
 <div class="category_section_page">
     <div class="alert_container" id="alert_container"></div>
@@ -31,7 +31,7 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
                                     Name</label>
                                 <input type="text" name="edit_category_title_input_name" class="form-control edit_category_title_input_name" id="edit_category_title_input_name" value="<?php echo $row["name"]; ?>">
                                 <input type="hidden" name="edit_category_id" id="edit_category_id" value="<?php echo $row["id"]; ?>">
-                                <span class="invalid-feedback edit_category_title_name_err" id="edit_category_title_name_err">
+                                <span class="invalid-feedback edit_category_title_name_err" id="edit_category_title_name_err"><?php echo $edit_category_title_name_err?>
                                 </span>
                             </div>
                             <div class="edit_category_title_name_button">
@@ -49,7 +49,7 @@ include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_t
 </div>
 
 <script>
-    /*--------------------------------------------------------------- Validation for submit button and input in add files ----------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------- Validation for submit button and input in edit files ----------------------------------------------------------------------------*/
     function validate_category_name_in_edit_page() {
         var category_name = $('#edit_category_title_input_name').val();
         var error_messages = '';

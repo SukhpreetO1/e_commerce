@@ -71,15 +71,16 @@ li{
 .category_header,
 .category_header_title,
 .users_detail_heading,
-.roles_heading {
+.roles_heading,
+.edit_role_heading {
   text-align: center;
   margin: 1% 0% 0;
 }
 
+.users_detail_toogle_button,
 .category_title_edit,
 .category_header_edit,
 .users_detail_edit,
-.users_detail_toogle_button,
 .roles_edit {
   margin-right: 15px;
 }
@@ -114,10 +115,11 @@ li{
 .edit_category_title_back_button,
 .category_header_back_button,
 .add_category_header_back_button,
-.users_detail_back_button,
 .edit_category_header_back_button,
+.users_detail_back_button,
 .roles_back_button,
-.add_role_back_button {
+.add_role_back_button,
+.edit_role_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -142,10 +144,11 @@ li{
 
 /* CSS for the add category title page */
 .add_category_title_name_button,
-.add_category_header_name_button,
 .edit_category_title_name_button,
+.add_category_header_name_button,
 .edit_category_header_name_button,
-.add_role_name_button {
+.add_role_name_button,
+.edit_role_name_button {
   text-align: center;
 }
 
@@ -153,17 +156,18 @@ li{
 .add_category_header_names,
 .edit_category_name,
 .edit_category_header_names,
-.add_role_name {
+.add_role_name,
+.edit_role_name {
   width: 30%;
   margin-left: 36%;
 }
 
 #add_category_title_name_err,
-#add_category_header_name_err,
 #edit_category_title_name_err,
+#add_category_header_name_err,
+#edit_category_header_name_err,
 #add_category_header_title_err,
 #edit_category_header_title_err,
-#edit_category_header_name_err,
 #add_role_name_err {
   display: block;
   text-align: start;

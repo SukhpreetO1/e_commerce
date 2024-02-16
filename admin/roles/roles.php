@@ -179,4 +179,26 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       var roles_id = $(this).siblings('.roles_id').val();
       role_delete_button('/admin/roles/delete_roles/delete_roles.php', roles_id);
    });
+
+   /*--------------------------------------------------------------- Click on Edit Button JS ----------------------------------------------------------------------------*/
+   function roles_edit_icon(url, roles_id) {
+      $.ajax({
+         type: 'GET',
+         url: BASE_URL + url + '?roles_id=' + roles_id,
+         success: function(data) {
+            $(".container").empty();
+            $('.container').html(data);
+         },
+         error: function(e) {
+            console.log(e);
+         }
+      });
+   }
+
+   // redirection ajax for edit in the role 
+   $(document).off('click', '.roles_edit').on('click', '.roles_edit', function(e) {
+      e.preventDefault();
+      var roles_id = $(this).siblings('.roles_id').val();
+      roles_edit_icon('/admin/roles/edit_roles/edit_roles.php', roles_id);
+   });
 </script>
