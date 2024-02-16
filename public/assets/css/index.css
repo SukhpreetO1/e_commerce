@@ -46,7 +46,10 @@ li {
 .category_types_success_dismissible,
 .role_alert_dismissible,
 .role_success_dismissible,
-.role_delete_alert_dismissible {
+.role_delete_alert_dismissible, 
+.user_delete_alert_dismissible, 
+.role_update_alert_dismissible, 
+.role_update_success_dismissible {
   font-size: 15px;
   position: absolute;
   right: 9px;
@@ -55,7 +58,10 @@ li {
 }
 
 .logged_in_alert_dismissible,
-.role_alert_dismissible {
+.role_alert_dismissible,
+.user_delete_alert_dismissible, 
+.role_update_alert_dismissible, 
+.role_update_success_dismissible {
   width: 15rem;
 }
 
