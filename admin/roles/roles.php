@@ -30,24 +30,24 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                $query = "SELECT * FROM roles";
                $result = mysqli_query($database_connection, $query);
 
-               while ($category_data = mysqli_fetch_assoc($result)) {
+               while ($role_data = mysqli_fetch_assoc($result)) {
                ?>
                   <tr scope="col">
                      <td>
-                        <?php echo $category_data['id']; ?>
+                        <?php echo $role_data['id']; ?>
                      </td>
                      <td>
-                        <?php echo $category_data['name']; ?>
+                        <?php echo $role_data['name']; ?>
                      </td>
                      <td>
-                        <?php echo date('d-m-Y', strtotime($category_data['created_at'])); ?>
+                        <?php echo date('d-m-Y', strtotime($role_data['created_at'])); ?>
                      </td>
                      <td>
-                        <?php echo date('d-m-Y', strtotime($category_data['updated_at'])); ?>
+                        <?php echo date('d-m-Y', strtotime($role_data['updated_at'])); ?>
                      </td>
                      <td>
                         <div class="roles_action">
-                           <input type="hidden" name="roles_id" class="roles_id" id="roles_id" value="<?php echo $category_data['id']; ?>">
+                           <input type="hidden" name="roles_id" class="roles_id" id="roles_id" value="<?php echo $role_data['id']; ?>">
                            <div class="roles_edit">
                               <i class="fa-regular fa-pen-to-square"></i>
                            </div>
@@ -91,7 +91,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       });
    }
 
-   // redirection ajax for back button the category title
+   // redirection ajax for back button the role title
    $(document).off('click', '.roles_back_button').on('click', '.roles_back_button', function(e) {
       e.preventDefault();
       roles_back_button('/admin/homepage/dashboard/dashboard.php', e);
@@ -112,9 +112,71 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       });
    }
 
-   // redirection ajax for adding the category title
+   // redirection ajax for adding the role title
    $(document).off('click', '.roles_plus_icon').on('click', '.roles_plus_icon', function(e) {
       e.preventDefault();
       roles_plus_icon('/admin/roles/add_roles/add_roles.php');
+   });
+
+   /*--------------------------------------------------------------- Delete Button JS on ADD PAGES ----------------------------------------------------------------------------*/
+   function role_delete_button(url, roles_id) {
+      Swal.fire({
+         title: 'Are you sure?',
+         text: "You won't be able to revert this!",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+         if (result.isConfirmed) {
+            var parsed_response = null;
+            $.ajax({
+               type: 'DELETE',
+               url: BASE_URL + url + '?roles_id=' + roles_id,
+               success: function(response) {
+                  if (parsed_response) {
+                     parsed_response = null;
+                  } else {
+                     parsed_response = JSON.parse(response);
+                     if (parsed_response.error) {
+                        var alert_message = '<div class="alert alert-danger role_delete_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                        $('#alert_container').append(alert_message);
+                        setTimeout(function() {
+                           $('.alert').remove();
+                        }, 3000);
+                     } else {
+                        $.ajax({
+                           url: BASE_URL + '/admin/roles/roles.php',
+                           type: 'GET',
+                           success: function(data) {
+                              $(".container").empty();
+                              $('.container').html(data);
+                              var alert_message = '<div class="alert alert-success role_delete_alert_dismissible" role="alert">' + parsed_response.success + '</div>';
+                              $('#alert_container').append(alert_message);
+                              setTimeout(function() {
+                                 $('.alert').remove();
+                              }, 2000);
+                           },
+                           error: function(xhr, status, error) {
+                              console.log(error);
+                           }
+                        });
+                     }
+                  }
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+         }
+      });
+   }
+
+   // redirection ajax for delete button the role title
+   $(document).on('click', '.roles_delete', function(e) {
+      e.preventDefault();
+      var roles_id = $(this).siblings('.roles_id').val();
+      role_delete_button('/admin/roles/delete_roles/delete_roles.php', roles_id);
    });
 </script>
