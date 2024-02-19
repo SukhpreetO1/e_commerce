@@ -22,7 +22,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                   <th scope="col">Category Name</th>
                   <th scope="col">Category Heading Name</th>
                   <th scope="col">Category Type Name</th>
-                  <th scope="col">Description</th>
                   <th scope="col">Created At</th>
                   <th scope="col">Updated At</th>
                   <th scope="col">Action</th>
@@ -50,9 +49,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                      </td>
                      <td>
                         <?php echo $category_data['name']; ?>
-                     </td>
-                     <td style="text-align: <?php echo $category_data['description'] ? 'left' : 'center'; ?>">
-                        <?php echo $category_data['description'] ? $category_data['description'] : "-"; ?>
                      </td>
                      <td>
                         <?php echo date('d-m-Y', strtotime($category_data['created_at'])); ?>
