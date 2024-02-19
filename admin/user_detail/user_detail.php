@@ -1,6 +1,6 @@
 <?php
 require dirname(__DIR__, 2) . "/common/config/config.php";
-include dirname(__DIR__, 2) . "/user_detail/toogle_button_php.php";
+include dirname(__DIR__, 2) . "/admin/user_detail/toogle_button_php.php";
 ?>
 
 <div class="users_detail_page">

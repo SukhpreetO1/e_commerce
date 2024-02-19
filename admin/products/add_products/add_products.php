@@ -17,72 +17,108 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
          <div class="add_section">
             <form method="post" id="add_products_form" class="add_products_form">
                <div class="form-group">
-                  <label for="add_products_input_name" class="add_product_name mt-2 mb-2">Name <span class="important_mark">*</span></label>
-                  <input type="text" name="add_products_input_name" class="form-control add_products_input_name" id="add_products_input_name">
-                  <span class="invalid-feedback add_products_name_err" id="add_products_name_err"><?php echo $add_products_name_err ?></php></span>
+                  <label for="add_products_input_name" class="add_product_name mt-2 mb-2">Name <span
+                        class="important_mark">*</span></label>
+                  <input type="text" name="add_products_input_name" class="form-control add_products_input_name"
+                     id="add_products_input_name">
+                  <span class="invalid-feedback add_products_name_err" id="add_products_name_err">
+                     <?php echo $add_products_name_err ?>
+                     </php>
+                  </span>
                </div>
 
                <div class="form-group">
-                  <label for="add_products_description" class="add_products_description mt-2 mb-2">Description <span class="important_mark">*</span></label>
-                  <textarea type="text" name="add_products_description" class="form-control add_products_description" id="add_products_description" rows="3"></textarea>
-                  <span class="invalid-feedback add_products_description_err" id="add_products_description_err"><?php echo $add_products_description_err ?></php></span>
+                  <label for="add_products_description" class="add_products_description mt-2 mb-2">Description <span
+                        class="important_mark">*</span></label>
+                  <textarea type="text" name="add_products_description" class="form-control add_products_description"
+                     id="add_products_description" rows="3"></textarea>
+                  <span class="invalid-feedback add_products_description_err" id="add_products_description_err">
+                     <?php echo $add_products_description_err ?>
+                     </php>
+                  </span>
                </div>
 
                <div class="form-group products_category_type_and_quantity">
                   <div class="form-group me-3 col-6">
-                     <label for="add_products_category_type" class="add_product_caegory_type mt-2 mb-2">Category Type <span class="important_mark">*</span></label>
-                     <select class="form-select add_products_category_type" id="add_products_category_type" aria-label="Select products Title Name" name="add_products_category_type">
+                     <label for="add_products_category_type" class="add_product_caegory_type mt-2 mb-2">Category Type
+                        <span class="important_mark">*</span></label>
+                     <select class="form-select add_products_category_type" id="add_products_category_type"
+                        aria-label="Select products Title Name" name="add_products_category_type">
                         <option hidden disabled selected>Select Category Title Name</option>
                         <?php
                         $sql = "SELECT * FROM categories_type";
                         $result = $database_connection->query($sql);
                         if ($result->num_rows > 0) {
                            while ($row = $result->fetch_assoc()) {
-                        ?>
-                              <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                        <?php
+                              ?>
+                              <option value="<?php echo $row['id']; ?>">
+                                 <?php echo $row['name']; ?>
+                              </option>
+                              <?php
                            }
                         }
                         $database_connection->close();
                         ?>
                      </select>
-                     <span class="invalid-feedback add_products_category_type_err" id="add_products_category_type_err"><?php echo $add_products_category_type_err ?></php></span>
+                     <span class="invalid-feedback add_products_category_type_err" id="add_products_category_type_err">
+                        <?php echo $add_products_category_type_err ?>
+                        </php>
+                     </span>
                   </div>
 
                   <div class="form-group col-6">
-                     <label for="add_products_quantity" class="add_products_quantity mt-2 mb-2">Quantity <span class="important_mark">*</span></label>
-                     <input type="text" name="add_products_quantity" class="form-control add_products_quantity" id="add_products_quantity">
-                     <span class="invalid-feedback add_products_quantity_err" id="add_products_quantity_err"><?php echo $add_products_quantity_err ?></php></span>
+                     <label for="add_products_quantity" class="add_products_quantity mt-2 mb-2">Quantity <span
+                           class="important_mark">*</span></label>
+                     <input type="text" name="add_products_quantity" class="form-control add_products_quantity"
+                        id="add_products_quantity">
+                     <span class="invalid-feedback add_products_quantity_err" id="add_products_quantity_err">
+                        <?php echo $add_products_quantity_err ?>
+                        </php>
+                     </span>
                   </div>
                </div>
 
                <div class="form-group products_price_and_discount">
                   <div class="form-group me-3 col-6">
-                     <label for="add_products_price" class="add_products_price mt-2 mb-2">Price <span class="important_mark">*</span></label>
+                     <label for="add_products_price" class="add_products_price mt-2 mb-2">Price <span
+                           class="important_mark">*</span></label>
                      <div class="input-group mb-2">
                         <div class="input-group-prepend">
                            <div class="input-group-text" style="height: 114%;">₹</div>
                         </div>
-                        <input type="text" name="add_products_price" class="form-control add_products_price" id="add_products_price">
+                        <input type="text" name="add_products_price" class="form-control add_products_price"
+                           id="add_products_price">
                      </div>
-                     <span class="invalid-feedback add_products_price_err" id="add_products_price_err"><?php echo $add_products_price_err ?></php></span>
+                     <span class="invalid-feedback add_products_price_err" id="add_products_price_err">
+                        <?php echo $add_products_price_err ?>
+                        </php>
+                     </span>
                   </div>
 
                   <div class="form-group col-6">
                      <label for="add_products_discount" class="add_products_discount mt-2 mb-2">Discount </label>
-                     <input type="text" name="add_products_discount" class="form-control add_products_discount" id="add_products_discount">
-                     <span class="invalid-feedback add_products_discount_err" id="add_products_discount_err"><?php echo $add_products_discount_err ?></php></span>
+                     <input type="text" name="add_products_discount" class="form-control add_products_discount"
+                        id="add_products_discount">
+                     <span class="invalid-feedback add_products_discount_err" id="add_products_discount_err">
+                        <?php echo $add_products_discount_err ?>
+                        </php>
+                     </span>
                   </div>
                </div>
 
                <div class="form-group upload-div">
-                  <label for="add_products_image" class="add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                  <input type="file" name="add_products_image" id="add_products_image" class="add_products_image" multiple accept="image/jpeg, image/png, image/jpg">
-                  <span class="invalid-feedback add_products_image_err" id="add_products_image_err"><?php echo $add_products_image_err ?></span>
+                  <label for="add_products_image" class="add_product_image mt-2 mb-2">Images <span
+                        class="important_mark">*</span></label>
+                  <input type="file" name="add_products_image" id="add_products_image" class="add_products_image"
+                     multiple accept="image/jpeg, image/png, image/jpg">
+                  <span class="invalid-feedback add_products_image_err" id="add_products_image_err">
+                     <?php echo $add_products_image_err ?>
+                  </span>
                </div>
 
                <div class="add_products_name_button">
-                  <button type="submit" name="create_products" class="btn btn-primary mt-2 create_products" id="create_products" value="Create products">Create product</button>
+                  <button type="submit" name="create_products" class="btn btn-primary mt-2 create_products"
+                     id="create_products" value="Create products">Create product</button>
                </div>
             </form>
          </div>
@@ -112,7 +148,14 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
 
    function validate_products_description() {
       var products_description = $('#add_products_description').val();
-      return validate_input(products_description, null, 'Product description is required.', null, 'Product description must be greater than 5 words.', '.add_products_description_err');
+      var error_messages = '';
+      if (products_description.trim() === '') {
+         error_messages = 'Product description is required.';
+      } else if (products_description.length < 5) {
+         error_messages = 'Product description must be greater than 5 words.';
+      }
+      $('.add_products_description_err').text(error_messages);
+      return error_messages === '';
    }
 
    function validate_category_title() {
@@ -126,15 +169,15 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    }
 
    function validate_products_quantity() {
-      var product_quantity = $('.add_products_quantity').val();
-      return validate_input(product_quantity, /^\d+$/, 'Product quantity is required.', 'Only numbers are allowed.', null, '.add_products_quantity_err');
+      var product_quantity = $('.add_products_quantity').val().trim();
+      return validate_input(product_quantity, /^\s*\d+\s*$/, 'Product quantity is required.', 'Only numbers are allowed.', null, '.add_products_quantity_err');
    }
 
    function validate_products_price() {
       var product_price = $('.add_products_price').val();
       return validate_input(product_price, /^\d+$/, 'Product price is required.', 'Only numbers are allowed.', null, '.add_products_price_err');
    }
-   
+
    function validate_products_discount() {
       var product_discount = $('.add_products_discount').val();
       return validate_input(product_discount, /^\d+$/, null, 'Only numbers are allowed.', null, '.add_products_discount_err');
@@ -143,16 +186,17 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    function validate_products_images(file) {
       const allowed_types = ['image/jpeg', 'image/png', 'image/jpg'];
       var error_messages = '';
-      if (typeof file === "undefined") {
+      if (file === undefined) {
          error_messages = 'Image field is required.';
       } else if (!allowed_types.includes(file.type)) {
          error_messages = 'File type is not allowed. Only png, jpg and jpeg format are allowed.';
       }
+      $('.add_products_image_err').text(error_messages);
       return error_messages === '';
    }
 
    // when submit the new products title file
-   $(document).off('submit', '#add_products_form').on('submit', '#add_products_form', function(e) {
+   $(document).off('submit', '#add_products_form').on('submit', '#add_products_form', function (e) {
       e.preventDefault();
       var is_valid_name = validate_products_name();
       var is_valid_description = validate_products_description();
@@ -170,11 +214,11 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
             type: "POST",
             url: BASE_URL + "/admin/products/add_products/add_products_php.php",
             data: formData,
-            success: function(response) {
+            success: function (response) {
                if (response.trim() === "") {
                   var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">Product name not saved.</div>';
                   $('#alert_container').append(alert_message);
-                  setTimeout(function() {
+                  setTimeout(function () {
                      $('.alert').remove();
                   }, 3000);
                } else {
@@ -185,23 +229,23 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                      if (parsed_response.error) {
                         var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
                         $('#alert_container').append(alert_message);
-                        setTimeout(function() {
+                        setTimeout(function () {
                            $('.alert').remove();
                         }, 3000);
                      } else {
                         $.ajax({
                            url: BASE_URL + '/admin/products/products.php',
                            type: 'GET',
-                           success: function(data) {
+                           success: function (data) {
                               $(".container").empty();
                               $('.container').html(data);
                               var alert_message = '<div class="alert alert-success products_success_dismissible" role="alert">' + parsed_response.success + '</div>';
                               $('#alert_container').append(alert_message);
-                              setTimeout(function() {
+                              setTimeout(function () {
                                  $('.alert').remove();
                               }, 2000);
                            },
-                           error: function(xhr, status, error) {
+                           error: function (xhr, status, error) {
                               console.log(error);
                            }
                         });
@@ -209,7 +253,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                   }
                }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                console.log("Error" + error);
             }
          });
@@ -217,7 +261,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    });
 
    // when click on the new products title input field
-   $(document).on('click', '#add_products_form', function(e) {
+   $(document).on('click', '#add_products_form', function (e) {
       var is_valid_name = validate_products_name();
       var is_valid_description = validate_products_description();
       var is_valid_title = validate_category_title();
@@ -231,7 +275,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    });
 
    // when input the new products title field
-   $(document).on('input', '#add_products_form', function(e) {
+   $(document).on('input', '#add_products_form', function (e) {
       var is_valid_name = validate_products_name();
       var is_valid_description = validate_products_description();
       var is_valid_quantity = validate_products_quantity();
@@ -248,18 +292,18 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
       $.ajax({
          type: 'GET',
          url: BASE_URL + url,
-         success: function(data) {
+         success: function (data) {
             $(".container").empty();
             $('.container').html(data);
          },
-         error: function(e) {
+         error: function (e) {
             console.log(e);
          }
       });
    }
 
    // redirection ajax for back button the add products title
-   $(document).off('click', '.add_products_back_button').on('click', '.add_products_back_button', function(e) {
+   $(document).off('click', '.add_products_back_button').on('click', '.add_products_back_button', function (e) {
       e.preventDefault();
       back_button_in_products_add_page('/admin/products/products.php', e);
    });
