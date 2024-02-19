@@ -12,7 +12,7 @@ include dirname(__DIR__, 2) . "/user_detail/toogle_button_php.php";
 
         <div class="users_detail_page">
             <a href="#"><i class="fa-solid fa-arrow-left-long users_detail_back_button"></i></a>
-            <a href="#"><i class="fa-solid fa-plus users_detail_plus_icon"></i></a>
+            <!-- <a href="#"><i class="fa-solid fa-plus users_detail_plus_icon"></i></a> -->
         </div>
 
         <div class="users_detail_page_table">
@@ -111,7 +111,6 @@ include dirname(__DIR__, 2) . "/user_detail/toogle_button_php.php";
             },
             success: function(response) {
                 parsed_response = JSON.parse(response);
-                console.log(parsed_response);
                 if (parsed_response.error) {
                     var alert_message = '<div class="alert alert-danger role_update_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
                     $('#alert_container').append(alert_message);
@@ -156,6 +155,9 @@ include dirname(__DIR__, 2) . "/user_detail/toogle_button_php.php";
                 $.ajax({
                     type: 'DELETE',
                     url: BASE_URL + url + '?user_id=' + user_id,
+                    data: {
+                        user_id: user_id,
+                    },
                     success: function(response) {
                         if (parsed_response) {
                             parsed_response = null;
@@ -200,5 +202,29 @@ include dirname(__DIR__, 2) . "/user_detail/toogle_button_php.php";
         e.preventDefault();
         var user_id = $(this).siblings('.user_id').val();
         user_delete_button('/admin/user_detail/delete_user_detail.php/delete_user_detail.php', user_id);
+    });
+
+     /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
+     function users_detail_back_button(url) {
+        $.ajax({
+            type: 'GET',
+            url: BASE_URL + url,
+            success: function(data) {
+                $(".container").empty();
+                var container = $('.container');
+                if (!$(data).find('.homepage_sidebar').length) {
+                    container.html(data);
+                }
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+    }
+
+    // redirection ajax for back button the category title
+    $(document).off('click', '.users_detail_back_button').on('click', '.users_detail_back_button', function(e) {
+        e.preventDefault();
+        users_detail_back_button('/admin/homepage/dashboard/dashboard.php', e);
     });
 </script>

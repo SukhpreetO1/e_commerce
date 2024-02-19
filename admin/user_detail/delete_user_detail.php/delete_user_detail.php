@@ -6,7 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
    $response = array();
    $result = mysqli_query($database_connection, "SELECT id FROM users WHERE id = $user_id");
    if (mysqli_num_rows($result) > 0) {
-      // mysqli_query($database_connection, "DELETE FROM users WHERE id = $user_id");
+      include dirname(__DIR__, 2) . "/mails/delete_user_mail.php";
+      mysqli_query($database_connection, "DELETE FROM users WHERE id = $user_id");
       mysqli_close($database_connection);
       $response['success'] = "User Deleted successfully.";
    } else {
