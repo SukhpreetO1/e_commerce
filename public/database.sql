@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 19, 2024 at 12:30 PM
+-- Generation Time: Feb 19, 2024 at 07:01 PM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -134,19 +134,6 @@ INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `created_at`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category_inventory`
---
-
-CREATE TABLE `category_inventory` (
-  `id` int NOT NULL,
-  `quantity` int NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `clothes_categories`
 --
 
@@ -171,21 +158,6 @@ INSERT INTO `clothes_categories` (`id`, `name`, `created_at`, `updated_at`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `discount`
---
-
-CREATE TABLE `discount` (
-  `id` int NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `category_type_id` int NOT NULL,
-  `discount_percentage` int NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `products`
 --
 
@@ -193,11 +165,26 @@ CREATE TABLE `products` (
   `id` int NOT NULL,
   `name` varchar(20) NOT NULL,
   `description` text NOT NULL,
-  `image_url` text NOT NULL,
+  `product_image_id` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `categories_type_id` int NOT NULL,
-  `category_inventory_id` int NOT NULL,
+  `quantity` int NOT NULL,
   `price` int NOT NULL,
-  `discount_id` int NOT NULL,
+  `discount` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_image`
+--
+
+CREATE TABLE `product_image` (
+  `id` int NOT NULL,
+  `products_id` int NOT NULL,
+  `name` int NOT NULL,
+  `path` int NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -270,32 +257,23 @@ ALTER TABLE `categories_type`
   ADD KEY `category_heading_id` (`category_heading_id`);
 
 --
--- Indexes for table `category_inventory`
---
-ALTER TABLE `category_inventory`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `clothes_categories`
 --
 ALTER TABLE `clothes_categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `discount`
---
-ALTER TABLE `discount`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_category_type` (`category_type_id`);
-
---
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `categories_type_id` (`categories_type_id`,`category_inventory_id`,`discount_id`),
-  ADD KEY `fk_category_inventory` (`category_inventory_id`),
-  ADD KEY `fk_discount` (`discount_id`);
+  ADD KEY `categories_type_id` (`categories_type_id`) USING BTREE;
+
+--
+-- Indexes for table `product_image`
+--
+ALTER TABLE `product_image`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `roles`
@@ -329,27 +307,21 @@ ALTER TABLE `categories_type`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- AUTO_INCREMENT for table `category_inventory`
---
-ALTER TABLE `category_inventory`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `clothes_categories`
 --
 ALTER TABLE `clothes_categories`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `discount`
---
-ALTER TABLE `discount`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_image`
+--
+ALTER TABLE `product_image`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -383,18 +355,10 @@ ALTER TABLE `categories_type`
   ADD CONSTRAINT `fk_category_heading` FOREIGN KEY (`category_heading_id`) REFERENCES `categories_heading` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `discount`
---
-ALTER TABLE `discount`
-  ADD CONSTRAINT `fk_category_type` FOREIGN KEY (`category_type_id`) REFERENCES `categories_type` (`id`);
-
---
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `fk_categories_type` FOREIGN KEY (`categories_type_id`) REFERENCES `categories_type` (`id`),
-  ADD CONSTRAINT `fk_category_inventory` FOREIGN KEY (`category_inventory_id`) REFERENCES `category_inventory` (`id`),
-  ADD CONSTRAINT `fk_discount` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`id`);
+  ADD CONSTRAINT `fk_categories_type` FOREIGN KEY (`categories_type_id`) REFERENCES `categories_type` (`id`);
 
 --
 -- Constraints for table `users`
