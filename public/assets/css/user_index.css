@@ -1,0 +1,96 @@
+/* ------------------------------------ navbar css ------------------------------------ */
+.container_fluid {
+  display: flex;
+  position: relative;
+  margin: 0 3%;
+  padding-top: 10px;
+}
+
+.navbar_logo {
+  width: 7%;
+  margin: 18px 9px;
+}
+
+.header {
+  height: 5rem;
+}
+
+.navbar_items {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 25px;
+  width: 100%;
+}
+
+.navbar_dashboard_search_bar {
+  padding-top: 10px;
+  display: -webkit-box;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+.navbar_collapse {
+  width: 100%;
+}
+
+.header_profile,
+.header_wishlist,
+.header_bag {
+  margin: 0 10px;
+}
+
+.dropdown_content {
+  display: none;
+  position: absolute;
+  z-index: 9;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.nav_item:hover .dropdown_content {
+  display: block;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.category_heading {
+  font-size: 13px;
+  color: #cd4f26;
+  padding: 2% 2%;
+}
+
+.category_type {
+  color: black;
+  font-weight: 200;
+}
+
+.category_pair {
+  width: 11vw;
+}
+
+.navbar_dropdown_menu {
+   position: absolute !important;
+   right: 16%;
+   top: 79%;
+}
+
+/* ------------------------------------ slider css ------------------------------------ */
+
+/* ------------------------------------ Card css ------------------------------------ */
+.container_cards {
+  display: flex;
+  padding: 3%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.homepage_card {
+  margin: 0 13px 20px 0;
+  flex: 0 0 calc(16.666% - 1rem);
+}
