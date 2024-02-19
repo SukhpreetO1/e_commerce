@@ -93,7 +93,8 @@ li {
 .category_types_action,
 .users_detail_page_action,
 .roles_action,
-.roles_title {
+.roles_title,
+.products_action {
   display: flex;
 }
 
@@ -103,7 +104,8 @@ li {
 .category_types_heading,
 .users_detail_heading,
 .roles_heading,
-.edit_role_heading {
+.edit_role_heading, 
+.products_heading {
   text-align: center;
   margin: 1% 0% 0;
 }
@@ -113,7 +115,8 @@ li {
 .category_header_edit,
 .category_types_edit,
 .users_detail_edit,
-.roles_edit {
+.roles_edit,
+.products_edit {
   margin-right: 15px;
 }
 
@@ -126,7 +129,8 @@ li {
 .add_category_types,
 .edit_category_header,
 .users_detail_page,
-.roles_title {
+.roles_title,
+.add_products {
   display: flex;
   justify-content: space-between;
   padding: 0 1% 1%;
@@ -136,7 +140,8 @@ li {
 .category_header_plus_icon,
 .category_types_plus_icon,
 .users_detail_plus_icon,
-.roles_plus_icon {
+.roles_plus_icon,
+.products_plus_icon {
   font-size: 1.5rem;
   border: 1px solid;
   border-radius: 51%;
@@ -155,7 +160,9 @@ li {
 .users_detail_back_button,
 .roles_back_button,
 .add_role_back_button,
-.edit_role_back_button {
+.edit_role_back_button,
+.products_back_button,
+.add_products_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -176,7 +183,9 @@ li {
 .category_types_edit:hover,
 .category_types_delete:hover,
 .roles_edit:hover,
-.roles_delete:hover {
+.roles_delete:hover,
+.products_edit,
+.products_delete {
   cursor: pointer;
 }
 
@@ -187,7 +196,8 @@ li {
 .edit_category_header_name_button,
 .add_category_types_name_button,
 .add_role_name_button,
-.edit_role_name_button {
+.edit_role_name_button,
+.add_products_name_button {
   text-align: center;
 }
 
@@ -199,6 +209,16 @@ li {
 .edit_role_name {
   width: 30%;
   margin-left: 36%;
+}
+
+.add_products_name{
+  width: 50%;
+  margin-left: 25%;
+}
+
+.products_category_type_and_quantity,
+.products_price_and_discount{
+  display: flex;
 }
 
 #add_category_title_name_err,

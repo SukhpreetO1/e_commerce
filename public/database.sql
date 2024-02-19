@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 14, 2024 at 05:56 PM
+-- Generation Time: Feb 19, 2024 at 12:30 PM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -67,7 +67,6 @@ CREATE TABLE `categories_type` (
   `id` int NOT NULL,
   `category_heading_id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -76,61 +75,74 @@ CREATE TABLE `categories_type` (
 -- Dumping data for table `categories_type`
 --
 
-INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 1, 'T-Shirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(2, 1, 'Casual Shirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(3, 1, 'Formal Shirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(4, 1, 'Sweatshirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(5, 1, 'Sweaters', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(6, 1, 'Jackets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(7, 1, 'Blazers & Coats', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(8, 1, 'Suits', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(9, 1, 'Rain Jackets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(10, 2, 'Kurtas & Kurta Sets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(11, 2, 'Sherwanis', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(12, 2, 'Nehru Jackets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(13, 2, 'Dhotis', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(14, 3, 'Jeans', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(15, 3, 'Casual Trousers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(16, 3, 'Formal Trousers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(17, 3, 'Shorts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(18, 3, 'Track Pants & Joggers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(19, 4, 'Briefs & Trunks', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(20, 4, 'Boxers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(21, 4, 'Vests', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(22, 4, 'Sleepwear & Loungewear', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(23, 4, 'Thermals', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(24, 6, 'Casual Shoes', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(25, 6, 'Sports Shoes', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(26, 6, 'Formal Shoes', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(27, 6, 'Sneakers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(28, 6, 'Sandals & Floaters', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(29, 6, 'Flip Flops', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(30, 6, 'Socks', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(31, 10, 'Sports Shoes', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(32, 10, 'Sports Sandals', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(33, 10, 'Active T-Shirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(34, 10, 'Track Pants & Shorts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(35, 10, 'Tracksuits', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(36, 10, 'Jackets & Sweatshirts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(37, 10, 'Sports Accessories', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(38, 10, 'Swimwear', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(39, 11, 'Smart Wearables', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(40, 11, 'Fitness Gadgets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(41, 11, 'Headphones', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(42, 11, 'Speakers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(43, 12, 'Wallets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(44, 12, 'Belts', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(45, 12, 'Perfumes & Body Mists', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(46, 12, 'Trimmers', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(47, 12, 'Deodorants', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(48, 12, 'Ties, Cufflinks & Pocket Squares', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(49, 12, 'Accessory Gift Sets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(50, 12, 'Caps & Hats', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(51, 12, 'Mufflers, Scarves & Gloves', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(52, 12, 'Phone Cases', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(53, 12, 'Rings & Wristwear', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(54, 12, 'Helmets', NULL, '2024-02-06 18:45:14', '2024-02-06 18:45:14');
+INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'T-Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(2, 1, 'Casual Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(3, 1, 'Formal Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(4, 1, 'Sweatshirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(5, 1, 'Sweaters', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(6, 1, 'Jackets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(7, 1, 'Blazers & Coats', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(8, 1, 'Suits', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(9, 1, 'Rain Jackets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(10, 2, 'Kurtas & Kurta Sets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(11, 2, 'Sherwanis', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(12, 2, 'Nehru Jackets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(13, 2, 'Dhotis', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(14, 3, 'Jeans', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(15, 3, 'Casual Trousers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(16, 3, 'Formal Trousers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(17, 3, 'Shorts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(18, 3, 'Track Pants & Joggers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(19, 4, 'Briefs & Trunks', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(20, 4, 'Boxers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(21, 4, 'Vests', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(22, 4, 'Sleepwear & Loungewear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(23, 4, 'Thermals', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(24, 6, 'Casual Shoes', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(25, 6, 'Sports Shoes', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(26, 6, 'Formal Shoes', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(27, 6, 'Sneakers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(28, 6, 'Sandals & Floaters', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(29, 6, 'Flip Flops', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(30, 6, 'Socks', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(31, 10, 'Sports Shoes', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(32, 10, 'Sports Sandals', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(33, 10, 'Active T-Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(34, 10, 'Track Pants & Shorts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(35, 10, 'Tracksuits', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(36, 10, 'Jackets & Sweatshirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(37, 10, 'Sports Accessories', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(38, 10, 'Swimwear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(39, 11, 'Smart Wearables', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(40, 11, 'Fitness Gadgets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(41, 11, 'Headphones', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(42, 11, 'Speakers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(43, 12, 'Wallets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(44, 12, 'Belts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(45, 12, 'Perfumes & Body Mists', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(46, 12, 'Trimmers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(47, 12, 'Deodorants', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(48, 12, 'Ties, Cufflinks & Pocket Squares', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(49, 12, 'Accessory Gift Sets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(50, 12, 'Caps & Hats', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(51, 12, 'Mufflers, Scarves & Gloves', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(52, 12, 'Phone Cases', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(53, 12, 'Rings & Wristwear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
+(54, 12, 'Helmets', '2024-02-06 18:45:14', '2024-02-06 18:45:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category_inventory`
+--
+
+CREATE TABLE `category_inventory` (
+  `id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -159,15 +171,49 @@ INSERT INTO `clothes_categories` (`id`, `name`, `created_at`, `updated_at`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `discount`
+--
+
+CREATE TABLE `discount` (
+  `id` int NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `category_type_id` int NOT NULL,
+  `discount_percentage` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `image_url` text NOT NULL,
+  `categories_type_id` int NOT NULL,
+  `category_inventory_id` int NOT NULL,
+  `price` int NOT NULL,
+  `discount_id` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
   `id` int NOT NULL,
-  `name` varchar(10) NOT NULL,
+  `name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `roles`
@@ -175,7 +221,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', '2024-02-14 17:43:08', '2024-02-14 17:43:08'),
-(2, 'User', '2024-02-14 17:43:08', '2024-02-14 17:43:08');
+(2, 'User', '2024-02-14 17:43:08', '2024-02-16 11:33:19');
 
 -- --------------------------------------------------------
 
@@ -202,8 +248,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `role_id`, `reset_link_token`, `reset_token_exp`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Sukhpreet', 'Singh', 'Sukhpreet9', 'ssingh77022@gmail.com', 2, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-06 12:43:37'),
-(2, 'Sukhpreet', 'Singh', 'Sukhpreet99', 'ssingh77021@gmail.com', 1, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-06 12:43:37');
+(1, 'Sukhpreet', 'Singh', 'Sukhpreet9', 'ssingh77022@gmail.com', 2, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-16 19:12:26'),
+(2, 'Sukhpreet', 'Singh', 'Sukhpreet99', 'ssingh77021@gmail.com', 1, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-16 18:47:12');
 
 --
 -- Indexes for dumped tables
@@ -224,10 +270,32 @@ ALTER TABLE `categories_type`
   ADD KEY `category_heading_id` (`category_heading_id`);
 
 --
+-- Indexes for table `category_inventory`
+--
+ALTER TABLE `category_inventory`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `clothes_categories`
 --
 ALTER TABLE `clothes_categories`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `discount`
+--
+ALTER TABLE `discount`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_category_type` (`category_type_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categories_type_id` (`categories_type_id`,`category_inventory_id`,`discount_id`),
+  ADD KEY `fk_category_inventory` (`category_inventory_id`),
+  ADD KEY `fk_discount` (`discount_id`);
 
 --
 -- Indexes for table `roles`
@@ -261,10 +329,28 @@ ALTER TABLE `categories_type`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
+-- AUTO_INCREMENT for table `category_inventory`
+--
+ALTER TABLE `category_inventory`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `clothes_categories`
 --
 ALTER TABLE `clothes_categories`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `discount`
+--
+ALTER TABLE `discount`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -295,6 +381,20 @@ ALTER TABLE `categories_heading`
 ALTER TABLE `categories_type`
   ADD CONSTRAINT `categories_type_ibfk_1` FOREIGN KEY (`category_heading_id`) REFERENCES `categories_heading` (`id`),
   ADD CONSTRAINT `fk_category_heading` FOREIGN KEY (`category_heading_id`) REFERENCES `categories_heading` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `discount`
+--
+ALTER TABLE `discount`
+  ADD CONSTRAINT `fk_category_type` FOREIGN KEY (`category_type_id`) REFERENCES `categories_type` (`id`);
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `fk_categories_type` FOREIGN KEY (`categories_type_id`) REFERENCES `categories_type` (`id`),
+  ADD CONSTRAINT `fk_category_inventory` FOREIGN KEY (`category_inventory_id`) REFERENCES `category_inventory` (`id`),
+  ADD CONSTRAINT `fk_discount` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`id`);
 
 --
 -- Constraints for table `users`
