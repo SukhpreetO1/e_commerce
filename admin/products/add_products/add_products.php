@@ -297,7 +297,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    });
 
    /*--------------------------------------------------------------- Uploaded image preview ----------------------------------------------------------------------------*/
-   var filesCount = 0; 
+   var filesCount = 0;
 
    function upload_preview_images(event) {
       var preview = document.getElementById('uploaded_image_preview');
