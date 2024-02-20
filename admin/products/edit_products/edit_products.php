@@ -27,7 +27,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                   <form method="post" id="edit_products_form" class="edit_products_form">
                      <div class="form-group">
                         <label for="edit_products_input_name" class="edit_product_name mt-2 mb-2">Name <span class="important_mark">*</span></label>
-                        <input type="text" name="edit_products_input_name" class="form-control edit_products_input_name" id="edit_products_input_name" value="<?php echo $product_data["name"];?>">
+                        <input type="text" name="edit_products_input_name" class="form-control edit_products_input_name" id="edit_products_input_name" value="<?php echo $product_data["name"]; ?>">
                         <span class="invalid-feedback edit_products_name_err" id="edit_products_name_err">
                            <?php echo $edit_products_name_err ?>
                            </php>
@@ -36,7 +36,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
                      <div class="form-group">
                         <label for="edit_products_description" class="edit_products_description mt-2 mb-2">Description <span class="important_mark">*</span></label>
-                        <textarea type="text" name="edit_products_description" class="form-control edit_products_description" id="edit_products_description" rows="3"><?php echo $product_data["description"];?></textarea>
+                        <textarea type="text" name="edit_products_description" class="form-control edit_products_description" id="edit_products_description" rows="3"><?php echo $product_data["description"]; ?></textarea>
                         <span class="invalid-feedback edit_products_description_err" id="edit_products_description_err">
                            <?php echo $edit_products_description_err ?>
                            </php>
@@ -71,7 +71,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
                         <div class="form-group col-6">
                            <label for="edit_products_quantity" class="edit_product_quantity mt-2 mb-2">Quantity <span class="important_mark">*</span></label>
-                           <input type="text" name="edit_products_quantity" class="form-control edit_products_quantity" id="edit_products_quantity" value="<?php echo $product_data["quantity"];?>">
+                           <input type="text" name="edit_products_quantity" class="form-control edit_products_quantity" id="edit_products_quantity" value="<?php echo $product_data["quantity"]; ?>">
                            <span class="invalid-feedback edit_products_quantity_err" id="edit_products_quantity_err">
                               <?php echo $edit_products_quantity_err ?>
                               </php>
@@ -86,7 +86,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                               <div class="input-group-prepend">
                                  <div class="input-group-text indian_rupee_sign">₹</div>
                               </div>
-                              <input type="text" name="edit_products_price" class="form-control edit_products_price" id="edit_products_price" value="<?php echo $product_data["price"];?>">
+                              <input type="text" name="edit_products_price" class="form-control edit_products_price" id="edit_products_price" value="<?php echo $product_data["price"]; ?>">
                            </div>
                            <span class="invalid-feedback edit_products_price_err" id="edit_products_price_err">
                               <?php echo $edit_products_price_err ?>
@@ -97,7 +97,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         <div class="form-group col-6">
                            <label for="edit_products_discount" class="edit_product_discount mt-2 mb-2">Discount </label>
                            <div class="input-group mb-2">
-                              <input type="text" name="edit_products_discount" class="form-control edit_products_discount" id="edit_products_discount" value="<?php echo $product_data["discount"];?>">
+                              <input type="text" name="edit_products_discount" class="form-control edit_products_discount" id="edit_products_discount" value="<?php echo $product_data["discount"]; ?>">
                               <div class="input-group-prepend">
                                  <div class="input-group-text percentage_sign">%</div>
                               </div>
@@ -113,8 +113,9 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         <label for="edit_products_image" class="edit_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
                         <input type="file" name="edit_products_image[]" id="edit_products_image" class="edit_products_image" multiple accept="image/jpeg, image/png, image/jpg">
                         <span class="invalid-feedback edit_products_image_err" id="edit_products_image_err">
-                           <?php echo $edit_products_image_err?>
+                           <?php echo $edit_products_image_err ?>
                         </span>
+                        <div id="uploaded_image_preview" style="display: flex; flex-wrap: wrap;"></div>
                      </div>
 
                      <div class="edit_products_name_button">
@@ -306,4 +307,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       e.preventDefault();
       back_button_in_products_edit_page('/admin/products/products.php', e);
    });
+
+   /*--------------------------------------------------------------- Uploaded image preview ----------------------------------------------------------------------------*/
+   
 </script>

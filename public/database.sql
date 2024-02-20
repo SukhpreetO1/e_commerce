@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 06:35 PM
--- Server version: 10.4.27-MariaDB
+-- Host: localhost:3306
+-- Generation Time: Feb 20, 2024 at 07:02 PM
+-- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -28,11 +29,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories_heading` (
-  `id` int(11) NOT NULL,
-  `clothes_category_id` int(11) NOT NULL COMMENT '1 for mens, 2 for womens, 3 for kids, 4 for living, 5 for beauty',
-  `name` varchar(30) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `clothes_category_id` int NOT NULL COMMENT '1 for mens, 2 for womens, 3 for kids, 4 for living, 5 for beauty',
+  `name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -63,11 +64,11 @@ INSERT INTO `categories_heading` (`id`, `clothes_category_id`, `name`, `created_
 --
 
 CREATE TABLE `categories_type` (
-  `id` int(11) NOT NULL,
-  `category_heading_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `category_heading_id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -137,10 +138,10 @@ INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `created_at`
 --
 
 CREATE TABLE `clothes_categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -161,17 +162,23 @@ INSERT INTO `clothes_categories` (`id`, `name`, `created_at`, `updated_at`) VALU
 --
 
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `description` text NOT NULL,
-  `product_image_id` int(11) NOT NULL,
-  `categories_type_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `discount` int(11) NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `name` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `categories_type_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `price` varchar(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `discount` varchar(8) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `categories_type_id`, `quantity`, `price`, `discount`, `created_at`, `updated_at`) VALUES
+(1, 'qwe', 'qweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeq', 2, 5, '10', '0', '2024-02-20 15:55:10', '2024-02-20 15:55:10');
 
 -- --------------------------------------------------------
 
@@ -180,12 +187,20 @@ CREATE TABLE `products` (
 --
 
 CREATE TABLE `product_image` (
-  `id` int(11) NOT NULL,
-  `products_id` int(11) NOT NULL,
-  `path` varchar(50) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `name` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `products_id` int NOT NULL,
+  `path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_image`
+--
+
+INSERT INTO `product_image` (`id`, `name`, `products_id`, `path`, `created_at`, `updated_at`) VALUES
+(1, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10');
 
 -- --------------------------------------------------------
 
@@ -194,10 +209,10 @@ CREATE TABLE `product_image` (
 --
 
 CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
-  `name` varchar(10) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `name` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -215,17 +230,17 @@ INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `email` varchar(30) NOT NULL,
-  `role_id` int(11) NOT NULL DEFAULT 2,
-  `reset_link_token` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL,
+  `first_name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `role_id` int NOT NULL DEFAULT '2',
+  `reset_link_token` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `reset_token_exp` datetime DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -265,8 +280,7 @@ ALTER TABLE `clothes_categories`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `categories_type_id` (`categories_type_id`) USING BTREE,
-  ADD KEY `product_image_id` (`product_image_id`);
+  ADD KEY `categories_type_id` (`categories_type_id`) USING BTREE;
 
 --
 -- Indexes for table `product_image`
@@ -298,43 +312,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories_heading`
 --
 ALTER TABLE `categories_heading`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `categories_type`
 --
 ALTER TABLE `categories_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `clothes_categories`
 --
 ALTER TABLE `clothes_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `product_image`
 --
 ALTER TABLE `product_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
