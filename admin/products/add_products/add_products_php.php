@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $add_products_quantity = trim($_POST["add_products_quantity"]);
    $add_products_price = trim($_POST["add_products_price"]);
    $add_products_discount = trim($_POST["add_products_discount"]);
-   $add_products_image = trim($_POST["add_products_image"]);
 
    $errors = array();
 
@@ -58,10 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    if (empty($errors)) {
       $check_sql = "SELECT * FROM products WHERE categories_type_id = ? AND name = ?";
-      $insert_sql = "INSERT INTO products (name, description,  product_image_id, categories_type_id, quantity, price, discount) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
-      mysqli_stmt_bind_param($check_stmt, "ssiiiii", $add_products_input_name, $add_products_description, $add_products_category_type, $add_products_quantity, $add_products_price, $add_products_discount, $add_products_image);
+      mysqli_stmt_bind_param($check_stmt, "is", $add_products_category_type, $add_products_input_name);
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
 
@@ -70,13 +67,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       mysqli_stmt_fetch($check_stmt);
 
       if (mysqli_stmt_num_rows($check_stmt) > 0) {
-         $response['error'] = "Product name already exists.";
+         $response['error'] = "Product name already exists in this category.";
       } else {
+         $insert_sql = "INSERT INTO products (name, description, categories_type_id, quantity, price, discount) VALUES (?, ?, ?, ?, ?, ?)";
          $insert_stmt = mysqli_prepare($database_connection, $insert_sql);
-         mysqli_stmt_bind_param($insert_stmt, "ssiiiii", $add_products_input_name, $add_products_description, $add_products_category_type, $add_products_quantity, $add_products_price, $add_products_discount, $add_products_image);
+         mysqli_stmt_bind_param($insert_stmt, "ssiiii", $add_products_input_name, $add_products_description, $add_products_category_type, $add_products_quantity, $add_products_price, $add_products_discount);
          mysqli_stmt_execute($insert_stmt);
+
+         $product_id = mysqli_insert_id($database_connection);
+         if (isset($_POST["image_file_names"])) {
+            $image_file_names = explode(',', $_POST["image_file_names"]);
+            $image_paths = array();
+            foreach ($image_file_names as $key => $image_name) {
+               $target_path = dirname(__DIR__, 3) . '/public/assets/product_images/' . $image_name;
+               if (move_uploaded_file($_FILES["add_products_image"]["tmp_name"][$key], $target_path)) {
+                  $image_paths[] = $target_path;
+                  $insert_image_sql = "INSERT INTO product_image (name, products_id, path) VALUES (?, ?, ?)";
+                  $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
+                  mysqli_stmt_bind_param($insert_image_stmt, "sis", $image_name, $product_id, $target_path);
+                  mysqli_stmt_execute($insert_image_stmt);
+               }
+            }
+         } else {
+            $add_products_image = null;
+         }
+
          $response['success'] = "Product created successfully.";
-         $response['url'] = '/admin/category_header/category_header.php';
+         $response['url'] = '/admin/products/products.php';
       }
 
       echo json_encode($response, JSON_UNESCAPED_SLASHES);

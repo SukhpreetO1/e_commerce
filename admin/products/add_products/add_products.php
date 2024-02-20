@@ -101,14 +101,14 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                   </div>
                </div>
 
-               <!-- <div class="form-group">
+               <div class="form-group">
                   <label for="add_products_image" class="add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                  <input type="file" name="add_products_image" id="add_products_image" class="add_products_image" multiple accept="image/jpeg, image/png, image/jpg">
+                  <input type="file" name="add_products_image[]" id="add_products_image" class="add_products_image" multiple accept="image/jpeg, image/png, image/jpg">
                   <span class="invalid-feedback add_products_image_err" id="add_products_image_err">
-                     <?php // echo $add_products_image_err 
+                     <?php echo $add_products_image_err
                      ?>
                   </span>
-               </div> -->
+               </div>
 
                <div class="add_products_name_button">
                   <button type="submit" name="create_products" class="btn btn-primary mt-2 create_products" id="create_products" value="Create products">Create product</button>
@@ -183,12 +183,24 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
       if ($('.add_products_discount').val().trim() === '') {
          $('.add_products_discount').val('0');
       }
-      var formData = $(this).serialize();
+      var form = this;
+      var fileInput = document.getElementById('add_products_image');
+      var files = fileInput.files;
+      var fileNames = [];
+
+      for (var i = 0; i < files.length; i++) {
+         fileNames.push(files[i].name);
+      }
+
+      var formData = new FormData(form);
+      formData.append('image_file_names', fileNames.join(','));
       var parsed_response = null;
       $.ajax({
          type: "POST",
          url: BASE_URL + "/admin/products/add_products/add_products_php.php",
          data: formData,
+         processData: false,
+         contentType: false,
          success: function(response) {
             if (response.trim() === "") {
                var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">Product name not saved.</div>';
@@ -234,8 +246,8 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
       });
    });
 
-   // when click on the new products title input field
-   $(document).on('click', '#add_products_form', function(e) {
+   // when click on the new products title field
+   $(document).off('click', '#add_products_form').on('click', '#add_products_form', function(e) {
       var is_valid_name = validate_products_name();
       var is_valid_description = validate_products_description();
       var is_valid_title = validate_category_title();
