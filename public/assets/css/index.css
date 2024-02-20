@@ -249,6 +249,20 @@ li {
   color: red;
 }
 
+.indian_rupee_sign{
+  height: 114%;
+  border-radius: 0;
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.percentage_sign{
+  height: 114%;
+  border-radius: 0;
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
 /* for toggle button in admin page */
 .switch {
   position: relative;

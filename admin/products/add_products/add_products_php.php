@@ -7,7 +7,6 @@ $add_products_category_type = $add_products_category_type_err = "";
 $add_products_quantity = $add_products_quantity_err = "";
 $add_products_price = $add_products_price_err = "";
 $add_products_discount = $add_products_discount_err = "";
-$add_products_image = $add_products_image_err = "";
 
 // var_dump($_POST);
 // die();
@@ -18,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $add_products_quantity = trim($_POST["add_products_quantity"]);
    $add_products_price = trim($_POST["add_products_price"]);
    $add_products_discount = trim($_POST["add_products_discount"]);
-   $add_products_image = trim($_POST["add_products_image"]);
 
    if (empty($add_products_input_name)) {
       $add_category_header_title_err = "Category title is required.";
