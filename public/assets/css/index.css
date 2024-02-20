@@ -221,6 +221,18 @@ li {
   text-align: center;
 }
 
+.preview_image_remove_button {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  padding: 0px 5px;
+  border: none;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .add_category_name,
 .add_category_header_names,
 .edit_category_name,

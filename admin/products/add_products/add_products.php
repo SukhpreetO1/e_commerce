@@ -108,7 +108,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                      <?php echo $add_products_image_err
                      ?>
                   </span>
-                  <div id="uploaded_image_preview"></div>
+                  <div id="uploaded_image_preview" style="display: flex; flex-wrap: wrap;"></div>
                </div>
 
                <div class="add_products_name_button">
@@ -297,21 +297,58 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    });
 
    /*--------------------------------------------------------------- Uploaded image preview ----------------------------------------------------------------------------*/
+   var filesCount = 0; 
+
    function upload_preview_images(event) {
       var preview = document.getElementById('uploaded_image_preview');
+      var fileInput = event.target;
       preview.innerHTML = '';
       if (event.target.files) {
          [...event.target.files].forEach(function(file) {
             var reader = new FileReader();
             reader.onload = function(e) {
+               var imgContainer = document.createElement('div');
+               imgContainer.style.position = 'relative';
                var img = document.createElement('img');
                img.src = e.target.result;
-               img.style.maxWidth = '9rem';
+               img.style.maxWidth = '8rem';
                img.style.marginRight = '10px';
-               preview.appendChild(img);
-            }
+               img.style.cursor = 'pointer';
+               img.onclick = function() {
+                  window.open(e.target.result);
+               };
+               imgContainer.appendChild(img);
+               var removeBtn = document.createElement('button');
+               removeBtn.innerHTML = 'x';
+               removeBtn.classList.add('preview_image_remove_button');
+               removeBtn.onclick = function() {
+                  imgContainer.remove();
+                  var newFiles = Array.from(fileInput.files).filter(function(file) {
+                     return file.name !== fileInput.files[0].name;
+                  });
+                  var dataTransfer = new DataTransfer();
+                  newFiles.forEach(function(file) {
+                     dataTransfer.items.add(file);
+                  });
+                  fileInput.files = dataTransfer.files;
+                  filesCount--;
+                  updateFileInputValue(fileInput, filesCount);
+               };
+               imgContainer.appendChild(removeBtn);
+               preview.appendChild(imgContainer);
+               filesCount++;
+               updateFileInputValue(fileInput, filesCount);
+            };
             reader.readAsDataURL(file);
          });
+      }
+   }
+
+   function updateFileInputValue(fileInput, count) {
+      if (count > 0) {
+         fileInput.dataset.fileCount = count;
+      } else {
+         fileInput.removeAttribute('data-file-count');
       }
    }
 </script>
