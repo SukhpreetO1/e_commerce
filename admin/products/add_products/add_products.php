@@ -39,7 +39,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                      <label for="add_products_category_type" class="add_product_caegory_type mt-2 mb-2">Category Type
                         <span class="important_mark">*</span></label>
                      <select class="form-select add_products_category_type" id="add_products_category_type" aria-label="Select products Title Name" name="add_products_category_type">
-                        <option hidden disabled selected>Select Category Title Name</option>
+                        <option hidden disabled selected>Select Category Type Name</option>
                         <?php
                         $sql = "SELECT * FROM categories_type";
                         $result = $database_connection->query($sql);
@@ -101,13 +101,14 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                   </div>
                </div>
 
-               <div class="form-group">
+               <!-- <div class="form-group">
                   <label for="add_products_image" class="add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                  <input type="file" name="add_products_image" id="add_products_image" class="add_products_image" multiple>
+                  <input type="file" name="add_products_image" id="add_products_image" class="add_products_image" multiple accept="image/jpeg, image/png, image/jpg">
                   <span class="invalid-feedback add_products_image_err" id="add_products_image_err">
-                     <?php echo $add_products_image_err ?>
+                     <?php // echo $add_products_image_err 
+                     ?>
                   </span>
-               </div>
+               </div> -->
 
                <div class="add_products_name_button">
                   <button type="submit" name="create_products" class="btn btn-primary mt-2 create_products" id="create_products" value="Create products">Create product</button>
@@ -178,65 +179,59 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    // when submit the new products title file
    $(document).off('submit', '#add_products_form').on('submit', '#add_products_form', function(e) {
       e.preventDefault();
-      var is_valid_name = validate_products_name();
-      var is_valid_description = validate_products_description();
-      var is_valid_title = validate_category_title();
-      var is_valid_quantity = validate_products_quantity();
-      var is_valid_price = validate_products_price();
-      var is_valid_discount = validate_products_discount();
-      if (!is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price || !is_valid_discount) {
-         return false;
-      } else {
-         var formData = $(this).serialize();
-         var parsed_response = null;
-         $.ajax({
-            type: "POST",
-            url: BASE_URL + "/admin/products/add_products/add_products_php.php",
-            data: formData,
-            success: function(response) {
-               if (response.trim() === "") {
-                  var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">Product name not saved.</div>';
-                  $('#alert_container').append(alert_message);
-                  setTimeout(function() {
-                     $('.alert').remove();
-                  }, 3000);
+
+      if ($('.add_products_discount').val().trim() === '') {
+         $('.add_products_discount').val('0');
+      }
+      var formData = $(this).serialize();
+      var parsed_response = null;
+      $.ajax({
+         type: "POST",
+         url: BASE_URL + "/admin/products/add_products/add_products_php.php",
+         data: formData,
+         success: function(response) {
+            if (response.trim() === "") {
+               var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">Product name not saved.</div>';
+               $('#alert_container').append(alert_message);
+               setTimeout(function() {
+                  $('.alert').remove();
+               }, 3000);
+            } else {
+               if (parsed_response) {
+                  parsed_response = null;
                } else {
-                  if (parsed_response) {
-                     parsed_response = null;
+                  parsed_response = JSON.parse(response);
+                  if (parsed_response.error) {
+                     var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                     $('#alert_container').append(alert_message);
+                     setTimeout(function() {
+                        $('.alert').remove();
+                     }, 3000);
                   } else {
-                     parsed_response = JSON.parse(response);
-                     if (parsed_response.error) {
-                        var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
-                        $('#alert_container').append(alert_message);
-                        setTimeout(function() {
-                           $('.alert').remove();
-                        }, 3000);
-                     } else {
-                        $.ajax({
-                           url: BASE_URL + '/admin/products/products.php',
-                           type: 'GET',
-                           success: function(data) {
-                              $(".container").empty();
-                              $('.container').html(data);
-                              var alert_message = '<div class="alert alert-success products_success_dismissible" role="alert">' + parsed_response.success + '</div>';
-                              $('#alert_container').append(alert_message);
-                              setTimeout(function() {
-                                 $('.alert').remove();
-                              }, 2000);
-                           },
-                           error: function(xhr, status, error) {
-                              console.log(error);
-                           }
-                        });
-                     }
+                     $.ajax({
+                        url: BASE_URL + '/admin/products/products.php',
+                        type: 'GET',
+                        success: function(data) {
+                           $(".container").empty();
+                           $('.container').html(data);
+                           var alert_message = '<div class="alert alert-success products_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                           $('#alert_container').append(alert_message);
+                           setTimeout(function() {
+                              $('.alert').remove();
+                           }, 2000);
+                        },
+                        error: function(xhr, status, error) {
+                           console.log(error);
+                        }
+                     });
                   }
                }
-            },
-            error: function(xhr, status, error) {
-               console.log("Error" + error);
             }
-         });
-      }
+         },
+         error: function(xhr, status, error) {
+            console.log("Error" + error);
+         }
+      });
    });
 
    // when click on the new products title input field
@@ -247,6 +242,9 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
       var is_valid_quantity = validate_products_quantity();
       var is_valid_price = validate_products_price();
       var is_valid_discount = validate_products_discount();
+      if ($('.add_products_discount').val().trim() === '') {
+         $('.add_products_discount').val('0');
+      }
       if (!is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price || !is_valid_discount) {
          return false;
       }
