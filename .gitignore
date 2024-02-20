@@ -1,3 +1,4 @@
 .env
 .vscode
 .htaccess
+/public/assets/product_images

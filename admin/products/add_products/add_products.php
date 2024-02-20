@@ -35,7 +35,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                </div>
 
                <div class="form-group products_category_type_and_quantity">
-                  <div class="form-group me-3 col-6">
+                  <div class="form-group me-2 col-6">
                      <label for="add_products_category_type" class="add_product_caegory_type mt-2 mb-2">Category Type
                         <span class="important_mark">*</span></label>
                      <select class="form-select add_products_category_type" id="add_products_category_type" aria-label="Select products Title Name" name="add_products_category_type">
@@ -72,7 +72,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                </div>
 
                <div class="form-group products_price_and_discount">
-                  <div class="form-group me-3 col-6">
+                  <div class="form-group me-2 col-6">
                      <label for="add_products_price" class="add_product_price mt-2 mb-2">Price <span class="important_mark">*</span></label>
                      <div class="input-group mb-2">
                         <div class="input-group-prepend">
@@ -103,11 +103,12 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
 
                <div class="form-group">
                   <label for="add_products_image" class="add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                  <input type="file" name="add_products_image[]" id="add_products_image" class="add_products_image" multiple accept="image/jpeg, image/png, image/jpg">
+                  <input type="file" name="add_products_image[]" id="add_products_image" class="add_products_image" multiple accept="image/jpeg, image/png, image/jpg" onchange="upload_preview_images(event)">
                   <span class="invalid-feedback add_products_image_err" id="add_products_image_err">
                      <?php echo $add_products_image_err
                      ?>
                   </span>
+                  <div id="uploaded_image_preview"></div>
                </div>
 
                <div class="add_products_name_button">
@@ -294,4 +295,23 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
       e.preventDefault();
       back_button_in_products_add_page('/admin/products/products.php', e);
    });
+
+   /*--------------------------------------------------------------- Uploaded image preview ----------------------------------------------------------------------------*/
+   function upload_preview_images(event) {
+      var preview = document.getElementById('uploaded_image_preview');
+      preview.innerHTML = '';
+      if (event.target.files) {
+         [...event.target.files].forEach(function(file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+               var img = document.createElement('img');
+               img.src = e.target.result;
+               img.style.maxWidth = '9rem';
+               img.style.marginRight = '10px';
+               preview.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+         });
+      }
+   }
 </script>

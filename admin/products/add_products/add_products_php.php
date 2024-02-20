@@ -79,7 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $image_file_names = explode(',', $_POST["image_file_names"]);
             $image_paths = array();
             foreach ($image_file_names as $key => $image_name) {
-               $target_path = dirname(__DIR__, 3) . '/public/assets/product_images/' . $image_name;
+               $image_directory = dirname(__DIR__, 3) . '/public/assets/product_images/';
+               if (!file_exists($image_directory)) {
+                  mkdir($image_directory, 0777, true);
+                  chmod($image_directory, 0777);
+               }
+               $target_path = $image_directory . $image_name;
+
                if (move_uploaded_file($_FILES["add_products_image"]["tmp_name"][$key], $target_path)) {
                   $image_paths[] = $target_path;
                   $insert_image_sql = "INSERT INTO product_image (name, products_id, path) VALUES (?, ?, ?)";

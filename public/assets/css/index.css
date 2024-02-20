@@ -48,10 +48,11 @@ li {
 .role_success_dismissible,
 .role_delete_alert_dismissible, 
 .user_delete_alert_dismissible, 
-.role_update_alert_dismissible, 
-.role_update_success_dismissible,
+.role_update_alert_dismissible, /* toggle button in user table */ 
+.role_update_success_dismissible, /* toggle button in user table */
 .products_alert_dismissible,
-.products_success_dismissible {
+.products_success_dismissible,
+.products_delete_alert_dismissible {
   font-size: 15px;
   position: absolute;
   right: 9px;
@@ -92,14 +93,26 @@ li {
 
 .category_section_page,
 .category_title_action,
-.category_header_page,
-.category_header_action,
 .category_types_action,
 .users_detail_page_action,
 .roles_action,
-.roles_title,
 .products_action {
   display: flex;
+  position: absolute;
+  margin-top: -0.75rem;
+}
+
+.category_header_action{
+  display: flex;
+  position: absolute;
+}
+
+.users_detail_toogle_button {
+  margin-top: 5px;
+}
+
+.table > :not(caption) > * > td {
+  border-bottom-width: 0px !important;
 }
 
 .category_title_heading,
@@ -134,7 +147,8 @@ li {
 .edit_category_header,
 .users_detail_page,
 .roles_title,
-.add_products {
+.add_products,
+.edit_products {
   display: flex;
   justify-content: space-between;
   padding: 0 1% 1%;
@@ -166,7 +180,8 @@ li {
 .add_role_back_button,
 .edit_role_back_button,
 .products_back_button,
-.add_products_back_button {
+.add_products_back_button, 
+.edit_products_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -201,7 +216,8 @@ li {
 .add_category_types_name_button,
 .add_role_name_button,
 .edit_role_name_button,
-.add_products_name_button {
+.add_products_name_button, 
+.edit_products_name_button {
   text-align: center;
 }
 
@@ -215,7 +231,8 @@ li {
   margin-left: 36%;
 }
 
-.add_products_name{
+.add_products_name, 
+.edit_products_name {
   width: 50%;
   margin-left: 25%;
 }
@@ -254,6 +271,10 @@ li {
   border-radius: 0;
   border-top-left-radius: 0.375rem;
   border-bottom-left-radius: 0.375rem;
+}
+
+.product_discount_centered{
+  text-align: center;
 }
 
 .percentage_sign{

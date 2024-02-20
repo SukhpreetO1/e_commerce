@@ -22,9 +22,9 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                   <th scope="col">Name</th>
                   <th scope="col">Description</th>
                   <th scope="col">Category Type</th>
-                  <th scope="col">Category Inventory</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Discount</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price (in ₹)/ piece</th>
+                  <th scope="col">Discount (in %)</th>
                   <th scope="col">Created At</th>
                   <th scope="col">Updated At</th>
                   <th scope="col">Action</th>
@@ -32,7 +32,9 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
             </thead>
             <tbody>
                <?php
-               $query = "SELECT * FROM products";
+               $query = "SELECT products.*, categories_type.id as categories_type_id, categories_type.name as categories_type_name
+               FROM products 
+               JOIN categories_type ON products.categories_type_id = categories_type.id";
                $result = mysqli_query($database_connection, $query);
 
                while ($products_data = mysqli_fetch_assoc($result)) {
@@ -45,19 +47,22 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                         <?php echo $products_data['name']; ?>
                      </td>
                      <td>
-                        <?php echo $products_data['description']; ?>
+                        <?php
+                        $limited_description = substr($products_data['description'], 0, 6) . '...';
+                        echo $limited_description;
+                        ?>
                      </td>
                      <td>
-                        <?php echo $products_data['categories_type_id']; ?>
+                        <?php echo $products_data['categories_type_name']; ?>
                      </td>
                      <td>
-                        <?php echo $products_data['category_inventory_id']; ?>
+                        <?php echo $products_data['quantity']; ?>
                      </td>
                      <td>
                         <?php echo $products_data['price']; ?>
                      </td>
-                     <td>
-                        <?php echo $products_data['discount_id']; ?>
+                     <td class="<?php echo ($products_data['discount'] == 0) ? 'product_discount_centered' : ''; ?>">
+                        <?php echo ($products_data['discount'] == 0) ? '-' : $products_data['discount']; ?>
                      </td>
                      <td>
                         <?php echo date('d-m-Y', strtotime($products_data['created_at'])); ?>
@@ -67,7 +72,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                      </td>
                      <td>
                         <div class="products_action">
-                           <input type="hidden" name="category_id" class="category_id" id="category_id" value="<?php echo $products_data['id']; ?>">
+                           <input type="hidden" name="product_id" class="product_id" id="product_id" value="<?php echo $products_data['id']; ?>">
                            <div class="products_edit">
                               <i class="fa-regular fa-pen-to-square"></i>
                            </div>
@@ -109,10 +114,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    });
 
    /*--------------------------------------------------------------- Click on Edit Button JS ----------------------------------------------------------------------------*/
-   function products_edit_icon(url, category_id) {
+   function products_edit_icon(url, product_id) {
       $.ajax({
          type: 'GET',
-         url: BASE_URL + url + '?category_id=' + category_id,
+         url: BASE_URL + url + '?product_id=' + product_id,
          success: function(data) {
             $(".container").empty();
             $('.container').html(data);
@@ -126,8 +131,8 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    // redirection ajax for adding the category title
    $(document).off('click', '.products_edit').on('click', '.products_edit', function(e) {
       e.preventDefault();
-      var category_id = $(this).siblings('.category_id').val();
-      products_edit_icon('/admin/products/edit_products/edit_products.php', category_id);
+      var product_id = $(this).siblings('.product_id').val();
+      products_edit_icon('/admin/products/edit_products/edit_products.php', product_id);
    });
 
    /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
@@ -161,7 +166,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    });
 
    /*--------------------------------------------------------------- Delete Button JS on ADD PAGES ----------------------------------------------------------------------------*/
-   function products_delete_button(url, category_id) {
+   function products_delete_button(url, product_id) {
       Swal.fire({
          title: 'Are you sure?',
          text: "You won't be able to revert this!",
@@ -175,7 +180,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
             var parsed_response = null;
             $.ajax({
                type: 'DELETE',
-               url: BASE_URL + url + '?category_id=' + category_id,
+               url: BASE_URL + url + '?product_id=' + product_id,
                success: function(response) {
                   if (parsed_response) {
                      parsed_response = null;
@@ -218,7 +223,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    // redirection ajax for delete button the category title
    $(document).on('click', '.products_delete', function(e) {
       e.preventDefault();
-      var category_id = $(this).siblings('.category_id').val();
-      products_delete_button('/admin/products/delete_category/delete_products.php', category_id);
+      var product_id = $(this).siblings('.product_id').val();
+      products_delete_button('/admin/products/delete_products/delete_products.php', product_id);
    });
 </script>
