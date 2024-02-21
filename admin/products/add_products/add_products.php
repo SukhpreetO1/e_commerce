@@ -164,12 +164,12 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
 
    function validate_products_quantity() {
       var product_quantity = $('.add_products_quantity').val();
-      return validate_input(product_quantity, /^\s*\d+\s*$/, 'Product quantity is required.', 'Only numbers are allowed.', null, '.add_products_quantity_err');
+      return validate_input(product_quantity, /^(?!0+(\.\d+)?$)\d+$/, 'Product quantity is required.', 'Only numbers are allowed and must start from 1 without decimal.', null, '.add_products_quantity_err');
    }
 
    function validate_products_price() {
       var product_price = $('.add_products_price').val();
-      return validate_input(product_price, /^\d+(\.\d+)?$/, 'Product price is required.', 'Only numbers are allowed.', null, '.add_products_price_err');
+      return validate_input(product_price, /^(?!0+(\.0+)?$)\d+(\.\d+)?$/, 'Product price is required.', 'Only numbers are allowed.', null, '.add_products_price_err');
    }
 
    function validate_products_discount() {

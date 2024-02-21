@@ -1,5 +1,6 @@
 <?php
 require dirname(__DIR__, 2) . "/common/config/config.php";
+include dirname(__DIR__) . "/products/product_modal/product_description_modal.php";
 ?>
 
 <div class="products_page">
@@ -73,6 +74,9 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                      <td>
                         <div class="products_action">
                            <input type="hidden" name="product_id" class="product_id" id="product_id" value="<?php echo $products_data['id']; ?>">
+                           <div class="product_info">
+                              <i class="fa-solid fa-circle-info"></i>
+                           </div>
                            <div class="products_edit">
                               <i class="fa-regular fa-pen-to-square"></i>
                            </div>
@@ -225,5 +229,21 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       e.preventDefault();
       var product_id = $(this).siblings('.product_id').val();
       products_delete_button('/admin/products/delete_products/delete_products.php', product_id);
+   });
+
+   /*--------------------------------------------------------------- Showing modal when click on info icon ----------------------------------------------------------------------------*/
+   $(document).off('click', '.product_info').on('click', '.product_info', function(e) {
+      var product_id = $(this).siblings('.product_id').val();
+      $.ajax({
+         type: 'GET',
+         url: BASE_URL + '/admin/products/product_modal/product_description_modal.php' + '?product_id=' + product_id,
+         success: function(data) {
+            $('#product_modal').html(data);
+            $('.product_modal').modal('show');
+         },
+         error: function(e) {
+            console.log(e);
+         }
+      });
    });
 </script>

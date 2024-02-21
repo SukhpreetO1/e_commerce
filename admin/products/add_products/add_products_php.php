@@ -84,14 +84,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   mkdir($image_directory, 0777, true);
                   chmod($image_directory, 0777);
                }
-               $image_name = str_replace(' ', '_', $image_name);
-               $target_path = $image_directory . $image_name;
+               $image_name_without_space = str_replace(' ', '_', $image_name);
+               $target_path = $image_directory . $image_name_without_space;
 
                if (move_uploaded_file($_FILES["add_products_image"]["tmp_name"][$key], $target_path)) {
                   $image_paths[] = $target_path;
                   $insert_image_sql = "INSERT INTO product_image (name, products_id, path) VALUES (?, ?, ?)";
                   $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
-                  mysqli_stmt_bind_param($insert_image_stmt, "sis", $image_name, $product_id, $image_name);
+                  mysqli_stmt_bind_param($insert_image_stmt, "sis", $image_name, $product_id, $image_name_without_space);
                   mysqli_stmt_execute($insert_image_stmt);
                }
             }

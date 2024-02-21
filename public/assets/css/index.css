@@ -133,8 +133,13 @@ li {
 .category_types_edit,
 .users_detail_edit,
 .roles_edit,
+.product_info,
 .products_edit {
   margin-right: 15px;
+}
+
+.products_description_in_modal{
+  word-wrap: break-word;
 }
 
 .container {
@@ -203,6 +208,7 @@ li {
 .category_types_delete:hover,
 .roles_edit:hover,
 .roles_delete:hover,
+.product_info,
 .products_edit,
 .products_delete {
   cursor: pointer;
