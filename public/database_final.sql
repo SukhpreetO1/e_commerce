@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 21, 2024 at 06:09 PM
+-- Generation Time: Feb 21, 2024 at 06:04 PM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -19,8 +19,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `e-commerce`
+-- Database: `e-commerce_2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `categories_type_id` int NOT NULL,
+  `users_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -30,7 +46,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` int NOT NULL,
-  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -54,8 +70,8 @@ INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `categories_heading` (
   `id` int NOT NULL,
-  `categories_id` int NOT NULL,
-  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `categories_id` int NOT NULL COMMENT '1 for mens, 2 for womens, 3 for kids, 4 for living, 5 for beauty',
+  `name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -89,8 +105,8 @@ INSERT INTO `categories_heading` (`id`, `categories_id`, `name`, `created_at`, `
 
 CREATE TABLE `categories_type` (
   `id` int NOT NULL,
-  `category_heading_id` int NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `categories_heading_id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -99,7 +115,7 @@ CREATE TABLE `categories_type` (
 -- Dumping data for table `categories_type`
 --
 
-INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `created_at`, `updated_at`) VALUES
+INSERT INTO `categories_type` (`id`, `categories_heading_id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 1, 'T-Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
 (2, 1, 'Casual Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
 (3, 1, 'Formal Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
@@ -158,17 +174,32 @@ INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `created_at`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int NOT NULL,
+  `cart_id` int NOT NULL,
+  `total_amount` int NOT NULL,
+  `order_date` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
   `id` int NOT NULL,
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci NOT NULL,
   `categories_type_id` int NOT NULL,
   `quantity` int NOT NULL,
-  `price` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `discount` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `price` varchar(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `discount` varchar(8) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -178,15 +209,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `categories_type_id`, `quantity`, `price`, `discount`, `created_at`, `updated_at`) VALUES
-(1, 'qwe', 'qweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeq', 2, 5, '10', '0', '2024-02-20 15:55:10', '2024-02-20 15:55:10');
+(1, 'qwe', 'qweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeq', 2, 5, '10', '0', '2024-02-20 15:55:10', '2024-02-20 15:55:10'),
+(3, 'oiuouoiuo weryt', 'adsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsdadsd', 4, 50, '50', '0', '2024-02-21 09:40:10', '2024-02-21 09:40:10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_image`
+-- Table structure for table `products_image`
 --
 
-CREATE TABLE `product_image` (
+CREATE TABLE `products_image` (
   `id` int NOT NULL,
   `name` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `products_id` int NOT NULL,
@@ -196,11 +228,16 @@ CREATE TABLE `product_image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_image`
+-- Dumping data for table `products_image`
 --
 
-INSERT INTO `product_image` (`id`, `name`, `products_id`, `path`, `created_at`, `updated_at`) VALUES
-(1, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10');
+INSERT INTO `products_image` (`id`, `name`, `products_id`, `path`, `created_at`, `updated_at`) VALUES
+(1, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10'),
+(7, 'Screenshot from 2023-10-03 18-43-46.png', 3, 'Screenshot_from_2023-10-03_18-43-46.png', '2024-02-21 09:40:10', '2024-02-21 09:40:10'),
+(8, 'Screenshot from 2023-09-28 16-53-23.png', 3, 'Screenshot_from_2023-09-28_16-53-23.png', '2024-02-21 09:40:10', '2024-02-21 09:40:10'),
+(9, 'Screenshot from 2023-09-11 14-58-14.png', 3, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-21 09:40:10', '2024-02-21 09:40:10'),
+(10, 'Screenshot from 2023-09-11 14-54-27.png', 3, 'Screenshot_from_2023-09-11_14-54-27.png', '2024-02-21 09:40:10', '2024-02-21 09:40:10'),
+(11, 'Screenshot from 2023-09-11 14-54-26.png', 3, 'Screenshot_from_2023-09-11_14-54-26.png', '2024-02-21 09:40:10', '2024-02-21 09:40:10');
 
 -- --------------------------------------------------------
 
@@ -210,7 +247,7 @@ INSERT INTO `product_image` (`id`, `name`, `products_id`, `path`, `created_at`, 
 
 CREATE TABLE `roles` (
   `id` int NOT NULL,
-  `name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -226,19 +263,38 @@ INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shipment_address`
+--
+
+CREATE TABLE `shipment_address` (
+  `id` int NOT NULL,
+  `order_id` int NOT NULL,
+  `users_id` int NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(30) NOT NULL,
+  `state` varchar(30) NOT NULL,
+  `country` varchar(25) NOT NULL,
+  `pin_code` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `first_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `last_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `first_name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
   `role_id` int NOT NULL DEFAULT '2',
-  `reset_link_token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `reset_link_token` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `reset_token_exp` datetime DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -251,9 +307,32 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `role
 (1, 'Sukhpreet', 'Singh', 'Sukhpreet9', 'ssingh77022@gmail.com', 2, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-16 19:12:26'),
 (2, 'Sukhpreet', 'Singh', 'Sukhpreet99', 'ssingh77021@gmail.com', 1, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-16 18:47:12');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `created_at` int NOT NULL,
+  `updated_at` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `categories_type_id` (`categories_type_id`),
+  ADD KEY `users_id` (`users_id`);
 
 --
 -- Indexes for table `categories`
@@ -273,7 +352,14 @@ ALTER TABLE `categories_heading`
 --
 ALTER TABLE `categories_type`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `category_heading_id` (`category_heading_id`);
+  ADD KEY `category_heading_id` (`categories_heading_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_items_id` (`cart_id`);
 
 --
 -- Indexes for table `products`
@@ -283,9 +369,9 @@ ALTER TABLE `products`
   ADD KEY `categories_type_id` (`categories_type_id`) USING BTREE;
 
 --
--- Indexes for table `product_image`
+-- Indexes for table `products_image`
 --
-ALTER TABLE `product_image`
+ALTER TABLE `products_image`
   ADD PRIMARY KEY (`id`),
   ADD KEY `products_id` (`products_id`);
 
@@ -294,6 +380,14 @@ ALTER TABLE `product_image`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipment_address`
+--
+ALTER TABLE `shipment_address`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `users_id` (`users_id`);
 
 --
 -- Indexes for table `users`
@@ -305,8 +399,22 @@ ALTER TABLE `users`
   ADD KEY `role_id` (`role_id`);
 
 --
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -327,16 +435,22 @@ ALTER TABLE `categories_type`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `product_image`
+-- AUTO_INCREMENT for table `products_image`
 --
-ALTER TABLE `product_image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `products_image`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -345,14 +459,34 @@ ALTER TABLE `roles`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `shipment_address`
+--
+ALTER TABLE `shipment_address`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `fk_order_table_categories_type_id` FOREIGN KEY (`categories_type_id`) REFERENCES `categories_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_order_table_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_order_table_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `categories_heading`
@@ -365,8 +499,14 @@ ALTER TABLE `categories_heading`
 -- Constraints for table `categories_type`
 --
 ALTER TABLE `categories_type`
-  ADD CONSTRAINT `categories_type_ibfk_1` FOREIGN KEY (`category_heading_id`) REFERENCES `categories_heading` (`id`),
-  ADD CONSTRAINT `fk_category_heading` FOREIGN KEY (`category_heading_id`) REFERENCES `categories_heading` (`id`);
+  ADD CONSTRAINT `categories_type_ibfk_1` FOREIGN KEY (`categories_heading_id`) REFERENCES `categories_heading` (`id`),
+  ADD CONSTRAINT `fk_category_heading` FOREIGN KEY (`categories_heading_id`) REFERENCES `categories_heading` (`id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `products`
@@ -375,10 +515,16 @@ ALTER TABLE `products`
   ADD CONSTRAINT `fk_categories_type` FOREIGN KEY (`categories_type_id`) REFERENCES `categories_type` (`id`);
 
 --
--- Constraints for table `product_image`
+-- Constraints for table `products_image`
 --
-ALTER TABLE `product_image`
+ALTER TABLE `products_image`
   ADD CONSTRAINT `fk_product_id` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
+
+--
+-- Constraints for table `shipment_address`
+--
+ALTER TABLE `shipment_address`
+  ADD CONSTRAINT `fk_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `users`
@@ -386,6 +532,13 @@ ALTER TABLE `product_image`
 ALTER TABLE `users`
   ADD CONSTRAINT `fk_roles` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `fk_wishlist_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_wishlist_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
