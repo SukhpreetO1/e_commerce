@@ -20,12 +20,12 @@ include dirname(__DIR__, 2) . "/category_types/add_category_types/add_category_t
                   <select class="form-select add_category_title_input_title" id="add_category_title_input_title" aria-label="Select Category Title Name" name="add_category_title_input_title">
                      <option hidden disabled selected>Select Category Title Name</option>
                      <?php
-                     $sql = "SELECT * FROM clothes_categories";
+                     $sql = "SELECT * FROM categories";
                      $result = $database_connection->query($sql);
                      if ($result->num_rows > 0) {
-                        while ($clothes_categories_data = $result->fetch_assoc()) {
+                        while ($categories_data = $result->fetch_assoc()) {
                      ?>
-                           <option value="<?php echo $clothes_categories_data['id']; ?>"><?php echo $clothes_categories_data['name']; ?></option>
+                           <option value="<?php echo $categories_data['id']; ?>"><?php echo $categories_data['name']; ?></option>
                      <?php
                         }
                      }

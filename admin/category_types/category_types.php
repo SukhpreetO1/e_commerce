@@ -29,10 +29,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
             </thead>
             <tbody>
                <?php
-               $query = "SELECT categories_type.*, categories_heading.id as categories_heading_id, categories_heading.name as categories_heading_name, categories_heading.clothes_category_id as categories_heading_clothes_category_id, clothes_categories.id as clothes_categories_id, clothes_categories.name as clothes_categories_name
+               $query = "SELECT categories_type.*, categories_heading.id as categories_heading_id, categories_heading.name as categories_heading_name, categories_heading.categories_id as categories_heading_categories_id, categories.id as categories_id, categories.name as categories_name
                FROM categories_type
                JOIN categories_heading ON categories_type.category_heading_id = categories_heading.id
-               JOIN clothes_categories ON categories_heading.clothes_category_id = clothes_categories.id";
+               JOIN categories ON categories_heading.categories_id = categories.id";
                $result = mysqli_query($database_connection, $query);
 
                while ($category_data = mysqli_fetch_assoc($result)) {
@@ -42,7 +42,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                         <?php echo $category_data['id']; ?>
                      </td>
                      <td>
-                        <?php echo $category_data['clothes_categories_name']; ?>
+                        <?php echo $category_data['categories_name']; ?>
                      </td>
                      <td>
                         <?php echo $category_data['categories_heading_name']; ?>

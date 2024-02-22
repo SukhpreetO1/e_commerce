@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $update_category_title_input_name = trim($_POST["edit_category_title_input_name"]);
       $edit_category_id = trim($_POST["edit_category_id"]);
 
-      $check_sql = "SELECT clothes_categories WHERE name = ? WHERE id = $edit_category_id";
-      $update_sql = "UPDATE clothes_categories SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
+      $check_sql = "SELECT categories WHERE name = ? WHERE id = $edit_category_id";
+      $update_sql = "UPDATE categories SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
       mysqli_stmt_bind_param($check_stmt, "si", $update_category_title_input_name, $edit_category_id);

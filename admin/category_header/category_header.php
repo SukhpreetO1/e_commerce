@@ -28,15 +28,15 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT categories_heading.*, clothes_categories.id as clothes_categories_id, clothes_categories.name as clothes_categories_name, clothes_categories.created_at as clothes_categories_created_at, clothes_categories.updated_at as clothes_categories_updated_at
+                    $query = "SELECT categories_heading.*, categories.id as categories, categories.name as categories_name, categories.created_at as categories_created_at, categories.updated_at as categories_updated_at
                     FROM categories_heading
-                    JOIN clothes_categories ON categories_heading.clothes_category_id = clothes_categories.id;";
+                    JOIN categories ON categories_heading.categories_id = categories.id;";
                     $result = mysqli_query($database_connection, $query);
                     while ($category_data = mysqli_fetch_assoc($result)) {
                     ?>
                         <tr>
                             <td><?php echo $category_data['id']; ?></td>
-                            <td><?php echo $category_data['clothes_categories_name']; ?></td>
+                            <td><?php echo $category_data['categories_name']; ?></td>
                             <td><?php echo $category_data['name']; ?></td>
                             <td><?php echo date('d-m-Y', strtotime($category_data['created_at'])); ?></td>
                             <td><?php echo date('d-m-Y', strtotime($category_data['updated_at'])); ?></td>

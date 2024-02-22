@@ -1,14 +1,14 @@
 <?php
 
 $query = "SELECT 
-cc.id AS clothes_categories_id,
+cc.id AS categories_id,
 cc.name AS name,
 cc.created_at AS created_at,
 cc.updated_at AS updated_at,
 JSON_ARRAYAGG(
     JSON_OBJECT(
         'category_header_id', ch.id,
-        'clothes_categories_id', ch.clothes_category_id,
+        'categories_id', ch.clothes_category_id,
         'name', ch.name,
         'created_at', ch.created_at,
         'updated_at', ch.updated_at,
@@ -27,7 +27,7 @@ JSON_ARRAYAGG(
     )
 ) AS category_header
 FROM 
-clothes_categories cc
+categories cc
 LEFT JOIN 
 categories_heading ch ON cc.id = ch.clothes_category_id
 GROUP BY 

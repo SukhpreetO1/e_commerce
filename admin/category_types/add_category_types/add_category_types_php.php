@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $add_category_types_input_name)) {
       $add_category_types_name_err = "Only alphabets are allowed.";
    } else {
-      $check_sql = "SELECT * FROM clothes_categories WHERE name = ?";
-      $insert_sql = "INSERT INTO clothes_categories (name) VALUES (?)";
+      $check_sql = "SELECT * FROM categories WHERE name = ?";
+      $insert_sql = "INSERT INTO categories (name) VALUES (?)";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
       mysqli_stmt_bind_param($check_stmt, "s", $add_category_types_input_name);

@@ -6,7 +6,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
     <div class="alert_container" id="alert_container"></div>
     <div class="container">
         <div class="category_title_heading">
-            <h2>Category Title</h2>
+            <h2>Category</h2>
         </div>
 
         <div class="add_category_title">
@@ -27,7 +27,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM clothes_categories";
+                    $query = "SELECT * FROM categories";
                     $result = mysqli_query($database_connection, $query);
 
                     while ($category_data = mysqli_fetch_assoc($result)) {

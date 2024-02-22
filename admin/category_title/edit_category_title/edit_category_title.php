@@ -6,7 +6,7 @@ include dirname(__DIR__, 2) . "/category_title/edit_category_title/edit_category
     <div class="alert_container" id="alert_container"></div>
     <div class="container">
         <div class="category_title_heading">
-            <h2>Edit Category Title</h2>
+            <h2>Edit Category</h2>
         </div>
 
         <div class="edit_category_title">
@@ -16,7 +16,7 @@ include dirname(__DIR__, 2) . "/category_title/edit_category_title/edit_category
         <?php
         $id = $_GET['category_id'];
 
-        $sql = "SELECT * FROM clothes_categories WHERE id = $id";
+        $sql = "SELECT * FROM categories WHERE id = $id";
         $result = $database_connection->query($sql);
 
         if ($result->num_rows > 0) {

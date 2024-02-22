@@ -22,7 +22,7 @@ include dirname(__DIR__, 2) . "/category_header/add_category_header/add_category
                         <select class="form-select add_category_header_input_title" id="add_category_header_input_title" aria-label="Select Category Title Name" name="add_category_header_input_title">
                             <option hidden disabled selected>Select Category Title Name</option>
                             <?php
-                            $sql = "SELECT * FROM clothes_categories";
+                            $sql = "SELECT * FROM categories";
                             $result = $database_connection->query($sql);
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {

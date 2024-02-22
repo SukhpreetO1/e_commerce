@@ -23,7 +23,7 @@ include dirname(__DIR__, 2) . "/category_header/edit_category_header/edit_catego
 
       if ($result->num_rows > 0) {
          while ($getting_data = $result->fetch_assoc()) {
-            $selectedCategoryId = $getting_data["clothes_category_id"];
+            $selectedCategoryId = $getting_data["categories_id"];
 
       ?>
             <div class="edit_category_header_names">
@@ -34,7 +34,7 @@ include dirname(__DIR__, 2) . "/category_header/edit_category_header/edit_catego
                         <select class="form-select edit_category_header_input_title" id="edit_category_header_input_title" aria-label="Select Category Title Name" name="edit_category_header_input_title">
                            <option hidden disabled selected>Select Category Title Name</option>
                            <?php
-                           $sql = "SELECT * FROM clothes_categories";
+                           $sql = "SELECT * FROM categories";
                            $result = $database_connection->query($sql);
                            if ($result->num_rows > 0) {
                               while ($row = $result->fetch_assoc()) {
