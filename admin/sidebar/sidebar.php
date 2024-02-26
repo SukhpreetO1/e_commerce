@@ -16,6 +16,11 @@
                 </a>
             </li>
             <li>
+                <a href="#" class="nav-link link-dark discount">
+                    Discount
+                </a>
+            </li>
+            <li>
                 <a href="#" class="nav-link link-dark products">
                     Products
                 </a>

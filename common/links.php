@@ -23,3 +23,8 @@
 
 <!-- sweetalerts js cdn -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<!-- date range js cdn -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.js"></script>

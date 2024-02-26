@@ -52,7 +52,14 @@ li {
 .role_update_success_dismissible, /* toggle button in user table */
 .products_alert_dismissible,
 .products_success_dismissible,
-.products_delete_alert_dismissible {
+.products_delete_alert_dismissible,
+.add_discount_alert_dismissible, 
+.add_discount_success_dismissible,
+.discount_delete_alert_dismissible,
+.discount_update_alert_dismissible,
+.discount_update_success_dismissible,
+.edit_discount_alert_dismissible,
+.edit_discount_success_dismissible {
   font-size: 15px;
   position: absolute;
   right: 9px;
@@ -62,8 +69,8 @@ li {
 
 .logged_in_alert_dismissible,
 .role_alert_dismissible,
-.user_delete_alert_dismissible, 
-.role_update_alert_dismissible, 
+.user_delete_alert_dismissible,
+.role_update_alert_dismissible,
 .role_update_success_dismissible {
   width: 15rem;
 }
@@ -77,13 +84,20 @@ li {
 .role_success_dismissible,
 .role_delete_alert_dismissible,
 .products_alert_dismissible,
-.products_success_dismissible {
+.products_success_dismissible,
+.add_discount_alert_dismissible,
+.add_discount_success_dismissible{
   width: 18rem;
 }
 
 .category_header_delete_alert_dismissible,
 .category_header_alert_dismissible,
-.category_header_success_dismissible {
+.category_header_success_dismissible,
+.discount_update_alert_dismissible,
+.discount_update_success_dismissible,
+.discount_delete_alert_dismissible,
+.edit_discount_alert_dismissible,
+.edit_discount_success_dismissible  {
   width: 20rem;
 }
 
@@ -95,18 +109,20 @@ li {
 .category_types_action,
 .users_detail_page_action,
 .roles_action,
-.products_action {
+.products_action,
+.discount_action {
   display: flex;
   position: absolute;
   margin-top: -0.75rem;
 }
 
-.category_header_action{
+.category_header_action {
   display: flex;
   position: absolute;
 }
 
-.users_detail_toogle_button {
+.users_detail_toogle_button, 
+.discount_toogle_button {
   margin-top: 5px;
 }
 
@@ -120,7 +136,8 @@ li {
 .category_types_heading,
 .users_detail_heading,
 .roles_heading,
-.edit_role_heading, 
+.edit_role_heading,
+.discount_heading,
 .products_heading {
   text-align: center;
   margin: 1% 0% 0;
@@ -133,11 +150,13 @@ li {
 .users_detail_edit,
 .roles_edit,
 .product_info,
-.products_edit {
+.products_edit,
+.discount_edit,
+.discount_toogle_button {
   margin-right: 15px;
 }
 
-.products_description_in_modal{
+.products_description_in_modal {
   word-wrap: break-word;
 }
 
@@ -152,7 +171,8 @@ li {
 .users_detail_page,
 .roles_title,
 .add_products,
-.edit_products {
+.edit_products,
+.add_discount {
   display: flex;
   justify-content: space-between;
   padding: 0 1% 1%;
@@ -163,7 +183,8 @@ li {
 .category_types_plus_icon,
 .users_detail_plus_icon,
 .roles_plus_icon,
-.products_plus_icon {
+.products_plus_icon,
+.discount_plus_icon {
   font-size: 1.5rem;
   border: 1px solid;
   border-radius: 51%;
@@ -184,8 +205,12 @@ li {
 .add_role_back_button,
 .edit_role_back_button,
 .products_back_button,
-.add_products_back_button, 
-.edit_products_back_button {
+.add_products_back_button,
+.edit_products_back_button,
+.discount_back_button,
+.discount_plus_icon,
+.add_discount_back_button,
+.edit_discount_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -209,7 +234,9 @@ li {
 .roles_delete:hover,
 .product_info,
 .products_edit,
-.products_delete {
+.products_delete,
+.discount_edit:hover,
+.discount_delete:hover {
   cursor: pointer;
 }
 
@@ -221,8 +248,10 @@ li {
 .add_category_types_name_button,
 .add_role_name_button,
 .edit_role_name_button,
-.add_products_name_button, 
-.edit_products_name_button {
+.add_products_name_button,
+.edit_products_name_button,
+.add_discount_name_button,
+.edit_discount_name_button {
   text-align: center;
 }
 
@@ -248,14 +277,16 @@ li {
   margin-left: 36%;
 }
 
-.add_products_name, 
-.edit_products_name {
+.add_products_name,
+.edit_products_name,
+.add_discount_name,
+.edit_discount_name {
   width: 50%;
   margin-left: 25%;
 }
 
 .products_category_type_and_quantity,
-.products_price_and_discount{
+.products_price_and_discount {
   display: flex;
   width: 98%;
 }
@@ -274,7 +305,17 @@ li {
 #add_products_quantity_err,
 #add_products_price_err,
 #add_products_discount_err,
-#add_products_image_err {
+#add_products_image_err,
+#add_discount_code_name_err,
+#add_discount_discount_type_err,
+#add_discount_active_inactive_err,
+#add_discount_price_err,
+#add_discount_expire_date_err,
+#edit_discount_code_name_err,
+#edit_discount_discount_type_err,
+#edit_discount_active_inactive_err,
+#edit_discount_price_err,
+#edit_discount_expire_date_err {
   display: block;
   text-align: start;
 }
@@ -283,18 +324,27 @@ li {
   color: red;
 }
 
-.indian_rupee_sign{
+.indian_rupee_sign {
   height: 116%;
   border-radius: 0;
   border-top-left-radius: 0.375rem;
   border-bottom-left-radius: 0.375rem;
 }
 
-.product_discount_centered{
+.discount_type_dropdown {
+  height: 118%;
+  border-radius: 0;
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+  border: 1px solid #bfbfbf;
+  padding: 0 0.25rem;
+}
+
+.product_discount_centered {
   text-align: center;
 }
 
-.percentage_sign{
+.percentage_sign {
   height: 116%;
   border-radius: 0;
   border-top-right-radius: 0.375rem;
@@ -315,7 +365,8 @@ li {
   height: 0;
 }
 
-.users_detail_toogle_button_role_change {
+.users_detail_toogle_button_role_change,
+.discount_toogle_button_active_change {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -327,7 +378,8 @@ li {
   transition: 0.4s;
 }
 
-.users_detail_toogle_button_role_change:before {
+.users_detail_toogle_button_role_change:before,
+.discount_toogle_button_active_change:before {
   position: absolute;
   content: "";
   height: 12px;
@@ -339,31 +391,71 @@ li {
   transition: 0.4s;
 }
 
-input:checked + .users_detail_toogle_button_role_change {
+input:checked + .users_detail_toogle_button_role_change,
+input:checked + .discount_toogle_button_active_change {
   background-color: #2196f3;
 }
 
-input:focus + .users_detail_toogle_button_role_change {
+input:focus + .users_detail_toogle_button_role_change,
+input:focus + .discount_toogle_button_active_change {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .users_detail_toogle_button_role_change:before {
+input:checked + .users_detail_toogle_button_role_change:before,
+input:checked + .discount_toogle_button_active_change:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 
 /* Rounded sliders */
-.users_detail_toogle_button_role_change {
+.users_detail_toogle_button_role_change,
+.discount_toogle_button_active_change {
   border-radius: 34px;
 }
 
-.users_detail_toogle_button_role_change:before {
+.users_detail_toogle_button_role_change:before,
+.discount_toogle_button_active_change:before {
   border-radius: 50%;
 }
 
 .placeholder_grey {
   color: grey;
+}
+
+div#ui-datepicker-div {
+  background-color: white;
+  border: 1px solid #cbcbcb;
+  width: 15rem;
+  display: none;
+}
+
+a.ui-state-default,
+a.ui-datepicker-next.ui-corner-all,
+.ui-datepicker-prev.ui-corner-all {
+  color: black;
+  text-decoration: none;
+  padding: 7px;
+}
+
+a.ui-datepicker-next.ui-corner-all:hover,
+.ui-datepicker-prev.ui-corner-all:hover {
+  cursor: pointer;
+}
+
+.ui-datepicker-calendar > thead > tr > th {
+  padding: 0 6px;
+}
+
+.ui-datepicker-title {
+  text-align: end;
+  padding-right: 10px;
+}
+
+a.ui-datepicker-next.ui-corner-all {
+  position: absolute;
+  right: 0;
+  top: -7px;
 }
 
 @media screen and (max-width: 825px) {

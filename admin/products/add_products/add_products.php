@@ -21,7 +21,6 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                   <input type="text" name="add_products_input_name" class="form-control add_products_input_name" id="add_products_input_name">
                   <span class="invalid-feedback add_products_name_err" id="add_products_name_err">
                      <?php echo $add_products_name_err ?>
-                     </php>
                   </span>
                </div>
 
@@ -30,7 +29,6 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                   <textarea type="text" name="add_products_description" class="form-control add_products_description" id="add_products_description" rows="3"></textarea>
                   <span class="invalid-feedback add_products_description_err" id="add_products_description_err">
                      <?php echo $add_products_description_err ?>
-                     </php>
                   </span>
                </div>
 
@@ -66,7 +64,6 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                      <input type="text" name="add_products_quantity" class="form-control add_products_quantity" id="add_products_quantity">
                      <span class="invalid-feedback add_products_quantity_err" id="add_products_quantity_err">
                         <?php echo $add_products_quantity_err ?>
-                        </php>
                      </span>
                   </div>
                </div>
@@ -82,7 +79,6 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                      </div>
                      <span class="invalid-feedback add_products_price_err" id="add_products_price_err">
                         <?php echo $add_products_price_err ?>
-                        </php>
                      </span>
                   </div>
 
@@ -96,7 +92,6 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                      </div>
                      <span class="invalid-feedback add_products_discount_err" id="add_products_discount_err">
                         <?php echo $add_products_discount_err ?>
-                        </php>
                      </span>
                   </div>
                </div>

@@ -38,10 +38,16 @@ $(document).on('click', '.dashboard', function (e) {
     handle_ajax_redirection('/admin/homepage/dashboard/dashboard.php');
 });
 
-// redirection ajax when click on dashboard
+// redirection ajax when click on products
 $(document).on('click', '.products', function (e) {
     e.preventDefault();
     handle_ajax_redirection('/admin/products/products.php');
+});
+
+// redirection ajax when click on discount
+$(document).on('click', '.discount', function (e) {
+    e.preventDefault();
+    handle_ajax_redirection('/admin/discount/discount.php');
 });
 
 // redirection ajax for the user detials

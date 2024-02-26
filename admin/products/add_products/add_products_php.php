@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (mysqli_stmt_num_rows($check_stmt) > 0) {
          $response['error'] = "Product name already exists in this category.";
       } else {
-         $insert_sql = "INSERT INTO products (name, description, categories_type_id, quantity, price, discount) VALUES (?, ?, ?, ?, ?, ?)";
+         $insert_sql = "INSERT INTO products (name, description, categories_type_id, quantity, price, discount_id) VALUES (?, ?, ?, ?, ?, ?)";
          $insert_stmt = mysqli_prepare($database_connection, $insert_sql);
          mysqli_stmt_bind_param($insert_stmt, "ssiiii", $add_products_input_name, $add_products_description, $add_products_category_type, $add_products_quantity, $add_products_price, $add_products_discount);
          mysqli_stmt_execute($insert_stmt);
