@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $add_products_category_type = trim($_POST["add_products_category_type"]);
    $add_products_quantity = trim($_POST["add_products_quantity"]);
    $add_products_price = trim($_POST["add_products_price"]);
-   $add_products_discount = trim($_POST["add_products_discount"]);
+   $add_products_discount = trim($_POST["add_products_discount"] ? $_POST["add_products_discount"] : 1);
 
    $errors = array();
 
@@ -48,11 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    // Validation for Product Price
    if (!preg_match('/^\d+(\.\d+)?$/', $add_products_price)) {
       $errors['add_products_price'] = 'Product price is required and should contain only numbers.';
-   }
-
-   // Validation for Product Discount
-   if (!preg_match('/^\d+$/', $add_products_discount)) {
-      $errors['add_products_discount'] = 'Product discount should contain only numbers.';
    }
 
    if (empty($errors)) {

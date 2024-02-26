@@ -1,6 +1,5 @@
 <?php
 require dirname(__DIR__, 2) . "/common/config/config.php";
-include dirname(__DIR__) . "/products/product_modal/product_description_modal.php";
 ?>
 
 <div class="products_page">
@@ -25,7 +24,7 @@ include dirname(__DIR__) . "/products/product_modal/product_description_modal.ph
                   <th scope="col">Category Type</th>
                   <th scope="col">Quantity</th>
                   <th scope="col">Price (in ₹)/ piece</th>
-                  <th scope="col">Discount (in %)</th>
+                  <th scope="col">Discount</th>
                   <th scope="col">Created At</th>
                   <th scope="col">Updated At</th>
                   <th scope="col">Action</th>
@@ -33,9 +32,10 @@ include dirname(__DIR__) . "/products/product_modal/product_description_modal.ph
             </thead>
             <tbody>
                <?php
-               $query = "SELECT products.*, categories_type.id as categories_type_id, categories_type.name as categories_type_name
+               $query = "SELECT products.*, categories_type.id as categories_type_id, categories_type.name as categories_type_name, discount.id as discount_id, discount.code_name as discount_code_name, discount.discount_type as discount_discount_type, discount.activate as discount_activate, discount.amount as discount_amount, discount.rupees_or_percentage as discount_rupees_or_percentage, discount.expiration_date as discount_expiration_date
                FROM products 
-               JOIN categories_type ON products.categories_type_id = categories_type.id";
+               JOIN categories_type ON products.categories_type_id = categories_type.id
+               JOIN discount ON products.discount_id = discount.id";
                $result = mysqli_query($database_connection, $query);
 
                while ($products_data = mysqli_fetch_assoc($result)) {
@@ -62,8 +62,8 @@ include dirname(__DIR__) . "/products/product_modal/product_description_modal.ph
                      <td>
                         <?php echo $products_data['price']; ?>
                      </td>
-                     <td class="<?php echo ($products_data['discount'] == 0) ? 'product_discount_centered' : ''; ?>">
-                        <?php echo ($products_data['discount'] == 0) ? '-' : $products_data['discount']; ?>
+                     <td>
+                        <?php echo ($products_data['discount_rupees_or_percentage'] == 0) ? '₹ ' . $products_data['discount_amount'] : $products_data['discount_amount'] . ' %'; ?>
                      </td>
                      <td>
                         <?php echo date('d-m-Y', strtotime($products_data['created_at'])); ?>
@@ -74,7 +74,7 @@ include dirname(__DIR__) . "/products/product_modal/product_description_modal.ph
                      <td>
                         <div class="products_action">
                            <input type="hidden" name="product_id" class="product_id" id="product_id" value="<?php echo $products_data['id']; ?>">
-                           <div class="product_info">
+                           <div class="product_info" data-bs-toggle="modal" data-bs-target="#product_modal">
                               <i class="fa-solid fa-circle-info"></i>
                            </div>
                            <div class="products_edit">
@@ -91,6 +91,20 @@ include dirname(__DIR__) . "/products/product_modal/product_description_modal.ph
                ?>
             </tbody>
          </table>
+      </div>
+   </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade product_modal" id="product_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Product Detail</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+         </div>
       </div>
    </div>
 </div>
@@ -233,15 +247,19 @@ include dirname(__DIR__) . "/products/product_modal/product_description_modal.ph
 
    /*--------------------------------------------------------------- Showing modal when click on info icon ----------------------------------------------------------------------------*/
    $(document).off('click', '.product_info').on('click', '.product_info', function(e) {
-      var product_id = $(this).siblings('.product_id').val();
+      // $('.product_info').click(function() {
+      var productId = $(this).siblings('.product_id').val();
       $.ajax({
-         type: 'GET',
-         url: BASE_URL + '/admin/products/product_modal/product_description_modal.php' + '?product_id=' + product_id,
-         success: function(data) {
-            $('#product_modal').html(data);
-            $('.product_modal').modal('show');
+         url: BASE_URL + "/admin/products/product_modal/product_description_modal.php",
+         method: 'GET',
+         data: {
+            product_id: productId
          },
-         error: function(e) {
+         success: function(response) {
+            $('.modal-body').html(response);
+            $('#product_modal').modal('show');
+         },
+         error: function() {
             console.log(e);
          }
       });

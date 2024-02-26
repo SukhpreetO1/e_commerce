@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 23, 2024 at 06:03 PM
+-- Generation Time: Feb 26, 2024 at 07:08 PM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -77,7 +77,7 @@ INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (2, 'Women', '2024-02-14 16:26:27', '2024-02-14 16:26:27'),
 (3, 'Kids', '2024-02-14 16:26:31', '2024-02-14 16:26:31'),
 (4, 'Home Living', '2024-02-14 16:26:40', '2024-02-14 16:26:40'),
-(5, 'Beauty', '2024-02-14 16:26:48', '2024-02-14 16:26:48');
+(5, 'Beauty', '2024-02-14 16:26:48', '2024-02-26 16:10:52');
 
 -- --------------------------------------------------------
 
@@ -211,9 +211,10 @@ CREATE TABLE `discount` (
   `id` int NOT NULL,
   `code_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `discount_type` varchar(80) COLLATE utf8mb4_general_ci NOT NULL,
-  `activate` int NOT NULL DEFAULT '0' COMMENT '0 for not active, 1 for active',
+  `activate` int NOT NULL COMMENT '0 for not active, 1 for active',
   `amount` int NOT NULL,
-  `expiration_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `rupees_or_percentage` int NOT NULL COMMENT '0 for ₹ and 1 for %',
+  `expiration_date` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -222,8 +223,8 @@ CREATE TABLE `discount` (
 -- Dumping data for table `discount`
 --
 
-INSERT INTO `discount` (`id`, `code_name`, `discount_type`, `activate`, `amount`, `expiration_date`, `created_at`, `updated_at`) VALUES
-(1, 'No Discount', 'No Discount', 0, 0, '2024-02-23 17:49:14', '2024-02-23 12:19:14', '2024-02-23 12:19:14');
+INSERT INTO `discount` (`id`, `code_name`, `discount_type`, `activate`, `amount`, `rupees_or_percentage`, `expiration_date`, `created_at`, `updated_at`) VALUES
+(1, 'NoDiscount', 'No Discount', 1, 0, 0, '2024-02-23', '2024-02-23 12:19:14', '2024-02-26 13:32:21');
 
 -- --------------------------------------------------------
 
@@ -287,7 +288,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `categories_type_id`, `quantity`, `price`, `discount_id`, `created_at`, `updated_at`) VALUES
-(1, 'qwe', 'qweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeq', 2, 5, '10', 1, '2024-02-20 15:55:10', '2024-02-20 15:55:10');
+(1, 'qweqweqweqweqwe', 'qweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeq', 2, 5, '10', 1, '2024-02-20 15:55:10', '2024-02-20 15:55:10');
 
 -- --------------------------------------------------------
 

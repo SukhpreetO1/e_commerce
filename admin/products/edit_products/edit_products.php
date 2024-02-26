@@ -30,7 +30,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         <input type="text" name="edit_products_input_name" class="form-control edit_products_input_name" id="edit_products_input_name" value="<?php echo $product_data["name"]; ?>">
                         <span class="invalid-feedback edit_products_name_err" id="edit_products_name_err">
                            <?php echo $edit_products_name_err ?>
-                           </php>
                         </span>
                      </div>
 
@@ -39,7 +38,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         <textarea type="text" name="edit_products_description" class="form-control edit_products_description" id="edit_products_description" rows="3"><?php echo $product_data["description"]; ?></textarea>
                         <span class="invalid-feedback edit_products_description_err" id="edit_products_description_err">
                            <?php echo $edit_products_description_err ?>
-                           </php>
                         </span>
                      </div>
 
@@ -65,7 +63,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            </select>
                            <span class="invalid-feedback edit_products_category_type_err" id="edit_products_category_type_err">
                               <?php echo $edit_products_category_type_err ?>
-                              </php>
                            </span>
                         </div>
 
@@ -74,7 +71,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            <input type="text" name="edit_products_quantity" class="form-control edit_products_quantity" id="edit_products_quantity" value="<?php echo $product_data["quantity"]; ?>">
                            <span class="invalid-feedback edit_products_quantity_err" id="edit_products_quantity_err">
                               <?php echo $edit_products_quantity_err ?>
-                              </php>
                            </span>
                         </div>
                      </div>
@@ -90,21 +86,14 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            </div>
                            <span class="invalid-feedback edit_products_price_err" id="edit_products_price_err">
                               <?php echo $edit_products_price_err ?>
-                              </php>
                            </span>
                         </div>
 
                         <div class="form-group col-6">
                            <label for="edit_products_discount" class="edit_product_discount mt-2 mb-2">Discount </label>
-                           <div class="input-group mb-2">
-                              <input type="text" name="edit_products_discount" class="form-control edit_products_discount" id="edit_products_discount" value="<?php echo $product_data["discount"]; ?>">
-                              <div class="input-group-prepend">
-                                 <div class="input-group-text percentage_sign">%</div>
-                              </div>
-                           </div>
+                           <input type="text" name="edit_products_discount" class="form-control edit_products_discount" id="edit_products_discount" value="<?php echo $product_data["discount"]; ?>">
                            <span class="invalid-feedback edit_products_discount_err" id="edit_products_discount_err">
                               <?php echo $edit_products_discount_err ?>
-                              </php>
                            </span>
                         </div>
                      </div>

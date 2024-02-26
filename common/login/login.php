@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once dirname(__DIR__) . "/session.php";
 require_once dirname(__DIR__) . '/base_url.php';
 require_once dirname(__DIR__) . "/config/config.php";

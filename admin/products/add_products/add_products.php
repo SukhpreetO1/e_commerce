@@ -34,8 +34,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
 
                <div class="form-group products_category_type_and_quantity">
                   <div class="form-group me-2 col-6">
-                     <label for="add_products_category_type" class="add_product_caegory_type mt-2 mb-2">Category Type
-                        <span class="important_mark">*</span></label>
+                     <label for="add_products_category_type" class="add_product_caegory_type mt-2 mb-2">Category Type <span class="important_mark">*</span></label>
                      <select class="form-select add_products_category_type" id="add_products_category_type" aria-label="Select products Title Name" name="add_products_category_type">
                         <option hidden disabled selected>Select Category Type Name</option>
                         <?php
@@ -50,12 +49,10 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                         <?php
                            }
                         }
-                        $database_connection->close();
                         ?>
                      </select>
                      <span class="invalid-feedback add_products_category_type_err" id="add_products_category_type_err">
                         <?php echo $add_products_category_type_err ?>
-                        </php>
                      </span>
                   </div>
 
@@ -84,12 +81,22 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
 
                   <div class="form-group col-6">
                      <label for="add_products_discount" class="add_product_discount mt-2 mb-2">Discount </label>
-                     <div class="input-group mb-2">
-                        <input type="text" name="add_products_discount" class="form-control add_products_discount" id="add_products_discount">
-                        <div class="input-group-prepend">
-                           <div class="input-group-text percentage_sign">%</div>
-                        </div>
-                     </div>
+                     <select class="form-select add_products_discount" id="add_products_discount" name="add_products_discount" style="height: 2.8rem;">
+                        <option hidden disabled selected>Select Discount</option>
+                        <?php
+                        $sql = "SELECT * FROM discount";
+                        $result = $database_connection->query($sql);
+                        if ($result->num_rows > 0) {
+                           while ($row = $result->fetch_assoc()) {
+                        ?>
+                              <option value="<?php echo $row['id']; ?>">
+                                 <?php echo $row['code_name']; ?>
+                              </option>
+                        <?php
+                           }
+                        }
+                        ?>
+                     </select>
                      <span class="invalid-feedback add_products_discount_err" id="add_products_discount_err">
                         <?php echo $add_products_discount_err ?>
                      </span>
@@ -100,8 +107,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
                   <label for="add_products_image" class="add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
                   <input type="file" name="add_products_image[]" id="add_products_image" class="add_products_image" multiple accept="image/jpeg, image/png, image/jpg" onchange="upload_preview_images(event)">
                   <span class="invalid-feedback add_products_image_err" id="add_products_image_err">
-                     <?php echo $add_products_image_err
-                     ?>
+                     <?php echo $add_products_image_err ?>
                   </span>
                   <div id="uploaded_image_preview" style="display: flex; flex-wrap: wrap;"></div>
                </div>
@@ -119,7 +125,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    /*--------------------------------------------------------------- Validation for submit button and input in add files ----------------------------------------------------------------------------*/
    function validate_input(value, validation_regex, required_error_message, format_error_message, length_error_message, selector) {
       var error_messages = '';
-      if (value.trim() === '') {
+      if (value === '') {
          error_messages = required_error_message;
       } else if (length_error_message && (value.length < 3 || value.length > 15)) {
          error_messages = length_error_message;
@@ -138,7 +144,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
    function validate_products_description() {
       var products_description = $('#add_products_description').val();
       var error_messages = '';
-      if (products_description.trim() === '') {
+      if (products_description === '') {
          error_messages = 'Product description is required.';
       } else if (products_description.length < 5) {
          error_messages = 'Product description must be greater than 5 words.';
@@ -167,18 +173,14 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
       return validate_input(product_price, /^(?!0+(\.0+)?$)\d+(\.\d+)?$/, 'Product price is required.', 'Only numbers are allowed.', null, '.add_products_price_err');
    }
 
-   function validate_products_discount() {
-      var product_discount = $('.add_products_discount').val();
-      return validate_input(product_discount, /^\d+$/, null, 'Only numbers are allowed.', null, '.add_products_discount_err');
-   }
-
    // when submit the new products title file
    $(document).off('submit', '#add_products_form').on('submit', '#add_products_form', function(e) {
       e.preventDefault();
 
-      if ($('.add_products_discount').val().trim() === '') {
-         $('.add_products_discount').val('0');
+      if ($('#add_products_discount').val() === '') {
+         $('#add_products_discount option:eq(1)').prop('selected', true);
       }
+      
       var form = this;
       var fileInput = document.getElementById('add_products_image');
       var files = fileInput.files;
@@ -198,7 +200,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
          processData: false,
          contentType: false,
          success: function(response) {
-            if (response.trim() === "") {
+            if (response === "") {
                var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">Product name not saved.</div>';
                $('#alert_container').append(alert_message);
                setTimeout(function() {
@@ -249,11 +251,10 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
       var is_valid_title = validate_category_title();
       var is_valid_quantity = validate_products_quantity();
       var is_valid_price = validate_products_price();
-      var is_valid_discount = validate_products_discount();
-      if ($('.add_products_discount').val().trim() === '') {
-         $('.add_products_discount').val('0');
+      if ($('#add_products_discount').val() === '') {
+         $('#add_products_discount option:eq(1)').prop('selected', true);
       }
-      if (!is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price || !is_valid_discount) {
+      if (!is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price) {
          return false;
       }
    });
@@ -264,8 +265,7 @@ include dirname(__DIR__, 2) . "/products/add_products/add_products_php.php";
       var is_valid_description = validate_products_description();
       var is_valid_quantity = validate_products_quantity();
       var is_valid_price = validate_products_price();
-      var is_valid_discount = validate_products_discount();
-      if (!is_valid_name || !is_valid_description || !is_valid_quantity || !is_valid_price || !is_valid_discount) {
+      if (!is_valid_name || !is_valid_description || !is_valid_quantity || !is_valid_price) {
          return false;
       }
    });
