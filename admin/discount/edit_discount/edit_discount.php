@@ -1,6 +1,5 @@
 <?php
 include dirname(__DIR__, 3) . "/common/config/config.php";
-// include dirname(__DIR__, 2) . "/discount/edit_discount/edit_discount_php.php";
 ?>
 <div class="edit_discount_page">
    <div class="alert_container" id="alert_container"></div>
@@ -187,67 +186,56 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
    // when submit the new file
    $(document).off('submit', '#edit_discount_form').on('submit', '#edit_discount_form', function(e) {
-      e.preventDefault();
-      var edit_discount_id = $('#edit_discount_id').val();
-      var is_valid_name = validate_discount_name();
-      var is_valid_description = validate_discount_type();
-      var is_valid_active_inactive = validate_active_inactive();
-      var is_valid_price = validate_discount_price();
-      var is_valid_expire_date = validate_discount_expire_date();
-      if (!is_valid_name || !is_valid_description || !is_valid_active_inactive || !is_valid_price || !is_valid_expire_date) {
-         return false;
-      } else {
-         var formData = $(this).serialize();
-         formData += "&discount_amount_type=" + $(".discount_type_dropdown").val();
-         var parsed_response = null;
-         $.ajax({
-            type: "POST",
-            url: BASE_URL + "/admin/discount/edit_discount/edit_discount_php.php" + "?edit_discount_id=" + edit_discount_id,
-            data: formData,
-            success: function(response) {
-               if (response.trim() === "") {
-                  var alert_message = '<div class="alert alert-danger edit_discount_alert_dismissible" role="alert">Discount name not saved.</div>';
-                  $('#alert_container').append(alert_message);
-                  setTimeout(function() {
-                     $('.alert').remove();
-                  }, 3000);
+      var formData = $(this).serialize();
+      formData += "&discount_amount_type=" + $(".discount_type_dropdown").val();
+      var parsed_response = null;
+      $.ajax({
+         type: "POST",
+         url: BASE_URL + "/admin/discount/edit_discount/edit_discount_php.php" + "?edit_discount_id=" + edit_discount_id,
+         data: formData,
+         success: function(response) {
+            if (response.trim() === "") {
+               var alert_message = '<div class="alert alert-danger edit_discount_alert_dismissible" role="alert">Discount name not saved.</div>';
+               $('#alert_container').append(alert_message);
+               setTimeout(function() {
+                  $('.alert').remove();
+               }, 3000);
+            } else {
+               if (parsed_response) {
+                  parsed_response = null;
                } else {
-                  if (parsed_response) {
-                     parsed_response = null;
+                  parsed_response = JSON.parse(response);
+                  if (parsed_response.error) {
+                     var alert_message = '<div class="alert alert-danger edit_discount_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                     $('#alert_container').append(alert_message);
+                     setTimeout(function() {
+                        $('.alert').remove();
+                     }, 3000);
                   } else {
-                     parsed_response = JSON.parse(response);
-                     if (parsed_response.error) {
-                        var alert_message = '<div class="alert alert-danger edit_discount_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
-                        $('#alert_container').append(alert_message);
-                        setTimeout(function() {
-                           $('.alert').remove();
-                        }, 3000);
-                     } else {
-                        $.ajax({
-                           url: BASE_URL + '/admin/discount/discount.php',
-                           type: 'GET',
-                           success: function(data) {
-                              $(".container").empty();
-                              $('.container').html(data);
-                              var alert_message = '<div class="alert alert-success edit_discount_success_dismissible" role="alert">' + parsed_response.success + '</div>';
-                              $('#alert_container').append(alert_message);
-                              setTimeout(function() {
-                                 $('.alert').remove();
-                              }, 2000);
-                           },
-                           error: function(xhr, status, error) {
-                              console.log(error);
-                           }
-                        });
-                     }
+                     $.ajax({
+                        url: BASE_URL + '/admin/discount/discount.php',
+                        type: 'GET',
+                        success: function(data) {
+                           $(".container").empty();
+                           $('.container').html(data);
+                           var alert_message = '<div class="alert alert-success edit_discount_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                           $('#alert_container').append(alert_message);
+                           setTimeout(function() {
+                              $('.alert').remove();
+                           }, 2000);
+                        },
+                        error: function(xhr, status, error) {
+                           console.log(error);
+                        }
+                     });
                   }
                }
-            },
-            error: function(xhr, status, error) {
-               console.log("Error" + error);
             }
-         });
-      }
+         },
+         error: function(xhr, status, error) {
+            console.log("Error" + error);
+         }
+      });
 
       $('.edit_discount_amount').on('input', function() {
          validate_discount_price();

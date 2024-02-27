@@ -1,5 +1,6 @@
 <?php
-include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_title_php.php";
+include dirname(__DIR__, 3) . "/common/config/config.php";
+// include dirname(__DIR__, 2) . "/category_title/add_category_title/add_category_title_php.php";
 ?>
 <div class="add_category_title_page">
     <div class="alert_container" id="alert_container"></div>

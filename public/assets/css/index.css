@@ -53,6 +53,7 @@ li {
 .products_alert_dismissible,
 .products_success_dismissible,
 .products_delete_alert_dismissible,
+.edit_products_alert_dismissible,
 .add_discount_alert_dismissible, 
 .add_discount_success_dismissible,
 .discount_delete_alert_dismissible,
@@ -88,6 +89,10 @@ li {
 .add_discount_alert_dismissible,
 .add_discount_success_dismissible {
   width: 18rem;
+}
+
+.edit_products_alert_dismissible{
+  width: 23rem;
 }
 
 .category_header_delete_alert_dismissible,
@@ -506,8 +511,13 @@ a.ui-datepicker-next.ui-corner-all {
   margin-right: 1rem;
 }
 
-.product_review_user_uploded_images:hover{
+.product_review_user_uploded_images:hover,
+.product_uploded_images:hover{
   cursor: pointer;
+}
+
+.products_uploaded_images{
+  display: flex;
 }
 
 /* dashboard css */

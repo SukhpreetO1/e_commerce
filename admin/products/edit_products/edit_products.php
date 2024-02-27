@@ -1,6 +1,5 @@
 <?php
 include dirname(__DIR__, 3) . "/common/config/config.php";
-// include dirname(__DIR__, 2) . "/products/edit_products/edit_products_php.php";
 ?>
 <div class="edit_products_page">
    <div class="alert_container" id="alert_container"></div>
@@ -20,6 +19,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       if ($result->num_rows > 0) {
          while ($product_data = $result->fetch_assoc()) {
             $selected_category_id = $product_data["categories_type_id"];
+            $selected_discount_id = $product_data["discount_id"];
       ?>
 
             <div class="edit_products_name">
@@ -27,6 +27,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                   <form method="post" id="edit_products_form" class="edit_products_form">
                      <div class="form-group">
                         <label for="edit_products_input_name" class="edit_product_name mt-2 mb-2">Name <span class="important_mark">*</span></label>
+                        <input type="hidden" name="edit_product_id" id="edit_product_id" value="<?php echo $product_data["id"]; ?>">
                         <input type="text" name="edit_products_input_name" class="form-control edit_products_input_name" id="edit_products_input_name" value="<?php echo $product_data["name"]; ?>">
                         <span class="invalid-feedback edit_products_name_err" id="edit_products_name_err">
                            <?php echo $edit_products_name_err ?>
@@ -58,7 +59,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                               <?php
                                  }
                               }
-                              $database_connection->close();
                               ?>
                            </select>
                            <span class="invalid-feedback edit_products_category_type_err" id="edit_products_category_type_err">
@@ -90,17 +90,48 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         </div>
 
                         <div class="form-group col-6">
-                           <label for="edit_products_discount" class="edit_product_discount mt-2 mb-2">Discount </label>
-                           <input type="text" name="edit_products_discount" class="form-control edit_products_discount" id="edit_products_discount" value="<?php echo $product_data["discount"]; ?>">
-                           <span class="invalid-feedback edit_products_discount_err" id="edit_products_discount_err">
-                              <?php echo $edit_products_discount_err ?>
+                           <label for="edit_products_discount" class="add_product_discount mt-2 mb-2">Discount </label>
+                           <select class="form-select edit_products_discount" id="edit_products_discount" name="edit_products_discount" style="height: 2.8rem;">
+                              <option hidden disabled selected>Select Discount</option>
+                              <?php
+                              $discount_sql = "SELECT * FROM discount";
+                              $result = $database_connection->query($discount_sql);
+                              if ($result->num_rows > 0) {
+                                 while ($discount = $result->fetch_assoc()) {
+                                    $selected_discount = ($discount['id'] == $selected_discount_id) ? "selected" : "";
+                              ?>
+                                    <option value="<?php echo $discount['id']; ?>" <?php echo $selected_discount; ?>> <?php echo $discount['code_name']; ?></option>
+                              <?php
+                                 }
+                              }
+                              ?>
+                           </select>
+                           <span class="invalid-feedback add_products_discount_err" id="add_products_discount_err">
+                              <?php echo $add_products_discount_err ?>
                            </span>
                         </div>
                      </div>
 
                      <div class="form-group">
+                        <div id="uploaded_images_preview">
+                           <?php
+                           $image_sql = "SELECT path FROM product_image WHERE products_id = " . $product_data['id'];
+                           $image_result = $database_connection->query($image_sql);
+                           if ($image_result->num_rows > 0) {
+                              echo '<label for="edit_products_image" class="edit_product_image mt-2 mb-2">Uploaded Images <span class="important_mark">*</span></label>';
+                              echo "<div class='products_uploaded_images'>";
+                              while ($row = $image_result->fetch_assoc()) {
+                                 echo "<img src='" . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_review_images/' . $row['path'] . "' style='max-width: 100px; margin-right: 10px;' alt='Product Image' class='product_uploded_images' onclick='window.open(\"" . $_ENV["BASE_URL"] . "/e_commerce/public/assets/product_review_images/" . $row["path"] . "\", \"_blank\");'>";
+                              }
+                              echo "</div>";
+                           }
+                           ?>
+                        </div>
+                     </div>
+
+                     <div class="form-group">
                         <label for="edit_products_image" class="edit_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                        <input type="file" name="edit_products_image[]" id="edit_products_image" class="edit_products_image" multiple accept="image/jpeg, image/png, image/jpg">
+                        <input type="file" name="edit_products_image[]" id="edit_products_image" class="edit_products_image" multiple accept="image/jpeg, image/png, image/jpg" onchange="upload_preview_images(event)">
                         <span class="invalid-feedback edit_products_image_err" id="edit_products_image_err">
                            <?php echo $edit_products_image_err ?>
                         </span>
@@ -116,7 +147,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       <?php
          }
       }
-      $database_connection->close();
       ?>
    </div>
 </div>
@@ -199,7 +229,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       var parsed_response = null;
       $.ajax({
          type: "POST",
-         url: BASE_URL + "/admin/products/edit_products/edit_products_php.php",
+         url: BASE_URL + "/admin/products/edit_products/edit_products_php.php" + "?edit_product_id=" + edit_product_id,
          data: formData,
          processData: false,
          contentType: false,
@@ -216,7 +246,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                } else {
                   parsed_response = JSON.parse(response);
                   if (parsed_response.error) {
-                     var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                     var alert_message = '<div class="alert alert-danger edit_products_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
                      $('#alert_container').append(alert_message);
                      setTimeout(function() {
                         $('.alert').remove();
@@ -298,5 +328,58 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
    });
 
    /*--------------------------------------------------------------- Uploaded image preview ----------------------------------------------------------------------------*/
-   
+   var filesCount = 0;
+
+   function upload_preview_images(event) {
+      var preview = document.getElementById('uploaded_image_preview');
+      var fileInput = event.target;
+      preview.innerHTML = '';
+      if (event.target.files) {
+         [...event.target.files].forEach(function(file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+               var imgContainer = document.createElement('div');
+               imgContainer.style.position = 'relative';
+               var img = document.createElement('img');
+               img.src = e.target.result;
+               img.style.maxWidth = '8rem';
+               img.style.marginRight = '10px';
+               img.style.cursor = 'pointer';
+               img.onclick = function() {
+                  window.open(e.target.result);
+               };
+               imgContainer.appendChild(img);
+               var removeBtn = document.createElement('button');
+               removeBtn.innerHTML = 'x';
+               removeBtn.classList.add('preview_image_remove_button');
+               removeBtn.onclick = function() {
+                  imgContainer.remove();
+                  var newFiles = Array.from(fileInput.files).filter(function(file) {
+                     return file.name !== fileInput.files[0].name;
+                  });
+                  var dataTransfer = new DataTransfer();
+                  newFiles.forEach(function(file) {
+                     dataTransfer.items.add(file);
+                  });
+                  fileInput.files = dataTransfer.files;
+                  filesCount--;
+                  updateFileInputValue(fileInput, filesCount);
+               };
+               imgContainer.appendChild(removeBtn);
+               preview.appendChild(imgContainer);
+               filesCount++;
+               updateFileInputValue(fileInput, filesCount);
+            };
+            reader.readAsDataURL(file);
+         });
+      }
+   }
+
+   function updateFileInputValue(fileInput, count) {
+      if (count > 0) {
+         fileInput.dataset.fileCount = count;
+      } else {
+         fileInput.removeAttribute('data-file-count');
+      }
+   }
 </script>

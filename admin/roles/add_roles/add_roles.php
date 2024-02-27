@@ -1,5 +1,6 @@
 <?php
-include dirname(__DIR__, 2) . "/roles/add_roles/add_roles_php.php";
+include dirname(__DIR__, 3) . "/common/config/config.php";
+// include dirname(__DIR__, 2) . "/roles/add_roles/add_roles_php.php";
 ?>
 <div class="add_roles_page">
    <div class="alert_container" id="alert_container"></div>

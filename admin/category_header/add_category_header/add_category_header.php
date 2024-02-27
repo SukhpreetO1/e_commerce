@@ -1,6 +1,6 @@
 <?php
 include dirname(__DIR__, 3) . "/common/config/config.php";
-include dirname(__DIR__, 2) . "/category_header/add_category_header/add_category_header_php.php";
+// include dirname(__DIR__, 2) . "/category_header/add_category_header/add_category_header_php.php";
 ?>
 
 <div class="category_heading_page">
