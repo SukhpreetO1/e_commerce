@@ -16,14 +16,14 @@ if ($result->num_rows > 0) {
                   $result = $database_connection->query($sql);
                   $is_first = true;
                   if ($result->num_rows > 0) {
-                     while ($row = $result->fetch_assoc()) {
+                     while ($product_image = $result->fetch_assoc()) {
                         if ($is_first) {
                            echo '<div class="carousel-item active" data-bs-interval="10000">';
                            $is_first = false;
                         } else {
                            echo '<div class="carousel-item" data-bs-interval="10000">';
                         }
-                        echo '<img src="' . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_images/' . $row['path'] . '" class="d-block w-100">';
+                        echo '<img src="' . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_images/' . $product_image['path'] . '" class="d-block w-100">';
                         echo '</div>';
                      }
                   }
@@ -44,8 +44,60 @@ if ($result->num_rows > 0) {
                <h3 class="product_name_in_modal" name="product_name_in_modal" id="product_name_in_modal"><?php echo $product_data['name']; ?></h3>
             </div>
             <div class="product_modal_description">
-               <!-- <label for="products_description" class="edit_products_description mt-2 mb-2"><strong>Description </strong></label> -->
                <div name="products_description_in_modal" class="products_description_in_modal" id="products_description_in_modal"><?php echo $product_data["description"]; ?></div>
+            </div>
+         </div>
+      </div>
+      <div class="product_review_details">
+         <div class="product_review_user_detail_and_review">
+            <div class="user_detail_email">
+               <?php
+               $sql = "SELECT product_reviews.*, users.* FROM product_reviews INNER JOIN users ON product_reviews.user_id = users.id";
+               $result = $database_connection->query($sql);
+               if ($result->num_rows > 0) {
+                  while ($product_review = $result->fetch_assoc()) {
+                     echo "<div class='user_review_part'><div class='product_review_rating'>";
+                     $product_id = $product_review['product_id'];
+                     $rating_sql = "SELECT * from product_reviews WHERE product_id = $product_id AND user_id = " . $product_review['user_id'];
+                     $rating_result = $database_connection->query($rating_sql);
+                     if ($rating_result->num_rows > 0) {
+                        $rating_row = $rating_result->fetch_assoc();
+                        $rating = $rating_row['rating'];
+                        $full_stars = floor($rating);
+                        $half_star = ceil($rating) > $full_stars;
+
+                        echo 'Rating ' . $rating_row['rating'] . '/5 ';
+                        for ($i = 1; $i <= 5; $i++) {
+                           echo '<i class="fa-star-wrapper">';
+                           if ($i <= $full_stars) {
+                              echo '<i class="fa-solid fa-star product_review_rating_star"></i>';
+                           } elseif ($i == $full_stars + 1 && $half_star) {
+                              echo '<i class="fa-solid fa-star-half product_review_rating_star"></i>';
+                           } else {
+                              echo '<i class="fa-regular fa-star"></i>';
+                           }
+                           echo '</i>';
+                        }
+                     }
+                     echo "</div>";
+                     echo "<p class='user_fullname mb-0'><span class='user_fullname_for_product_review'>" . $product_review["first_name"] . " " . $product_review["last_name"] . "</span> <span class='user_email_for_product_review'>" . $product_review["email"] . "</span></p>";
+
+                     $image_sql = "SELECT * FROM product_reviews_images WHERE product_review_id = " . $product_review['id'];
+                     $image_result = $database_connection->query($image_sql);
+                     if ($image_result->num_rows > 0) {
+                        echo '<div class="product_review_user_uploded_images_wrapper d-flex">';
+                        while ($image_row = $image_result->fetch_assoc()) {
+                           echo '<img src="' . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_review_images/' . $image_row['path'] . '" class="d-block product_review_user_uploded_images" onclick="window.open(\'' . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_review_images/' . $image_row['path'] . '\', \'_blank\');">';
+                        }
+                        echo '</div>';
+                     }
+
+                     echo "<span class='user_review_details'>" . $product_review['review_text'] . "</span><br>";
+                     echo "<span class='user_review_date'>" . date('d-m-Y H:i:s', strtotime($product_review["review_date"])) . "</span>";
+                     echo "</div>";
+                  }
+               }
+               ?>
             </div>
          </div>
       </div>

@@ -476,6 +476,40 @@ a.ui-datepicker-next.ui-corner-all {
   display: flex;
 }
 
+.product_review_rating_star{
+  color: orange;
+}
+
+.user_email_for_product_review{
+  font-size: 13px;
+  position: relative;
+  left: 2px;
+  top: -3px;
+}
+
+.product_review_rating{
+  position: absolute;
+  right: 1rem;
+  width: 12rem;
+}
+
+.user_review_part{
+  margin-bottom: 1.5rem;
+}
+
+.user_review_date{
+  font-size: 14px;
+}
+
+.product_review_user_uploded_images{
+  width: 8rem !important;
+  margin-right: 1rem;
+}
+
+.product_review_user_uploded_images:hover{
+  cursor: pointer;
+}
+
 /* dashboard css */
 .dashboard_charts_details{
   margin-top: 1rem;
