@@ -408,7 +408,7 @@ input:checked + .discount_toogle_button_active_change:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
+/* Toggles buttons */
 .users_detail_toogle_button_role_change,
 .discount_toogle_button_active_change {
   border-radius: 34px;
@@ -423,6 +423,7 @@ input:checked + .discount_toogle_button_active_change:before {
   color: grey;
 }
 
+/* datapicker css */
 div#ui-datepicker-div {
   background-color: white;
   border: 1px solid #cbcbcb;
@@ -466,8 +467,49 @@ a.ui-datepicker-next.ui-corner-all {
   border-radius: 6px;
 }
 
+/* products css */
 .product_images {
-  width: 25rem;
+  width: 38rem;
+}
+
+.product_images_description{
+  display: flex;
+}
+
+/* dashboard css */
+.dashboard_charts_details{
+  margin-top: 1rem;
+}
+
+.card.text-bg-light.mb-3.me-3 {
+  width: 17rem;
+}
+
+.pending_orders_count_details,
+.category_heading_count_details {
+  border-bottom: 5px solid #33d933;
+}
+
+.active_orders_count_detials,
+.category_types_count_details {
+  border-bottom: 5px solid #db980dc2;
+}
+
+.delivered_orders_count_detials,
+.products_count_details {
+  border-bottom: 5px solid #e98ed3;
+}
+
+.customer_cancel_orders_count_details,
+.discount_count_details {
+  border-bottom: 5px solid #d94f58;
+}
+
+.category_heading_count_details:hover,
+.category_types_count_details:hover,
+.products_count_details:hover,
+.discount_count_details:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 825px) {

@@ -6,7 +6,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    <div class="alert_container" id="alert_container"></div>
    <div class="container">
       <div class="products_heading">
-         <h2>Products Name</h2>
+         <h2>Products</h2>
       </div>
 
       <div class="add_products">
@@ -97,7 +97,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
 <!-- Modal -->
 <div class="modal fade product_modal" id="product_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-lg">
+   <div class="modal-dialog modal-xl">
       <div class="modal-content">
          <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Product Detail</h1>
