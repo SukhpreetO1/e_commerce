@@ -221,6 +221,13 @@ li {
   color: black;
 }
 
+.discount_file_import{
+  font-size: 2rem;
+  margin-left: 5px;
+  padding: 5px;
+  color: black;
+}
+
 .add_categories_header_name {
   width: 30%;
   margin-left: 36%;

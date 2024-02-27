@@ -9,9 +9,18 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
          <h2>Discount</h2>
       </div>
 
+      <div class="error_messages" style="display: none;">
+         <div class="alert alert-danger uploading_file_err" role="alert" id="uploading_file_err">
+            <?php echo $uploading_file_err ?>
+         </div>
+      </div>
+
       <div class="add_discount">
          <a href="#"><i class="fa-solid fa-arrow-left-long discount_back_button"></i></a>
-         <a href="#"><i class="fa-solid fa-plus discount_plus_icon"></i></a>
+         <div>
+            <a href="#"><i class="fa-solid fa-plus discount_plus_icon"></i></a>
+            <a href="#" id="discount_import_file_link"><i class="fa-solid fa-file-arrow-down discount_file_import"></i></a>
+         </div>
       </div>
 
       <div class="discount_table">
@@ -268,5 +277,42 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       e.preventDefault();
       var discount_id = $(this).siblings('.discount_id').val();
       discount_edit_icon('/admin/discount/edit_discount/edit_discount.php', discount_id);
+   });
+
+   /*--------------------------------------------------------------- Import Button ----------------------------------------------------------------------------*/
+   function discount_import_button(url) {
+      $.ajax({
+         type: 'GET',
+         url: BASE_URL + url,
+         success: function(data) {
+            $(".container").empty();
+            $('.container').html(data);
+         },
+         error: function(e) {
+            console.log(e);
+         }
+      });
+   }
+
+   $(document).ready(function() {
+      $('#discount_import_file_link').click(function() {
+         $('<input type="file">').click().change(function() {
+            if (this.files[0].name.toLowerCase().endsWith('.csv')) {
+               discount_import_button('/admin/discount/discount_import/discount_import.php');
+            } else {
+               $('.error_messages').css({
+                  'display': 'block',
+                  'width': '14rem',
+                  'position': 'absolute',
+                  'top': '-0.5rem',
+                  'right': '0.75rem'
+               });
+               $('.uploading_file_err').text('Please select a CSV file');
+               setTimeout(function() {
+                  $('.error_messages').css('display', 'none');
+               }, 3000);
+            }
+         });
+      });
    });
 </script>
