@@ -280,13 +280,15 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    });
 
    /*--------------------------------------------------------------- Import Button ----------------------------------------------------------------------------*/
-   function discount_import_button(url) {
+   function discount_import_button(url, formData) {
       $.ajax({
-         type: 'GET',
+         type: 'POST',
          url: BASE_URL + url,
+         data: formData,
+         processData: false,
+         contentType: false,
          success: function(data) {
-            $(".container").empty();
-            $('.container').html(data);
+            console.log(data);
          },
          error: function(e) {
             console.log(e);
@@ -296,23 +298,28 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
    $(document).ready(function() {
       $('#discount_import_file_link').click(function() {
-         $('<input type="file">').click().change(function() {
-            if (this.files[0].name.toLowerCase().endsWith('.csv')) {
-               discount_import_button('/admin/discount/discount_import/discount_import.php');
+         var fileInput = $('<input type="file">');
+         fileInput.on('change', function() {
+            var file = this.files[0];
+            if (file.name.toLowerCase().endsWith('.csv') || file.name.toLowerCase().endsWith('.xlsx')) {
+               var formData = new FormData();
+               formData.append('file', file);
+               discount_import_button('/admin/discount/discount_import/discount_import.php', formData);
             } else {
                $('.error_messages').css({
                   'display': 'block',
-                  'width': '14rem',
+                  'width': '24rem',
                   'position': 'absolute',
                   'top': '-0.5rem',
                   'right': '0.75rem'
                });
-               $('.uploading_file_err').text('Please select a CSV file');
+               $('.uploading_file_err').text('Please select a CSV or XLSX file');
                setTimeout(function() {
                   $('.error_messages').css('display', 'none');
                }, 3000);
             }
          });
+         fileInput.click();
       });
    });
 </script>
