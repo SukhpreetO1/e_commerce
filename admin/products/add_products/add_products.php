@@ -67,21 +67,12 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                <div class="form-group products_size_and_color">
                   <div class="form-group me-2 col-6">
                      <label for="add_products_size" class="add_product_size mt-2 mb-2">Size <span class="important_mark">*</span></label>
-                     <select class="form-select add_products_size" id="add_products_size" aria-label="Select products size" name="add_products_size[]">
-                        <option hidden disabled selected>Select products size</option>
-                        <?php
-                        $sql = "SELECT * FROM size";
-                        $result = $database_connection->query($sql);
-                        if ($result->num_rows > 0) {
-                           while ($product_size = $result->fetch_assoc()) {
-                        ?>
-                              <option value="<?php echo $product_size['id']; ?>">
-                                 <?php echo $product_size['name']; ?>
-                              </option>
-                        <?php
-                           }
-                        }
-                        ?>
+                     <select class="selectpicker add_products_size" id="add_products_size" aria-label="Select products size" name="add_products_size[]" multiple>
+                        <option disabled >Select products size</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
                      </select>
                      <span class="invalid-feedback add_products_size_err" id="add_products_size_err">
                         <?php echo $add_products_size_err ?>
@@ -90,7 +81,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
                   <div class="form-group me-2 col-6">
                      <label for="add_products_color" class="add_product_color mt-2 mb-2">Color <span class="important_mark">*</span></label>
-                     <select class="form-select add_products_color" id="add_products_color" aria-label="Select products size" name="add_products_color[]" multiple="multiple">
+                     <select class="form-select add_products_color" id="add_products_color" aria-label="Select products size" name="add_products_color[]">
                         <option hidden disabled selected>Select products color</option>
                         <?php
                         $sql = "SELECT * FROM color";
@@ -98,7 +89,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         if ($result->num_rows > 0) {
                            while ($product_color = $result->fetch_assoc()) {
                         ?>
-                              <option value="<?php echo $product_color['id'] ?>" class="color_code_showing_color" style="background-color: <?php echo $product_color['color_code']; ?>;">
+                              <option value="<?php echo $product_color['id'] ?>">
                                  <?php echo $product_color['name']; ?>
                               </option>
                         <?php
@@ -393,10 +384,4 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          fileInput.removeAttribute('data-file-count');
       }
    }
-
-   $(document).ready(function() {
-      $('#add_products_color').multiselect({
-         includeSelectAllOption: true,
-      });
-   });
 </script>

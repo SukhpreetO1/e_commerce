@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 26, 2024 at 07:08 PM
+-- Generation Time: Feb 28, 2024 at 07:10 PM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -73,7 +73,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Men', '2024-02-14 16:26:23', '2024-02-14 17:04:10'),
+(1, 'Men', '2024-02-14 16:26:23', '2024-02-28 16:30:10'),
 (2, 'Women', '2024-02-14 16:26:27', '2024-02-14 16:26:27'),
 (3, 'Kids', '2024-02-14 16:26:31', '2024-02-14 16:26:31'),
 (4, 'Home Living', '2024-02-14 16:26:40', '2024-02-14 16:26:40'),
@@ -196,10 +196,23 @@ INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `created_at`
 
 CREATE TABLE `color` (
   `id` int NOT NULL,
-  `name` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `color_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `color`
+--
+
+INSERT INTO `color` (`id`, `name`, `color_code`, `created_at`, `updated_at`) VALUES
+(1, 'Supernova', '#ffc800', '2024-02-28 15:23:06', '2024-02-28 16:49:49'),
+(2, 'Amethyst Smoke', '#9b9bbb', '2024-02-28 15:23:49', '2024-02-28 15:23:49'),
+(3, 'Crete', '#7f7c29', '2024-02-28 15:36:32', '2024-02-28 15:36:32'),
+(4, 'Ultramarine', '#070788', '2024-02-28 15:38:17', '2024-02-28 15:38:17'),
+(5, 'Fuzzy Wuzzy', '#000066', '2024-02-28 15:40:49', '2024-02-28 15:40:49'),
+(6, 'Port Gore', '#212150', '2024-02-28 15:42:21', '2024-02-28 15:42:21');
 
 -- --------------------------------------------------------
 
@@ -224,7 +237,7 @@ CREATE TABLE `discount` (
 --
 
 INSERT INTO `discount` (`id`, `code_name`, `discount_type`, `activate`, `amount`, `rupees_or_percentage`, `expiration_date`, `created_at`, `updated_at`) VALUES
-(1, 'NoDiscount', 'No Discount', 1, 0, 0, '2024-02-23', '2024-02-23 12:19:14', '2024-02-26 13:32:21');
+(1, 'NoDiscount', 'No Discount', 1, 0, 1, '2024-02-23', '2024-02-23 12:19:14', '2024-02-27 10:51:56');
 
 -- --------------------------------------------------------
 
@@ -288,7 +301,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `categories_type_id`, `quantity`, `price`, `discount_id`, `created_at`, `updated_at`) VALUES
-(1, 'qweqweqweqweqwe', 'qweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeqqweqeq', 2, 5, '10', 1, '2024-02-20 15:55:10', '2024-02-20 15:55:10');
+(1, 'lorem', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis dignissimos sapiente aut! Accusamus ab vero doloremque nobis id earum soluta.', 2, 5, '10', 1, '2024-02-20 15:55:10', '2024-02-27 17:12:03');
 
 -- --------------------------------------------------------
 
@@ -310,7 +323,8 @@ CREATE TABLE `product_image` (
 --
 
 INSERT INTO `product_image` (`id`, `name`, `products_id`, `path`, `created_at`, `updated_at`) VALUES
-(1, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10');
+(1, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10'),
+(2, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10');
 
 -- --------------------------------------------------------
 
@@ -322,11 +336,25 @@ CREATE TABLE `product_reviews` (
   `id` int NOT NULL,
   `product_id` int NOT NULL,
   `user_id` int NOT NULL,
-  `rating` int NOT NULL,
+  `rating` float NOT NULL,
   `review_text` text COLLATE utf8mb4_general_ci NOT NULL,
   `review_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `images_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `images_path` text COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_reviews_images`
+--
+
+CREATE TABLE `product_reviews_images` (
+  `id` int NOT NULL,
+  `name` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` int NOT NULL,
+  `product_review_id` int NOT NULL,
+  `path` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -401,6 +429,14 @@ CREATE TABLE `size` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `size`
+--
+
+INSERT INTO `size` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Free Size', '2024-02-28 10:59:00', '2024-02-28 10:59:00'),
+(2, 'XS', '2024-02-28 11:21:28', '2024-02-28 11:33:35');
 
 -- --------------------------------------------------------
 
@@ -491,7 +527,7 @@ ALTER TABLE `categories_type`
 --
 ALTER TABLE `color`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD UNIQUE KEY `name` (`color_code`);
 
 --
 -- Indexes for table `discount`
@@ -539,6 +575,14 @@ ALTER TABLE `product_reviews`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `product_reviews_images`
+--
+ALTER TABLE `product_reviews_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_review_id` (`product_review_id`) USING BTREE;
 
 --
 -- Indexes for table `product_variants`
@@ -625,7 +669,7 @@ ALTER TABLE `categories_type`
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `discount`
@@ -649,18 +693,24 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_image`
 --
 ALTER TABLE `product_image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `product_reviews`
 --
 ALTER TABLE `product_reviews`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_reviews_images`
+--
+ALTER TABLE `product_reviews_images`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -685,7 +735,7 @@ ALTER TABLE `shipping_address`
 -- AUTO_INCREMENT for table `size`
 --
 ALTER TABLE `size`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -765,6 +815,13 @@ ALTER TABLE `product_image`
 ALTER TABLE `product_reviews`
   ADD CONSTRAINT `fk_product_reviews_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_product_reviews_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `product_reviews_images`
+--
+ALTER TABLE `product_reviews_images`
+  ADD CONSTRAINT `fk_product_reviews_images_fk_product_reviews_images_product_revi` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_product_reviews_images_product_review_id` FOREIGN KEY (`product_review_id`) REFERENCES `product_reviews` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `product_variants`
