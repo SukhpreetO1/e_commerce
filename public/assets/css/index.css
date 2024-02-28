@@ -59,6 +59,11 @@ li {
 .size_alert_dismissible,
 .size_success_dismissible,
 .size_delete_alert_dismissible,
+.add_color_alert_dismissible,
+.add_color_success_dismissible,
+.color_alert_dismissible,
+.color_success_dismissible,
+.color_delete_alert_dismissible,
 .add_discount_alert_dismissible, 
 .add_discount_success_dismissible,
 .discount_delete_alert_dismissible,
@@ -98,6 +103,11 @@ li {
   width: 18rem;
 }
 
+.add_color_alert_dismissible,
+.add_color_success_dismissible{
+  width: 16rem;
+}
+
 .edit_products_alert_dismissible{
   width: 23rem;
 }
@@ -123,6 +133,7 @@ li {
 .roles_action,
 .products_action,
 .size_action,
+.color_action,
 .discount_action {
   display: flex;
   position: absolute;
@@ -151,6 +162,7 @@ li {
 .roles_heading,
 .edit_role_heading,
 .size_heading,
+.color_heading,
 .discount_heading,
 .products_heading {
   text-align: center;
@@ -166,6 +178,7 @@ li {
 .product_info,
 .products_edit,
 .size_edit,
+.color_edit,
 .discount_edit,
 .discount_toogle_button {
   margin-right: 15px;
@@ -189,6 +202,8 @@ li {
 .edit_products,
 .add_size,
 .edit_size,
+.add_color,
+.edit_color,
 .add_discount {
   display: flex;
   justify-content: space-between;
@@ -202,6 +217,7 @@ li {
 .roles_plus_icon,
 .products_plus_icon,
 .size_plus_icon,
+.color_plus_icon,
 .discount_plus_icon {
   font-size: 1.5rem;
   border: 1px solid;
@@ -229,6 +245,10 @@ li {
 .size_plus_icon,
 .add_size_back_button, 
 .edit_size_back_button, 
+.color_back_button,
+.color_plus_icon,
+.add_color_back_button, 
+.edit_color_back_button, 
 .discount_back_button,
 .discount_plus_icon,
 .add_discount_back_button,
@@ -266,6 +286,8 @@ li {
 .products_delete,
 .size_edit:hover,
 .size_delete:hover,
+.color_edit:hover,
+.color_delete:hover,
 .discount_edit:hover,
 .discount_delete:hover {
   cursor: pointer;
@@ -283,6 +305,8 @@ li {
 .edit_products_name_button,
 .add_size_name_button,
 .edit_size_name_button,
+.add_color_name_button,
+.edit_color_name_button,
 .add_discount_name_button,
 .edit_discount_name_button {
   text-align: center;
@@ -307,7 +331,9 @@ li {
 .add_role_name,
 .edit_role_name,
 .add_size_name,
-.edit_size_name {
+.edit_size_name,
+/* .add_color_name, */
+.edit_color_name {
   width: 30%;
   margin-left: 36%;
 }
@@ -343,6 +369,8 @@ li {
 #add_products_image_err,
 #add_size_name_err,
 #edit_size_name_err,
+#add_color_name_err,
+#edit_color_name_err,
 #add_discount_code_name_err,
 #add_discount_discount_type_err,
 #add_discount_active_inactive_err,

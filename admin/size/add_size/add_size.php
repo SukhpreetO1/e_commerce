@@ -34,14 +34,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 </div>
 
 <script>
-   $(document).ready(function() {
-      $('#add_size_expire_date').datepicker({
-         onSelect: function() {
-            $('.add_size_expire_date_err').text('');
-         }
-      });
-   });
-
    /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
    function add_size_back_button(url) {
       $.ajax({
@@ -133,10 +125,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          error: function(xhr, status, error) {
             console.log("Error" + error);
          }
-      });
-
-      $('.add_size_amount').on('input', function() {
-         validate_size_price();
       });
    });
 
