@@ -16,6 +16,21 @@
                 </a>
             </li>
             <li>
+                <a href="#" class="nav-link link-dark brands">
+                    Brands
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link link-dark size">
+                    Size
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link link-dark color">
+                    Color
+                </a>
+            </li>
+            <li>
                 <a href="#" class="nav-link link-dark discount">
                     Discount
                 </a>

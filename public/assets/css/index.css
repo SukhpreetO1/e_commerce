@@ -142,6 +142,7 @@ li {
 .users_detail_heading,
 .roles_heading,
 .edit_role_heading,
+.size_heading,
 .discount_heading,
 .products_heading {
   text-align: center;
@@ -177,6 +178,7 @@ li {
 .roles_title,
 .add_products,
 .edit_products,
+.add_size,
 .add_discount {
   display: flex;
   justify-content: space-between;
@@ -189,6 +191,7 @@ li {
 .users_detail_plus_icon,
 .roles_plus_icon,
 .products_plus_icon,
+.size_plus_icon,
 .discount_plus_icon {
   font-size: 1.5rem;
   border: 1px solid;
@@ -212,6 +215,8 @@ li {
 .products_back_button,
 .add_products_back_button,
 .edit_products_back_button,
+.size_back_button,
+.size_plus_icon,
 .discount_back_button,
 .discount_plus_icon,
 .add_discount_back_button,

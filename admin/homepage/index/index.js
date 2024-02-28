@@ -35,61 +35,83 @@ function handle_redirection_and_push_state(urlPath, urlName) {
 // redirection ajax when click on sidebar text / logo
 $(document).on('click', '.title', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/homepage/dashboard/dashboard', 'dashboard');
+    handle_redirection_and_push_state('/homepage/dashboard/dashboard', 'tab=dashboard');
 });
 
 // redirection ajax when click on dashboard
 $(document).on('click', '.dashboard', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/homepage/dashboard/dashboard', 'dashboard');
+    handle_redirection_and_push_state('/homepage/dashboard/dashboard', 'tab=dashboard');
+});
+
+// redirection ajax when click on brands
+$(document).on('click', '.brands', function (e) {
+    e.preventDefault();
+    handle_redirection_and_push_state('/brands/brands', 'tab=brands');
+});
+
+// redirection ajax when click on size
+$(document).on('click', '.size', function (e) {
+    e.preventDefault();
+    handle_redirection_and_push_state('/size/size', 'tab=size');
+});
+
+// redirection ajax when click on color
+$(document).on('click', '.color', function (e) {
+    e.preventDefault();
+    handle_redirection_and_push_state('/color/color', 'tab=color');
 });
 
 // redirection ajax when click on discount
 $(document).on('click', '.discount', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/discount/discount', 'discount');
+    handle_redirection_and_push_state('/discount/discount', 'tab=discount');
 });
 
 // redirection ajax when click on products
 $(document).on('click', '.products', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/products/products', 'products');
+    handle_redirection_and_push_state('/products/products', 'tab=products');
 });
 
 // redirection ajax for the user detials
 $(document).on('click', '.roles', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/roles/roles', 'roles');
+    handle_redirection_and_push_state('/roles/roles', 'tab=roles');
 });
 
 // redirection ajax for the user detials
 $(document).on('click', '.users', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/user_detail/user_detail', 'user_detail');
+    handle_redirection_and_push_state('/user_detail/user_detail', 'tab=user_detail');
 });
 
 // redirection ajax for the category title
 $(document).on('click', '.category_title', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/category_title/category_title', 'category_title');
+    handle_redirection_and_push_state('/category_title/category_title', 'tab=category_title');
 });
 
 // redirection ajax for the category heading
 $(document).on('click', '.category_heading', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/category_header/category_header', 'category_header');
+    handle_redirection_and_push_state('/category_header/category_header', 'tab=category_header');
 });
 
 // redirection ajax for the category types
 $(document).on('click', '.categories_types', function (e) {
     e.preventDefault();
-    handle_redirection_and_push_state('/category_types/category_types', 'category_types');
+    handle_redirection_and_push_state('/category_types/category_types', 'tab=category_types');
 });
 
 $(document).ready(function () {
     var query_param = window.location.search;
     if (query_param.includes('dashboard')) {
         handle_ajax_redirection('/admin/homepage/dashboard/dashboard.php');
+    } else if (query_param.includes('size')) {
+        handle_ajax_redirection('/admin/size/size.php');
+    } else if (query_param.includes('color')) {
+        handle_ajax_redirection('/admin/color/color.php');
     } else if (query_param.includes('discount')) {
         handle_ajax_redirection('/admin/discount/discount.php');
     } else if (query_param.includes('products')) {

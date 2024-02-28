@@ -75,7 +75,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                         <div class="products_action">
                            <input type="hidden" name="product_id" class="product_id" id="product_id" value="<?php echo $products_data['id']; ?>">
                            <div class="product_info" data-bs-toggle="modal" data-bs-target="#product_modal">
-                              <i class="fa-solid fa-circle-info"></i>
+                              <i class="fa-regular fa-eye"></i>
                            </div>
                            <div class="products_edit">
                               <i class="fa-regular fa-pen-to-square"></i>

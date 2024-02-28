@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
                         } else {
                            echo '<div class="carousel-item" data-bs-interval="10000">';
                         }
-                        echo '<img src="' . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_images/' . $product_image['path'] . '" class="d-block w-100">';
+                        echo '<img src="' . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_images/' . $product_image['path'] . '" class="d-block w-100" alt="Product Image">';
                         echo '</div>';
                      }
                   }
