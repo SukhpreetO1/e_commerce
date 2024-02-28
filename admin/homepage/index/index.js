@@ -108,6 +108,8 @@ $(document).ready(function () {
     var query_param = window.location.search;
     if (query_param.includes('dashboard')) {
         handle_ajax_redirection('/admin/homepage/dashboard/dashboard.php');
+    } else if (query_param.includes('brands')) {
+        handle_ajax_redirection('/admin/brands/brands.php');
     } else if (query_param.includes('size')) {
         handle_ajax_redirection('/admin/size/size.php');
     } else if (query_param.includes('color')) {

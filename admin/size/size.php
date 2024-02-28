@@ -9,12 +9,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
          <h2>Size</h2>
       </div>
 
-      <div class="error_messages" style="display: none;">
-         <div class="alert alert-danger uploading_file_err" role="alert" id="uploading_file_err">
-            <?php echo $uploading_file_err ?>
-         </div>
-      </div>
-
       <div class="add_size">
          <a href="#"><i class="fa-solid fa-arrow-left-long size_back_button"></i></a>
          <a href="#"><i class="fa-solid fa-plus size_plus_icon"></i></a>
@@ -54,13 +48,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                      <td style="width: 6rem;">
                         <div class="size_action">
                            <input type="hidden" name="size_id" class="size_id" id="size_id" value="<?php echo $size_data['id']; ?>">
-                           <input type="hidden" name="active_id" class="active_id" id="active_id" value="<?php echo $size_data['activate']; ?>">
-                           <div class="size_toogle_button">
-                              <label class="switch">
-                                 <input type="checkbox" <?php echo ($size_data['activate'] == 1) ? 'checked' : ''; ?>>
-                                 <span class="size_toogle_button_active_change" id="size_toogle_button_active_change" name='size_toogle_button_active_change'></span>
-                              </label>
-                           </div>
                            <div class="size_edit">
                               <i class="fa-regular fa-pen-to-square"></i>
                            </div>
