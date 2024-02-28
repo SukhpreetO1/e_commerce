@@ -347,6 +347,7 @@ li {
 }
 
 .products_category_type_and_quantity,
+.products_size_and_color,
 .products_price_and_discount {
   display: flex;
   width: 98%;
