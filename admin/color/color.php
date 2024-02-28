@@ -20,6 +20,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
+                  <th scope="col">Code Name</th>
                   <th scope="col">Created At</th>
                   <th scope="col">Updated At</th>
                   <th scope="col">Action</th>
@@ -38,6 +39,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                      </td>
                      <td>
                         <?php echo $color_data['name']; ?>
+                     </td>
+                     <td class="d-flex">
+                        <span class="color_code_showing_color" style="background-color: <?php echo $color_data['color_code']; ?>;"></span>
+                        <span><?php echo $color_data['color_code']; ?></span>
                      </td>
                      <td>
                         <?php echo date('d-m-Y', strtotime($color_data['created_at'])); ?>
@@ -62,19 +67,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                ?>
             </tbody>
          </table>
-      </div>
-   </div>
-</div>
-
-<div class="modal fade color_modal" id="color_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Color </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <div class="modal-body">
-         </div>
       </div>
    </div>
 </div>
@@ -194,18 +186,24 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       color_edit_icon('/admin/color/edit_color/edit_color.php', color_id);
    });
 
-   /*--------------------------------------------------------------- Showing modal when click on info icon ----------------------------------------------------------------------------*/
-   $(document).off('click', '.color_plus_icon').on('click', '.color_plus_icon', function(e) {
+   /*--------------------------------------------------------------- Click on plus (+) JS ----------------------------------------------------------------------------*/
+   function color_plus_icon(url) {
       $.ajax({
-         url: BASE_URL + "/admin/color/add_color/add_color.php",
-         method: 'GET',
-         success: function(response) {
-            $('.modal-body').html(response);
-            $('#color_modal').modal('show');
+         type: 'GET',
+         url: BASE_URL + url,
+         success: function(data) {
+            $(".container").empty();
+            $('.container').html(data);
          },
-         error: function() {
+         error: function(e) {
             console.log(e);
          }
       });
+   }
+
+   // redirection ajax for adding the
+   $(document).off('click', '.color_plus_icon').on('click', '.color_plus_icon', function(e) {
+      e.preventDefault();
+      color_plus_icon('/admin/color/add_color/add_color.php');
    });
 </script>

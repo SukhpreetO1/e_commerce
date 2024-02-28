@@ -1,15 +1,22 @@
 <?php
 include dirname(__DIR__, 3) . "/common/config/config.php";
-// include dirname(__DIR__, 2) . "/color/add_color/add_color_php.php";
 ?>
 <div class="add_color_page">
    <div class="alert_container" id="alert_container"></div>
    <div class="container">
+      <div class="color_heading">
+         <h2>Add color</h2>
+      </div>
+
+      <div class="add_color">
+         <a href="#"><i class="fa-solid fa-arrow-left-long add_color_back_button"></i></a>
+      </div>
+
       <div class="add_color_name">
          <div class="add_section">
             <form method="post" id="add_color_form" class="add_color_form">
                <div class="form-group">
-                  <label for="add_color_input_name" class="add_product_name mt-2 mb-2">Color Name <span class="important_mark">*</span></label>
+               <label for="add_color_input_name" class="add_product_name mt-2 mb-2">Color Name <span class="important_mark">*</span></label>
                   <div id="color_picker_container">
                      <label for="color_picker">Select color : </label>
                      <input type="color" id="color_picker" value="#0000ff">
@@ -34,6 +41,31 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
    selected_color_picker.addEventListener('input', function() {
       color_name_input.value = selected_color_picker.value;
    });
+
+   /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
+   function add_color_back_button(url) {
+      $.ajax({
+         type: 'GET',
+         url: BASE_URL + url,
+         success: function(data) {
+            $(".container").empty();
+            var container = $('.container');
+            if (!$(data).find('.homepage_sidebar').length) {
+               container.html(data);
+            }
+         },
+         error: function(e) {
+            console.log(e);
+         }
+      });
+   }
+
+   // redirection ajax for back button
+   $(document).off('click', '.add_color_back_button').on('click', '.add_color_back_button', function(e) {
+      e.preventDefault();
+      add_color_back_button('/admin/color/color.php', e);
+   });
+
 
    /*--------------------------------------------------------------- Validation for submit button and input in add files ----------------------------------------------------------------------------*/
    // when submit the new file
