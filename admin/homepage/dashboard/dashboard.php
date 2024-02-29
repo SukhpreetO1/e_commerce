@@ -94,19 +94,6 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
                   </div>
                </div>
             </div>
-            <div class="form-group me-2 col-6">
-               <label for="add_products_size" class="add_product_size mt-2 mb-2">Size <span class="important_mark">*</span></label>
-               <select class="selectpicker add_products_size" id="add_products_size" aria-label="Select products size" name="add_products_size[]" multiple>
-                  <option disabled>Select products size</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                  <option value="4">Four</option>
-               </select>
-               <span class="invalid-feedback add_products_size_err" id="add_products_size_err">
-                  <?php echo $add_products_size_err ?>
-               </span>
-            </div>
          </div>
       </div>
    </div>

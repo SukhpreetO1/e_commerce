@@ -2,35 +2,27 @@
   margin: 0;
   padding: 0 0 6px 0;
 }
+
+.nav-link,
+.nav-link:hover {
+  color: black;
+}
+
 /* sidebar css only */
-.dropdown {
-  position: fixed;
-  bottom: 0px;
-  width: 10%;
-  padding-top: 10px;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block !important;
-}
-
-.dropdown-menu {
-  position: absolute;
-  inset: auto auto 0px 0px;
-  margin: 0px;
-  transform: translate(0px, -46px);
-}
-
 .admin_sidebar {
-  width: 12%;
+  width: 13rem;
+  padding: 1rem 1rem 1rem 0;
 }
 
 .homepage_sidebar {
   max-width: 12rem;
+  position: relative;
 }
 
-li {
-  width: 11rem;
+.highlighted {
+  background-color: #4c64e5 !important;
+  color: white !important;
+  border-radius: 0px !important;
 }
 /* -------------------------------------------------------- */
 
@@ -632,6 +624,12 @@ a.ui-datepicker-next.ui-corner-all {
   height: 2rem;
   position: absolute;
   margin-left: 1rem;
+}
+
+.add_products_size,
+.add_products_color {
+  display: block !important;
+  width: 100% !important;
 }
 
 @media screen and (max-width: 825px) {
