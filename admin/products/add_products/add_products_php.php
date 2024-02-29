@@ -5,6 +5,8 @@ $add_products_input_name = $add_products_name_err = "";
 $add_products_description = $add_products_description_err = "";
 $add_products_category_type = $add_products_category_type_err = "";
 $add_products_quantity = $add_products_quantity_err = "";
+$add_products_size = $add_products_size_err = "";
+$add_products_color = $add_products_color_err = "";
 $add_products_price = $add_products_price_err = "";
 $add_products_discount = $add_products_discount_err = "";
 $add_products_image = $add_products_image_err = "";
@@ -14,6 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $add_products_description = trim($_POST["add_products_description"]);
    $add_products_category_type = trim($_POST["add_products_category_type"]);
    $add_products_quantity = trim($_POST["add_products_quantity"]);
+   $add_products_size = trim($_POST["add_products_size"]);
+   $add_products_color = trim($_POST["add_products_color"]);
    $add_products_price = trim($_POST["add_products_price"]);
    $add_products_discount = trim($_POST["add_products_discount"] ? $_POST["add_products_discount"] : 1);
 
@@ -45,6 +49,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $errors['add_products_quantity'] = 'Product quantity is required and should contain only numbers.';
    }
 
+   // Validation for Category Type
+   if (empty($add_products_size)) {
+      $errors['add_products_size'] = 'Select atleast 1 size.';
+   }
+
+   // Validation for Category Type
+   if (empty($add_products_color)) {
+      $errors['add_products_color'] = 'Select atleast 1 color.';
+   }
+
+
    // Validation for Product Price
    if (!preg_match('/^\d+(\.\d+)?$/', $add_products_price)) {
       $errors['add_products_price'] = 'Product price is required and should contain only numbers.';
@@ -70,6 +85,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          mysqli_stmt_execute($insert_stmt);
 
          $product_id = mysqli_insert_id($database_connection);
+
+         $size_ids = explode(',', $_POST['add_products_size']);
+         $insert_product_size_sql = "INSERT INTO product_size_variant (product_id, size_id) VALUES (?, ?)";
+         $stmt = $database_connection->prepare($insert_product_size_sql);
+         foreach ($size_ids as $size_id) {
+            $stmt->bind_param("ii", $product_id, $size_id);
+            $stmt->execute();
+         }
+         $stmt->close();
+
+         $colors_ids = explode(',', $_POST['add_products_color']);
+         $insert_product_color_sql = "INSERT INTO product_color_variant (product_id, color_id) VALUES (?, ?)";
+         $stmt = $database_connection->prepare($insert_product_color_sql);
+         foreach ($colors_ids as $colors_id) {
+            $stmt->bind_param("ii", $product_id, $colors_id);
+            $stmt->execute();
+         }
+         $stmt->close();
+
          if (isset($_POST["image_file_names"])) {
             $image_file_names = explode(',', $_POST["image_file_names"]);
             $image_paths = array();

@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__) . "/session.php";
+// require_once dirname(__DIR__) . "/session.php";
 require_once "../config/config.php";
 require_once "./signup_php.php";
 require_once "../links.php";
@@ -17,6 +17,13 @@ require_once "../links.php";
 <body>
     <div class="wrapper signup">
         <h2 class="signup_heading">Sign Up</h2>
+
+        <?php
+        if (!empty($signup_err)) {
+            echo '<div class="alert alert-danger">' . $signup_err . '</div>';
+        }
+        ?>
+
         <form id="registrationForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="name_details">
                 <div class="form-group me-3 mt-3">

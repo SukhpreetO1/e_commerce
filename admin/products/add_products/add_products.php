@@ -92,6 +92,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                      <label for="add_products_color" class="add_product_color mt-2 mb-2">Color <span class="important_mark">*</span></label>
                      <select class="selectpicker add_products_color" id="add_products_color" aria-label="Select products size" name="add_products_color[]" multiple data-live-search="true">
                         <option disabled>Select products color</option>
+                        <option value="select_all">Select All</option>
                         <?php
                         $sql = "SELECT * FROM color";
                         $result = $database_connection->query($sql);
@@ -218,6 +219,26 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       return validate_input(product_quantity, /^(?!0+(\.\d+)?$)\d+$/, 'Product quantity is required.', 'Only numbers are allowed and must start from 1 without decimal.', null, '.add_products_quantity_err');
    }
 
+   function validate_size() {
+      var selected_size = $('#add_products_size').val();
+      var error_messages = '';
+      if (selected_size == '') {
+         error_messages = 'Select atleast 1 size.';
+      }
+      $('.add_products_size_err').text(error_messages);
+      return error_messages === '';
+   }
+
+   function validate_color() {
+      var selected_color = $('#add_products_color').val();
+      var error_messages = '';
+      if (selected_color == '') {
+         error_messages = 'Select atleast 1 color.';
+      }
+      $('.add_products_color_err').text(error_messages);
+      return error_messages === '';
+   }
+
    function validate_products_price() {
       var product_price = $('.add_products_price').val();
       return validate_input(product_price, /^(?!0+(\.0+)?$)\d+(\.\d+)?$/, 'Product price is required.', 'Only numbers are allowed.', null, '.add_products_price_err');
@@ -239,9 +260,13 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       for (var i = 0; i < files.length; i++) {
          fileNames.push(files[i].name);
       }
+      var selectedSizes = $('#add_products_size').val().join(',');
+      var selectedColors = $('#add_products_color').val().join(',');
 
       var formData = new FormData(form);
       formData.append('image_file_names', fileNames.join(','));
+      formData.append('add_products_size', selectedSizes);
+      formData.append('add_products_color', selectedColors);
       var parsed_response = null;
       $.ajax({
          type: "POST",
@@ -300,11 +325,13 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       var is_valid_description = validate_products_description();
       var is_valid_title = validate_category_title();
       var is_valid_quantity = validate_products_quantity();
+      var is_valid_size = validate_size();
+      var is_valid_color = validate_color();
       var is_valid_price = validate_products_price();
       if ($('#add_products_discount').val() === '') {
          $('#add_products_discount option:eq(1)').prop('selected', true);
       }
-      if (!is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price) {
+      if (!is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price || !is_valid_size || !is_valid_color) {
          return false;
       }
    });

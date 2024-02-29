@@ -102,6 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             mysqli_stmt_close($stmt);
         }
+    } else {
+        $signup_err = "Oops! Something went wrong. Please try again later.";
     }
 
     mysqli_close($database_connection);

@@ -1,9 +1,8 @@
 <?php 
-session_start();
+require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
 require_once dirname(__DIR__, 3) . "/common/base_url.php";
 require_once dirname(__DIR__, 3) . "/common/config/config.php";
 require_once dirname(__DIR__, 3) . "/common/links.php";
-require_once dirname(__DIR__, 3) . "/common/alerts/homepage_alerts.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
