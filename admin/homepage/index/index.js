@@ -134,6 +134,13 @@ $(document).on('click', '.categories_types', function (e) {
     handle_redirection_and_push_state('/category_types/category_types', 'tab=categories_types');
 });
 
+// redirection ajax for the admin details
+$(document).on('click', '.admin_detail', function (e) {
+    e.preventDefault();
+    add_background_color(this);
+    handle_redirection_and_push_state('/admin_detail/admin_detail', 'tab=admin_detail');
+});
+
 $(document).ready(function () {
     var query_param = window.location.search;
 
@@ -181,7 +188,9 @@ $(document).ready(function () {
         handle_ajax_redirection('/admin/category_types/category_types.php', function () {
             add_background_color('.categories_types');
         });
-    } else{
-        removeClass('.categories_types');
+    } else if (query_param.includes('admin_detail')) {
+        handle_ajax_redirection('/admin/admin_detail/admin_detail.php', function () {
+            // add_background_color('.admin_detail');
+        });
     }
 });

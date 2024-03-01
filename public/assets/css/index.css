@@ -163,6 +163,7 @@
 .category_header_title,
 .category_types_heading,
 .users_detail_heading,
+.admin_detail_heading,
 .roles_heading,
 .edit_role_heading,
 .size_heading,
@@ -202,6 +203,7 @@
 .add_category_types,
 .edit_category_header,
 .users_detail_page,
+.admin_detail_page,
 .roles_title,
 .add_products,
 .edit_products,
@@ -240,6 +242,8 @@
 .category_types_back_button,
 .add_category_types_back_button,
 .users_detail_back_button,
+.admin_detail_back_button,
+.admin_detail_edit_button,
 .roles_back_button,
 .add_role_back_button,
 .edit_role_back_button,
@@ -653,8 +657,14 @@ a.ui-datepicker-next.ui-corner-all {
   width: 100% !important;
   height: 2.5rem !important;
 }
+
 .add_products_size button{
   height: 2.5rem;
+}
+
+.sidebar_profile_dropdown{
+  width: 100%;
+  margin-left: 3% !important;
 }
 
 @media screen and (max-width: 825px) {

@@ -444,6 +444,26 @@ document.getElementById('password').addEventListener('input', function () {
   }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  var visible_password_icon = document.getElementById('visible_password');
+  var password_value = document.getElementById('password').value;
+  if (password_value.length > 0) {
+    visible_password_icon.style.display = 'block';
+  } else {
+    visible_password_icon.style.display = 'none';
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  var visible_password_icon = document.getElementById('visible_confirm_password');
+  var confirm_password_value = document.getElementById('confirm_password').value;
+  if (confirm_password_value.length > 0) {
+    visible_password_icon.style.display = 'block';
+  } else {
+    visible_password_icon.style.display = 'none';
+  }
+});
+
 document.getElementById('confirm_password').addEventListener('input', function () {
   var visible_confirm_password_icon = document.getElementById('visible_confirm_password');
   if (this.value.length > 0) {

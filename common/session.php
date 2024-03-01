@@ -4,9 +4,9 @@ if (strpos($_SERVER['REQUEST_URI'], 'logged_in') !== false) {
     parse_str($queryString, $params);
     $roleId = $params['role_id'];
     if ($roleId === "2") {
-        header("location: /e_commerce/users/homepage/index/index.php?logged_in=true");
+        header("location: /e_commerce/users/homepage/index/index.php?logged_in=true&role_id=" . $roleId . "&user_id=" . $params['id']);
     } else if ($roleId === "1") {
-        header("location: /e_commerce/admin/homepage/index/index.php?logged_in=true");
+        header("location: /e_commerce/admin/homepage/index/index.php?logged_in=true&role_id=" . $roleId . "&admin_id=" . $params['id']);
     } else {
         header("location: /e_commerce/common/login/login.php");
     }

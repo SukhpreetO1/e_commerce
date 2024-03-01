@@ -149,3 +149,13 @@ document.getElementById('password').addEventListener('input', function () {
     visible_password_icon.style.display = 'none';
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  var visible_password_icon = document.getElementById('visible_password');
+  var password_value = document.getElementById('password').value;
+  if (password_value.length > 0) {
+    visible_password_icon.style.display = 'block';
+  } else {
+    visible_password_icon.style.display = 'none';
+  }
+});
