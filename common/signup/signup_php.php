@@ -1,6 +1,6 @@
 <?php
 $first_name = $last_name = $email = $username = $mobile_number = $date_of_birth = $password = $confirm_password = "";
-$first_name_err = $last_name_err = $email_err = $username_err = $mobile_number_err = $date_of_birth_err = $password_err = $confirm_password_err = "";
+$first_name_err = $last_name_err = $email_err = $username_err = $mobile_number_err = $date_of_birth_err = $password_err = $confirm_password_err = $signup_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate first name
@@ -34,9 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) > 0) {
                     $email_err = "This email is already registered.";
+                } else {
+                    $email = trim($_POST["email"]);
                 }
             } else {
-                echo "email - Oops! Something went wrong. Please try again later.";
+                $signup_err = "Something is wrong in email.";
             }
             mysqli_stmt_close($stmt);
         }
@@ -59,9 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) > 0) {
                     $mobile_number_err = "This mobile number is already registered.";
+                } else {
+                    $mobile_number = trim($_POST["mobile_number"]);
                 }
             } else {
-                echo "mobile_number - Oops! Something went wrong. Please try again later.";
+                $signup_err = "Something is wrong in mobile number.";
             }
             mysqli_stmt_close($stmt);
         }
@@ -71,7 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["date_of_birth"] == null) {
         $date_of_birth_err = "Please select your date of birth.";
     } else {
-        $date_of_birth = DateTime::createFromFormat('m/d/Y', trim($_POST["date_of_birth"]))->format('Y-m-d');
+        if (DateTime::createFromFormat('Y-m-d', $_POST["date_of_birth"]) === false) {
+            $date_of_birth = DateTime::createFromFormat('m/d/Y', trim($_POST["date_of_birth"]))->format('Y-m-d');
+        } else {
+            $date_of_birth = $_POST["date_of_birth"];
+        }
     }
 
     // Validate username
@@ -91,9 +99,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) > 0) {
                     $username_err = "This username is already taken.";
+                } else {
+                    $username = trim($_POST["username"]);
                 }
             } else {
-                echo "username - Oops! Something went wrong. Please try again later.";
+                $signup_err = "Something is wrong in username.";
             }
             mysqli_stmt_close($stmt);
         }
@@ -117,6 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $confirm_password_err = "Password did not match.";
         }
     }
+
     // If all fields are validated, proceed with the database insertion
     if (empty($first_name_err) && empty($last_name_err) && empty($email_err) && empty($mobile_number_err) && empty($date_of_birth_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
         $sql = "INSERT INTO users (first_name, last_name, username, email, mobile_number, date_of_birth, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -136,11 +147,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $signup_err = "Account not created. Please contact admin.";
             }
-            mysqli_stmt_close($stmt);
         } else {
             $signup_err = "Oops! Something went wrong. Please try again later.";
         }
+        mysqli_stmt_close($stmt);
     }
-
     mysqli_close($database_connection);
 }

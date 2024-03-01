@@ -16,6 +16,11 @@
                 </a>
             </li>
             <li>
+                <a href="#" class="nav-link users">
+                    Users Details
+                </a>
+            </li>
+            <li>
                 <a href="#" class="nav-link brands">
                     Brands
                 </a>
@@ -43,11 +48,6 @@
             <li>
                 <a href="#" class="nav-link roles">
                     Roles
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link users">
-                    Users Details
                 </a>
             </li>
             <li>
