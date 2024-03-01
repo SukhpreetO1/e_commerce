@@ -90,9 +90,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
                   <div class="form-group me-2 col-6">
                      <label for="add_products_color" class="add_product_color mt-2 mb-2">Color <span class="important_mark">*</span></label>
-                     <select class="selectpicker add_products_color" id="add_products_color" aria-label="Select products size" name="add_products_color[]" multiple data-live-search="true">
-                        <option disabled>Select products color</option>
-                        <option value="select_all">Select All</option>
+                     <select class="form-select add_products_color" id="add_products_color" aria-label="Select product color" name="add_products_color">
+                     <option hidden selected disabled>Select products color</option>
                         <?php
                         $sql = "SELECT * FROM color";
                         $result = $database_connection->query($sql);
@@ -232,8 +231,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
    function validate_color() {
       var selected_color = $('#add_products_color').val();
       var error_messages = '';
-      if (selected_color == '') {
-         error_messages = 'Select atleast 1 color.';
+      if (selected_color === '' || selected_color === null) {
+         error_messages = 'Please select atleast 1 color.';
       }
       $('.add_products_color_err').text(error_messages);
       return error_messages === '';
@@ -261,12 +260,10 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          fileNames.push(files[i].name);
       }
       var selectedSizes = $('#add_products_size').val().join(',');
-      var selectedColors = $('#add_products_color').val().join(',');
 
       var formData = new FormData(form);
       formData.append('image_file_names', fileNames.join(','));
       formData.append('add_products_size', selectedSizes);
-      formData.append('add_products_color', selectedColors);
       var parsed_response = null;
       $.ajax({
          type: "POST",

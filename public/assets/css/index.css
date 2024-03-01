@@ -628,10 +628,13 @@ a.ui-datepicker-next.ui-corner-all {
   margin-left: 1rem;
 }
 
-.add_products_size,
-.add_products_color {
+.add_products_size {
   display: block !important;
   width: 100% !important;
+  height: 2.5rem !important;
+}
+.add_products_size button{
+  height: 2.5rem;
 }
 
 @media screen and (max-width: 825px) {

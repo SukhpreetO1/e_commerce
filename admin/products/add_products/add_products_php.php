@@ -79,9 +79,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (mysqli_stmt_num_rows($check_stmt) > 0) {
          $response['error'] = "Product name already exists in this category.";
       } else {
-         $insert_sql = "INSERT INTO products (name, description, categories_type_id, quantity, price, discount_id) VALUES (?, ?, ?, ?, ?, ?)";
+         $insert_sql = "INSERT INTO products (name, description, categories_type_id, quantity, color_id, price, discount_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
          $insert_stmt = mysqli_prepare($database_connection, $insert_sql);
-         mysqli_stmt_bind_param($insert_stmt, "ssiiii", $add_products_input_name, $add_products_description, $add_products_category_type, $add_products_quantity, $add_products_price, $add_products_discount);
+         mysqli_stmt_bind_param($insert_stmt, "ssiiiii", $add_products_input_name, $add_products_description, $add_products_category_type, $add_products_quantity, $add_products_color, $add_products_price, $add_products_discount);
          mysqli_stmt_execute($insert_stmt);
 
          $product_id = mysqli_insert_id($database_connection);
@@ -91,15 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $stmt = $database_connection->prepare($insert_product_size_sql);
          foreach ($size_ids as $size_id) {
             $stmt->bind_param("ii", $product_id, $size_id);
-            $stmt->execute();
-         }
-         $stmt->close();
-
-         $colors_ids = explode(',', $_POST['add_products_color']);
-         $insert_product_color_sql = "INSERT INTO product_color_variant (product_id, color_id) VALUES (?, ?)";
-         $stmt = $database_connection->prepare($insert_product_color_sql);
-         foreach ($colors_ids as $colors_id) {
-            $stmt->bind_param("ii", $product_id, $colors_id);
             $stmt->execute();
          }
          $stmt->close();

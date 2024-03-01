@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         // if ($role_id == 2) {
                         //     header("location:" . $_ENV['BASE_URL'] . "/users/homepage/index/index.php?logged_in=true");
                         // } else {
+                        //     header("location:" . $_ENV['BASE_URL'] . "/admin/homepage/index/index.php?logged_in=true");
                         // }
                         header("location:" . $_ENV['BASE_URL'] . "/common/session.php?logged_in=true&role_id=" . $role_id);
                     } else {

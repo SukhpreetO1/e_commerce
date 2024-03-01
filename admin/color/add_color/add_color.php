@@ -16,12 +16,15 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          <div class="add_section">
             <form method="post" id="add_color_form" class="add_color_form">
                <div class="form-group">
-               <label for="add_color_input_name" class="add_product_name mt-2 mb-2">Color Name <span class="important_mark">*</span></label>
-                  <div id="color_picker_container">
+                  <label for="add_color_input_name" class="add_product_name mt-2 mb-2">Color Name <span class="important_mark">*</span></label>
+                  <input type="text" name="add_color_input_name" class="form-control add_color_input_name" id="add_color_input_name" value="" placeholder="Enter color name">
+                  <span class="invalid-feedback add_color_input_name_err" id="add_color_input_name_err">
+                     <?php echo $add_color_input_name_err ?>
+                  </span>
+                  <div id="color_picker_container" class="mt-4">
                      <label for="color_picker">Select color : </label>
-                     <input type="color" id="color_picker" value="#0000ff">
+                     <input type="color" id="color_picker" class="color_picker" value="" name="add_color_hex_code">
                   </div>
-                  <input type="hidden" name="add_color_input_name" class="form-control add_color_input_name" id="add_color_input_name" value="" placeholder="Enter color name">
                </div>
 
                <div class="add_color_name_button">
@@ -34,14 +37,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 </div>
 
 <script>
-   /*--------------------------------------------------------------- Color Picker ----------------------------------------------------------------------------*/
-   var selected_color_picker = document.getElementById('color_picker');
-   var color_name_input = document.getElementById('add_color_input_name');
-
-   selected_color_picker.addEventListener('input', function() {
-      color_name_input.value = selected_color_picker.value;
-   });
-
    /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
    function add_color_back_button(url) {
       $.ajax({
@@ -121,6 +116,44 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          },
          error: function(xhr, status, error) {
             console.log("Error" + error);
+         }
+      });
+   });
+
+   /*--------------------------------------------------------------- Hex code converted ----------------------------------------------------------------------------*/
+   $('.color_picker').on('change', function() {
+      var color_picker_value = $(this).val();
+      color_picker_value = color_picker_value.substring(1);
+      var apiUrl = "https://www.thecolorapi.com/id?hex=" + color_picker_value;
+     
+      $.ajax({
+         url: apiUrl,
+         method: "GET",
+         success: function(data) {
+            var colorName = data.name.value;
+            $('#add_color_input_name').val(colorName);
+         },
+         error: function(xhr, status, error) {
+            var errorMessage = "The Color API doesn't understand the query parameter. Please supply a query parameter of `rgb`, `hsl`, `cmyk` or `hex`.";
+            $('.add_color_input_name_err').text(errorMessage);
+         }
+      });
+   });
+
+   $('.add_color_input_name').on('input', function() {
+      var color_input_value = $(this).val();
+      var apiUrl = "https://x-colors.yurace.pro/api/random/color?type=" + color_input_value;
+     
+      $.ajax({
+         url: apiUrl,
+         method: "GET",
+         success: function(data) {
+            var colorName = data.hex;
+            $('#color_picker').val(colorName);
+         },
+         error: function(xhr, status, error) {
+            var errorMessage = "Please select one color from color picker";
+            $('.add_color_input_name_err').text(errorMessage);
          }
       });
    });
