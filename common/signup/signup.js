@@ -24,6 +24,14 @@ document.getElementById('email').addEventListener('blur', function () {
   validate_email_and_update_status();
 });
 
+document.getElementById('mobile_number').addEventListener('blur', function () {
+  validate_mobile_number_and_update_status();
+});
+
+document.getElementById('date_of_birth').addEventListener('blur', function () {
+  validate_date_of_birth_and_update_status();
+});
+
 document.getElementById('password').addEventListener('blur', function () {
   validate_password_and_update_status();
 });
@@ -114,6 +122,16 @@ document.getElementById('submit_button').addEventListener('click', function (eve
     is_valid = false;
   }
 
+  if (!validate_mobile_number_and_update_status()) {
+    empty_fields.push('mobile_number');
+    is_valid = false;
+  }
+
+  if (!validate_date_of_birth_and_update_status()) {
+    empty_fields.push('date_of_birth');
+    is_valid = false;
+  }
+
   if (!validate_password_and_update_status()) {
     empty_fields.push('password');
     is_valid = false;
@@ -133,7 +151,7 @@ document.getElementById('submit_button').addEventListener('click', function (eve
 function validate_field_and_update_status(field_id, field_name, regex) {
   var is_valid = true;
   var field_element = document.getElementById(field_id);
-  
+
   if (field_element) {
     var field_value = field_element.value;
 
@@ -154,7 +172,7 @@ function validate_field_and_update_status(field_id, field_name, regex) {
 
     field_validation_status[field_id] = is_valid;
   }
-  
+
   return is_valid;
 }
 
@@ -173,6 +191,41 @@ function validate_email_and_update_status() {
   }
 
   return true;
+}
+
+function validate_mobile_number_and_update_status() {
+  var mobile_number = document.getElementById('mobile_number').value;
+  var mobileNumberRegex =/^\d{10,12}$/;
+
+  if (is_empty(mobile_number)) {
+    display_error('mobile_number_err', 'Mobile Number cannot be empty');
+    add_invalid_class('mobile_number');
+    return false;
+  } else if (!mobileNumberRegex.test(mobile_number)) {
+    display_error('mobile_number_err', 'Mobile number must contain 10 to 12 numbers only.');
+    add_invalid_class('mobile_number');
+    return false;
+  }
+
+  return true;
+}
+
+$(document).ready(function() {
+  $('#date_of_birth').on('change', function() {
+    validate_date_of_birth_and_update_status();
+  });
+});
+
+function validate_date_of_birth_and_update_status() {
+  var date_of_birth = $('#date_of_birth').datepicker('getDate');
+  if (date_of_birth != null) {
+    clear_invalid_class('date_of_birth');
+    return true;
+  } else {
+    display_error('date_of_birth_err', 'Please select your date of birth');
+    add_invalid_class('date_of_birth');
+    return false;
+  }
 }
 
 function validate_password_and_update_status() {
@@ -195,7 +248,7 @@ function validate_confirm_password_and_update_status() {
   var confirm_password = document.getElementById('confirm_password').value;
 
   if (is_empty(confirm_password)) {
-    display_error('confirm_password_err', 'Confirm Password cannot be empty');
+    display_error('confirm_password_err', 'Confirm password cannot be empty');
     add_invalid_class('confirm_password');
     return false;
   } else if (password !== confirm_password) {
@@ -217,23 +270,25 @@ function validate_confirm_password_and_update_status() {
 // Function to display error messages for empty fields
 function display_error_messages(fields) {
   var customMessages = {
-    first_name: "First Name cannot be empty",
-    last_name: "Last Name cannot be empty",
+    first_name: "First name cannot be empty",
+    last_name: "Last name cannot be empty",
     username: "Username cannot be empty",
     email: "Email cannot be empty",
+    mobile_number: "Mobile number cannot be empty",
+    date_of_birth: "Date of birth cannot be empty",
     password: "Password cannot be empty",
-    confirm_password: "Confirm Password cannot be empty",
+    confirm_password: "Confirm password cannot be empty",
   };
 
   fields.forEach(function (field) {
     var customMessage = customMessages[field] || field + " cannot be empty";
     var errorElement = document.getElementById(field + "_err");
     var fieldElement = document.getElementById(field);
-    
+
     if (errorElement) {
       errorElement.textContent = customMessage;
     }
-    
+
     if (fieldElement) {
       fieldElement.classList.add("invalid");
     }
@@ -248,11 +303,11 @@ function display_error_messages(fields) {
 var field_validation_status = {};
 
 document.getElementById('first_name').addEventListener('input', function () {
-  validate_field_on_input('first_name', 'First Name', /^[a-zA-Z]+$/);
+  validate_field_on_input('first_name', 'First name', /^[a-zA-Z]+$/);
 });
 
 document.getElementById('last_name').addEventListener('input', function () {
-  validate_field_on_input('last_name', 'Last Name', /^[a-zA-Z]+$/);
+  validate_field_on_input('last_name', 'Last name', /^[a-zA-Z]+$/);
 });
 
 document.getElementById('username').addEventListener('input', function () {
@@ -263,12 +318,16 @@ document.getElementById('email').addEventListener('input', function () {
   validate_field_on_input('email', 'Email', /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
 });
 
+document.getElementById('mobile_number').addEventListener('input', function () {
+  validate_field_on_input('mobile_number', 'Mobile number',/^\d{10,12}$/);
+});
+
 document.getElementById('password').addEventListener('input', function () {
   validate_field_on_input('password', 'Password', /^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/);
 });
 
 document.getElementById('confirm_password').addEventListener('input', function () {
-  validate_field_on_input('confirm_password', 'Confirm Password', /^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/);
+  validate_field_on_input('confirm_password', 'Confirm password', /^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/);
   var passwordValue = document.getElementById('password').value;
   var confirmPasswordValue = document.getElementById('confirm_password').value;
 
@@ -304,10 +363,11 @@ function validate_field_on_input(field_id, field_name, regex) {
     field_validation_status[field_id] = true;
   } else {
     // display_error(field_id + '_err', field_name + ' should contain only specified characters');
-    display_error('first_name_err', 'First Name should contain only letters');
-    display_error('last_name_err', 'Last Name should contain only letters');
+    display_error('first_name_err', 'First name should contain only letters');
+    display_error('last_name_err', 'Last name should contain only letters');
     display_error('username_err', 'Username must contain 1 capital letter and 1 numbers.');
     display_error('email_err', 'Invalid email format. Format should be like abc@gmail.com');
+    display_error('mobile_number_err', 'Mobile number must contain 10 to 12 numbers only.');
     display_error('password_err', 'Invalid password format. Must contain at least 6 characters, 1 capital letter and 1 number.');
     display_error('confirm_password_err', 'Password do not match');
     add_invalid_class(field_id);
@@ -332,7 +392,7 @@ function clear_invalid_class(field) {
 
 function is_empty(value) {
   return typeof value === 'string' && value.trim() === '';
-} 
+}
 
 function display_error(error_id, error_message) {
   document.getElementById(error_id).textContent = error_message;
@@ -350,13 +410,13 @@ function toggle_password_visibility() {
   var eyeIcon = document.querySelector('.visible_password i');
 
   if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      eyeIcon.classList.remove('fa-eye-slash');
-      eyeIcon.classList.add('fa-eye');
+    passwordInput.type = 'text';
+    eyeIcon.classList.remove('fa-eye-slash');
+    eyeIcon.classList.add('fa-eye');
   } else {
-      passwordInput.type = 'password';
-      eyeIcon.classList.remove('fa-eye');
-      eyeIcon.classList.add('fa-eye-slash');
+    passwordInput.type = 'password';
+    eyeIcon.classList.remove('fa-eye');
+    eyeIcon.classList.add('fa-eye-slash');
   }
 }
 
@@ -365,12 +425,12 @@ function toggle_confirm_password_visibility() {
   var eyeIcon = document.querySelector('.visible_confirm_password i');
 
   if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      eyeIcon.classList.remove('fa-eye-slash');
-      eyeIcon.classList.add('fa-eye');
+    passwordInput.type = 'text';
+    eyeIcon.classList.remove('fa-eye-slash');
+    eyeIcon.classList.add('fa-eye');
   } else {
-      passwordInput.type = 'password';
-      eyeIcon.classList.remove('fa-eye');
-      eyeIcon.classList.add('fa-eye-slash');
+    passwordInput.type = 'password';
+    eyeIcon.classList.remove('fa-eye');
+    eyeIcon.classList.add('fa-eye-slash');
   }
 }

@@ -510,7 +510,7 @@ a.ui-datepicker-next.ui-corner-all:hover,
 
 .ui-datepicker-title {
   text-align: end;
-  padding-right: 10px;
+  padding: 10px;
 }
 
 a.ui-datepicker-next.ui-corner-all {

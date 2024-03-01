@@ -1,5 +1,4 @@
 <?php
-// require_once dirname(__DIR__) . "/session.php";
 require_once dirname(__DIR__) . '/base_url.php';
 require_once dirname(__DIR__) . "/config/config.php";
 require_once dirname(__DIR__) . "/login/login_php.php";

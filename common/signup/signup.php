@@ -1,8 +1,8 @@
 <?php
 // require_once dirname(__DIR__) . "/session.php";
-require_once "../config/config.php";
-require_once "./signup_php.php";
-require_once "../links.php";
+require_once dirname(__DIR__) . "/config/config.php";
+require_once dirname(__DIR__) . "/signup/signup_php.php";
+require_once dirname(__DIR__) . "/links.php";
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +49,18 @@ require_once "../links.php";
                     <span class="invalid-feedback" id="email_err"><?php echo $email_err; ?></span>
                 </div>
             </div>
+            <div class="mobile_number_dob_details">
+                <div class="form-group me-3 mt-3">
+                    <label>Mobile Number <span class="asterik_important">*</span></label>
+                    <input type="text" id="mobile_number" name="mobile_number" class="form-control mobile_number <?php echo (!empty($mobile_number_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $mobile_number; ?>" placeholder="Enter Mobile Number">
+                    <span class="invalid-feedback" id="mobile_number_err"><?php echo $mobile_number_err; ?></span>
+                </div>
+                <div class="form-group me-3 mt-3">
+                    <label>Date of Birth <span class="asterik_important">*</span></label>
+                    <input type="text" id="date_of_birth" name="date_of_birth" class="form-control d_o_b <?php echo (!empty($date_of_birth_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $date_of_birth; ?>" placeholder="Select Date of Birth">
+                    <span class="invalid-feedback" id="date_of_birth_err"><?php echo $date_of_birth_err; ?></span>
+                </div>
+            </div>
             <div class="username_password_detail">
                 <div class="form-group me-3 mt-3" style="position:relative">
                     <label>Password <span class="asterik_important">*</span></label>
@@ -67,6 +79,9 @@ require_once "../links.php";
             </div>
         </form>
     </div>
+    <script>
+        $('#date_of_birth').datepicker();
+    </script>
     <script type="text/javascript" src="./signup.js"></script>
 </body>
 

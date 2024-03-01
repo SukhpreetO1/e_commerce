@@ -21,12 +21,12 @@ require_once BASE_DIR . "/common/alerts/forgot_password_alerts.php";
         </div>
     </div>
     <div class="container forgot_password_mail_form">
-        <div class="heading">
+        <div class="heading" style="text-align: center; ">
             <h3>Forgot Password</h3>
         </div>
         <form method="post" id="forgot_password_form">
             <div class="form-group">
-                <label for="email" class="email mt-2">Email :</label>
+                <label for="email" class="email mt-2 mb-2">Email </label>
                 <input type="email" name="email" class="form-control forgot_email" id="email">
                 <span class="invalid-feedback" id="email_err"><?php echo $email_err; ?></span>
             </div>

@@ -75,9 +75,9 @@ a {
 }
 
 .navbar_dropdown_menu {
-   position: absolute !important;
-   right: 16%;
-   top: 79%;
+  position: absolute !important;
+  right: 16%;
+  top: 79%;
 }
 
 /* ------------------------------------ slider css ------------------------------------ */
@@ -93,4 +93,21 @@ a {
 .homepage_card {
   margin: 0 13px 20px 0;
   flex: 0 0 calc(16.666% - 1rem);
+}
+
+
+
+
+
+/* ------------------------------------ Login User ----------------------------------- */
+.logged_in_alert_dismissible {
+  font-size: 15px;
+  position: absolute;
+  right: 9px;
+  top: 6px;
+  z-index: 9;
+}
+
+.logged_in_alert_dismissible {
+  width: 15rem;
 }
