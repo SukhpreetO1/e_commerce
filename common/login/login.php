@@ -33,7 +33,7 @@ require_once dirname(__DIR__) . "/alerts/login_alerts.php";
             </div>
             <div class="form-group mt-3" style="position:relative">
                 <label name="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control password_password mt-2 <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password ?>"><span class="visible_password" onclick="toggle_password()"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                <input type="password" id="password" name="password" class="form-control password_password mt-2 <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password ?>"><span class="visible_password" id="visible_password"  onclick="toggle_password()"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                 <span class="invalid-feedback" id="password_err"><?php echo $password_err; ?></span>
                 <div class="form-group forgot_password mt-3">
                     <p class="login_forgot_password mt-2"><a href= "<?php echo $_ENV['BASE_URL'] ?>/common/forgot_password/forgot_password/forgot_password.php">Forgot Password?</a></p>

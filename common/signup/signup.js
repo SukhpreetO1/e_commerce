@@ -195,7 +195,7 @@ function validate_email_and_update_status() {
 
 function validate_mobile_number_and_update_status() {
   var mobile_number = document.getElementById('mobile_number').value;
-  var mobileNumberRegex =/^\d{10,12}$/;
+  var mobileNumberRegex = /^\d{10,12}$/;
 
   if (is_empty(mobile_number)) {
     display_error('mobile_number_err', 'Mobile Number cannot be empty');
@@ -210,8 +210,8 @@ function validate_mobile_number_and_update_status() {
   return true;
 }
 
-$(document).ready(function() {
-  $('#date_of_birth').on('change', function() {
+$(document).ready(function () {
+  $('#date_of_birth').on('change', function () {
     validate_date_of_birth_and_update_status();
   });
 });
@@ -319,7 +319,7 @@ document.getElementById('email').addEventListener('input', function () {
 });
 
 document.getElementById('mobile_number').addEventListener('input', function () {
-  validate_field_on_input('mobile_number', 'Mobile number',/^\d{10,12}$/);
+  validate_field_on_input('mobile_number', 'Mobile number', /^\d{10,12}$/);
 });
 
 document.getElementById('password').addEventListener('input', function () {
@@ -434,3 +434,21 @@ function toggle_confirm_password_visibility() {
     eyeIcon.classList.add('fa-eye-slash');
   }
 }
+
+document.getElementById('password').addEventListener('input', function () {
+  var visible_password_icon = document.getElementById('visible_password');
+  if (this.value.length > 0) {
+    visible_password_icon.style.display = 'block';
+  } else {
+    visible_password_icon.style.display = 'none';
+  }
+});
+
+document.getElementById('confirm_password').addEventListener('input', function () {
+  var visible_confirm_password_icon = document.getElementById('visible_confirm_password');
+  if (this.value.length > 0) {
+    visible_confirm_password_icon.style.display = 'block';
+  } else {
+    visible_confirm_password_icon.style.display = 'none';
+  }
+});

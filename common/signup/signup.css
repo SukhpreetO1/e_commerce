@@ -55,13 +55,9 @@ label {
   background-image: none;
 }
 
-.visible_password {
-  position: absolute;
-  top: 40px;
-  right: 11px;
-}
-
+.visible_password,
 .visible_confirm_password {
+  display: none;
   position: absolute;
   top: 40px;
   right: 11px;

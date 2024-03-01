@@ -5,33 +5,33 @@ var field_validation_status = {
 
 // Showing validaton message when press tab button
 document.getElementById('email').addEventListener('blur', function () {
-    validateEmail();
+  validateEmail();
 });
 
 function validateEmail() {
-    var email = document.getElementById('email').value;
-    var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-  
-    if (isEmpty(email)) {
-        displayError('email_err', 'Email cannot be empty');
-        addInvalidClass('email');
-      return false;
-    } else if (!emailRegex.test(email)) {
-        displayError('email_err', 'Invalid email format. Format should be like abc@gmail.com');
-        addInvalidClass('email');
-      return false;
-    }
-    return true;
+  var email = document.getElementById('email').value;
+  var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+  if (isEmpty(email)) {
+    displayError('email_err', 'Email cannot be empty');
+    addInvalidClass('email');
+    return false;
+  } else if (!emailRegex.test(email)) {
+    displayError('email_err', 'Invalid email format. Format should be like abc@gmail.com');
+    addInvalidClass('email');
+    return false;
+  }
+  return true;
 }
 
 function validatePassword() {
-    var password = document.getElementById('password').value;
-  
-    if (isEmpty(password)) {
-        displayError('password_err', 'Password cannot be empty');
-        addInvalidClass('password');
-    }   
-    return true;
+  var password = document.getElementById('password').value;
+
+  if (isEmpty(password)) {
+    displayError('password_err', 'Password cannot be empty');
+    addInvalidClass('password');
+  }
+  return true;
 }
 
 
@@ -70,11 +70,11 @@ function displayErrorMessages(fields) {
     var customMessage = customMessages[field] || field + " cannot be empty";
     var errorElement = document.getElementById(field + "_err");
     var fieldElement = document.getElementById(field);
-    
+
     if (errorElement) {
       errorElement.textContent = customMessage;
     }
-    
+
     if (fieldElement) {
       fieldElement.classList.add("invalid");
     }
@@ -92,13 +92,13 @@ function validateFieldOnInput(field_id, field_name, regex) {
   var field_value = document.getElementById(field_id).value;
 
   if (!isEmpty(field_value) && regex.test(field_value)) {
-      clearErrorMessages();
-      clearInvalidClass(field_id);
-      field_validation_status[field_id] = true;
+    clearErrorMessages();
+    clearInvalidClass(field_id);
+    field_validation_status[field_id] = true;
   } else {
-      displayError('email_err', 'Invalid email format. Format should be like abc@gmail.com');
-      addInvalidClass(field_id);
-      field_validation_status[field_id] = false;
+    displayError('email_err', 'Invalid email format. Format should be like abc@gmail.com');
+    addInvalidClass(field_id);
+    field_validation_status[field_id] = false;
   }
 }
 
@@ -116,7 +116,7 @@ function clearErrorMessages() {
 
 function isEmpty(value) {
   return typeof value === 'string' && value.trim() === '';
-} 
+}
 
 function addInvalidClass(field) {
   document.getElementById(field).classList.add('is-invalid');
@@ -131,12 +131,21 @@ function toggle_password() {
   var eyeIcon = document.querySelector('.visible_password i');
 
   if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      eyeIcon.classList.remove('fa-eye-slash');
-      eyeIcon.classList.add('fa-eye');
+    passwordInput.type = 'text';
+    eyeIcon.classList.remove('fa-eye-slash');
+    eyeIcon.classList.add('fa-eye');
   } else {
-      passwordInput.type = 'password';
-      eyeIcon.classList.remove('fa-eye');
-      eyeIcon.classList.add('fa-eye-slash');
+    passwordInput.type = 'password';
+    eyeIcon.classList.remove('fa-eye');
+    eyeIcon.classList.add('fa-eye-slash');
   }
 }
+
+document.getElementById('password').addEventListener('input', function () {
+  var visible_password_icon = document.getElementById('visible_password');
+  if (this.value.length > 0) {
+    visible_password_icon.style.display = 'block';
+  } else {
+    visible_password_icon.style.display = 'none';
+  }
+});

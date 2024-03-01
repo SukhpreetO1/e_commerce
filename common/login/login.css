@@ -30,6 +30,7 @@ p.login_forgot_password.mt-2 {
 }
 
 .visible_password {
+  display: none;
   position: absolute;
   top: 36px;
   right: 11px;

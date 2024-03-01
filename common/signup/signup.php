@@ -64,12 +64,12 @@ require_once dirname(__DIR__) . "/links.php";
             <div class="username_password_detail">
                 <div class="form-group me-3 mt-3" style="position:relative">
                     <label>Password <span class="asterik_important">*</span></label>
-                    <input type="password" id="password" name="password" class="form-control password <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>" placeholder="Enter Password"><span class="visible_password" onclick="toggle_password_visibility()"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                    <input type="password" id="password" name="password" class="form-control password <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>" placeholder="Enter Password"><span class="visible_password" id="visible_password" onclick="toggle_password_visibility()"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                     <span class="invalid-feedback" id="password_err"><?php echo $password_err; ?></span>
                 </div>
                 <div class="form-group me-3 mt-3" style="position:relative">
                     <label>Confirm Password <span class="asterik_important">*</span></label>
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control confirm_password <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>" placeholder="Enter Confirm Password"><span class="visible_confirm_password" onclick="toggle_confirm_password_visibility()"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control confirm_password <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>" placeholder="Enter Confirm Password"><span class="visible_confirm_password" id="visible_confirm_password" onclick="toggle_confirm_password_visibility()"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                     <span class="invalid-feedback" id="confirm_password_err"><?php echo $confirm_password_err; ?></span>
                 </div>
             </div>
