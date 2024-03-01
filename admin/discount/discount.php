@@ -78,10 +78,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                         <div class="discount_action">
                            <input type="hidden" name="discount_id" class="discount_id" id="discount_id" value="<?php echo $discount_data['id']; ?>">
                            <input type="hidden" name="active_id" class="active_id" id="active_id" value="<?php echo $discount_data['activate']; ?>">
-                           <div class="discount_toogle_button">
+                           <div class="discount_toggle_button">
                               <label class="switch">
                                  <input type="checkbox" <?php echo ($discount_data['activate'] == 1) ? 'checked' : ''; ?>>
-                                 <span class="discount_toogle_button_active_change" id="discount_toogle_button_active_change" name='discount_toogle_button_active_change'></span>
+                                 <span class="discount_toggle_button_active_change" id="discount_toggle_button_active_change" name='discount_toggle_button_active_change'></span>
                               </label>
                            </div>
                            <div class="discount_edit">
@@ -217,11 +217,11 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    });
 
    /* --------------------------------------------------------------- Toggle Button JS ----------------------------------------------------------------------------*/
-   $(document).off('click', '.discount_toogle_button_active_change').on('click', '.discount_toogle_button_active_change', function() {
+   $(document).off('click', '.discount_toggle_button_active_change').on('click', '.discount_toggle_button_active_change', function() {
       var discount_id = $(this).parent().parent().parent().find('.discount_id').val();
       var active_id = $(this).parent().parent().parent().find('.active_id').val();
       $.ajax({
-         url: BASE_URL + "/admin/discount/active_toogle_button_php.php",
+         url: BASE_URL + "/admin/discount/active_toggle_button_php.php",
          type: "POST",
          data: {
             discount_id: discount_id,

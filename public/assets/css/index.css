@@ -24,8 +24,8 @@
   color: white !important;
   border-radius: 0px !important;
 }
-/* -------------------------------------------------------- */
 
+/* ----------------------------------------------------------------------------------- */
 .logged_in_alert_dismissible,
 .category_title_alert_dismissible,
 .category_title_delete_alert_dismissible,
@@ -36,12 +36,6 @@
 .category_types_delete_alert_dismissible,
 .category_types_alert_dismissible,
 .category_types_success_dismissible,
-.role_alert_dismissible,
-.role_success_dismissible,
-.role_delete_alert_dismissible, 
-.user_delete_alert_dismissible, 
-.role_update_alert_dismissible, /* toggle button in user table */ 
-.role_update_success_dismissible, /* toggle button in user table */
 .products_alert_dismissible,
 .products_success_dismissible,
 .products_delete_alert_dismissible,
@@ -70,11 +64,28 @@
   z-index: 9;
 }
 
+.role_alert_dismissible,
+.role_success_dismissible,
+.role_delete_alert_dismissible, 
+.user_delete_alert_dismissible, 
+.role_update_alert_dismissible, /* toggle button in user table */ 
+.role_update_success_dismissible, /* toggle button in user table */
+.user_active_update_success_dismissible, /* toggle button in user table */
+.user_active_update_alert_dismissible /* toggle button in user table */ {
+  font-size: 15px;
+  position: absolute;
+  right: -8rem;
+  top: 6px;
+  z-index: 9;
+}
+
 .logged_in_alert_dismissible,
 .role_alert_dismissible,
 .user_delete_alert_dismissible,
 .role_update_alert_dismissible,
-.role_update_success_dismissible {
+.role_update_success_dismissible,
+.user_active_update_success_dismissible,
+.user_active_update_alert_dismissible {
   width: 15rem;
 }
 
@@ -129,7 +140,7 @@
 .discount_action {
   display: flex;
   position: absolute;
-  margin-top: -0.75rem;
+  margin-top: -0.5rem;
 }
 
 .category_header_action {
@@ -137,9 +148,10 @@
   position: absolute;
 }
 
-.users_detail_toogle_button,
-.discount_toogle_button {
-  margin-top: 5px;
+.users_detail_toggle_button,
+.users_active_toggle_button,
+.discount_toggle_button {
+  margin-top: 2px;
 }
 
 .table > :not(caption) > * > td {
@@ -161,7 +173,8 @@
   margin: 1% 0% 0;
 }
 
-.users_detail_toogle_button,
+.users_detail_toggle_button,
+.users_active_toggle_button,
 .category_title_edit,
 .category_header_edit,
 .category_types_edit,
@@ -172,7 +185,7 @@
 .size_edit,
 .color_edit,
 .discount_edit,
-.discount_toogle_button {
+.discount_toggle_button {
   margin-right: 15px;
 }
 
@@ -425,8 +438,9 @@
   height: 0;
 }
 
-.users_detail_toogle_button_role_change,
-.discount_toogle_button_active_change {
+.users_detail_toggle_button_role_change,
+.users_active_toggle_button_change,
+.discount_toggle_button_active_change {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -438,8 +452,9 @@
   transition: 0.4s;
 }
 
-.users_detail_toogle_button_role_change:before,
-.discount_toogle_button_active_change:before {
+.users_detail_toggle_button_role_change:before,
+.users_active_toggle_button_change:before,
+.discount_toggle_button_active_change:before {
   position: absolute;
   content: "";
   height: 12px;
@@ -451,31 +466,36 @@
   transition: 0.4s;
 }
 
-input:checked + .users_detail_toogle_button_role_change,
-input:checked + .discount_toogle_button_active_change {
+input:checked + .users_detail_toggle_button_role_change,
+input:checked + .users_active_toggle_button_change,
+input:checked + .discount_toggle_button_active_change {
   background-color: #2196f3;
 }
 
-input:focus + .users_detail_toogle_button_role_change,
-input:focus + .discount_toogle_button_active_change {
+input:focus + .users_detail_toggle_button_role_change,
+input:focus + .users_active_toggle_button_change,
+input:focus + .discount_toggle_button_active_change {
   box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .users_detail_toogle_button_role_change:before,
-input:checked + .discount_toogle_button_active_change:before {
+input:checked + .users_detail_toggle_button_role_change:before,
+input:checked + .users_active_toggle_button_change:before,
+input:checked + .discount_toggle_button_active_change:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 
 /* Toggles buttons */
-.users_detail_toogle_button_role_change,
-.discount_toogle_button_active_change {
+.users_detail_toggle_button_role_change,
+.users_active_toggle_button_change,
+.discount_toggle_button_active_change {
   border-radius: 34px;
 }
 
-.users_detail_toogle_button_role_change:before,
-.discount_toogle_button_active_change:before {
+.users_detail_toggle_button_role_change:before,
+.users_active_toggle_button_change:before,
+.discount_toggle_button_active_change:before {
   border-radius: 50%;
 }
 

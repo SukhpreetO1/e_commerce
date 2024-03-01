@@ -71,7 +71,7 @@
                 <img src="#" alt="" width="32" height="32" class="rounded-circle me-2">
                 <strong>Profile</strong>
             </a>
-            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+            <ul class="dropdown-menu text-small shadow sidebar_profile_dropdown" aria-labelledby="dropdownUser2">
                 <li><a class="dropdown-item" href="#">Detail</a></li>
                 <li><a class="dropdown-item logout" href="#">Logout</a></li>
             </ul>
