@@ -2,7 +2,10 @@
 include dirname(__DIR__, 3) . "/common/config/config.php";
 
 $product_id = $_GET['product_id'];
-$sql = "SELECT * FROM products WHERE id = $product_id";
+$sql = "SELECT products.*, color.id AS color_id, color.name AS color_name, color.color_code AS color_color_code
+FROM products 
+LEFT JOIN color ON products.color_id = color.id
+WHERE products.id = $product_id";
 $result = $database_connection->query($sql);
 if ($result->num_rows > 0) {
    while ($product_data = $result->fetch_assoc()) {
@@ -45,6 +48,28 @@ if ($result->num_rows > 0) {
             </div>
             <div class="product_modal_description">
                <div name="products_description_in_modal" class="products_description_in_modal" id="products_description_in_modal"><?php echo $product_data["description"]; ?></div>
+            </div>
+            <div class="product_modal_size">
+               <div name="products_sizes_in_modal" class="products_sizes_in_modal" id="products_sizes_in_modal">
+                  <?php
+                  $sql = "SELECT product_size_variant.*, size.name AS size_name
+                            FROM product_size_variant
+                            INNER JOIN size ON product_size_variant.size_id = size.id
+                            WHERE product_size_variant.product_id = $product_id;";
+                  $result = $database_connection->query($sql);
+                  if ($result->num_rows > 0) {
+                     while ($sizes = $result->fetch_assoc()) {
+                        echo '<div class="product_selected_size">' . $sizes['size_name'] . '</div>';
+                     }
+                  }
+                  ?>
+               </div>
+            </div>
+            <div class="product_modal_color">
+               <div name="products_color_in_modal" class="products_color_in_modal" id="products_color_in_modal">
+                  <span class="product_selected_color_name" value="<?php echo $product_data['color_color_code'] ?>" style="background-color: <?php echo $product_data['color_color_code'] ?>">
+                  </span>
+               </div>
             </div>
          </div>
       </div>
