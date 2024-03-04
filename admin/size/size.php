@@ -9,9 +9,18 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
          <h2>Size</h2>
       </div>
 
+      <div class="error_messages" style="display: none;">
+         <div class="alert alert-danger uploading_file_err" role="alert" id="uploading_file_err">
+            <?php echo $uploading_file_err ?>
+         </div>
+      </div>
+
       <div class="add_size">
          <a href="#"><i class="fa-solid fa-arrow-left-long size_back_button"></i></a>
-         <a href="#"><i class="fa-solid fa-plus size_plus_icon"></i></a>
+         <div>
+            <a href="#"><i class="fa-solid fa-plus size_plus_icon"></i></a>
+            <a href="#" id="size_import_file_link"><i class="fa-solid fa-file-arrow-down size_file_import"></i></a>
+         </div>
       </div>
 
       <div class="size_table">
@@ -200,5 +209,44 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       e.preventDefault();
       var size_id = $(this).siblings('.size_id').val();
       size_edit_icon('/admin/size/edit_size/edit_size.php', size_id);
+   });
+
+   /*--------------------------------------------------------------- Import Button ----------------------------------------------------------------------------*/
+   $(document).ready(function() {
+      $('#size_import_file_link').click(function() {
+         var fileInput = $('<input type="file">');
+         fileInput.on('change', function() {
+            var file = this.files[0];
+            if (file.name.toLowerCase().endsWith('.csv') || file.name.toLowerCase().endsWith('.xlsx')) {
+               var formData = new FormData();
+               formData.append('file_name', file.name);
+               console.log(file.name);
+               $.ajax({
+                  type: 'POST',
+                  url: BASE_URL + '/admin/size/size_import/size_import.php',
+                  data: formData,
+                  success: function(data) {
+                     console.log(data);
+                  },
+                  error: function(e) {
+                     console.log(e);
+                  }
+               });
+            } else {
+               $('.error_messages').css({
+                  'display': 'block',
+                  'width': '17rem',
+                  'position': 'absolute',
+                  'top': '-0.5rem',
+                  'right': '-10rem'
+               });
+               $('.uploading_file_err').text('Please select a CSV or XLSX file');
+               setTimeout(function() {
+                  $('.error_messages').css('display', 'none');
+               }, 3000);
+            }
+         });
+         fileInput.click();
+      });
    });
 </script>

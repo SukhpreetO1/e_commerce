@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 01, 2024 at 06:48 PM
+-- Generation Time: Mar 04, 2024 at 06:56 PM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `e-commerce`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` int NOT NULL,
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'ABC', '2024-03-04 13:13:25', '2024-03-04 13:13:25');
 
 -- --------------------------------------------------------
 
@@ -73,7 +93,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Men', '2024-02-14 16:26:23', '2024-02-28 16:30:10'),
+(1, 'Men', '2024-02-14 16:26:23', '2024-03-04 17:11:00'),
 (2, 'Women', '2024-02-14 16:26:27', '2024-02-14 16:26:27'),
 (3, 'Kids', '2024-02-14 16:26:31', '2024-02-14 16:26:31'),
 (4, 'Home Living', '2024-02-14 16:26:40', '2024-02-14 16:26:40'),
@@ -238,7 +258,7 @@ CREATE TABLE `discount` (
 --
 
 INSERT INTO `discount` (`id`, `code_name`, `discount_type`, `activate`, `amount`, `rupees_or_percentage`, `expiration_date`, `created_at`, `updated_at`) VALUES
-(1, 'NoDiscount', 'No Discount', 1, 0, 1, '2024-02-23', '2024-02-23 12:19:14', '2024-02-27 10:51:56');
+(1, 'NoDiscount', 'No Discount', 1, 0, 1, '2024-02-15', '2024-02-23 12:19:14', '2024-03-04 11:37:29');
 
 -- --------------------------------------------------------
 
@@ -288,6 +308,7 @@ CREATE TABLE `payment_method` (
 CREATE TABLE `products` (
   `id` int NOT NULL,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `brands_id` int NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `categories_type_id` int NOT NULL,
   `quantity` int NOT NULL,
@@ -302,12 +323,12 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `categories_type_id`, `quantity`, `color_id`, `price`, `discount_id`, `created_at`, `updated_at`) VALUES
-(1, 'lorem', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis dignissimos sapiente aut! Accusamus ab vero doloremque nobis id earum soluta.', 2, 5, 1, '10', 1, '2024-02-20 15:55:10', '2024-02-27 17:12:03'),
-(2, 'uiouiouio', 'uiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouio', 5, 10, 1, '30', 1, '2024-02-29 15:34:54', '2024-02-29 15:34:54'),
-(3, 'xcc', 'cvbcvb', 3, 20, 1, '20', 1, '2024-02-29 15:38:13', '2024-02-29 15:38:13'),
-(4, 'zxczxc', 'zxczxczxc', 3, 210, 1, '20', 1, '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(5, 'asdasd', 'asdasdasd', 4, 50, 3, '50', 1, '2024-03-01 09:45:20', '2024-03-01 09:45:20');
+INSERT INTO `products` (`id`, `name`, `brands_id`, `description`, `categories_type_id`, `quantity`, `color_id`, `price`, `discount_id`, `created_at`, `updated_at`) VALUES
+(1, 'lorem', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis dignissimos sapiente aut! Accusamus ab vero doloremque nobis id earum soluta.', 2, 5, 1, '10', 1, '2024-02-20 15:55:10', '2024-02-27 17:12:03'),
+(2, 'uiouiouio', 1, 'uiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouio', 5, 10, 1, '30', 1, '2024-02-29 15:34:54', '2024-02-29 15:34:54'),
+(3, 'xcc', 1, 'cvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbv', 3, 20, 1, '20', 1, '2024-02-29 15:38:13', '2024-02-29 15:38:13'),
+(4, 'zxczxc', 1, 'zxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxc', 3, 210, 1, '20', 1, '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
+(5, 'asdasd', 1, 'asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd', 4, 50, 3, '50', 1, '2024-03-01 09:45:20', '2024-03-01 09:45:20');
 
 -- --------------------------------------------------------
 
@@ -493,7 +514,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `mobile_number`, `date_of_birth`, `active`, `role_id`, `reset_link_token`, `reset_token_exp`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Sukhpreet', 'Singh', 'Sukhpreet9', 'ssingh77022@gmail.com', 1112223331, '2024-03-06', 1, 2, NULL, NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-03-01 16:31:39'),
-(2, 'Sukhpreet', 'Singh', 'Sukhpreet99', 'ssingh77021@gmail.com', 1231231231, '2024-03-20', 1, 1, 'NULL', NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-02-16 18:47:12'),
+(2, 'Sukhpreet', 'Singh', 'SukhpreetO9', 'ssingh77021@gmail.com', 7897897878, '2024-03-14', 1, 1, 'NULL', NULL, '$2y$10$YdMAas42Dp5eUUmh7Ikn5OTVbHPDlM9ykN4.gT4Ueo2gf0eCbyrcy', '2024-02-01 09:47:43', '2024-03-04 17:14:28'),
 (3, 'Jagseer', 'Singh', 'JS1', 'jagseer.singh@talentalgia.in', 1234567890, '2024-03-19', 1, 2, NULL, NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-29 16:42:58', '2024-02-29 16:42:58'),
 (4, 'asas', 'asasdad', 'Q2', 'abc@gmail.com', 4564564645, '2024-03-01', 2, 2, NULL, NULL, '$2y$10$X492gkW9d6eCcxfm2Gl5hOBLhIQ9rzjqPWXCoohF25MtpPusTtfOG', '2024-03-01 12:30:05', '2024-03-01 16:31:45');
 
@@ -515,6 +536,13 @@ CREATE TABLE `wishlist` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `card_details`
@@ -590,7 +618,8 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categories_type_id` (`categories_type_id`) USING BTREE,
   ADD KEY `discount_id` (`discount_id`),
-  ADD KEY `color_id` (`color_id`);
+  ADD KEY `color_id` (`color_id`),
+  ADD KEY `brands_id` (`brands_id`) USING BTREE;
 
 --
 -- Indexes for table `product_image`
@@ -665,6 +694,12 @@ ALTER TABLE `wishlist`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `card_details`
@@ -831,6 +866,7 @@ ALTER TABLE `payment_method`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
+  ADD CONSTRAINT `fk_brands_id` FOREIGN KEY (`brands_id`) REFERENCES `brands` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_categories_type` FOREIGN KEY (`categories_type_id`) REFERENCES `categories_type` (`id`),
   ADD CONSTRAINT `fk_color_id` FOREIGN KEY (`color_id`) REFERENCES `color` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_discount_id` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`id`);
