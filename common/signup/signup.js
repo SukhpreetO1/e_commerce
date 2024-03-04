@@ -3,6 +3,8 @@ var field_validation_status = {
   last_name: { is_valid: false, error_message: '' },
   username: { is_valid: false, error_message: '' },
   email: { is_valid: false, error_message: '' },
+  mobile_number: { is_valid: false, error_message: '' },
+  date_of_birth: { is_valid: false, error_message: '' },
   password: { is_valid: false, error_message: '' },
   confirm_password: { is_valid: false, error_message: '' }
 };
@@ -455,12 +457,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  var visible_password_icon = document.getElementById('visible_confirm_password');
+  var visible_confirm_password_icon = document.getElementById('visible_confirm_password');
   var confirm_password_value = document.getElementById('confirm_password').value;
   if (confirm_password_value.length > 0) {
-    visible_password_icon.style.display = 'block';
+    visible_confirm_password_icon.style.display = 'block';
   } else {
-    visible_password_icon.style.display = 'none';
+    visible_confirm_password_icon.style.display = 'none';
   }
 });
 

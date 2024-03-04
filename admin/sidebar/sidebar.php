@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <div class="homepage_sidebar">
     <div class="admin_sidebar">
         <a href="#" class="mb-3 link-dark text-decoration-none title">
@@ -72,7 +75,7 @@
                 <strong>Profile</strong>
             </a>
             <ul class="dropdown-menu text-small shadow sidebar_profile_dropdown" aria-labelledby="dropdownUser2">
-                <input type="hidden" name="user_id" class="user_id" id="user_id" value="<?php var_dump($role_id)?>">
+                <input type="hidden" name="user_id" class="user_id" id="user_id">
                 <li><a class="dropdown-item admin_detail" href="#">Admin Detail</a></li>
                 <li><a class="dropdown-item logout" href="#">Logout</a></li>
             </ul>

@@ -50,20 +50,15 @@
 .color_alert_dismissible,
 .color_success_dismissible,
 .color_delete_alert_dismissible,
-.add_discount_alert_dismissible, 
+.add_discount_alert_dismissible,
 .add_discount_success_dismissible,
 .discount_delete_alert_dismissible,
 .discount_update_alert_dismissible,
 .discount_update_success_dismissible,
 .edit_discount_alert_dismissible,
-.edit_discount_success_dismissible {
-  font-size: 15px;
-  position: absolute;
-  right: 9px;
-  top: 6px;
-  z-index: 9;
-}
-
+.edit_admin_detail_alert_dismissible,
+.edit_admin_detail_success_dismissible,
+.edit_discount_success_dismissible,
 .role_alert_dismissible,
 .role_success_dismissible,
 .role_delete_alert_dismissible, 
@@ -102,16 +97,18 @@
 .add_size_alert_dismissible,
 .add_size_success_dismissible,
 .add_discount_alert_dismissible,
-.add_discount_success_dismissible {
+.add_discount_success_dismissible,
+.edit_admin_detail_alert_dismissible,
+.edit_admin_detail_success_dismissible {
   width: 18rem;
 }
 
 .add_color_alert_dismissible,
-.add_color_success_dismissible{
+.add_color_success_dismissible {
   width: 16rem;
 }
 
-.edit_products_alert_dismissible{
+.edit_products_alert_dismissible {
   width: 23rem;
 }
 
@@ -164,6 +161,8 @@
 .category_types_heading,
 .users_detail_heading,
 .admin_detail_heading,
+.edit_admin_detail_heading,
+.admin_detail_submit_details,
 .roles_heading,
 .edit_role_heading,
 .size_heading,
@@ -204,6 +203,7 @@
 .edit_category_header,
 .users_detail_page,
 .admin_detail_page,
+.edit_admin_detail_page,
 .roles_title,
 .add_products,
 .edit_products,
@@ -244,6 +244,7 @@
 .users_detail_back_button,
 .admin_detail_back_button,
 .admin_detail_edit_button,
+.edit_admin_detail_back_button,
 .roles_back_button,
 .add_role_back_button,
 .edit_role_back_button,
@@ -252,12 +253,12 @@
 .edit_products_back_button,
 .size_back_button,
 .size_plus_icon,
-.add_size_back_button, 
-.edit_size_back_button, 
+.add_size_back_button,
+.edit_size_back_button,
 .color_back_button,
 .color_plus_icon,
-.add_color_back_button, 
-.edit_color_back_button, 
+.add_color_back_button,
+.edit_color_back_button,
 .discount_back_button,
 .discount_plus_icon,
 .add_discount_back_button,
@@ -267,7 +268,7 @@
   color: black;
 }
 
-.discount_file_import{
+.discount_file_import {
   font-size: 2rem;
   margin-left: 5px;
   padding: 5px;
@@ -300,6 +301,52 @@
 .discount_edit:hover,
 .discount_delete:hover {
   cursor: pointer;
+}
+
+.admin_detials_firstname_lastname,
+.admin_detials_username_email,
+.admin_detials_mobile_number_date_of_birth,
+.edit_admin_detials_firstname_lastname,
+.edit_admin_detials_username_email,
+.edit_admin_detials_mobile_number_date_of_birth,
+.edit_admin_detials_password_confirm_password {
+  display: flex;
+}
+
+.admin_personal_detials,
+.edit_admin_personal_detials {
+  position: absolute;
+  left: 28%;
+}
+
+.password-match {
+  border: 2.5px solid green;
+}
+
+.password-not-matched {
+  border: 2.5px solid red;
+}
+
+.edit_admin_password.is-invalid,
+.edit_admin_confirm_password.is-invalid {
+  background-image: none;
+}
+
+.edit_admin_password_icon,
+.edit_admin_confirm_password_icon {
+  display: block;
+  position: absolute;
+  top: 40px;
+  right: 11px;
+}
+
+.edit_admin_password,
+.edit_admin_confirm_password {
+  padding-right: 2.25rem;
+}
+
+.form-group.me-3 {
+  width: 18rem;
 }
 
 /* CSS for the add category title page */
@@ -392,7 +439,15 @@
 #edit_discount_discount_type_err,
 #edit_discount_active_inactive_err,
 #edit_discount_price_err,
-#edit_discount_expire_date_err {
+#edit_discount_expire_date_err,
+#edit_admin_first_name_err,
+#edit_admin_last_name_err,
+#edit_admin_username_err,
+#edit_admin_email_err,
+#edit_admin_mobile_number_err,
+#edit_admin_date_of_birth_err,
+#edit_admin_password_err,
+#edit_admin_confirm_password_err {
   display: block;
   text-align: start;
 }
@@ -556,51 +611,51 @@ a.ui-datepicker-next.ui-corner-all {
   width: 38rem;
 }
 
-.product_images_description{
+.product_images_description {
   display: flex;
 }
 
-.product_review_rating_star{
+.product_review_rating_star {
   color: orange;
 }
 
-.user_email_for_product_review{
+.user_email_for_product_review {
   font-size: 13px;
   position: relative;
   left: 2px;
   top: -3px;
 }
 
-.product_review_rating{
+.product_review_rating {
   position: absolute;
   right: 1rem;
   width: 12rem;
 }
 
-.user_review_part{
+.user_review_part {
   margin-bottom: 1.5rem;
 }
 
-.user_review_date{
+.user_review_date {
   font-size: 14px;
 }
 
-.product_review_user_uploded_images{
+.product_review_user_uploded_images {
   width: 8rem !important;
   margin-right: 1rem;
 }
 
 .product_review_user_uploded_images:hover,
-.product_uploded_images:hover{
+.product_uploded_images:hover {
   cursor: pointer;
 }
 
-.products_uploaded_images{
+.products_uploaded_images {
   display: flex;
 }
 
 /* dashboard css */
-.dashboard_charts_details{
+.dashboard_charts_details {
   margin-top: 1rem;
 }
 
@@ -635,7 +690,7 @@ a.ui-datepicker-next.ui-corner-all {
   cursor: pointer;
 }
 
-.color_code_showing_color{
+.color_code_showing_color {
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
@@ -643,7 +698,7 @@ a.ui-datepicker-next.ui-corner-all {
   margin-right: 8px;
 }
 
-#color_picker{
+#color_picker {
   width: 11rem;
   border: none;
   background: white;
@@ -658,11 +713,11 @@ a.ui-datepicker-next.ui-corner-all {
   height: 2.5rem !important;
 }
 
-.add_products_size button{
+.add_products_size button {
   height: 2.5rem;
 }
 
-.sidebar_profile_dropdown{
+.sidebar_profile_dropdown {
   width: 100%;
   margin-left: 3% !important;
 }

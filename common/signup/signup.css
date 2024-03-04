@@ -33,6 +33,8 @@
 .last_name,
 .username,
 .email,
+.mobile_number,
+.date_of_birth,
 .password,
 .confirm_password {
   width: 15rem;

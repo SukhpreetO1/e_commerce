@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (mysqli_stmt_num_rows($stmt) == 1 && mysqli_stmt_bind_result($stmt, $id, $param_email, $hashed_password, $active, $role_id) && mysqli_stmt_fetch($stmt)) {
                     if(password_verify($password, $hashed_password)) {
                         if($active === 1) {
-                            // session_start();
+                            session_start();
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["email"] = $email;
