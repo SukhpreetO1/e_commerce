@@ -219,14 +219,53 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
             var file = this.files[0];
             if (file.name.toLowerCase().endsWith('.csv') || file.name.toLowerCase().endsWith('.xlsx')) {
                var formData = new FormData();
-               formData.append('file_name', file.name);
-               console.log(file.name);
+               formData.append('file', file);
+               // formData.append('file_name', file.name);
+               var parsed_response = null;
                $.ajax({
                   type: 'POST',
                   url: BASE_URL + '/admin/size/size_import/size_import.php',
                   data: formData,
-                  success: function(data) {
-                     console.log(data);
+                  contentType: false,
+                  processData: false,
+                  success: function(response) {
+                     if (response.trim() === "") {
+                        var alert_message = '<div class="alert alert-danger size_imported_alert_dismissible" role="alert">File not uploaded.</div>';
+                        $('#alert_container').append(alert_message);
+                        setTimeout(function() {
+                           $('.alert').remove();
+                        }, 3000);
+                     } else {
+                        if (parsed_response) {
+                           parsed_response = null;
+                        } else {
+                           parsed_response = JSON.parse(response);
+                           if (parsed_response.error) {
+                              var alert_message = '<div class="alert alert-danger size_imported_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                              $('#alert_container').append(alert_message);
+                              setTimeout(function() {
+                                 $('.alert').remove();
+                              }, 3000);
+                           } else {
+                              $.ajax({
+                                 url: BASE_URL + '/admin/size/size.php',
+                                 type: 'GET',
+                                 success: function(data) {
+                                    $(".container").empty();
+                                    $('.container').html(data);
+                                    var alert_message = '<div class="alert alert-success size_imported_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                                    $('#alert_container').append(alert_message);
+                                    setTimeout(function() {
+                                       $('.alert').remove();
+                                    }, 2000);
+                                 },
+                                 error: function(xhr, status, error) {
+                                    console.log(error);
+                                 }
+                              });
+                           }
+                        }
+                     }
                   },
                   error: function(e) {
                      console.log(e);
