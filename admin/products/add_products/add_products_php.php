@@ -1,6 +1,7 @@
 <?php
 include dirname(__DIR__, 3) . "/common/config/config.php";
 
+$add_product_brands_name = $add_products_brands_name_err = "";
 $add_products_input_name = $add_products_name_err = "";
 $add_products_description = $add_products_description_err = "";
 $add_products_category_type = $add_products_category_type_err = "";
@@ -12,6 +13,7 @@ $add_products_discount = $add_products_discount_err = "";
 $add_products_image = $add_products_image_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   $add_product_brands_name = trim($_POST["add_product_brands_name"]);
    $add_products_input_name = trim($_POST["add_products_input_name"]);
    $add_products_description = trim($_POST["add_products_description"]);
    $add_products_category_type = trim($_POST["add_products_category_type"]);
@@ -22,6 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $add_products_discount = trim($_POST["add_products_discount"] ? $_POST["add_products_discount"] : 1);
 
    $errors = array();
+
+   // Validation for brand name
+   if (empty($add_products_color)) {
+      $errors['add_product_brands_name'] = 'Select atleast 1 brand name.';
+   }
 
    // Validation for Product Name
    if (empty($add_products_input_name)) {
@@ -49,16 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $errors['add_products_quantity'] = 'Product quantity is required and should contain only numbers.';
    }
 
-   // Validation for Category Type
+   // Validation for size
    if (empty($add_products_size)) {
       $errors['add_products_size'] = 'Select atleast 1 size.';
    }
 
-   // Validation for Category Type
+   // Validation for color
    if (empty($add_products_color)) {
       $errors['add_products_color'] = 'Select atleast 1 color.';
    }
-
 
    // Validation for Product Price
    if (!preg_match('/^\d+(\.\d+)?$/', $add_products_price)) {
@@ -79,9 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (mysqli_stmt_num_rows($check_stmt) > 0) {
          $response['error'] = "Product name already exists in this category.";
       } else {
-         $insert_sql = "INSERT INTO products (name, description, categories_type_id, quantity, color_id, price, discount_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+         $insert_sql = "INSERT INTO products (name, brands_id, description, categories_type_id, quantity, color_id, price, discount_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
          $insert_stmt = mysqli_prepare($database_connection, $insert_sql);
-         mysqli_stmt_bind_param($insert_stmt, "ssiiiii", $add_products_input_name, $add_products_description, $add_products_category_type, $add_products_quantity, $add_products_color, $add_products_price, $add_products_discount);
+         mysqli_stmt_bind_param($insert_stmt, "sisiiiii", $add_products_input_name, $add_product_brands_name, $add_products_description, $add_products_category_type, $add_products_quantity, $add_products_color, $add_products_price, $add_products_discount);
          mysqli_stmt_execute($insert_stmt);
 
          $product_id = mysqli_insert_id($database_connection);

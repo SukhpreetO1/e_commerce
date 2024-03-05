@@ -20,23 +20,49 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          while ($product_data = $result->fetch_assoc()) {
             $selected_category_id = $product_data["categories_type_id"];
             $selected_discount_id = $product_data["discount_id"];
+            $selected_brands_id = $product_data["brands_id"];
+            $selected_color_id = $product_data["color_id"];
       ?>
 
             <div class="edit_products_name">
                <div class="edit_section">
                   <form method="post" id="edit_products_form" class="edit_products_form">
-                     <div class="form-group">
-                        <label for="edit_products_input_name" class="edit_product_name mt-2 mb-2">Name <span class="important_mark">*</span></label>
-                        <input type="hidden" name="edit_product_id" id="edit_product_id" value="<?php echo $product_data["id"]; ?>">
-                        <input type="text" name="edit_products_input_name" class="form-control edit_products_input_name" id="edit_products_input_name" value="<?php echo $product_data["name"]; ?>">
-                        <span class="invalid-feedback edit_products_name_err" id="edit_products_name_err">
-                           <?php echo $edit_products_name_err ?>
-                        </span>
+                     <div class="form-group products_brands_name_and_names">
+                        <div class="form-group me-3 col-6">
+                           <input type="hidden" name="edit_product_id" id="edit_product_id" value="<?php echo $product_data["id"]; ?>">
+                           <label for="edit_product_brands_name" class="edit_product_discount mt-2 mb-2">Discount <span class="important_mark">*</span></label>
+                           <select class="form-select edit_product_brands_name" id="edit_product_brands_name" name="edit_product_brands_name">
+                              <option hidden disabled selected>Select Discount</option>
+                              <?php
+                              $brands_sql = "SELECT * FROM brands";
+                              $result = $database_connection->query($brands_sql);
+                              if ($result->num_rows > 0) {
+                                 while ($brands = $result->fetch_assoc()) {
+                                    $selected_brands = ($brands['id'] == $selected_brands_id) ? "selected" : "";
+                              ?>
+                                    <option value="<?php echo $brands['id']; ?>" <?php echo $selected_brands; ?>> <?php echo $brands['name']; ?></option>
+                              <?php
+                                 }
+                              }
+                              ?>
+                           </select>
+                           <span class="invalid-feedback edit_products_brands_name_err" id="edit_products_brands_name_err">
+                              <?php echo $edit_products_brands_name_err ?>
+                           </span>
+                        </div>
+
+                        <div class="form-group col-6">
+                           <label for="edit_products_input_name" class="edit_product_name mt-2 mb-2">Name <span class="important_mark">*</span></label>
+                           <input type="text" name="edit_products_input_name" class="form-control edit_products_input_name" id="edit_products_input_name" value="<?php echo $product_data["name"]; ?>">
+                           <span class="invalid-feedback edit_products_name_err" id="edit_products_name_err">
+                              <?php echo $edit_products_name_err ?>
+                           </span>
+                        </div>
                      </div>
 
-                     <div class="form-group">
+                     <div class="form-group col-12">
                         <label for="edit_products_description" class="edit_products_description mt-2 mb-2">Description <span class="important_mark">*</span></label>
-                        <textarea type="text" name="edit_products_description" class="form-control edit_products_description" id="edit_products_description" rows="3"><?php echo $product_data["description"]; ?></textarea>
+                        <textarea type="text" name="edit_products_description" class="form-control edit_products_description" id="edit_products_description" rows="3" style="width:97%"><?php echo $product_data["description"]; ?></textarea>
                         <span class="invalid-feedback edit_products_description_err" id="edit_products_description_err">
                            <?php echo $edit_products_description_err ?>
                         </span>
@@ -75,6 +101,58 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         </div>
                      </div>
 
+                     <div class="form-group products_size_and_color">
+                        <div class="form-group me-2 col-6">
+                           <label for="edit_products_size" class="edit_product_size mt-2 mb-2">Size <span class="important_mark">*</span></label>
+                           <select class="selectpicker edit_products_size" id="edit_products_size" aria-label="Select products size" name="edit_products_size[]" multiple data-live-search="true">
+                              <option disabled>Select products Size</option>
+                              <?php
+                              $size_sql = "SELECT * FROM size";
+                              $result = $database_connection->query($size_sql);
+                              $selected_size_ids = [];
+                              $selected_size_id_query = "SELECT size_id FROM product_size_variant WHERE product_id = " . $product_data['id'];
+                              $selected_size_id_result = $database_connection->query($selected_size_id_query);
+                              if ($selected_size_id_result->num_rows > 0) {
+                                 while ($row = $selected_size_id_result->fetch_assoc()) {
+                                    $selected_size_ids[] = $row['size_id'];
+                                 }
+                              }
+                              if ($result->num_rows > 0) {
+                                 while ($size = $result->fetch_assoc()) {
+                                    $selected_sizes = (in_array($size['id'], $selected_size_ids)) ? "selected" : "";
+                                    echo "<option value='" . $size['id'] . "' " . $selected_sizes . ">" . $size['name'] . "</option>";
+                                 }
+                              }
+                              ?>
+                           </select>
+                           <span class="invalid-feedback edit_products_size_err" id="edit_products_size_err">
+                              <?php echo $edit_products_size_err ?>
+                           </span>
+                        </div>
+
+                        <div class="form-group me-2 col-6" style="margin-left: -0.75rem;">
+                           <label for="edit_products_color" class="edit_product_color mt-2 mb-2">Color <span class="important_mark">*</span></label>
+                           <select class="form-select edit_products_color" id="edit_products_color" name="edit_products_color" style="height: 2.8rem;">
+                              <option hidden disabled selected>Select Color</option>
+                              <?php
+                              $color_sql = "SELECT * FROM color";
+                              $result = $database_connection->query($color_sql);
+                              if ($result->num_rows > 0) {
+                                 while ($color = $result->fetch_assoc()) {
+                                    $selected_color = ($color['id'] == $selected_color_id) ? "selected" : "";
+                              ?>
+                                    <option value="<?php echo $color['id']; ?>" <?php echo $selected_color; ?>> <?php echo $color['name']; ?></option>
+                              <?php
+                                 }
+                              }
+                              ?>
+                           </select>
+                           <span class="invalid-feedback edit_products_color_err" id="edit_products_color_err">
+                              <?php echo $edit_products_color_err ?>
+                           </span>
+                        </div>
+                     </div>
+
                      <div class="form-group products_price_and_discount">
                         <div class="form-group me-3 col-6">
                            <label for="edit_products_price" class="edit_product_price mt-2 mb-2">Price <span class="important_mark">*</span></label>
@@ -90,7 +168,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         </div>
 
                         <div class="form-group col-6">
-                           <label for="edit_products_discount" class="add_product_discount mt-2 mb-2">Discount </label>
+                           <label for="edit_products_discount" class="edit_product_discount mt-2 mb-2">Discount </label>
                            <select class="form-select edit_products_discount" id="edit_products_discount" name="edit_products_discount" style="height: 2.8rem;">
                               <option hidden disabled selected>Select Discount</option>
                               <?php
@@ -106,8 +184,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                               }
                               ?>
                            </select>
-                           <span class="invalid-feedback add_products_discount_err" id="add_products_discount_err">
-                              <?php echo $add_products_discount_err ?>
+                           <span class="invalid-feedback edit_products_discount_err" id="edit_products_discount_err">
+                              <?php echo $edit_products_discount_err ?>
                            </span>
                         </div>
                      </div>
@@ -115,13 +193,16 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                      <div class="form-group">
                         <div id="uploaded_images_preview">
                            <?php
-                           $image_sql = "SELECT path FROM product_image WHERE products_id = " . $product_data['id'];
+                           $image_sql = "SELECT id, products_id, path FROM product_image WHERE products_id = " . $product_data['id'];
                            $image_result = $database_connection->query($image_sql);
                            if ($image_result->num_rows > 0) {
-                              echo '<label for="edit_products_image" class="edit_product_image mt-2 mb-2">Uploaded Images <span class="important_mark">*</span></label>';
+                              echo '<label for="edit_uploaded_products_image" class="edit_uploaded_products_image mt-2 mb-2">Uploaded Images <span class="important_mark">*</span></label>';
                               echo "<div class='products_uploaded_images'>";
                               while ($row = $image_result->fetch_assoc()) {
-                                 echo "<img src='" . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_review_images/' . $row['path'] . "' style='max-width: 100px; margin-right: 10px;' alt='Product Image' class='product_uploded_images' onclick='window.open(\"" . $_ENV["BASE_URL"] . "/e_commerce/public/assets/product_review_images/" . $row["path"] . "\", \"_blank\");'>";
+                                 echo "<div class='uploaded_image_container' style='position:relative' data-image-id='" . $row['id'] . "' data-product-id='" . $row['products_id'] . "'>";
+                                 echo "<img src='" . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_images/' . $row['path'] . "' style='max-width: 10rem; margin-right: 10px;' alt='Product Image' class='product_uploded_images'>";
+                                 echo "<button class='uploaded_image_close_button' i='uploaded_image_close_button'>X</button>";
+                                 echo "</div>";
                               }
                               echo "</div>";
                            }
@@ -152,6 +233,45 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 </div>
 
 <script>
+   /*--------------------------------------------------------------- Multi select dropdown ----------------------------------------------------------------------------*/
+   $('.selectpicker').selectpicker('refresh');
+
+   /*--------------------------------------------------------------- Delete the uploaded image ----------------------------------------------------------------------------*/
+   $(document).off('click', '.uploaded_image_close_button').on('click', '.uploaded_image_close_button', function(e) {
+      e.preventDefault();
+      var image_id = $(this).parent().data('image-id');
+      var product_id = $(this).parent().data('product-id');
+      $(this).parent().remove();
+      var parsed_response = null;
+      $.ajax({
+         type: 'DELETE',
+         url: BASE_URL + '/admin/products/delete_products/delete_uploaded_image.php' + '?image_id=' + image_id + '&product_id=' + product_id,
+         success: function(response) {
+            if (parsed_response) {
+               parsed_response = null;
+            } else {
+               parsed_response = JSON.parse(response);
+               if (parsed_response.error) {
+                  var alert_message = '<div class="alert alert-danger products_uploaded_image_delete_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                  $('#alert_container').append(alert_message);
+                  setTimeout(function() {
+                     $('.alert').remove();
+                  }, 3000);
+               } else {
+                  var alert_message = '<div class="alert alert-success products_uploaded_image_delete_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                  $('#alert_container').append(alert_message);
+                  setTimeout(function() {
+                     $('.alert').remove();
+                  }, 2000);
+               }
+            }
+         },
+         error: function(e) {
+            console.log(e);
+         }
+      });
+   });
+
    /*--------------------------------------------------------------- Validation for submit button and input in edit files ----------------------------------------------------------------------------*/
    function validate_input(value, validation_regex, required_error_message, format_error_message, length_error_message, selector) {
       var error_messages = '';
@@ -163,6 +283,16 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          error_messages = format_error_message;
       }
       $(selector).text(error_messages);
+      return error_messages === '';
+   }
+
+   function validate_brands_name() {
+      var selected_color = $('#edit_product_brands_name').val();
+      var error_messages = '';
+      if (selected_color === '' || selected_color === null) {
+         error_messages = 'Please select atleast 1 brand name.';
+      }
+      $('.edit_products_brands_name_err').text(error_messages);
       return error_messages === '';
    }
 
@@ -198,6 +328,26 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       return validate_input(product_quantity, /^\s*\d+\s*$/, 'Product quantity is required.', 'Only numbers are allowed.', null, '.edit_products_quantity_err');
    }
 
+   function validate_size() {
+      var selected_size = $('#edit_products_size').val();
+      var error_messages = '';
+      if (selected_size == '') {
+         error_messages = 'Select atleast 1 size.';
+      }
+      $('.edit_products_size_err').text(error_messages);
+      return error_messages === '';
+   }
+
+   function validate_color() {
+      var selected_color = $('#edit_products_color').val();
+      var error_messages = '';
+      if (selected_color === '' || selected_color === null) {
+         error_messages = 'Please select atleast 1 color.';
+      }
+      $('.edit_products_color_err').text(error_messages);
+      return error_messages === '';
+   }
+
    function validate_products_price() {
       var product_price = $('.edit_products_price').val();
       return validate_input(product_price, /^\d+(\.\d+)?$/, 'Product price is required.', 'Only numbers are allowed.', null, '.edit_products_price_err');
@@ -211,7 +361,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
    // when submit the new products title file
    $(document).off('submit', '#edit_products_form').on('submit', '#edit_products_form', function(e) {
       e.preventDefault();
-
+      var edit_product_id = $('#edit_product_id').val();
       if ($('.edit_products_discount').val().trim() === '') {
          $('.edit_products_discount').val('0');
       }
@@ -223,9 +373,11 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       for (var i = 0; i < files.length; i++) {
          fileNames.push(files[i].name);
       }
+      var selectedSizes = $('#edit_products_size').val().join(',');
 
       var formData = new FormData(form);
       formData.append('image_file_names', fileNames.join(','));
+      formData.append('edit_products_size', selectedSizes);
       var parsed_response = null;
       $.ajax({
          type: "POST",
@@ -280,16 +432,19 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
    // when click on the new products title field
    $(document).off('click', '#edit_products_form').on('click', '#edit_products_form', function(e) {
+      var is_valid_brand_name = validate_brands_name();
       var is_valid_name = validate_products_name();
       var is_valid_description = validate_products_description();
       var is_valid_title = validate_category_title();
       var is_valid_quantity = validate_products_quantity();
+      var is_valid_size = validate_size();
+      var is_valid_color = validate_color();
       var is_valid_price = validate_products_price();
       var is_valid_discount = validate_products_discount();
       if ($('.edit_products_discount').val().trim() === '') {
          $('.edit_products_discount').val('0');
       }
-      if (!is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price || !is_valid_discount) {
+      if (!is_valid_brand_name || !is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price || !is_valid_size || !is_valid_color) {
          return false;
       }
    });

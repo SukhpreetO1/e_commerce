@@ -15,12 +15,36 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       <div class="add_products_name">
          <div class="add_section">
             <form method="post" id="add_products_form" class="add_products_form">
-               <div class="form-group">
-                  <label for="add_products_input_name" class="add_product_name mt-2 mb-2">Name <span class="important_mark">*</span></label>
-                  <input type="text" name="add_products_input_name" class="form-control add_products_input_name" id="add_products_input_name">
-                  <span class="invalid-feedback add_products_name_err" id="add_products_name_err">
-                     <?php echo $add_products_name_err ?>
-                  </span>
+               <div class="form-group products_brands_name_and_names">
+                  <div class="form-group me-2 col-6">
+                     <label for="add_product_brands_name" class="add_product_brand_name mt-2 mb-2">Brand Name <span class="important_mark">*</span></label>
+                     <select class="form-select add_product_brands_name" id="add_product_brands_name" aria-label="Select products Brand Name" name="add_product_brands_name">
+                        <option hidden disabled selected>Select Brand Name</option>
+                        <?php
+                        $sql = "SELECT * FROM brands";
+                        $result = $database_connection->query($sql);
+                        if ($result->num_rows > 0) {
+                           while ($row = $result->fetch_assoc()) {
+                        ?>
+                              <option value="<?php echo $row['id']; ?>">
+                                 <?php echo $row['name']; ?>
+                              </option>
+                        <?php
+                           }
+                        }
+                        ?>
+                     </select>
+                     <span class="invalid-feedback add_products_brands_name_err" id="add_products_brands_name_err">
+                        <?php echo $add_products_brands_name_err ?>
+                     </span>
+                  </div>
+                  <div class="form-group me-2 col-6">
+                     <label for="add_products_input_name" class="add_product_name mt-2 mb-2">Name <span class="important_mark">*</span></label>
+                     <input type="text" name="add_products_input_name" class="form-control add_products_input_name" id="add_products_input_name">
+                     <span class="invalid-feedback add_products_name_err" id="add_products_name_err">
+                        <?php echo $add_products_name_err ?>
+                     </span>
+                  </div>
                </div>
 
                <div class="form-group">
@@ -186,6 +210,16 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       return error_messages === '';
    }
 
+   function validate_brands_name() {
+      var selected_color = $('#add_product_brands_name').val();
+      var error_messages = '';
+      if (selected_color === '' || selected_color === null) {
+         error_messages = 'Please select atleast 1 brand name.';
+      }
+      $('.add_products_brands_name_err').text(error_messages);
+      return error_messages === '';
+   }
+
    function validate_products_name() {
       var products_name = $('#add_products_input_name').val();
       return validate_input(products_name, /^[a-zA-Z\s]+$/, 'Product name is required.', 'Only alphabets are allowed.', 'Product name must be between 3 and 15 characters long.', '.add_products_name_err');
@@ -318,6 +352,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
    // when click on the new products title field
    $(document).off('click', '#add_products_form').on('click', '#add_products_form', function(e) {
+      var is_valid_brand_name = validate_brands_name();
       var is_valid_name = validate_products_name();
       var is_valid_description = validate_products_description();
       var is_valid_title = validate_category_title();
@@ -328,7 +363,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       if ($('#add_products_discount').val() === '') {
          $('#add_products_discount option:eq(1)').prop('selected', true);
       }
-      if (!is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price || !is_valid_size || !is_valid_color) {
+      if (!is_valid_brand_name || !is_valid_name || !is_valid_description || !is_valid_title || !is_valid_quantity || !is_valid_price || !is_valid_size || !is_valid_color) {
          return false;
       }
    });

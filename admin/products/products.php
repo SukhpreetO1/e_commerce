@@ -19,6 +19,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
             <thead>
                <tr>
                   <th scope="col">#</th>
+                  <th scope="col">Brand Name</th>
                   <th scope="col">Name</th>
                   <th scope="col">Description</th>
                   <th scope="col">Category Type</th>
@@ -32,10 +33,11 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
             </thead>
             <tbody>
                <?php
-               $query = "SELECT products.*, categories_type.id as categories_type_id, categories_type.name as categories_type_name, discount.id as discount_id, discount.code_name as discount_code_name, discount.discount_type as discount_discount_type, discount.activate as discount_activate, discount.amount as discount_amount, discount.rupees_or_percentage as discount_rupees_or_percentage, discount.expiration_date as discount_expiration_date
+               $query = "SELECT products.*, categories_type.id as categories_type_id, categories_type.name as categories_type_name, discount.id as discount_id, discount.code_name as discount_code_name, discount.discount_type as discount_discount_type, discount.activate as discount_activate, discount.amount as discount_amount, discount.rupees_or_percentage as discount_rupees_or_percentage, discount.expiration_date as discount_expiration_date, brands.name as brands_name
                FROM products 
                JOIN categories_type ON products.categories_type_id = categories_type.id
-               JOIN discount ON products.discount_id = discount.id";
+               JOIN discount ON products.discount_id = discount.id
+               JOIN brands ON products.brands_id = brands.id";
                $result = mysqli_query($database_connection, $query);
 
                while ($products_data = mysqli_fetch_assoc($result)) {
@@ -43,6 +45,9 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                   <tr scope="col">
                      <td>
                         <?php echo $products_data['id']; ?>
+                     </td>
+                     <td>
+                        <?php echo $products_data['brands_name']; ?>
                      </td>
                      <td>
                         <?php echo $products_data['name']; ?>

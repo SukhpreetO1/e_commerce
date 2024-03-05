@@ -68,7 +68,9 @@
 .user_active_update_success_dismissible, /* toggle button in user table */
 .user_active_update_alert_dismissible, /* toggle button in user table */ 
 .size_imported_alert_dismissible,
-.size_imported_success_dismissible {
+.size_imported_success_dismissible,
+.products_uploaded_image_delete_success_dismissible,
+.products_uploaded_image_delete_alert_dismissible {
   font-size: 15px;
   position: absolute;
   right: -8rem;
@@ -84,7 +86,9 @@
 .user_active_update_success_dismissible,
 .user_active_update_alert_dismissible,
 .size_imported_success_dismissible,
-.size_imported_alert_dismissible {
+.size_imported_alert_dismissible,
+.products_uploaded_image_delete_success_dismissible,
+.products_uploaded_image_delete_alert_dismissible {
   width: 15rem;
 }
 
@@ -395,6 +399,18 @@
   cursor: pointer;
 }
 
+.uploaded_image_close_button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 0px 5px;
+  border: none;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .add_category_name,
 .add_category_header_names,
 .edit_category_name,
@@ -417,6 +433,7 @@
   margin-left: 25%;
 }
 
+.products_brands_name_and_names,
 .products_category_type_and_quantity,
 .products_size_and_color,
 .products_price_and_discount {
@@ -432,6 +449,7 @@
 #edit_category_header_title_err,
 #add_category_types_name_err,
 #add_role_name_err,
+#add_products_brands_name_err,
 #add_products_name_err,
 #add_products_description_err,
 #add_products_category_type_err,
@@ -441,6 +459,16 @@
 #add_products_price_err,
 #add_products_discount_err,
 #add_products_image_err,
+#edit_products_brands_name_err,
+#edit_products_name_err,
+#edit_products_description_err,
+#edit_products_category_type_err,
+#edit_products_quantity_err,
+#edit_products_size_err,
+#edit_products_color_err,
+#edit_products_price_err,
+#edit_products_discount_err,
+#edit_products_image_err,
 #add_size_name_err,
 #edit_size_name_err,
 #add_color_name_err,
@@ -741,13 +769,22 @@ a.ui-datepicker-next.ui-corner-all {
   margin-left: 1rem;
 }
 
-.add_products_size {
+.add_products_size,
+.edit_products_size {
   display: block !important;
-  width: 100% !important;
   height: 2.5rem !important;
 }
 
-.add_products_size button {
+.add_products_size {
+  width: 100% !important;
+}
+
+.edit_products_size {
+  width: 93% !important;
+}
+
+.add_products_size button,
+.edit_products_size button {
   height: 2.5rem;
 }
 
