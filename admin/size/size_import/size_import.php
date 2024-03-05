@@ -51,15 +51,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($result) {
                move_uploaded_file($_FILES['file']['tmp_name'], dirname(__DIR__, 3) . '/public/assets/uploaded_files/size/' . $file_name);
-               $response['success'] = "Data imported successfully";
+               $response['success'] = "Name imported successfully";
             } else {
-               $response['error'] = "Failed to import data";
+               $response['error'] = "Failed to import names";
             }
          } else {
-            $response['error'] = "Data that already exists in the database are : " . implode(', ', $failed_names);
+            $response['error'] = "Names that already exists in the database are : " . implode(', ', $failed_names);
          }
       } else {
-         $response['error'] = "No data to import";
+         $response['error'] = "No name to import";
       }
 
       echo json_encode($response, JSON_UNESCAPED_SLASHES);
