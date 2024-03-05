@@ -138,7 +138,8 @@
 .products_action,
 .size_action,
 .color_action,
-.discount_action {
+.discount_action,
+.brands_action {
   display: flex;
   position: absolute;
   margin-top: -0.5rem;
@@ -172,7 +173,8 @@
 .size_heading,
 .color_heading,
 .discount_heading,
-.products_heading {
+.products_heading,
+.brands_heading {
   text-align: center;
   margin: 1% 0% 0;
 }
@@ -189,7 +191,8 @@
 .size_edit,
 .color_edit,
 .discount_edit,
-.discount_toggle_button {
+.discount_toggle_button,
+.brands_edit {
   margin-right: 15px;
 }
 
@@ -215,7 +218,8 @@
 .edit_size,
 .add_color,
 .edit_color,
-.add_discount {
+.add_discount,
+.add_brands {
   display: flex;
   justify-content: space-between;
   padding: 0 1% 1%;
@@ -229,7 +233,8 @@
 .products_plus_icon,
 .size_plus_icon,
 .color_plus_icon,
-.discount_plus_icon {
+.discount_plus_icon,
+.brands_plus_icon {
   font-size: 1.5rem;
   border: 1px solid;
   border-radius: 51%;
@@ -266,7 +271,9 @@
 .discount_back_button,
 .discount_plus_icon,
 .add_discount_back_button,
-.edit_discount_back_button {
+.edit_discount_back_button,
+.brands_back_button,
+.brands_plus_icon {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -304,7 +311,9 @@
 .color_edit:hover,
 .color_delete:hover,
 .discount_edit:hover,
-.discount_delete:hover {
+.discount_delete:hover,
+.brands_edit:hover,
+.brands_delete:hover {
   cursor: pointer;
 }
 

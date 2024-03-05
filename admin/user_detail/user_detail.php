@@ -1,6 +1,6 @@
 <?php
 require dirname(__DIR__, 2) . "/common/config/config.php";
-include dirname(__DIR__, 2) . "/admin/user_detail/toggle_button_php.php";
+// include dirname(__DIR__, 2) . "/admin/user_detail/toggle_button_php.php";
 ?>
 
 <div class="users_detail_page">
@@ -271,6 +271,8 @@ include dirname(__DIR__, 2) . "/admin/user_detail/toggle_button_php.php";
 
     /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
     function users_detail_back_button(url) {
+        $('.users').removeClass('highlighted');
+        $('.dashboard').addClass('highlighted');
         $.ajax({
             type: 'GET',
             url: BASE_URL + url,
@@ -279,6 +281,8 @@ include dirname(__DIR__, 2) . "/admin/user_detail/toggle_button_php.php";
                 var container = $('.container');
                 if (!$(data).find('.homepage_sidebar').length) {
                     container.html(data);
+                    var new_url = window.location.href.replace('?tab=user_detail', '?tab=dashboard');
+                    history.pushState(null, null, new_url);
                 }
             },
             error: function(e) {

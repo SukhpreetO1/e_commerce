@@ -112,6 +112,8 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
     /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
     function category_title_back_button(url) {
+        $('.category_title').removeClass('highlighted');
+        $('.dashboard').addClass('highlighted');
         $.ajax({
             type: 'GET',
             url: BASE_URL + url,
@@ -120,6 +122,8 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                 var container = $('.container');
                 if (!$(data).find('.homepage_sidebar').length) {
                     container.html(data);
+                    var new_url = window.location.href.replace('?tab=category_title', '?tab=dashboard');
+                    history.pushState(null, null, new_url);
                 }
             },
             error: function(e) {
