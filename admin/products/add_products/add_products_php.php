@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $errors = array();
 
    // Validation for brand name
-   if (empty($add_products_color)) {
+   if (empty($add_product_brands_name)) {
       $errors['add_product_brands_name'] = 'Select atleast 1 brand name.';
    }
 

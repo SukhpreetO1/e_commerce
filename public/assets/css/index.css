@@ -102,7 +102,6 @@
 .category_title_delete_alert_dismissible,
 .category_types_delete_alert_dismissible,
 .category_types_alert_dismissible,
-.category_types_success_dismissible,
 .role_success_dismissible,
 .role_delete_alert_dismissible,
 .products_alert_dismissible,
@@ -120,6 +119,10 @@
 .add_color_alert_dismissible,
 .add_color_success_dismissible {
   width: 16rem;
+}
+
+.category_types_success_dismissible {
+  width: 21rem;
 }
 
 .edit_products_alert_dismissible {
@@ -461,7 +464,9 @@
 #edit_category_header_name_err,
 #add_category_header_title_err,
 #edit_category_header_title_err,
-#add_category_types_name_err,
+#add_category_title_input_title_err,
+#add_category_header_input_title_err,
+#add_category_types_input_name_err,
 #add_role_name_err,
 #add_products_brands_name_err,
 #add_products_name_err,

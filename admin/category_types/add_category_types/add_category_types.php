@@ -32,38 +32,20 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                      }
                      ?>
                   </select>
-                  <span class="invalid-feedback edit_category_title_name_err" id="edit_category_title_name_err"><?php echo $edit_category_title_name_err; ?></span>
+                  <span class="invalid-feedback add_category_title_input_title_err" id="add_category_title_input_title_err"><?php echo $add_category_title_input_title_err; ?></span>
                </div>
                <div class="form-group category_header_dropdown">
                   <label for="add_category_header_input_title" class="add_category_header_title mt-2 mb-2">Category Header Name <span class="important_mark">*</span></label>
-                  <input type="hidden" name="categories_id" class="categories_id" id="categories_id" value="">
                   <select class="form-select add_category_header_input_title" id="add_category_header_input_title" aria-label="Select Category Title Name" name="add_category_header_input_title" value="">
                      <option hidden disabled selected>Select Category Header Name</option>
-                     <?php
-                     $selected_category_id = isset($_POST['selected_categories_id']) ? $_POST['selected_categories_id'] : 0;
-                     var_dump($_POST);
-                     $sql = "SELECT * FROM categories_heading WHERE categories_id = ";
-                     $result = $database_connection->query($sql);
-                     if ($result->num_rows > 0) {
-                        while ($categories_heading_row = $result->fetch_assoc()) {
-                     ?>
-                           <option value="<?php echo $categories_heading_row['id']; ?>"><?php echo $categories_heading_row['name']; ?></option>
-                        <?php
-                        }
-                     } else {
-                        ?>
-                        <option value="0">No Category Header</option>
-                     <?php
-                     }
-                     $database_connection->close();
-                     ?>
+                     <option value="0" disabled readonly>Select first category title.</option>
                   </select>
-                  <span class="invalid-feedback add_category_header_title_err" id="add_category_header_title_err"><?php echo $add_category_header_title_err; ?></span>
+                  <span class="invalid-feedback add_category_header_input_title_err" id="add_category_header_input_title_err"><?php echo $add_category_header_input_title_err; ?></span>
                </div>
                <div class="form-group">
                   <label for="add_category_types_input_name" class="add_category_types_name mt-2 mb-2">Category Type Name <span class="important_mark">*</span></label>
                   <input type="text" name="add_category_types_input_name" class="form-control add_category_types_input_name" id="add_category_types_input_name">
-                  <span class="invalid-feedback add_category_types_name_err" id="add_category_types_name_err"><?php echo $add_category_types_name_err ?></php></span>
+                  <span class="invalid-feedback add_category_types_input_name_err" id="add_category_types_input_name_err"><?php echo $add_category_types_input_name_err ?></php></span>
                </div>
                <div class="add_category_types_name_button">
                   <button type="submit" name="create_category" class="btn btn-primary mt-2 create_category" id="create_category" value="Create Category Type">Create Category Type</button>
@@ -75,24 +57,50 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 </div>
 
 <script>
-   /*--------------------------------------------------------------- Validation for submit button and input in add files ----------------------------------------------------------------------------*/
-   function validate_category_header() {
-      var selected_value = $('.add_category_header_input_title').val();
-      var error_messages = '';
-      if (selected_value === '' || selected_value === null) {
-         error_messages = 'Category Header is required.';
-      }
-      $('.add_category_header_title_err').text(error_messages);
-      return error_messages === '';
-   }
+   /*--------------------------------------------------------------- getting categories id ----------------------------------------------------------------------------*/
+   $(document).ready(function() {
+      $('.add_category_title_input_title').change(function() {
+         var category_id = $(this).val();
+         $.ajax({
+            url: BASE_URL + '/admin/category_types/add_category_types/get_category_headers.php',
+            method: 'POST',
+            data: {
+               category_id: category_id
+            },
+            dataType: 'json',
+            success: function(response) {
+               var options = '<option hidden disabled selected>Select Category Header Name</option>';
+               if (response.length > 0) {
+                  $.each(response, function(index, categoryHeader) {
+                     options += '<option value="' + categoryHeader.id + '">' + categoryHeader.name + '</option>';
+                  });
+               } else {
+                  options += '<option value="0" disabled readonly>No category heading in this category title</option>';
+               }
+               $('.add_category_header_input_title').html(options);
+            }
+         });
+      });
+   });
 
+   /*--------------------------------------------------------------- Validation for submit button and input in add files ----------------------------------------------------------------------------*/
    function validate_category_title() {
       var selected_value = $('.add_category_title_input_title').val();
       var error_messages = '';
       if (selected_value === '' || selected_value === null) {
          error_messages = 'Category title is required.';
       }
-      $('.edit_category_title_name_err').text(error_messages);
+      $('.add_category_title_input_title_err').text(error_messages);
+      return error_messages === '';
+   }
+   
+   function validate_category_header() {
+      var selected_value = $('.add_category_header_input_title').val();
+      var error_messages = '';
+      if (selected_value === '' || selected_value === null) {
+         error_messages = 'Category Header is required.';
+      }
+      $('.add_category_header_input_title_err').text(error_messages);
       return error_messages === '';
    }
 
@@ -106,17 +114,17 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       } else if (!/^[a-zA-Z\s]+$/.test(category_name)) {
          error_messages = 'Only alphabets are allowed.';
       }
-      $('.add_category_types_name_err').text(error_messages);
+      $('.add_category_types_input_name_err').text(error_messages);
       return error_messages === '';
    }
 
    // when submit the new category types file
    $(document).off('submit', '#add_category_types_form').on('submit', '#add_category_types_form', function(e) {
       e.preventDefault();
-      var isTitleValid = validate_category_title();
-      var isHeaderValid = validate_category_header();
-      var isNameValid = validate_category_name();
-      if (!isTitleValid || !isHeaderValid || !isHeadisNameValiderValid) {
+      var is_title_valid = validate_category_title();
+      var is_header_valid = validate_category_header();
+      var is_name_valid = validate_category_name();
+      if (!is_title_valid || !is_header_valid || !is_name_valid) {
          return false;
       } else {
          var formData = $(this).serialize();
@@ -127,7 +135,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
             data: formData,
             success: function(response) {
                if (response.trim() === "") {
-                  var alert_message = '<div class="alert alert-danger category_types_alert_dismissible" role="alert">Category Type not saved.</div>';
+                  var alert_message = '<div class="alert alert-danger category_types_alert_dismissible" role="alert">Category Type name not saved.</div>';
                   $('#alert_container').append(alert_message);
                   setTimeout(function() {
                      $('.alert').remove();
@@ -173,22 +181,20 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
    // when click on the new category types input field
    $(document).on('click', '#add_category_types_form', function(e) {
-      e.preventDefault();
-      var isTitleValid = validate_category_title();
-      var isHeaderValid = validate_category_header();
-      var isNameValid = validate_category_name();
-      if (!isTitleValid || !isHeaderValid || !isHeadisNameValiderValid) {
+      var is_title_valid = validate_category_title();
+      var is_header_valid = validate_category_header();
+      var is_name_valid = validate_category_name();
+      if (!is_title_valid || !is_header_valid || !is_name_valid) {
          return false;
       }
    });
 
    // when input the new category types field
    $(document).on('input', '#add_category_types_form', function(e) {
-      e.preventDefault();
-      var isTitleValid = validate_category_title();
-      var isHeaderValid = validate_category_header();
-      var isNameValid = validate_category_name();
-      if (!isTitleValid || !isHeaderValid || !isHeadisNameValiderValid) {
+      var is_title_valid = validate_category_title();
+      var is_header_valid = validate_category_header();
+      var is_name_valid = validate_category_name();
+      if (!is_title_valid || !is_header_valid || !is_name_valid) {
          return false;
       }
    });
@@ -214,21 +220,5 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
    $(document).off('click', '.add_category_types_back_button').on('click', '.add_category_types_back_button', function(e) {
       e.preventDefault();
       back_button_in_category_types_add_page('/admin/category_types/category_types.php', e);
-   });
-
-   /*--------------------------------------------------------------- getting categories id ----------------------------------------------------------------------------*/
-   $(document).ready(function() {
-      $('.add_category_title_input_title').change(function() {
-         var selected_categories_id = $(this).val();
-         $.ajax({
-            type: 'post',
-            data: {
-               selected_categories_id: selected_categories_id,
-            },
-            success: function(response) {
-               $('#categories_id').val(selected_categories_id);
-            }
-         });
-      });
    });
 </script>
