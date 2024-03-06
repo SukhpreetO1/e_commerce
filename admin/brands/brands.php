@@ -52,7 +52,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                      <td style="width: 6rem;">
                         <div class="brands_action">
                            <input type="hidden" name="brands_id" class="brands_id" id="brands_id" value="<?php echo $brands_data['id']; ?>">
-                           <input type="hidden" name="active_id" class="active_id" id="active_id" value="<?php echo $brands_data['active']; ?>">
                            <div class="brands_edit">
                               <i class="fa-regular fa-pen-to-square"></i>
                            </div>
