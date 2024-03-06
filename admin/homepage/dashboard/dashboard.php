@@ -101,13 +101,17 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
 
 <script>
    // redirection links
-   function handle_dashboard_redirection(url) {
+   function handle_dashboard_redirection(url, tabName) {
+      $('.dashboard').removeClass('highlighted');
+      $(`.${tabName}`).addClass('highlighted');
       $.ajax({
          type: 'GET',
          url: BASE_URL + url,
          success: function(data) {
             $('.container').empty();
             $('.container').html(data);
+            var new_url = window.location.href.replace('?tab=dashboard', `?tab=${tabName}`);
+            history.pushState(null, null, new_url);
          },
          error: function(e) {
             console.log(e);
@@ -117,21 +121,21 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
 
    $(document).off('click', '.category_heading_count_details').on('click', '.category_heading_count_details', function(e) {
       e.preventDefault();
-      handle_dashboard_redirection('/admin/category_header/category_header.php');
+      handle_dashboard_redirection('/admin/category_header/category_header.php', 'category_header');
    });
 
    $(document).off('click', '.category_types_count_details').on('click', '.category_types_count_details', function(e) {
       e.preventDefault();
-      handle_dashboard_redirection('/admin/category_types/category_types.php');
+      handle_dashboard_redirection('/admin/category_types/category_types.php', 'categories_types');
    });
 
    $(document).off('click', '.products_count_details').on('click', '.products_count_details', function(e) {
       e.preventDefault();
-      handle_dashboard_redirection('/admin/products/products.php');
+      handle_dashboard_redirection('/admin/products/products.php', 'products');
    });
 
    $(document).off('click', '.discount_count_details').on('click', '.discount_count_details', function(e) {
       e.preventDefault();
-      handle_dashboard_redirection('/admin/discount/discount.php');
+      handle_dashboard_redirection('/admin/discount/discount.php', 'discount');
    });
 </script>
