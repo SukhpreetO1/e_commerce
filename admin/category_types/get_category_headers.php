@@ -1,5 +1,5 @@
 <?php
-include dirname(__DIR__, 3) . "/common/config/config.php";
+include dirname(__DIR__, 2) . "/common/config/config.php";
 
 if (isset($_POST['category_id']) && !empty($_POST['category_id'])) {
    $category_id = mysqli_real_escape_string($database_connection, $_POST['category_id']);
@@ -17,4 +17,3 @@ if (isset($_POST['category_id']) && !empty($_POST['category_id'])) {
 } else {
    echo json_encode(array('error' => 'Category ID is missing.'));
 }
-?>

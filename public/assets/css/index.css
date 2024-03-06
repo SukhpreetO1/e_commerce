@@ -33,8 +33,8 @@
 .category_header_success_dismissible,
 .category_header_alert_dismissible,
 .category_header_delete_alert_dismissible,
-.category_types_delete_alert_dismissible,
-.category_types_alert_dismissible,
+.category_type_delete_alert_dismissible, 
+.category_type_delete_success_dismissible,
 .category_types_success_dismissible,
 .products_alert_dismissible,
 .products_success_dismissible,
@@ -73,7 +73,8 @@
 .products_uploaded_image_delete_alert_dismissible,
 .brands_alert_dismissible,
 .brands_success_dismissible,
-.brands_delete_alert_dismissible {
+.brands_delete_alert_dismissible,
+.brands_delete_success_dismissible {
   font-size: 15px;
   position: absolute;
   right: -8rem;
@@ -93,14 +94,15 @@
 .products_uploaded_image_delete_success_dismissible,
 .products_uploaded_image_delete_alert_dismissible,
 .brands_alert_dismissible,
-.brands_delete_alert_dismissible {
+.brands_delete_alert_dismissible,
+.brands_delete_success_dismissible {
   width: 15rem;
 }
 
 .category_title_alert_dismissible,
 .category_title_success_dismissible,
-.category_title_delete_alert_dismissible,
-.category_types_delete_alert_dismissible,
+.category_type_delete_alert_dismissible, 
+.category_type_delete_success_dismissible,
 .category_types_alert_dismissible,
 .role_success_dismissible,
 .role_delete_alert_dismissible,
@@ -222,6 +224,7 @@
 .add_category_header,
 .add_category_types,
 .edit_category_header,
+.edit_category_types,
 .users_detail_page,
 .admin_detail_page,
 .edit_admin_detail_page,
@@ -265,6 +268,7 @@
 .edit_category_header_back_button,
 .category_types_back_button,
 .add_category_types_back_button,
+.edit_category_types_back_button,
 .users_detail_back_button,
 .admin_detail_back_button,
 .admin_detail_edit_button,
@@ -387,6 +391,7 @@
 .add_category_header_name_button,
 .edit_category_header_name_button,
 .add_category_types_name_button,
+.edit_category_types_name_button,
 .add_role_name_button,
 .edit_role_name_button,
 .add_products_name_button,

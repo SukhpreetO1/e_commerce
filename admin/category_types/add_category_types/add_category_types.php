@@ -62,7 +62,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       $('.add_category_title_input_title').change(function() {
          var category_id = $(this).val();
          $.ajax({
-            url: BASE_URL + '/admin/category_types/add_category_types/get_category_headers.php',
+            url: BASE_URL + '/admin/category_types/get_category_headers.php',
             method: 'POST',
             data: {
                category_id: category_id
@@ -158,6 +158,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            success: function(data) {
                               $(".container").empty();
                               $('.container').html(data);
+                              var new_url = window.location.href.replace('?tab=add_categories_types', '?tab=categories_types');
+                              history.pushState(null, null, new_url);
                               var alert_message = '<div class="alert alert-success category_types_success_dismissible" role="alert">' + parsed_response.success + '</div>';
                               $('#alert_container').append(alert_message);
                               setTimeout(function() {

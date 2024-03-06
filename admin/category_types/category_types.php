@@ -35,30 +35,30 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                JOIN categories ON categories_heading.categories_id = categories.id";
                $result = mysqli_query($database_connection, $query);
 
-               while ($category_data = mysqli_fetch_assoc($result)) {
+               while ($category_type_data = mysqli_fetch_assoc($result)) {
                ?>
                   <tr scope="col">
                      <td>
-                        <?php echo $category_data['id']; ?>
+                        <?php echo $category_type_data['id']; ?>
                      </td>
                      <td>
-                        <?php echo $category_data['categories_name']; ?>
+                        <?php echo $category_type_data['categories_name']; ?>
                      </td>
                      <td>
-                        <?php echo $category_data['categories_heading_name']; ?>
+                        <?php echo $category_type_data['categories_heading_name']; ?>
                      </td>
                      <td>
-                        <?php echo $category_data['name']; ?>
+                        <?php echo $category_type_data['name']; ?>
                      </td>
                      <td>
-                        <?php echo date('d-m-Y', strtotime($category_data['created_at'])); ?>
+                        <?php echo date('d-m-Y', strtotime($category_type_data['created_at'])); ?>
                      </td>
                      <td>
-                        <?php echo date('d-m-Y', strtotime($category_data['updated_at'])); ?>
+                        <?php echo date('d-m-Y', strtotime($category_type_data['updated_at'])); ?>
                      </td>
                      <td>
                         <div class="category_types_action">
-                           <input type="hidden" name="category_id" class="category_id" id="category_id" value="<?php echo $category_data['id']; ?>">
+                           <input type="hidden" name="category_type_id" class="category_type_id" id="category_type_id" value="<?php echo $category_type_data['id']; ?>">
                            <div class="category_types_edit">
                               <i class="fa-regular fa-pen-to-square"></i>
                            </div>
@@ -102,10 +102,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    });
 
    /*--------------------------------------------------------------- Click on Edit Button JS ----------------------------------------------------------------------------*/
-   function category_types_edit_icon(url, category_id) {
+   function category_types_edit_icon(url, category_type_id) {
       $.ajax({
          type: 'GET',
-         url: BASE_URL + url + '?category_id=' + category_id,
+         url: BASE_URL + url + '?category_type_id=' + category_type_id,
          success: function(data) {
             $(".container").empty();
             $('.container').html(data);
@@ -119,8 +119,8 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    // redirection ajax for adding the category types
    $(document).off('click', '.category_types_edit').on('click', '.category_types_edit', function(e) {
       e.preventDefault();
-      var category_id = $(this).siblings('.category_id').val();
-      category_types_edit_icon('/admin/category_types/edit_category_types/edit_category_types.php', category_id);
+      var category_type_id = $(this).siblings('.category_type_id').val();
+      category_types_edit_icon('/admin/category_types/edit_category_types/edit_category_types.php', category_type_id);
    });
 
    /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
@@ -158,7 +158,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    });
 
    /*--------------------------------------------------------------- Delete Button JS on ADD PAGES ----------------------------------------------------------------------------*/
-   function category_types_delete_button(url, category_id) {
+   function category_types_delete_button(url, category_type_id) {
       Swal.fire({
          title: 'Are you sure?',
          text: "You won't be able to revert this!",
@@ -172,14 +172,14 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
             var parsed_response = null;
             $.ajax({
                type: 'DELETE',
-               url: BASE_URL + url + '?category_id=' + category_id,
+               url: BASE_URL + url + '?category_type_id=' + category_type_id,
                success: function(response) {
                   if (parsed_response) {
                      parsed_response = null;
                   } else {
                      parsed_response = JSON.parse(response);
                      if (parsed_response.error) {
-                        var alert_message = '<div class="alert alert-danger category_types_delete_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                        var alert_message = '<div class="alert alert-danger category_type_delete_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
                         $('#alert_container').append(alert_message);
                         setTimeout(function() {
                            $('.alert').remove();
@@ -191,7 +191,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                            success: function(data) {
                               $(".container").empty();
                               $('.container').html(data);
-                              var alert_message = '<div class="alert alert-success category_types_delete_alert_dismissible" role="alert">' + parsed_response.success + '</div>';
+                              var alert_message = '<div class="alert alert-success category_type_delete_success_dismissible" role="alert">' + parsed_response.success + '</div>';
                               $('#alert_container').append(alert_message);
                               setTimeout(function() {
                                  $('.alert').remove();
@@ -212,10 +212,10 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       });
    }
 
-   // redirection ajax for delete button the category types
+   // redirection ajax for delete button the category title
    $(document).on('click', '.category_types_delete', function(e) {
       e.preventDefault();
-      var category_id = $(this).siblings('.category_id').val();
-      category_types_delete_button('/admin/category_types/delete_category_types/delete_category_types.php', category_id);
+      var category_type_id = $(this).siblings('.category_type_id').val();
+      category_types_delete_button('/admin/category_types/delete_category_types/delete_category_types.php', category_type_id);
    });
 </script>

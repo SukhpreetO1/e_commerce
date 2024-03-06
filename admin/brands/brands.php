@@ -164,7 +164,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                            success: function(data) {
                               $(".container").empty();
                               $('.container').html(data);
-                              var alert_message = '<div class="alert alert-success brands_delete_alert_dismissible" role="alert">' + parsed_response.success + '</div>';
+                              var alert_message = '<div class="alert alert-success brands_delete_success_dismissible" role="alert">' + parsed_response.success + '</div>';
                               $('#alert_container').append(alert_message);
                               setTimeout(function() {
                                  $('.alert').remove();
