@@ -189,4 +189,26 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       var brands_id = $(this).siblings('.brands_id').val();
       brands_delete_button('/admin/brands/delete_brands/delete_brands.php', brands_id);
    });
+
+   /*--------------------------------------------------------------- Click on Edit Button JS ----------------------------------------------------------------------------*/
+   function brands_edit(url, brands_id) {
+      $.ajax({
+         type: 'GET',
+         url: BASE_URL + url + '?brands_id=' + brands_id,
+         success: function(data) {
+            $(".container").empty();
+            $('.container').html(data);
+         },
+         error: function(e) {
+            console.log(e);
+         }
+      });
+   }
+
+   // redirection ajax
+   $(document).off('click', '.brands_edit').on('click', '.brands_edit', function(e) {
+      e.preventDefault();
+      var brands_id = $(this).siblings('.brands_id').val();
+      brands_edit('/admin/brands/edit_brands/edit_brands.php', brands_id);
+   });
 </script>

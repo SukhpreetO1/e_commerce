@@ -27,7 +27,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                <div class="edit_section">
                   <form method="post" id="edit_color_form" class="edit_color_form">
                      <div class="form-group">
-                        <label for="edit_color_input_name" class="edit_product_name mt-2 mb-2">Color Name</label>
+                        <!-- <label for="edit_color_input_name" class="edit_product_name mt-2 mb-2">Color Name</label> -->
                         <div id="color_picker_container">
                            <label for="color_picker">Select color : </label>
                            <input type="color" id="color_picker" value="<?php echo $row["color_code"]; ?>">

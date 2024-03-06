@@ -104,9 +104,9 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                                         $('.container').html(data);
                                         var alert_message = '<div class="alert alert-success category_title_success_dismissible" role="alert">' + parsed_response.success + '</div>';
                                         $('#alert_container').append(alert_message);
-                                        // setTimeout(function() {
-                                        //     $('.alert').remove();
-                                        // }, 2000);
+                                        setTimeout(function() {
+                                            $('.alert').remove();
+                                        }, 2000);
                                     },
                                     error: function(xhr, status, error) {
                                         console.log(error);

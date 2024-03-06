@@ -2,17 +2,15 @@
 include dirname(__DIR__, 3) . "/common/config/config.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   var_dump($_POST);
-   die();
-   $add_color_input_name = trim($_POST["add_color_input_name"]);
+   $add_color_input_name = empty($_POST["add_color_input_name"]) ? "Black" : trim($_POST["add_color_input_name"]);
    $add_color_hex_code = trim($_POST["add_color_hex_code"]);
 
    $response = array();
-   if ($add_color_input_name !== 0) {
+   if ($add_color_input_name != "") {
       $check_sql = "SELECT * FROM color WHERE color_code = ?";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
-      mysqli_stmt_bind_param($check_stmt, "s", $add_color_input_name, $add_color_hex_code);
+      mysqli_stmt_bind_param($check_stmt, "s", $add_color_hex_code);
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 04, 2024 at 06:56 PM
+-- Generation Time: Mar 06, 2024 at 12:26 PM
 -- Server version: 8.0.36-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `brands` (
   `id` int NOT NULL,
-  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -40,7 +40,8 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'ABC', '2024-03-04 13:13:25', '2024-03-04 13:13:25');
+(1, 'ABC', '2024-03-04 13:13:25', '2024-03-04 13:13:25'),
+(2, 'qwe', '2024-03-06 05:40:41', '2024-03-06 06:27:45');
 
 -- --------------------------------------------------------
 
@@ -233,7 +234,12 @@ INSERT INTO `color` (`id`, `name`, `color_code`, `created_at`, `updated_at`) VAL
 (4, 'Ultramarine', '#070788', '2024-02-28 15:38:17', '2024-02-28 15:38:17'),
 (5, 'Fuzzy Wuzzy', '#000066', '2024-02-28 15:40:49', '2024-02-28 15:40:49'),
 (6, 'Port Gore', '#212150', '2024-02-28 15:42:21', '2024-02-28 15:42:21'),
-(8, 'Tosca', '#8a4242', '2024-03-01 10:12:55', '2024-03-01 10:12:55');
+(7, 'Tosca', '#8a4242', '2024-03-01 10:12:55', '2024-03-01 10:12:55'),
+(8, 'Dusty Gray', '#a58d8d', '2024-03-06 12:00:18', '2024-03-06 12:00:25'),
+(9, 'Black', '#000000', '2024-03-06 12:14:01', '2024-03-06 12:14:01'),
+(10, 'Maroon', '#850000', '2024-03-06 12:16:53', '2024-03-06 12:16:53'),
+(11, 'Lonestar', '#700000', '2024-03-06 12:18:27', '2024-03-06 12:18:27'),
+(12, 'Mojo', '#c44040', '2024-03-06 12:18:37', '2024-03-06 12:18:37');
 
 -- --------------------------------------------------------
 
@@ -326,7 +332,7 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `name`, `brands_id`, `description`, `categories_type_id`, `quantity`, `color_id`, `price`, `discount_id`, `created_at`, `updated_at`) VALUES
 (1, 'lorem', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis dignissimos sapiente aut! Accusamus ab vero doloremque nobis id earum soluta.', 2, 5, 1, '10', 1, '2024-02-20 15:55:10', '2024-02-27 17:12:03'),
 (2, 'uiouiouio', 1, 'uiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouio', 5, 10, 1, '30', 1, '2024-02-29 15:34:54', '2024-02-29 15:34:54'),
-(3, 'xcc', 1, 'cvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbv', 3, 20, 1, '20', 1, '2024-02-29 15:38:13', '2024-02-29 15:38:13'),
+(3, 'asdxcc', 2, 'cvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbv', 3, 20, 1, '20', 1, '2024-02-29 15:38:13', '2024-03-06 11:43:08'),
 (4, 'zxczxc', 1, 'zxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxc', 3, 210, 1, '20', 1, '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
 (5, 'asdasd', 1, 'asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd', 4, 50, 3, '50', 1, '2024-03-01 09:45:20', '2024-03-01 09:45:20');
 
@@ -352,15 +358,15 @@ CREATE TABLE `product_image` (
 INSERT INTO `product_image` (`id`, `name`, `products_id`, `path`, `created_at`, `updated_at`) VALUES
 (1, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10'),
 (2, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10'),
-(29, 'Screenshot from 2023-10-03 18-46-19.png', 4, 'Screenshot_from_2023-10-03_18-46-19.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(30, 'Screenshot from 2023-10-03 18-43-46.png', 4, 'Screenshot_from_2023-10-03_18-43-46.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(31, 'Screenshot from 2023-09-28 16-53-23.png', 4, 'Screenshot_from_2023-09-28_16-53-23.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(32, 'Screenshot from 2023-09-11 14-58-14.png', 4, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(33, 'Screenshot from 2024-01-12 11-16-22.png', 5, 'Screenshot_from_2024-01-12_11-16-22.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(34, 'Screenshot from 2024-01-01 13-51-17.png', 5, 'Screenshot_from_2024-01-01_13-51-17.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(35, 'Screenshot from 2023-12-08 10-00-08.png', 5, 'Screenshot_from_2023-12-08_10-00-08.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(36, 'Screenshot from 2023-10-24 17-01-59.png', 5, 'Screenshot_from_2023-10-24_17-01-59.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(37, 'Screenshot from 2023-10-04 12-11-07.png', 5, 'Screenshot_from_2023-10-04_12-11-07.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20');
+(3, 'Screenshot from 2023-10-03 18-46-19.png', 4, 'Screenshot_from_2023-10-03_18-46-19.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
+(4, 'Screenshot from 2023-10-03 18-43-46.png', 4, 'Screenshot_from_2023-10-03_18-43-46.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
+(5, 'Screenshot from 2023-09-28 16-53-23.png', 4, 'Screenshot_from_2023-09-28_16-53-23.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
+(6, 'Screenshot from 2023-09-11 14-58-14.png', 4, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
+(7, 'Screenshot from 2024-01-12 11-16-22.png', 5, 'Screenshot_from_2024-01-12_11-16-22.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
+(8, 'Screenshot from 2024-01-01 13-51-17.png', 5, 'Screenshot_from_2024-01-01_13-51-17.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
+(9, 'Screenshot from 2023-12-08 10-00-08.png', 5, 'Screenshot_from_2023-12-08_10-00-08.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
+(10, 'Screenshot from 2023-10-24 17-01-59.png', 5, 'Screenshot_from_2023-10-24_17-01-59.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
+(11, 'Screenshot from 2023-10-04 12-11-07.png', 5, 'Screenshot_from_2023-10-04_12-11-07.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20');
 
 -- --------------------------------------------------------
 
@@ -419,7 +425,9 @@ INSERT INTO `product_size_variant` (`id`, `product_id`, `size_id`, `created_at`,
 (3, 3, 1, '2024-02-29 15:38:13', '2024-02-29 15:38:13'),
 (4, 4, 2, '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
 (5, 5, 1, '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(6, 5, 2, '2024-03-01 09:45:20', '2024-03-01 09:45:20');
+(6, 5, 2, '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
+(7, 1, 3, '2024-03-05 17:49:29', '2024-03-05 17:49:29'),
+(8, 1, 4, '2024-03-05 17:50:11', '2024-03-05 17:50:11');
 
 -- --------------------------------------------------------
 
@@ -483,7 +491,33 @@ CREATE TABLE `size` (
 
 INSERT INTO `size` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'Free Size', '2024-02-28 10:59:00', '2024-02-28 10:59:00'),
-(2, 'XS', '2024-02-28 11:21:28', '2024-02-28 11:33:35');
+(2, 'XS', '2024-02-28 11:21:28', '2024-02-28 11:33:35'),
+(3, 'S', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(4, 'M', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(5, 'L', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(6, 'XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(7, '2XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(8, '3XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(9, '4XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(10, '5XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(11, '27', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(12, '28', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(13, '29', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(14, '30', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(15, '32', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(16, '34', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(17, '36', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(18, '37', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(19, '38', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(20, '39', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(21, '40', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(22, '42', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(23, '44', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(24, '46', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(25, '48', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(26, '50', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(27, '52', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
+(28, '54', '2024-03-05 12:59:47', '2024-03-05 12:59:47');
 
 -- --------------------------------------------------------
 
@@ -699,7 +733,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `card_details`
@@ -717,31 +751,31 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `categories_heading`
 --
 ALTER TABLE `categories_heading`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `categories_type`
 --
 ALTER TABLE `categories_type`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `discount`
 --
 ALTER TABLE `discount`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -759,19 +793,19 @@ ALTER TABLE `payment_method`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `product_image`
 --
 ALTER TABLE `product_image`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `product_reviews`
 --
 ALTER TABLE `product_reviews`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_reviews_images`
@@ -783,13 +817,13 @@ ALTER TABLE `product_reviews_images`
 -- AUTO_INCREMENT for table `product_size_variant`
 --
 ALTER TABLE `product_size_variant`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `shipping_address`
@@ -801,13 +835,13 @@ ALTER TABLE `shipping_address`
 -- AUTO_INCREMENT for table `size`
 --
 ALTER TABLE `size`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `wishlist`

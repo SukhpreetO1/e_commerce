@@ -230,7 +230,8 @@
 .add_color,
 .edit_color,
 .add_discount,
-.add_brands {
+.add_brands,
+.edit_brands {
   display: flex;
   justify-content: space-between;
   padding: 0 1% 1%;
@@ -285,7 +286,8 @@
 .edit_discount_back_button,
 .brands_back_button,
 .brands_plus_icon,
-.add_brands_back_button {
+.add_brands_back_button,
+.edit_brands_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -392,7 +394,8 @@
 .edit_color_name_button,
 .add_discount_name_button,
 .edit_discount_name_button,
-.add_brands_name_button {
+.add_brands_name_button,
+.edit_brands_name_button {
   text-align: center;
 }
 
@@ -430,7 +433,8 @@
 .edit_size_name,
 .add_color_name,
 .edit_color_name,
-.add_brands_names {
+.add_brands_names,
+.edit_brands_names {
   width: 30%;
   margin-left: 36%;
 }
@@ -501,7 +505,8 @@
 #edit_admin_date_of_birth_err,
 #edit_admin_password_err,
 #edit_admin_confirm_password_err,
-#add_brands_name_err {
+#add_brands_name_err,
+#edit_brands_name_err {
   display: block;
   text-align: start;
 }
