@@ -128,6 +128,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          success: function(data) {
             $(".container").empty();
             $('.container').html(data);
+            var new_url = window.location.href.replace('?tab=add_brands', '?tab=brands');
+            history.pushState(null, null, new_url);
          },
          error: function(e) {
             console.log(e);

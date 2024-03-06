@@ -605,7 +605,7 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `categories_heading`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `clothes_category_id` (`categories_id`);
+  ADD KEY `categories_id` (`categories_id`);
 
 --
 -- Indexes for table `categories_type`
@@ -872,7 +872,7 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `categories_heading`
   ADD CONSTRAINT `categories_heading_ibfk_1` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `fk_clothes_category` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `fk_categories` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`);
 
 --
 -- Constraints for table `categories_type`

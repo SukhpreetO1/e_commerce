@@ -144,51 +144,59 @@ $(document).on('click', '.admin_detail', function (e) {
 $(document).ready(function () {
     var query_param = window.location.search;
 
-    if (query_param.includes('dashboard')) {
+    if (query_param.includes('=dashboard')) {
         handle_ajax_redirection('/admin/homepage/dashboard/dashboard.php', function () {
             add_background_color('.dashboard');
         });
-    } else if (query_param.includes('brands')) {
+    } else if (query_param.includes('=brands')) {
         handle_ajax_redirection('/admin/brands/brands.php', function () {
             add_background_color('.brands');
         });
-    } else if (query_param.includes('size')) {
+    } else if (query_param.includes('=add_brands')) {
+        handle_ajax_redirection('/admin/brands/add_brands/add_brands.php', function () {
+            add_background_color('.brands');
+        });
+    } else if (query_param.includes('=size')) {
         handle_ajax_redirection('/admin/size/size.php', function () {
             add_background_color('.size');
         });
-    } else if (query_param.includes('color')) {
+    } else if (query_param.includes('=color')) {
         handle_ajax_redirection('/admin/color/color.php', function () {
             add_background_color('.color');
         });
-    } else if (query_param.includes('discount')) {
+    } else if (query_param.includes('=discount')) {
         handle_ajax_redirection('/admin/discount/discount.php', function () {
             add_background_color('.discount');
         });
-    } else if (query_param.includes('products')) {
+    } else if (query_param.includes('=products')) {
         handle_ajax_redirection('/admin/products/products.php', function () {
             add_background_color('.products');
         });
-    } else if (query_param.includes('roles')) {
+    } else if (query_param.includes('=roles')) {
         handle_ajax_redirection('/admin/roles/roles.php', function () {
             add_background_color('.roles');
         });
-    } else if (query_param.includes('user_detail')) {
+    } else if (query_param.includes('=user_detail')) {
         handle_ajax_redirection('/admin/user_detail/user_detail.php', function () {
             add_background_color('.users');
         });
-    } else if (query_param.includes('category_title')) {
+    } else if (query_param.includes('=category_title')) {
         handle_ajax_redirection('/admin/category_title/category_title.php', function () {
             add_background_color('.category_title');
         });
-    } else if (query_param.includes('category_header')) {
+    } else if (query_param.includes('=category_header')) {
         handle_ajax_redirection('/admin/category_header/category_header.php', function () {
             add_background_color('.category_heading');
         });
-    } else if (query_param.includes('categories_types')) {
+    } else if (query_param.includes('=categories_types')) {
         handle_ajax_redirection('/admin/category_types/category_types.php', function () {
             add_background_color('.categories_types');
         });
-    } else if (query_param.includes('admin_detail')) {
+    } else if (query_param.includes('=add_categories_types')) {
+        handle_ajax_redirection('/admin/category_types/add_category_types/add_category_types.php', function () {
+            add_background_color('.categories_types');
+        });
+    } else if (query_param.includes('=admin_detail')) {
         handle_ajax_redirection('/admin/admin_detail/admin_detail.php', function () {
             // add_background_color('.admin_detail');
         });

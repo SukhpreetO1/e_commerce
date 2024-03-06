@@ -36,10 +36,13 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                </div>
                <div class="form-group category_header_dropdown">
                   <label for="add_category_header_input_title" class="add_category_header_title mt-2 mb-2">Category Header Name <span class="important_mark">*</span></label>
+                  <input type="hidden" name="categories_id" class="categories_id" id="categories_id" value="">
                   <select class="form-select add_category_header_input_title" id="add_category_header_input_title" aria-label="Select Category Title Name" name="add_category_header_input_title" value="">
                      <option hidden disabled selected>Select Category Header Name</option>
                      <?php
-                     $sql = "SELECT * FROM categories_heading WHERE clothes_category_id = ";
+                     $selected_category_id = isset($_POST['selected_categories_id']) ? $_POST['selected_categories_id'] : 0;
+                     var_dump($_POST);
+                     $sql = "SELECT * FROM categories_heading WHERE categories_id = ";
                      $result = $database_connection->query($sql);
                      if ($result->num_rows > 0) {
                         while ($categories_heading_row = $result->fetch_assoc()) {
@@ -198,6 +201,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          success: function(data) {
             $(".container").empty();
             $('.container').html(data);
+            var new_url = window.location.href.replace('?tab=add_categories_types', '?tab=categories_types');
+            history.pushState(null, null, new_url);
          },
          error: function(e) {
             console.log(e);
@@ -209,5 +214,21 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
    $(document).off('click', '.add_category_types_back_button').on('click', '.add_category_types_back_button', function(e) {
       e.preventDefault();
       back_button_in_category_types_add_page('/admin/category_types/category_types.php', e);
+   });
+
+   /*--------------------------------------------------------------- getting categories id ----------------------------------------------------------------------------*/
+   $(document).ready(function() {
+      $('.add_category_title_input_title').change(function() {
+         var selected_categories_id = $(this).val();
+         $.ajax({
+            type: 'post',
+            data: {
+               selected_categories_id: selected_categories_id,
+            },
+            success: function(response) {
+               $('#categories_id').val(selected_categories_id);
+            }
+         });
+      });
    });
 </script>
