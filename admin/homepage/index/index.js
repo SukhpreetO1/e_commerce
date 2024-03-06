@@ -46,7 +46,7 @@ function add_background_color(element) {
     $('.roles').removeClass('highlighted');
     $('.users').removeClass('highlighted');
     $('.category_title').removeClass('highlighted');
-    $('.category_heading').removeClass('highlighted');
+    $('.category_header').removeClass('highlighted');
     $('.categories_types').removeClass('highlighted');
     $(element).addClass('highlighted');
 }
@@ -121,7 +121,7 @@ $(document).on('click', '.category_title', function (e) {
 });
 
 // redirection ajax for the category heading
-$(document).on('click', '.category_heading', function (e) {
+$(document).on('click', '.category_header', function (e) {
     e.preventDefault();
     add_background_color(this);
     handle_redirection_and_push_state('/category_header/category_header', 'tab=category_header');
@@ -186,7 +186,7 @@ $(document).ready(function () {
         });
     } else if (query_param.includes('=category_header')) {
         handle_ajax_redirection('/admin/category_header/category_header.php', function () {
-            add_background_color('.category_heading');
+            add_background_color('.category_header');
         });
     } else if (query_param.includes('=categories_types')) {
         handle_ajax_redirection('/admin/category_types/category_types.php', function () {

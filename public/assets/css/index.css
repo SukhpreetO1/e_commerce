@@ -23,6 +23,8 @@
   background-color: #4c64e5 !important;
   color: white !important;
   border-radius: 0px !important;
+  margin: 0 !important;
+  text-align: left !important;
 }
 
 /* ----------------------------------------------------------------------------------- */
@@ -177,7 +179,6 @@
 }
 
 .category_title_heading,
-.category_header,
 .category_header_title,
 .category_types_heading,
 .users_detail_heading,

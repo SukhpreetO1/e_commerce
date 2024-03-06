@@ -5,7 +5,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 <div class="category_header_page">
     <div class="alert_container" id="alert_container"></div>
     <div class="container">
-        <div class="category_header">
+        <div class="category_header_title">
             <h2>Category Header</h2>
         </div>
 
@@ -91,7 +91,7 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 
     /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
     function category_header_back_button(url) {
-        $('.category_heading').removeClass('highlighted');
+        $('.category_header').removeClass('highlighted');
         $('.dashboard').addClass('highlighted');
 
         $.ajax({

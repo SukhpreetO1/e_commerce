@@ -59,7 +59,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link category_heading">
+                <a href="#" class="nav-link category_header">
                     Category Heading
                 </a>
             </li>
