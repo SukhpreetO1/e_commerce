@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    }
 
    if (empty($errors)) {
-      $check_sql = "SELECT discount WHERE id = $edit_discount_id AND code_name = ? AND discount_type = ?";
+      $check_sql = "SELECT * FROM discount WHERE id = $edit_discount_id AND code_name = ? AND discount_type = ?";
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
       mysqli_stmt_bind_param($check_stmt, "iss",$edit_discount_id, $edit_discount_input_code_name, $edit_discount_input_discount_type);
       mysqli_stmt_execute($check_stmt);
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       mysqli_stmt_bind_result($check_stmt, $result);
       mysqli_stmt_fetch($check_stmt);
 
-      if (mysqli_stmt_num_rows($check_stmt) != 0) {
+      if (mysqli_stmt_num_rows($check_stmt) == 0) {
          $response['error'] = "This discount does not exists.";
       } else {
          $original_date = $edit_discount_expire_date;

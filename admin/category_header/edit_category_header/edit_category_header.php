@@ -85,7 +85,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
    function validate_category_title() {
       var selected_value = $('.edit_category_header_input_title').val();
-      console.log(selected_value);
       var error_messages = '';
       if (selected_value === '' || selected_value === null) {
          error_messages = 'Category title is required.';
@@ -103,7 +102,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          return false;
       } else {
          var formData = $(this).serialize();
-         console.log(formData);
          var parsed_response = null;
          $.ajax({
             type: "POST",

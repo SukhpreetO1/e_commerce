@@ -19,14 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $color_name = $data['name']['value'];
    }
 
-   $check_sql = "SELECT color WHERE color_code = ? WHERE id = $edit_color_id";
+   $check_sql = "SELECT * FROM color WHERE color_code = ? WHERE id = ?";
    $check_stmt = mysqli_prepare($database_connection, $check_sql);
    mysqli_stmt_bind_param($check_stmt, "si", $edit_color_input_name, $edit_color_id);
    mysqli_stmt_execute($check_stmt);
    mysqli_stmt_store_result($check_stmt);
 
    $response = array();
-   if (mysqli_stmt_num_rows($check_stmt) != 0) {
+   if (mysqli_stmt_num_rows($check_stmt) == 0) {
       $response['error'] = "Color name does not exist.";
    } else {
       $update_sql = "UPDATE color SET name = ?, color_code = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";

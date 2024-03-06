@@ -217,8 +217,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            success: function(data) {
                               $(".container").empty();
                               $('.container').html(data);
-                              var new_url = window.location.href.replace('?tab=edit_categories_types', '?tab=categories_types');
-                              history.pushState(null, null, new_url);
                               var alert_message = '<div class="alert alert-success category_types_success_dismissible" role="alert">' + parsed_response.success + '</div>';
                               $('#alert_container').append(alert_message);
                               setTimeout(function() {

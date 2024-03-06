@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $update_role_input_name = trim($_POST["edit_role_input_name"]);
       $edit_role_id = trim($_POST["edit_role_id"]);
 
-      $check_sql = "SELECT roles WHERE name = ? WHERE id = $edit_role_id";
+      $check_sql = "SELECT * FROM roles WHERE name = ? WHERE id = ?";
       $update_sql = "UPDATE roles SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       mysqli_stmt_store_result($check_stmt);
 
       $response = array();
-      if (mysqli_stmt_num_rows($check_stmt) != 0) {
+      if (mysqli_stmt_num_rows($check_stmt) == 0) {
          $response['error'] = "Role does not exist.";
       } else {
          $update_stmt = mysqli_prepare($database_connection, $update_sql);

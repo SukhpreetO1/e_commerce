@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $update_category_header_input_name = trim($_POST["edit_category_header_input_name"]);
       $edit_category_id = trim($_POST["edit_category_id"]);
 
-      $check_sql = "SELECT * FROM categories_heading WHERE categories_id = ? AND name = ? WHERE id = $edit_category_id";
+      $check_sql = "SELECT * FROM categories_heading WHERE categories_id = ? AND name = ? AND id = ?";
       $update_sql = "UPDATE categories_heading SET categories_id = ?, name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       mysqli_stmt_bind_result($check_stmt, $result);
       mysqli_stmt_fetch($check_stmt);
 
-      if (mysqli_stmt_num_rows($check_stmt) != 0) {
+      if (mysqli_stmt_num_rows($check_stmt) == 0) {
          $response['error'] = "Category header name does not exist in this category.";
       } else {
          $insert_stmt = mysqli_prepare($database_connection, $update_sql);

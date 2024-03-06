@@ -276,7 +276,6 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
             url: BASE_URL + "/admin/admin_detail/edit_admin_detail/edit_admin_detail_php.php" + "?edit_admin_id=" + edit_admin_id,
             data: formData,
             success: function(response) {
-               console.log(response);
                if (response.trim() === "") {
                   var alert_message = '<div class="alert alert-danger edit_admin_detail_alert_dismissible" role="alert">Admin details not updated.</div>';
                   $('#alert_container').append(alert_message);

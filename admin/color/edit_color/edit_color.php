@@ -65,7 +65,6 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       var edit_color_id = $('#edit_color_id').val();
       var formData = $(this).serialize();
       var parsed_response = null;
-      console.log(formData);
       $.ajax({
          type: "POST",
          url: BASE_URL + "/admin/color/edit_color/edit_color_php.php" + "?color_id=" + edit_color_id,

@@ -20,7 +20,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Active/ Inactive</th>
                   <th scope="col">Created At</th>
                   <th scope="col">Updated At</th>
                   <th scope="col">Action</th>
@@ -39,9 +38,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
                      </td>
                      <td>
                         <?php echo $brands_data['name']; ?>
-                     </td>
-                     <td>
-                        <?php echo ($brands_data['active'] == 0) ? 'Inactive' : 'Active'; ?>
                      </td>
                      <td>
                         <?php echo date('d-m-Y', strtotime($brands_data['created_at'])); ?>

@@ -16,14 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $update_brands_input_name = trim($_POST["edit_brands_input_name"]);
       $brands_id = trim($_POST["edit_brands_id"]);
 
-      $check_sql = "SELECT brands WHERE name = ? WHERE id = $brands_id";
+      $check_sql = "SELECT * FROM brands WHERE name = ? AND id = ?";
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
       mysqli_stmt_bind_param($check_stmt, "si", $update_brands_input_name, $brands_id);
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
 
       $response = array();
-      if (mysqli_stmt_num_rows($check_stmt) != 0) {
+      if (mysqli_stmt_num_rows($check_stmt) == 0) {
          $response['error'] = "Brand name does not exist.";
       } else {
          $update_sql = "UPDATE brands SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";

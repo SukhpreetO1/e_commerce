@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $update_category_title_input_name = trim($_POST["edit_category_title_input_name"]);
       $edit_category_id = trim($_POST["edit_category_id"]);
 
-      $check_sql = "SELECT categories WHERE name = ? WHERE id = $edit_category_id";
+      $check_sql = "SELECT * FROM categories WHERE name = ? WHERE id = ?";
       $update_sql = "UPDATE categories SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       mysqli_stmt_store_result($check_stmt);
 
       $response = array();
-      if (mysqli_stmt_num_rows($check_stmt) != 0) {
+      if (mysqli_stmt_num_rows($check_stmt) == 0) {
          $response['error'] = "Category name does not exist.";
       } else {
          $update_stmt = mysqli_prepare($database_connection, $update_sql);

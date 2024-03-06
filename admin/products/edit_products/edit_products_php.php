@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    }
 
    if (empty($errors)) {
-      $check_sql = "SELECT * FROM products WHERE id = $edit_product_id AND categories_type_id = ? AND name = ?";
+      $check_sql = "SELECT * FROM products WHERE id = ? AND categories_type_id = ? AND name = ?";
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
       mysqli_stmt_bind_param($check_stmt, "iis", $edit_product_id, $edit_products_category_type, $edit_products_input_name);
       mysqli_stmt_execute($check_stmt);
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       mysqli_stmt_bind_result($check_stmt, $result);
       mysqli_stmt_fetch($check_stmt);
 
-      if (mysqli_stmt_num_rows($check_stmt) != 0) {
+      if (mysqli_stmt_num_rows($check_stmt) == 0) {
          $response['error'] = "Product name does not exists in this category.";
       } else {
          $update_sql = "UPDATE products SET name=?, brands_id=?, description=?, categories_type_id=?, quantity=?, color_id=?, price=?, discount_id=?, updated_at = CURRENT_TIMESTAMP  WHERE id=?";
