@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       } else {
          $update_sql = "UPDATE products SET name=?, brands_id=?, description=?, categories_type_id=?, quantity=?, color_id=?, price=?, discount_id=?, updated_at = CURRENT_TIMESTAMP  WHERE id=?";
          $update_stmt = mysqli_prepare($database_connection, $update_sql);
-         mysqli_stmt_bind_param($update_stmt, "ssiiiii", $edit_products_input_name, $edit_product_brands_name, $edit_products_description, $edit_products_category_type, $edit_products_quantity, $edit_products_color, $edit_products_price, $edit_products_discount, $edit_product_id);
+         mysqli_stmt_bind_param($update_stmt, "sisiiiiii", $edit_products_input_name, $edit_product_brands_name, $edit_products_description, $edit_products_category_type, $edit_products_quantity, $edit_products_color, $edit_products_price, $edit_products_discount, $edit_product_id);
          mysqli_stmt_execute($update_stmt);
 
          $product_id = mysqli_insert_id($database_connection);

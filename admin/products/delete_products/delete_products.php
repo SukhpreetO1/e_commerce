@@ -15,6 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
          }
       }
       mysqli_query($database_connection, "DELETE FROM product_image WHERE products_id = $product_id");
+
+      $product_size = "SELECT * FROM product_size_variant where product_id = $product_id";
+      $product_size_result = mysqli_query($database_connection, $product_size);
+      while ($row = mysqli_fetch_assoc($product_size_result)) {
+         mysqli_query($database_connection, "DELETE FROM product_size_variant WHERE product_id = $product_id");
+      }
       mysqli_query($database_connection, "DELETE FROM products WHERE id = $product_id");
       mysqli_close($database_connection);
       $response['success'] = "Product name deleted successfully.";

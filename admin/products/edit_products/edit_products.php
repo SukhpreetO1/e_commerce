@@ -28,7 +28,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                <div class="edit_section">
                   <form method="post" id="edit_products_form" class="edit_products_form">
                      <div class="form-group products_brands_name_and_names">
-                        <div class="form-group me-3 col-6">
+                        <div class="form-group me-2 col-6">
                            <input type="hidden" name="edit_product_id" id="edit_product_id" value="<?php echo $product_data["id"]; ?>">
                            <label for="edit_product_brands_name" class="edit_product_discount mt-2 mb-2">Discount <span class="important_mark">*</span></label>
                            <select class="form-select edit_product_brands_name" id="edit_product_brands_name" name="edit_product_brands_name">
@@ -51,7 +51,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            </span>
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="form-group me-2 col-6">
                            <label for="edit_products_input_name" class="edit_product_name mt-2 mb-2">Name <span class="important_mark">*</span></label>
                            <input type="text" name="edit_products_input_name" class="form-control edit_products_input_name" id="edit_products_input_name" value="<?php echo $product_data["name"]; ?>">
                            <span class="invalid-feedback edit_products_name_err" id="edit_products_name_err">
@@ -60,16 +60,16 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                         </div>
                      </div>
 
-                     <div class="form-group col-12">
+                     <div class="form-group">
                         <label for="edit_products_description" class="edit_products_description mt-2 mb-2">Description <span class="important_mark">*</span></label>
-                        <textarea type="text" name="edit_products_description" class="form-control edit_products_description" id="edit_products_description" rows="3" style="width:97%"><?php echo $product_data["description"]; ?></textarea>
+                        <textarea type="text" name="edit_products_description" class="form-control edit_products_description" id="edit_products_description" rows="3"><?php echo $product_data["description"]; ?></textarea>
                         <span class="invalid-feedback edit_products_description_err" id="edit_products_description_err">
                            <?php echo $edit_products_description_err ?>
                         </span>
                      </div>
 
                      <div class="form-group products_category_type_and_quantity">
-                        <div class="form-group me-3 col-6">
+                        <div class="form-group me-2 col-6"">
                            <label for="edit_products_category_type" class="edit_product_caegory_type mt-2 mb-2">Category Type
                               <span class="important_mark">*</span></label>
                            <select class="form-select edit_products_category_type" id="edit_products_category_type" aria-label="Select products Title Name" name="edit_products_category_type">
@@ -92,7 +92,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            </span>
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="form-group me-2 col-6">
                            <label for="edit_products_quantity" class="edit_product_quantity mt-2 mb-2">Quantity <span class="important_mark">*</span></label>
                            <input type="text" name="edit_products_quantity" class="form-control edit_products_quantity" id="edit_products_quantity" value="<?php echo $product_data["quantity"]; ?>">
                            <span class="invalid-feedback edit_products_quantity_err" id="edit_products_quantity_err">
@@ -130,7 +130,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            </span>
                         </div>
 
-                        <div class="form-group me-2 col-6" style="margin-left: -0.75rem;">
+                        <div class="form-group me-2 col-6">
                            <label for="edit_products_color" class="edit_product_color mt-2 mb-2">Color <span class="important_mark">*</span></label>
                            <select class="form-select edit_products_color" id="edit_products_color" name="edit_products_color" style="height: 2.8rem;">
                               <option hidden disabled selected>Select Color</option>
@@ -154,7 +154,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                      </div>
 
                      <div class="form-group products_price_and_discount">
-                        <div class="form-group me-3 col-6">
+                        <div class="form-group me-2 col-6">
                            <label for="edit_products_price" class="edit_product_price mt-2 mb-2">Price <span class="important_mark">*</span></label>
                            <div class="input-group mb-2">
                               <div class="input-group-prepend">
@@ -167,7 +167,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                            </span>
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="form-group me-2 col-6">
                            <label for="edit_products_discount" class="edit_product_discount mt-2 mb-2">Discount </label>
                            <select class="form-select edit_products_discount" id="edit_products_discount" name="edit_products_discount" style="height: 2.8rem;">
                               <option hidden disabled selected>Select Discount</option>

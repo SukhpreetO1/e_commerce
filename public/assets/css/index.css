@@ -70,7 +70,10 @@
 .size_imported_alert_dismissible,
 .size_imported_success_dismissible,
 .products_uploaded_image_delete_success_dismissible,
-.products_uploaded_image_delete_alert_dismissible {
+.products_uploaded_image_delete_alert_dismissible,
+.brands_alert_dismissible,
+.brands_success_dismissible,
+.brands_delete_alert_dismissible {
   font-size: 15px;
   position: absolute;
   right: -8rem;
@@ -88,7 +91,9 @@
 .size_imported_success_dismissible,
 .size_imported_alert_dismissible,
 .products_uploaded_image_delete_success_dismissible,
-.products_uploaded_image_delete_alert_dismissible {
+.products_uploaded_image_delete_alert_dismissible,
+.brands_alert_dismissible,
+.brands_delete_alert_dismissible {
   width: 15rem;
 }
 
@@ -107,7 +112,8 @@
 .add_discount_alert_dismissible,
 .add_discount_success_dismissible,
 .edit_admin_detail_alert_dismissible,
-.edit_admin_detail_success_dismissible {
+.edit_admin_detail_success_dismissible,
+.brands_success_dismissible {
   width: 18rem;
 }
 
@@ -178,7 +184,8 @@
 .color_heading,
 .discount_heading,
 .products_heading,
-.brands_heading {
+.brands_heading,
+.brands_title {
   text-align: center;
   margin: 1% 0% 0;
 }
@@ -277,7 +284,8 @@
 .add_discount_back_button,
 .edit_discount_back_button,
 .brands_back_button,
-.brands_plus_icon {
+.brands_plus_icon,
+.add_brands_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -383,7 +391,8 @@
 .add_color_name_button,
 .edit_color_name_button,
 .add_discount_name_button,
-.edit_discount_name_button {
+.edit_discount_name_button,
+.add_brands_name_button {
   text-align: center;
 }
 
@@ -420,7 +429,8 @@
 .add_size_name,
 .edit_size_name,
 .add_color_name,
-.edit_color_name {
+.edit_color_name,
+.add_brands_names {
   width: 30%;
   margin-left: 36%;
 }
@@ -490,7 +500,8 @@
 #edit_admin_mobile_number_err,
 #edit_admin_date_of_birth_err,
 #edit_admin_password_err,
-#edit_admin_confirm_password_err {
+#edit_admin_confirm_password_err,
+#add_brands_name_err {
   display: block;
   text-align: start;
 }
@@ -773,14 +784,7 @@ a.ui-datepicker-next.ui-corner-all {
 .edit_products_size {
   display: block !important;
   height: 2.5rem !important;
-}
-
-.add_products_size {
   width: 100% !important;
-}
-
-.edit_products_size {
-  width: 93% !important;
 }
 
 .add_products_size button,

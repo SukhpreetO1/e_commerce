@@ -115,7 +115,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                   <div class="form-group me-2 col-6">
                      <label for="add_products_color" class="add_product_color mt-2 mb-2">Color <span class="important_mark">*</span></label>
                      <select class="form-select add_products_color" id="add_products_color" aria-label="Select product color" name="add_products_color">
-                     <option hidden selected disabled>Select products color</option>
+                        <option hidden selected disabled>Select products color</option>
                         <?php
                         $sql = "SELECT * FROM color";
                         $result = $database_connection->query($sql);

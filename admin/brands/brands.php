@@ -106,4 +106,87 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       e.preventDefault();
       brands_back_button('/admin/homepage/dashboard/dashboard.php', e);
    });
+
+   /*--------------------------------------------------------------- Click on plus (+) JS ----------------------------------------------------------------------------*/
+   function brands_plus_icon(url) {
+      $.ajax({
+         type: 'GET',
+         url: BASE_URL + url,
+         success: function(data) {
+            $(".container").empty();
+            $('.container').html(data);
+         },
+         error: function(e) {
+            console.log(e);
+         }
+      });
+   }
+
+   // redirection ajax for adding the category title
+   $(document).off('click', '.brands_plus_icon').on('click', '.brands_plus_icon', function(e) {
+      e.preventDefault();
+      brands_plus_icon('/admin/brands/add_brands/add_brands.php');
+   });
+
+   /*--------------------------------------------------------------- Delete Button JS on ADD PAGES ----------------------------------------------------------------------------*/
+   function brands_delete_button(url, brands_id) {
+      Swal.fire({
+         title: 'Are you sure?',
+         text: "You won't be able to revert this!",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+         if (result.isConfirmed) {
+            var parsed_response = null;
+            $.ajax({
+               type: 'DELETE',
+               url: BASE_URL + url + '?brands_id=' + brands_id,
+               success: function(response) {
+                  if (parsed_response) {
+                     parsed_response = null;
+                  } else {
+                     parsed_response = JSON.parse(response);
+                     if (parsed_response.error) {
+                        var alert_message = '<div class="alert alert-danger brands_delete_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                        $('#alert_container').append(alert_message);
+                        setTimeout(function() {
+                           $('.alert').remove();
+                        }, 3000);
+                     } else {
+                        $.ajax({
+                           url: BASE_URL + '/admin/brands/brands.php',
+                           type: 'GET',
+                           success: function(data) {
+                              $(".container").empty();
+                              $('.container').html(data);
+                              var alert_message = '<div class="alert alert-success brands_delete_alert_dismissible" role="alert">' + parsed_response.success + '</div>';
+                              $('#alert_container').append(alert_message);
+                              setTimeout(function() {
+                                 $('.alert').remove();
+                              }, 2000);
+                           },
+                           error: function(xhr, status, error) {
+                              console.log(error);
+                           }
+                        });
+                     }
+                  }
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+         }
+      });
+   }
+
+   // redirection ajax for delete button the category title
+   $(document).on('click', '.brands_delete', function(e) {
+      e.preventDefault();
+      var brands_id = $(this).siblings('.brands_id').val();
+      brands_delete_button('/admin/brands/delete_brands/delete_brands.php', brands_id);
+   });
 </script>
