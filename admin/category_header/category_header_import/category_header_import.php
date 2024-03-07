@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_num_rows($check_stmt) == 0) {
                $inserted_names[] = [$category_id, $name];
             } else {
-               $failed_names[] = [$category_name, $name];
+               $failed_names[] = $name;
             }
          }
 
@@ -91,9 +91,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                }
 
                move_uploaded_file($_FILES['file']['tmp_name'], dirname(__DIR__, 3) . '/public/assets/uploaded_files/categories_heading/' . $file_name);
-               $response['success'] = "Category name imported successfully";
+               $response['success'] = "Category header name imported successfully";
             } else {
-               $response['error'] = "Failed to import categories names";
+               $response['error'] = "Failed to import categories heading names";
             }
          } else {
             $response['error'] = "Names that already exists in the database are : " . implode(', ', $failed_names);

@@ -41,6 +41,8 @@
 .category_type_delete_success_dismissible,
 .category_types_success_dismissible,
 .category_types_alert_dismissible,
+.category_types_imported_success_dismissible,
+.category_types_imported_alert_dismissible,
 .products_alert_dismissible,
 .products_success_dismissible,
 .products_delete_alert_dismissible,
@@ -140,6 +142,11 @@
   width: 23rem;
 }
 
+.category_header_imported_alert_dismissible,
+.category_types_imported_alert_dismissible {
+  width: 25rem;
+}
+
 .category_header_delete_alert_dismissible,
 .category_header_alert_dismissible,
 .category_header_success_dismissible,
@@ -148,8 +155,8 @@
 .discount_delete_alert_dismissible,
 .edit_discount_alert_dismissible,
 .edit_discount_success_dismissible,
-.category_header_imported_alert_dismissible,
-.category_header_imported_success_dismissible {
+.category_header_imported_success_dismissible,
+.category_types_imported_success_dismissible {
   width: 20rem;
 }
 
@@ -312,7 +319,8 @@
 
 .size_file_import,
 .brands_file_import,
-.category_header_file_import {
+.category_header_file_import,
+.category_types_file_import {
   font-size: 2rem;
   margin-left: 5px;
   padding: 5px;

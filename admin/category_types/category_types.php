@@ -9,9 +9,18 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
          <h2>Category Types</h2>
       </div>
 
+      <div class="error_messages" style="display: none;">
+         <div class="alert alert-danger uploading_file_err" role="alert" id="uploading_file_err">
+            <?php echo $uploading_file_err ?>
+         </div>
+      </div>
+
       <div class="add_category_types">
          <a href="#"><i class="fa-solid fa-arrow-left-long category_types_back_button"></i></a>
-         <a href="#"><i class="fa-solid fa-plus category_types_plus_icon"></i></a>
+         <div>
+            <a href="#"><i class="fa-solid fa-plus category_types_plus_icon"></i></a>
+            <a href="#" id="category_types_import_file_link"><i class="fa-solid fa-file-arrow-down category_types_file_import"></i></a>
+         </div>
       </div>
 
       <div class="category_types_table">
@@ -217,5 +226,82 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
       e.preventDefault();
       var category_type_id = $(this).siblings('.category_type_id').val();
       category_types_delete_button('/admin/category_types/delete_category_types/delete_category_types.php', category_type_id);
+   });
+
+   /*--------------------------------------------------------------- Import Button ----------------------------------------------------------------------------*/
+   $(document).ready(function() {
+      $('#category_types_import_file_link').click(function() {
+         var fileInput = $('<input type="file">');
+         fileInput.on('change', function() {
+            var file = this.files[0];
+            if (file.name.toLowerCase().endsWith('.csv') || file.name.toLowerCase().endsWith('.xlsx')) {
+               var formData = new FormData();
+               formData.append('file', file);
+               var parsed_response = null;
+               $.ajax({
+                  type: 'POST',
+                  url: BASE_URL + '/admin/category_types/category_types_import/category_types_import.php',
+                  data: formData,
+                  contentType: false,
+                  processData: false,
+                  success: function(response) {
+                     if (response.trim() === "") {
+                        var alert_message = '<div class="alert alert-danger category_types_imported_alert_dismissible" role="alert">File not uploaded.</div>';
+                        $('#alert_container').append(alert_message);
+                        setTimeout(function() {
+                           $('.alert').remove();
+                        }, 3000);
+                     } else {
+                        if (parsed_response) {
+                           parsed_response = null;
+                        } else {
+                           parsed_response = JSON.parse(response);
+                           if (parsed_response.error) {
+                              var alert_message = '<div class="alert alert-danger category_types_imported_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                              $('#alert_container').append(alert_message);
+                              setTimeout(function() {
+                                 $('.alert').remove();
+                              }, 3000);
+                           } else {
+                              $.ajax({
+                                 url: BASE_URL + '/admin/category_types/category_types.php',
+                                 type: 'GET',
+                                 success: function(data) {
+                                    $(".container").empty();
+                                    $('.container').html(data);
+                                    var alert_message = '<div class="alert alert-success category_types_imported_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                                    $('#alert_container').append(alert_message);
+                                    setTimeout(function() {
+                                       $('.alert').remove();
+                                    }, 2000);
+                                 },
+                                 error: function(xhr, status, error) {
+                                    console.log(error);
+                                 }
+                              });
+                           }
+                        }
+                     }
+                  },
+                  error: function(e) {
+                     console.log(e);
+                  }
+               });
+            } else {
+               $('.error_messages').css({
+                  'display': 'block',
+                  'width': '17rem',
+                  'position': 'absolute',
+                  'top': '-0.5rem',
+                  'right': '-10rem'
+               });
+               $('.uploading_file_err').text('Please select a CSV or XLSX file');
+               setTimeout(function() {
+                  $('.error_messages').css('display', 'none');
+               }, 3000);
+            }
+         });
+         fileInput.click();
+      });
    });
 </script>
