@@ -111,7 +111,7 @@
 
 .category_title_alert_dismissible,
 .category_title_success_dismissible,
-.category_type_delete_alert_dismissible, 
+.category_type_delete_alert_dismissible,
 .category_type_delete_success_dismissible,
 .category_types_alert_dismissible,
 .role_success_dismissible,
@@ -852,4 +852,50 @@ a.ui-datepicker-next.ui-corner-all {
   .homepage_sidebar {
     display: none;
   }
+}
+
+/* custom dropdown */
+.add_products_color {
+  position: relative;
+}
+
+.custom_product_dropdown_option {
+  padding: 7px 0 0 11px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 8px;
+  height: 2.5rem;
+}
+
+.custom_product_dropdown {
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  display: none;
+  width: 16.5vw;
+  border-radius: 10px;
+  height: 20rem;
+  overflow-y: scroll;
+}
+
+.custom_product_dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.custom_product_dropdown li:hover {
+  background: #f0f0f0;
+}
+
+.additional-info {
+  position: absolute;
+  width: 5rem;
+  height: 26px;
+}
+
+.color_name{
+  padding-left: 5rem;
 }

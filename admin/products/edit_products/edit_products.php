@@ -70,8 +70,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
                      <div class="form-group products_category_type_and_quantity">
                         <div class="form-group me-2 col-6"">
-                           <label for="edit_products_category_type" class="edit_product_caegory_type mt-2 mb-2">Category Type
-                              <span class="important_mark">*</span></label>
+                           <label for=" edit_products_category_type" class="edit_product_caegory_type mt-2 mb-2">Category Type
+                           <span class="important_mark">*</span></label>
                            <select class="form-select edit_products_category_type" id="edit_products_category_type" aria-label="Select products Title Name" name="edit_products_category_type">
                               <option hidden disabled selected>Select Category Type Name</option>
                               <?php
@@ -132,21 +132,26 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
                         <div class="form-group me-2 col-6">
                            <label for="edit_products_color" class="edit_product_color mt-2 mb-2">Color <span class="important_mark">*</span></label>
-                           <select class="form-select edit_products_color" id="edit_products_color" name="edit_products_color" style="height: 2.8rem;">
-                              <option hidden disabled selected>Select Color</option>
-                              <?php
-                              $color_sql = "SELECT * FROM color";
-                              $result = $database_connection->query($color_sql);
-                              if ($result->num_rows > 0) {
-                                 while ($color = $result->fetch_assoc()) {
-                                    $selected_color = ($color['id'] == $selected_color_id) ? "selected" : "";
-                              ?>
-                                    <option value="<?php echo $color['id']; ?>" <?php echo $selected_color; ?>> <?php echo $color['name']; ?></option>
-                              <?php
+                           <div class="custom-dropdown edit_products_color" id="edit_products_color" name="edit_products_color">
+                              <div class="selected-option custom_product_dropdown_option">Select product color</div>
+                              <ul class="options custom_product_dropdown">
+                                 <?php
+                                 $color_sql = "SELECT * FROM color";
+                                 $result = $database_connection->query($color_sql);
+                                 if ($result->num_rows > 0) {
+                                    while ($color = $result->fetch_assoc()) {
+                                       $selected_color = ($color['id'] == $selected_color_id) ? "selected" : "";
+                                 ?>
+                                       <li data-value="<?php echo $color['id'] ?>" class="<?php echo $selected_color; ?>">
+                                          <span class="additional-info color_name" value="<?php echo $color['color_code'] ?>" style="background-color: <?php echo $color['color_code'] ?>"></span>
+                                          <span class="color_name"><?php echo $color['name']; ?></span>
+                                       </li>
+                                 <?php
+                                    }
                                  }
-                              }
-                              ?>
-                           </select>
+                                 ?>
+                              </ul>
+                           </div>
                            <span class="invalid-feedback edit_products_color_err" id="edit_products_color_err">
                               <?php echo $edit_products_color_err ?>
                            </span>
@@ -233,6 +238,40 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 </div>
 
 <script>
+   /*--------------------------------------------------------------- js for the custom dropdown ---------------------------------------------------------------*/
+   $(document).ready(function() {
+      var initialColorName = $('.options li.selected .color_name').text().trim();
+      $('.selected-option').text(initialColorName);
+      $(document).on('click', '.custom_product_dropdown_option', function(event) {
+         event.stopPropagation();
+         var dropdown = $(this).closest('.custom-dropdown');
+         var options = dropdown.find('.options');
+         options.toggle();
+      });
+
+      $(document).on('click', '.options li', function(event) {
+         event.stopPropagation();
+         var dropdown = $(this).closest('.custom-dropdown');
+         var selectedOption = dropdown.find('.selected-option');
+         var options = dropdown.find('.options');
+         var target = $(event.target).closest('li');
+         if (target.length) {
+            selectedOption.text(target.find('.color_name').text().trim());
+            target.addClass('selected').siblings().removeClass('selected');
+            options.hide();
+            validate_color();
+         }
+      });
+
+      $(document).click(function(event) {
+         var dropdown = $('.custom-dropdown');
+         var options = dropdown.find('.options');
+         if (!$(event.target).closest('.custom_product_dropdown').length) {
+            options.hide();
+         }
+      });
+   });
+
    /*--------------------------------------------------------------- Multi select dropdown ----------------------------------------------------------------------------*/
    $('.selectpicker').selectpicker('refresh');
 
@@ -339,9 +378,9 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
    }
 
    function validate_color() {
-      var selected_color = $('#edit_products_color').val();
+      var selected_color = $('#edit_products_color .selected-option').text().trim();
       var error_messages = '';
-      if (selected_color === '' || selected_color === null) {
+      if (selected_color === 'Select product color') {
          error_messages = 'Please select atleast 1 color.';
       }
       $('.edit_products_color_err').text(error_messages);
@@ -374,10 +413,13 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
          fileNames.push(files[i].name);
       }
       var selectedSizes = $('#edit_products_size').val().join(',');
+      var selectedColorId = $('#edit_products_color .options li.selected').attr('data-value');
 
       var formData = new FormData(form);
       formData.append('image_file_names', fileNames.join(','));
       formData.append('edit_products_size', selectedSizes);
+      formData.append('edit_products_color', selectedColorId);
+
       var parsed_response = null;
       $.ajax({
          type: "POST",
