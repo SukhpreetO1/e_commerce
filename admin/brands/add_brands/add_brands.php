@@ -36,8 +36,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       var error_messages = '';
       if (brand_name.trim() === '') {
          error_messages = 'Brand name is required.';
-      } else if (brand_name.length < 1 || brand_name.length > 15) {
-         error_messages = 'Brand name must be between 1 and 15 characters long.';
+      } else if (brand_name.length < 1 || brand_name.length > 20) {
+         error_messages = 'Brand name must be between 1 and 20 characters long.';
       } else if (!/^[a-zA-Z\s\W]+$/.test(brand_name)) {
          error_messages = 'Only alphabets and special character are allowed.';
       }

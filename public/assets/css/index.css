@@ -35,6 +35,8 @@
 .category_header_success_dismissible,
 .category_header_alert_dismissible,
 .category_header_delete_alert_dismissible,
+.category_header_imported_success_dismissible,
+.category_header_imported_alert_dismissible,
 .category_type_delete_alert_dismissible, 
 .category_type_delete_success_dismissible,
 .category_types_success_dismissible,
@@ -72,6 +74,8 @@
 .user_active_update_alert_dismissible, /* toggle button in user table */ 
 .size_imported_alert_dismissible,
 .size_imported_success_dismissible,
+.brands_imported_alert_dismissible,
+.brands_imported_success_dismissible,
 .products_uploaded_image_delete_success_dismissible,
 .products_uploaded_image_delete_alert_dismissible,
 .brands_alert_dismissible,
@@ -94,6 +98,7 @@
 .user_active_update_alert_dismissible,
 .size_imported_success_dismissible,
 .size_imported_alert_dismissible,
+.brands_imported_alert_dismissible,
 .products_uploaded_image_delete_success_dismissible,
 .products_uploaded_image_delete_alert_dismissible,
 .brands_alert_dismissible,
@@ -117,7 +122,8 @@
 .add_discount_success_dismissible,
 .edit_admin_detail_alert_dismissible,
 .edit_admin_detail_success_dismissible,
-.brands_success_dismissible {
+.brands_success_dismissible,
+.brands_imported_success_dismissible {
   width: 18rem;
 }
 
@@ -141,7 +147,9 @@
 .discount_update_success_dismissible,
 .discount_delete_alert_dismissible,
 .edit_discount_alert_dismissible,
-.edit_discount_success_dismissible {
+.edit_discount_success_dismissible,
+.category_header_imported_alert_dismissible,
+.category_header_imported_success_dismissible {
   width: 20rem;
 }
 
@@ -303,7 +311,8 @@
 }
 
 .size_file_import,
-.discount_file_import {
+.brands_file_import,
+.category_header_file_import {
   font-size: 2rem;
   margin-left: 5px;
   padding: 5px;

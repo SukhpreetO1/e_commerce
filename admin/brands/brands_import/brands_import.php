@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $inserted_names = array();
          $failed_names = array();
 
-         $check_sql = "SELECT name FROM size WHERE name = ?";
+         $check_sql = "SELECT name FROM brands WHERE name = ?";
          $check_stmt = mysqli_prepare($database_connection, $check_sql);
 
          foreach ($names as $name) {
@@ -46,11 +46,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $values = implode(',', array_map(function ($value) {
                return "('$value')";
             }, $inserted_names));
-            $size_import = "INSERT INTO size (name) VALUES $values";
-            $result = mysqli_query($database_connection, $size_import);
 
-            if ($result) {
-               $brands_directory = dirname(__DIR__, 3) . '/public/assets/uploaded_files/size/';
+            $stmt = mysqli_prepare($database_connection, "INSERT INTO brands (name) VALUES (?)");
+            foreach ($inserted_names as $value) {
+               mysqli_stmt_bind_param($stmt, 's', $value);
+               mysqli_stmt_execute($stmt);
+            }
+            mysqli_stmt_close($stmt);
+
+            if ($stmt) {
+               $brands_directory = dirname(__DIR__, 3) . '/public/assets/uploaded_files/brands/';
                if (!file_exists($brands_directory)) {
                   mkdir($brands_directory, 0777, true);
                }
@@ -60,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   chmod($brands_directory, 0777);
                }
 
-               move_uploaded_file($_FILES['file']['tmp_name'], dirname(__DIR__, 3) . '/public/assets/uploaded_files/size/' . $file_name);
-               $response['success'] = "Name imported successfully";
+               move_uploaded_file($_FILES['file']['tmp_name'], dirname(__DIR__, 3) . '/public/assets/uploaded_files/brands/' . $file_name);
+               $response['success'] = "Brand name imported successfully";
             } else {
                $response['error'] = "Failed to import names";
             }
@@ -73,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
 
       echo json_encode($response, JSON_UNESCAPED_SLASHES);
-      mysqli_stmt_close($size_import);
+      mysqli_stmt_close($brands_import);
    } else {
       $response['error'] = "Invalid File";
       echo json_encode($errors, JSON_UNESCAPED_SLASHES);

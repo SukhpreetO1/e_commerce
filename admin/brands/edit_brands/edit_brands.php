@@ -53,8 +53,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       var error_messages = '';
       if (brands.trim() === '') {
          error_messages = 'Brand name is required.';
-      } else if (brands.length < 1 || brands.length > 15) {
-         error_messages = 'Brand name must be between 1 and 15 characters long.';
+      } else if (brands.length < 1 || brands.length > 20) {
+         error_messages = 'Brand name must be between 1 and 20 characters long.';
       } else if (!/^[a-zA-Z\s\W]+$/.test(brands)) {
          error_messages = 'Only alphabets are allowed.';
       }

@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    if (empty($edit_brands_input_name)) {
       $edit_brands_name_err = "Brand name is required.";
-   } elseif (strlen($edit_brands_input_name) < 1 || strlen($edit_brands_input_name) > 15) {
-      $edit_brands_name_err = "Brand name must be between 1 and 15 characters long.";
+   } elseif (strlen($edit_brands_input_name) < 1 || strlen($edit_brands_input_name) > 20) {
+      $edit_brands_name_err = "Brand name must be between 1 and 20 characters long.";
    } elseif (!preg_match('/^[a-zA-Z\s\W]+$/', $edit_brands_input_name)) {
       $edit_brands_name_err = "Only alphabets are allowed.";
    } else {
