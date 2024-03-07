@@ -875,7 +875,7 @@ a.ui-datepicker-next.ui-corner-all {
   background: #fff;
   border: 1px solid #ccc;
   display: none;
-  width: 16.5vw;
+  width: 100%;
   border-radius: 10px;
   height: 20rem;
   overflow-y: scroll;

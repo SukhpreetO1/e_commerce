@@ -31,8 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       for ($row = 2; $row <= $highestRow; ++$row) {
          $category_name = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-         $name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
          $category_id = getCategoryIDFromName($database_connection, $category_name);
+         
+         $name = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
          $names[] = "('$category_id', '$name')";
       }
 
