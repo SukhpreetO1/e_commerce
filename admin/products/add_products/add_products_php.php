@@ -108,8 +108,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                $image_directory = dirname(__DIR__, 3) . '/public/assets/product_images/';
                if (!file_exists($image_directory)) {
                   mkdir($image_directory, 0777, true);
+               }
+
+               $permissions = fileperms($image_directory);
+               if (($permissions & 0777) !== 0777) {
                   chmod($image_directory, 0777);
                }
+
                $image_name_without_space = str_replace(' ', '_', $image_name);
                $target_path = $image_directory . $image_name_without_space;
 
@@ -119,6 +124,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
                   mysqli_stmt_bind_param($insert_image_stmt, "sis", $image_name, $product_id, $image_name_without_space);
                   mysqli_stmt_execute($insert_image_stmt);
+               } else {
+                  $response['error'] = "Images not uploaded.";
                }
             }
          } else {

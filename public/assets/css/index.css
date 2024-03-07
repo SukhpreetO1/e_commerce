@@ -737,7 +737,13 @@ a.ui-datepicker-next.ui-corner-all {
   border: 1px solid #8080807a;
   border-radius: 10px;
   padding: 5px;
-  margin-right: 5px;
+  margin: 0 5px 5px 0;
+  width: 5rem;
+  text-align: center;
+}
+
+.products_sizes_in_modal {
+  flex-wrap: wrap;
 }
 
 .product_selected_color_name {
@@ -745,6 +751,14 @@ a.ui-datepicker-next.ui-corner-all {
   height: 2rem;
   display: block;
   border-radius: 6px;
+}
+
+.products_modal_brands_name {
+  font-size: 2rem;
+}
+
+#product_name_in_modal {
+  font-weight: 300;
 }
 
 /* dashboard css */

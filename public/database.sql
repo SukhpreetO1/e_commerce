@@ -35,14 +35,6 @@ CREATE TABLE `brands` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `brands`
---
-
-INSERT INTO `brands` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'ABC', '2024-03-04 13:13:25', '2024-03-04 13:13:25'),
-(2, 'qwe', '2024-03-06 05:40:41', '2024-03-06 06:27:45');
-
 -- --------------------------------------------------------
 
 --
@@ -89,17 +81,6 @@ CREATE TABLE `categories` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Men', '2024-02-14 16:26:23', '2024-03-04 17:11:00'),
-(2, 'Women', '2024-02-14 16:26:27', '2024-02-14 16:26:27'),
-(3, 'Kids', '2024-02-14 16:26:31', '2024-02-14 16:26:31'),
-(4, 'Home Living', '2024-02-14 16:26:40', '2024-02-14 16:26:40'),
-(5, 'Beauty', '2024-02-14 16:26:48', '2024-02-26 16:10:52');
-
 -- --------------------------------------------------------
 
 --
@@ -113,27 +94,6 @@ CREATE TABLE `categories_heading` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `categories_heading`
---
-
-INSERT INTO `categories_heading` (`id`, `categories_id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Topwear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(2, 1, 'Indians & Festive Wear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(3, 1, 'Bottomwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(4, 1, 'Innerwear & sleepwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(5, 1, 'Plus Size', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(6, 1, 'Footwear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(7, 1, 'Personal Care & Grooming', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(8, 1, 'Sunglasses & Frames', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(9, 1, 'Watches', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(10, 1, 'Sports & Active Wear', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(11, 1, 'Gadgets', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(12, 1, 'Fashion Accessories', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(13, 1, 'Bags & Backpacks', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(14, 1, 'Luggages & Trolleys', '2024-02-06 18:48:18', '2024-02-06 18:48:18'),
-(15, 2, 'Indian & Fusion Wear', '2024-02-12 09:58:36', '2024-02-12 09:58:36');
 
 -- --------------------------------------------------------
 
@@ -149,66 +109,6 @@ CREATE TABLE `categories_type` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `categories_type`
---
-
-INSERT INTO `categories_type` (`id`, `category_heading_id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 1, 'T-Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(2, 1, 'Casual Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(3, 1, 'Formal Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(4, 1, 'Sweatshirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(5, 1, 'Sweaters', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(6, 1, 'Jackets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(7, 1, 'Blazers & Coats', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(8, 1, 'Suits', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(9, 1, 'Rain Jackets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(10, 2, 'Kurtas & Kurta Sets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(11, 2, 'Sherwanis', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(12, 2, 'Nehru Jackets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(13, 2, 'Dhotis', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(14, 3, 'Jeans', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(15, 3, 'Casual Trousers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(16, 3, 'Formal Trousers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(17, 3, 'Shorts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(18, 3, 'Track Pants & Joggers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(19, 4, 'Briefs & Trunks', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(20, 4, 'Boxers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(21, 4, 'Vests', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(22, 4, 'Sleepwear & Loungewear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(23, 4, 'Thermals', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(24, 6, 'Casual Shoes', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(25, 6, 'Sports Shoes', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(26, 6, 'Formal Shoes', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(27, 6, 'Sneakers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(28, 6, 'Sandals & Floaters', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(29, 6, 'Flip Flops', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(30, 6, 'Socks', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(31, 10, 'Sports Shoes', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(32, 10, 'Sports Sandals', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(33, 10, 'Active T-Shirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(34, 10, 'Track Pants & Shorts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(35, 10, 'Tracksuits', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(36, 10, 'Jackets & Sweatshirts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(37, 10, 'Sports Accessories', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(38, 10, 'Swimwear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(39, 11, 'Smart Wearables', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(40, 11, 'Fitness Gadgets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(41, 11, 'Headphones', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(42, 11, 'Speakers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(43, 12, 'Wallets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(44, 12, 'Belts', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(45, 12, 'Perfumes & Body Mists', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(46, 12, 'Trimmers', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(47, 12, 'Deodorants', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(48, 12, 'Ties, Cufflinks & Pocket Squares', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(49, 12, 'Accessory Gift Sets', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(50, 12, 'Caps & Hats', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(51, 12, 'Mufflers, Scarves & Gloves', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(52, 12, 'Phone Cases', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(53, 12, 'Rings & Wristwear', '2024-02-06 18:45:14', '2024-02-06 18:45:14'),
-(54, 12, 'Helmets', '2024-02-06 18:45:14', '2024-02-06 18:45:14');
-
 -- --------------------------------------------------------
 
 --
@@ -222,24 +122,6 @@ CREATE TABLE `color` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `color`
---
-
-INSERT INTO `color` (`id`, `name`, `color_code`, `created_at`, `updated_at`) VALUES
-(1, 'Supernova', '#ffc800', '2024-02-28 15:23:06', '2024-02-28 16:49:49'),
-(2, 'Amethyst Smoke', '#9b9bbb', '2024-02-28 15:23:49', '2024-02-28 15:23:49'),
-(3, 'Crete', '#7f7c29', '2024-02-28 15:36:32', '2024-02-28 15:36:32'),
-(4, 'Ultramarine', '#070788', '2024-02-28 15:38:17', '2024-02-28 15:38:17'),
-(5, 'Fuzzy Wuzzy', '#000066', '2024-02-28 15:40:49', '2024-02-28 15:40:49'),
-(6, 'Port Gore', '#212150', '2024-02-28 15:42:21', '2024-02-28 15:42:21'),
-(7, 'Tosca', '#8a4242', '2024-03-01 10:12:55', '2024-03-01 10:12:55'),
-(8, 'Dusty Gray', '#a58d8d', '2024-03-06 12:00:18', '2024-03-06 12:00:25'),
-(9, 'Black', '#000000', '2024-03-06 12:14:01', '2024-03-06 12:14:01'),
-(10, 'Maroon', '#850000', '2024-03-06 12:16:53', '2024-03-06 12:16:53'),
-(11, 'Lonestar', '#700000', '2024-03-06 12:18:27', '2024-03-06 12:18:27'),
-(12, 'Mojo', '#c44040', '2024-03-06 12:18:37', '2024-03-06 12:18:37');
 
 -- --------------------------------------------------------
 
@@ -325,17 +207,6 @@ CREATE TABLE `products` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `brands_id`, `description`, `categories_type_id`, `quantity`, `color_id`, `price`, `discount_id`, `created_at`, `updated_at`) VALUES
-(1, 'lorem', 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis dignissimos sapiente aut! Accusamus ab vero doloremque nobis id earum soluta.', 2, 5, 1, '10', 1, '2024-02-20 15:55:10', '2024-02-27 17:12:03'),
-(2, 'uiouiouio', 1, 'uiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouiouio', 5, 10, 1, '30', 1, '2024-02-29 15:34:54', '2024-02-29 15:34:54'),
-(3, 'asdxcc', 2, 'cvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbcvbv', 3, 20, 1, '20', 1, '2024-02-29 15:38:13', '2024-03-06 11:43:08'),
-(4, 'zxczxc', 1, 'zxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxczxc', 3, 210, 1, '20', 1, '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(5, 'asdasd', 1, 'asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd', 4, 50, 3, '50', 1, '2024-03-01 09:45:20', '2024-03-01 09:45:20');
-
 -- --------------------------------------------------------
 
 --
@@ -350,23 +221,6 @@ CREATE TABLE `product_image` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product_image`
---
-
-INSERT INTO `product_image` (`id`, `name`, `products_id`, `path`, `created_at`, `updated_at`) VALUES
-(1, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10'),
-(2, 'Screenshot from 2023-09-11 14-58-14.png', 1, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-20 15:55:10', '2024-02-20 15:55:10'),
-(3, 'Screenshot from 2023-10-03 18-46-19.png', 4, 'Screenshot_from_2023-10-03_18-46-19.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(4, 'Screenshot from 2023-10-03 18-43-46.png', 4, 'Screenshot_from_2023-10-03_18-43-46.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(5, 'Screenshot from 2023-09-28 16-53-23.png', 4, 'Screenshot_from_2023-09-28_16-53-23.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(6, 'Screenshot from 2023-09-11 14-58-14.png', 4, 'Screenshot_from_2023-09-11_14-58-14.png', '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(7, 'Screenshot from 2024-01-12 11-16-22.png', 5, 'Screenshot_from_2024-01-12_11-16-22.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(8, 'Screenshot from 2024-01-01 13-51-17.png', 5, 'Screenshot_from_2024-01-01_13-51-17.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(9, 'Screenshot from 2023-12-08 10-00-08.png', 5, 'Screenshot_from_2023-12-08_10-00-08.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(10, 'Screenshot from 2023-10-24 17-01-59.png', 5, 'Screenshot_from_2023-10-24_17-01-59.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(11, 'Screenshot from 2023-10-04 12-11-07.png', 5, 'Screenshot_from_2023-10-04_12-11-07.png', '2024-03-01 09:45:20', '2024-03-01 09:45:20');
 
 -- --------------------------------------------------------
 
@@ -414,20 +268,6 @@ CREATE TABLE `product_size_variant` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product_size_variant`
---
-
-INSERT INTO `product_size_variant` (`id`, `product_id`, `size_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, '2024-02-29 15:34:54', '2024-02-29 15:34:54'),
-(2, 2, 2, '2024-02-29 15:34:54', '2024-02-29 15:34:54'),
-(3, 3, 1, '2024-02-29 15:38:13', '2024-02-29 15:38:13'),
-(4, 4, 2, '2024-02-29 15:39:09', '2024-02-29 15:39:09'),
-(5, 5, 1, '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(6, 5, 2, '2024-03-01 09:45:20', '2024-03-01 09:45:20'),
-(7, 1, 3, '2024-03-05 17:49:29', '2024-03-05 17:49:29'),
-(8, 1, 4, '2024-03-05 17:50:11', '2024-03-05 17:50:11');
 
 -- --------------------------------------------------------
 
@@ -485,40 +325,6 @@ CREATE TABLE `size` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `size`
---
-
-INSERT INTO `size` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Free Size', '2024-02-28 10:59:00', '2024-02-28 10:59:00'),
-(2, 'XS', '2024-02-28 11:21:28', '2024-02-28 11:33:35'),
-(3, 'S', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(4, 'M', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(5, 'L', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(6, 'XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(7, '2XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(8, '3XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(9, '4XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(10, '5XL', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(11, '27', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(12, '28', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(13, '29', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(14, '30', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(15, '32', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(16, '34', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(17, '36', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(18, '37', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(19, '38', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(20, '39', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(21, '40', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(22, '42', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(23, '44', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(24, '46', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(25, '48', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(26, '50', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(27, '52', '2024-03-05 12:59:47', '2024-03-05 12:59:47'),
-(28, '54', '2024-03-05 12:59:47', '2024-03-05 12:59:47');
-
 -- --------------------------------------------------------
 
 --
@@ -541,16 +347,6 @@ CREATE TABLE `users` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `mobile_number`, `date_of_birth`, `active`, `role_id`, `reset_link_token`, `reset_token_exp`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Sukhpreet', 'Singh', 'Sukhpreet9', 'ssingh77022@gmail.com', 1112223331, '2024-03-06', 1, 2, NULL, NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-01 09:47:43', '2024-03-01 16:31:39'),
-(2, 'Sukhpreet', 'Singh', 'SukhpreetO9', 'ssingh77021@gmail.com', 7897897878, '2024-03-14', 1, 1, 'NULL', NULL, '$2y$10$YdMAas42Dp5eUUmh7Ikn5OTVbHPDlM9ykN4.gT4Ueo2gf0eCbyrcy', '2024-02-01 09:47:43', '2024-03-04 17:14:28'),
-(3, 'Jagseer', 'Singh', 'JS1', 'jagseer.singh@talentalgia.in', 1234567890, '2024-03-19', 1, 2, NULL, NULL, '$2y$10$bGnAyeHAdVZ9oEVTBeVzDedv1WUbSJFwoqybRISvyxq.KptBQAQCy', '2024-02-29 16:42:58', '2024-02-29 16:42:58'),
-(4, 'asas', 'asasdad', 'Q2', 'abc@gmail.com', 4564564645, '2024-03-01', 2, 2, NULL, NULL, '$2y$10$X492gkW9d6eCcxfm2Gl5hOBLhIQ9rzjqPWXCoohF25MtpPusTtfOG', '2024-03-01 12:30:05', '2024-03-01 16:31:45');
 
 -- --------------------------------------------------------
 

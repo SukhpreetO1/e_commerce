@@ -2,9 +2,10 @@
 include dirname(__DIR__, 3) . "/common/config/config.php";
 
 $product_id = $_GET['product_id'];
-$sql = "SELECT products.*, color.id AS color_id, color.name AS color_name, color.color_code AS color_color_code
+$sql = "SELECT products.*, color.id AS color_id, color.name AS color_name, color.color_code AS color_color_code, brands.id as brands_id, brands.name as brands_name
 FROM products 
 LEFT JOIN color ON products.color_id = color.id
+LEFT JOIN brands ON products.brands_id = brands.id
 WHERE products.id = $product_id";
 $result = $database_connection->query($sql);
 if ($result->num_rows > 0) {
@@ -44,7 +45,7 @@ if ($result->num_rows > 0) {
          </div>
          <div class="product_details col-5 ms-4">
             <div class="product_name">
-               <h3 class="product_name_in_modal" name="product_name_in_modal" id="product_name_in_modal"><?php echo $product_data['name']; ?></h3>
+               <span class="products_modal_brands_name"><?php echo $product_data['brands_name']; ?></span><h5 class="product_name_in_modal" name="product_name_in_modal" id="product_name_in_modal"><?php echo $product_data['name']; ?></h5>
             </div>
             <div class="product_modal_description">
                <div name="products_description_in_modal" class="products_description_in_modal" id="products_description_in_modal"><?php echo $product_data["description"]; ?></div>
