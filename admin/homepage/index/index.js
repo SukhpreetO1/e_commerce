@@ -104,8 +104,9 @@ $(document).ready(function () {
     };
 
     var query_param = window.location.search;
+    var param_value = query_param.split('=')[1];
     for (var param in query_param_mappings) {
-        if (query_param.includes('=' + param)) {
+        if (param_value === param) {
             var url = query_param_mappings[param][0];
             var bgColorClass = query_param_mappings[param][1];
             handle_ajax_redirection(url, function () {
