@@ -1,82 +1,57 @@
 <?php
-
-$query = "SELECT 
-cc.id AS categories_id,
-cc.name AS name,
-cc.created_at AS created_at,
-cc.updated_at AS updated_at,
-JSON_ARRAYAGG(
-    JSON_OBJECT(
-        'category_header_id', ch.id,
-        'categories_id', ch.categories_id,
-        'name', ch.name,
-        'created_at', ch.created_at,
-        'updated_at', ch.updated_at,
-        'categories_types', (
-            SELECT JSON_ARRAYAGG(JSON_OBJECT(
-                'categories_type_id', ct.id,
-                'category_heading_id', ct.category_heading_id,
-                'name', ct.name,
-                'created_at', ct.created_at,
-                'updated_at', ct.updated_at
-            ))
-            FROM categories_type ct
-            WHERE ct.category_heading_id = ch.id
-        )
-    )
-) AS category_header
-FROM 
-categories cc
-LEFT JOIN 
-categories_heading ch ON cc.id = ch.categories_id
-GROUP BY 
-cc.id, cc.name, cc.created_at, cc.updated_at";
-
+$query = "SELECT * FROM categories";
 $result = mysqli_query($database_connection, $query);
 if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $category_title = json_decode($row['category_header'], true);
-        echo "<div class='nav_item navbar_heading'><a href='#'>" . $row['name'] . "</a>";
-        if ($category_title['0']['name'] !== null) {
-            echo "<div class='dropdown_content category_header'>";
-            $current_pair = [];
-            foreach ($category_title as $category) {
-                if (!empty($category['categories_types'])) {
-                    if (count($current_pair) < 2) {
-                        $current_pair[] = $category;
-                    } else {
-                        display_category_pair($current_pair);
-                        $current_pair = [$category];
-                    }
-                } else {
-                    $current_pair[] = $category;
-                    if (count($current_pair) == 6) {
-                        display_category_pair($current_pair);
-                        $current_pair = [];
-                    }
-                }
-            }
+   while ($categories = mysqli_fetch_assoc($result)) {
+      echo "<div class='nav_item navbar_heading'><a href='#'>" . $categories['name'] . "</a>";
+      echo "<div class='dropdown_content category_header'>";
 
-            if (!empty($current_pair)) {
-                display_category_pair($current_pair);
+      $categories_id = $categories['id'];
+      $categories_heading_query = "SELECT * FROM categories_heading WHERE categories_id = $categories_id";
+      $categories_heading_result = mysqli_query($database_connection, $categories_heading_query);
+
+      if ($categories_heading_result) {
+         $group_sizes = [
+            1 => [2, 3, 4, 2, 3],
+            2 => [3, 2, 4, 2, 5],
+            3 => [1, 1, 2, 3, 2],
+            4 => [2, 2, 3, 3, 1],
+            5 => [1, 3, 2, 5, 1]
+         ];
+
+         $group_index = 0;
+         $group_count = 0;
+
+         while ($heading_row = mysqli_fetch_assoc($categories_heading_result)) {
+            $current_group_sizes = $group_sizes[$categories_id];
+            if ($group_count == 0) {
+               echo "<div class='category_heading_group'>";
+            }
+            echo "<div class='category_heading'><a href='#' class='category_heading_name' style='color: " . ($heading_row['categories_id'] == 1 ? '#ee5f73' : ($heading_row['categories_id'] == 2 ? '#fb56c1' : ($heading_row['categories_id'] == 3 ? '#f26a10' : ($heading_row['categories_id'] == 4 ? '#f2c210' : ($heading_row['categories_id'] == 5 ? '#0db7af' : 'black'))))) . "'>" . $heading_row['name'];
+            echo "<div class='category_types'>";
+
+            $categories_heading_id = $heading_row['id'];
+            $categories_type_query = "SELECT * FROM categories_type WHERE category_heading_id = $categories_heading_id";
+            $categories_type_result = mysqli_query($database_connection, $categories_type_query);
+            if ($categories_type_result) {
+               while ($type_row = mysqli_fetch_assoc($categories_type_result)) {
+                  echo "<div class='category_type'><a href='#'>" . $type_row['name'] . "</a></div>";
+               }
             }
             echo "</div>";
-        }
-        echo "</div>";
-    }
-} else {
-    echo "Data of navbar not getting";
-}
+            echo "</a></div>";
+            $group_count++;
 
-function display_category_pair($pair)
-{
-    echo "<div class='category_pair'>";
-    foreach ($pair as $category) {
-        echo "<div class='category_heading category_heading_section_" . $category['category_header_id'] . "'><a href='#' class='mb-2 ps-0 category_heading'>" . $category['name'] . "</a>";
-        foreach ($category['categories_types'] as $categoryType) {
-            echo "<div><a href='#' class='category_type category_type_" . $categoryType['categories_type_id'] . "'>" . $categoryType['name'] . "<br></a></div>";
-        }
-        echo "<br></div>";
-    }
-    echo "</div>";
+            if ($group_count == $current_group_sizes[$group_index]) {
+               echo "</div>";
+               $group_count = 0;
+               $group_index++;
+            }
+         }
+         if ($group_count > 0) {
+            echo "</div>";
+         }
+      }
+      echo "</div></div>";
+   }
 }

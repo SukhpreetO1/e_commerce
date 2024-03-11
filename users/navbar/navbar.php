@@ -12,10 +12,11 @@
             <div class="navbar_collapse" id="search_filter">
                 <div class="navbar-nav navbar_dashboard_search_bar">
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2 navbar_search_bar" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2 navbar_search_bar" type="search" placeholder="Search for products, brands and more" aria-label="Search">
                     </form>
                     <div class="header_profile">
-                        <div class="nav-link navbar_dropdown" role="button">
+                        <i class="fa-regular fa-user"></i>
+                        <div class="nav-link navbar_dropdown profile" role="button">
                             Profile
                             <ul class="dropdown-menu navbar_dropdown_menu">
                                 <li><a class="dropdown-item" href="<?php echo $_ENV['BASE_URL'] ?>/common/logout.php">Logout</a></li>
@@ -23,12 +24,14 @@
                         </div>
                     </div>
                     <div class="header_wishlist">
-                        <a class="nav-link navbar_dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-regular fa-heart"></i>
+                        <a class="nav-link navbar_dropdown wishlist" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Wishlist
                         </a>
                     </div>
                     <div class="header_bag">
-                        <a class="nav-link navbar_dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <a class="nav-link navbar_dropdown bag" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Bag
                         </a>
                     </div>

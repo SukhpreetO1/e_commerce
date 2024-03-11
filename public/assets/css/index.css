@@ -771,11 +771,11 @@ a.ui-datepicker-next.ui-corner-all {
 }
 
 .products_modal_brands_name {
-  font-size: 2rem;
+  font-weight: 300;
 }
 
 #product_name_in_modal {
-  font-weight: 300;
+  font-size: 2rem;
 }
 
 /* dashboard css */
