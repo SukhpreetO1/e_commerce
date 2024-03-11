@@ -45,7 +45,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
             if (!$(data).find('.homepage_sidebar').length) {
                container.html(data);
             }
-            var new_url = window.location.href.replace('?tab=add_roles', '?tab=roles');
+            var new_url = window.location.href.replace('?tab=add_size', '?tab=size');
             history.pushState(null, null, new_url);
          },
          error: function(e) {
