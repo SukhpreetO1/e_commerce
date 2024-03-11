@@ -1,15 +1,15 @@
 <div class="header">
     <nav class="header_navbar">
-        <div class="container_fluid">
-            <div class="navbar_logo">
+        <div class="container_fluid col-12">
+            <div class="navbar_logo col-1">
                 <a class="logo" href="#"><img src="<?php echo $_ENV['BASE_URL'] ?>/public/assets/images/m_letter.svg" alt="logo"></a>
             </div>
-            <div class="navbar_items">
+            <div class="navbar_items col-5">
                 <?php
                 include dirname(__DIR__) . "/navbar/navbar_dropdown.php";
                 ?>
             </div>
-            <div class="navbar_collapse" id="search_filter">
+            <div class="navbar_collapse col-6" id="search_filter">
                 <div class="navbar-nav navbar_dashboard_search_bar">
                     <form class="d-flex" role="search">
                         <input class="form-control me-2 navbar_search_bar" type="search" placeholder="Search for products, brands and more" aria-label="Search">
