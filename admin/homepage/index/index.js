@@ -38,6 +38,7 @@ function handle_redirection_and_push_state(urlPath, urlName) {
 function add_background_color(element) {
     $('.size').removeClass('highlighted');
     $('.dashboard').removeClass('highlighted');
+    $('.dashboard_category').removeClass('highlighted');
     $('.brands').removeClass('highlighted');
     $('.size').removeClass('highlighted');
     $('.color').removeClass('highlighted');
@@ -62,6 +63,13 @@ $(document).on('click', '.dashboard', function (e) {
     e.preventDefault();
     add_background_color(this);
     handle_redirection_and_push_state('/homepage/dashboard/dashboard', 'tab=dashboard');
+});
+
+// redirection ajax when click on dashboard category
+$(document).on('click', '.dashboard_category', function (e) {
+    e.preventDefault();
+    add_background_color(this);
+    handle_redirection_and_push_state('/homepage/dashboard_category/dashboard_category', 'tab=dashboard_category');
 });
 
 // redirection ajax when click on brands
@@ -147,6 +155,10 @@ $(document).ready(function () {
     if (query_param.includes('=dashboard')) {
         handle_ajax_redirection('/admin/homepage/dashboard/dashboard.php', function () {
             add_background_color('.dashboard');
+        });
+    } else if (query_param.includes('=dashboard_category')) {
+        handle_ajax_redirection('/admin/homepage/dashboard_category/dashboard_category.php', function () {
+            add_background_color('.dashboard_category');
         });
     } else if (query_param.includes('=brands')) {
         handle_ajax_redirection('/admin/brands/brands.php', function () {

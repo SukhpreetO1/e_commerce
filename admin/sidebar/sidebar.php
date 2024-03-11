@@ -14,6 +14,11 @@
                 </a>
             </li>
             <li>
+                <a href="#" class="nav-link dashboard_category">
+                    Dashboard Category
+                </a>
+            </li>
+            <li>
                 <a href="#" class="nav-link orders">
                     Orders
                 </a>

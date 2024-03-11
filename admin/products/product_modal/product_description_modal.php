@@ -22,10 +22,10 @@ if ($result->num_rows > 0) {
                   if ($result->num_rows > 0) {
                      while ($product_image = $result->fetch_assoc()) {
                         if ($is_first) {
-                           echo '<div class="carousel-item active" data-bs-interval="10000">';
+                           echo '<div class="carousel-item active" data-bs-interval="3000">';
                            $is_first = false;
                         } else {
-                           echo '<div class="carousel-item" data-bs-interval="10000">';
+                           echo '<div class="carousel-item" data-bs-interval="3000">';
                         }
                         echo '<img src="' . $_ENV['BASE_URL'] . '/e_commerce/public/assets/product_images/' . $product_image['path'] . '" class="d-block w-100" alt="Product Image">';
                         echo '</div>';
@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
          </div>
          <div class="product_details col-5 ms-4">
             <div class="product_name">
-               <span class="products_modal_brands_name"><?php echo $product_data['brands_name']; ?></span><h5 class="product_name_in_modal" name="product_name_in_modal" id="product_name_in_modal"><?php echo $product_data['name']; ?></h5>
+               <h5 class="product_name_in_modal" name="product_name_in_modal" id="product_name_in_modal"><?php echo $product_data['name']; ?></h5><span class="products_modal_brands_name"><?php echo $product_data['brands_name']; ?></span>
             </div>
             <div class="product_modal_description">
                <div name="products_description_in_modal" class="products_description_in_modal" id="products_description_in_modal"><?php echo $product_data["description"]; ?></div>

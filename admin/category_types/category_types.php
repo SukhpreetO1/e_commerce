@@ -87,6 +87,12 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
 </div>
 
 <script>
+   /*--------------------------------------------------------------- Adding datatables ----------------------------------------------------------------------------*/
+   // for creating the tables using datatables
+   $(document).ready(function() {
+      $('#category_types_table').DataTable();
+   });
+
    /*--------------------------------------------------------------- Click on plus (+) JS ----------------------------------------------------------------------------*/
    function category_types_plus_icon(url) {
       $.ajax({
@@ -158,12 +164,6 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
    $(document).off('click', '.category_types_back_button').on('click', '.category_types_back_button', function(e) {
       e.preventDefault();
       category_types_back_button('/admin/homepage/dashboard/dashboard.php', e);
-   });
-
-   /*--------------------------------------------------------------- Adding datatables ----------------------------------------------------------------------------*/
-   // for creating the tables using datatables
-   $(document).ready(function() {
-      $('#category_types_table').DataTable();
    });
 
    /*--------------------------------------------------------------- Delete Button JS on ADD PAGES ----------------------------------------------------------------------------*/

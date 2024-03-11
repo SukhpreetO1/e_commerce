@@ -169,16 +169,12 @@ a {
 img.carousel_image {
   width: 100%;
 }
-
-.carousel-item.active {
-  /* width: 82rem; */
-}
 /* ------------------------------------ Card css ------------------------------------ */
-.container_cards {
-  /* display: flex;
-  padding: 3%;
+.dashboard_cards {
+  display: flex;
   flex-wrap: wrap;
-  justify-content: center; */
+  /* justify-content: center; */
+  margin-left: 5%;
 }
 
 .homepage_card {
