@@ -84,6 +84,8 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
          success: function(data) {
             $(".container").empty();
             $('.container').html(data);
+            var new_url = window.location.href.replace('?tab=roles', '?tab=add_roles');
+            history.pushState(null, null, new_url);
          },
          error: function(e) {
             console.log(e);

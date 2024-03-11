@@ -75,6 +75,8 @@ require dirname(__DIR__, 2) . "/common/config/config.php";
             success: function(data) {
                 $(".container").empty();
                 $('.container').html(data);
+                var new_url = window.location.href.replace('?tab=category_title', '?tab=add_category_title');
+                history.pushState(null, null, new_url);
             },
             error: function(e) {
                 console.log(e);

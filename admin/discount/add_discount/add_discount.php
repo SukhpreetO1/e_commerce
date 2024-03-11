@@ -97,6 +97,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
             if (!$(data).find('.homepage_sidebar').length) {
                container.html(data);
             }
+            var new_url = window.location.href.replace('?tab=add_discount', '?tab=discount');
+            history.pushState(null, null, new_url);
          },
          error: function(e) {
             console.log(e);

@@ -172,20 +172,40 @@ $(document).ready(function () {
         handle_ajax_redirection('/admin/size/size.php', function () {
             add_background_color('.size');
         });
+    } else if (query_param.includes('=add_roles')) {
+        handle_ajax_redirection('/admin/size/add_size/add_size.php', function () {
+            add_background_color('.size');
+        });
     } else if (query_param.includes('=color')) {
         handle_ajax_redirection('/admin/color/color.php', function () {
+            add_background_color('.color');
+        });
+    } else if (query_param.includes('=add_color')) {
+        handle_ajax_redirection('/admin/color/add_color/add_color.php', function () {
             add_background_color('.color');
         });
     } else if (query_param.includes('=discount')) {
         handle_ajax_redirection('/admin/discount/discount.php', function () {
             add_background_color('.discount');
         });
+    } else if (query_param.includes('=add_discount')) {
+        handle_ajax_redirection('/admin/discount/add_discount/add_discount.php', function () {
+            add_background_color('.discount');
+        });
     } else if (query_param.includes('=products')) {
         handle_ajax_redirection('/admin/products/products.php', function () {
             add_background_color('.products');
         });
+    } else if (query_param.includes('=add_products')) {
+        handle_ajax_redirection('/admin/products/add_products/add_products.php', function () {
+            add_background_color('.products');
+        });
     } else if (query_param.includes('=roles')) {
         handle_ajax_redirection('/admin/roles/roles.php', function () {
+            add_background_color('.roles');
+        });
+    } else if (query_param.includes('=add_roles')) {
+        handle_ajax_redirection('/admin/roles/add_roles/add_roles.php', function () {
             add_background_color('.roles');
         });
     } else if (query_param.includes('=user_detail')) {
@@ -196,8 +216,16 @@ $(document).ready(function () {
         handle_ajax_redirection('/admin/category_title/category_title.php', function () {
             add_background_color('.category_title');
         });
+    } else if (query_param.includes('=add_category_title')) {
+        handle_ajax_redirection('/admin/category_title/add_category_title/add_category_title.php', function () {
+            add_background_color('.category_title');
+        });
     } else if (query_param.includes('=category_header')) {
         handle_ajax_redirection('/admin/category_header/category_header.php', function () {
+            add_background_color('.category_header');
+        });
+    } else if (query_param.includes('=add_category_header')) {
+        handle_ajax_redirection('/admin/category_header/add_category_header/add_category_header.php', function () {
             add_background_color('.category_header');
         });
     } else if (query_param.includes('=categories_types')) {
