@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    if (empty($add_dashboard_category_input_name)) {
       $add_dashboard_category_name_err = "Name is required.";
-   } elseif (strlen($add_dashboard_category_input_name) < 3 || strlen($add_dashboard_category_input_name) > 15) {
-      $add_dashboard_category_name_err = "Name must be between 3 and 15 characters long.";
+   } elseif (strlen($add_dashboard_category_input_name) < 3 || strlen($add_dashboard_category_input_name) > 25) {
+      $add_dashboard_category_name_err = "Name must be between 3 and 25 characters long.";
    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $add_dashboard_category_input_name)) {
       $add_dashboard_category_name_err = "Only alphabets are allowed.";
    } else {

@@ -46,8 +46,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       var error_messages = '';
       if (category_name.trim() === '') {
          error_messages = 'Name is required.';
-      } else if (category_name.length < 3 || category_name.length > 15) {
-         error_messages = 'Name must be between 3 and 15 characters long.';
+      } else if (category_name.length < 3 || category_name.length > 25) {
+         error_messages = 'Name must be between 3 and 25 characters long.';
       } else if (!/^[a-zA-Z\s]+$/.test(category_name)) {
          error_messages = 'Only alphabets are allowed.';
       }
