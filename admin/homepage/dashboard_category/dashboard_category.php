@@ -48,6 +48,10 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
                             <td>
                                 <div class="dashboard_category_action">
                                     <input type="hidden" name="dashboard_category_id" class="dashboard_category_id" id="dashboard_category_id" value="<?php echo $dashboard_category['id']; ?>">
+                                    <div class="dashboard_category_view" data-bs-toggle="modal" data-bs-target="#dashboard_category_modal">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </div>
+
                                     <div class="dashboard_category_edit">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </div>
@@ -62,6 +66,20 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
                     ?>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade dashboard_category_modal" id="dashboard_category_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Dashboard Category Detail</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
         </div>
     </div>
 </div>
@@ -175,7 +193,7 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
                                 }, 3000);
                             } else {
                                 $.ajax({
-                                    url: BASE_URL + '/admin/dashboard_category/dashboard_category.php',
+                                    url: BASE_URL + '/admin/homepage/dashboard_category/dashboard_category.php',
                                     type: 'GET',
                                     success: function(data) {
                                         $(".container").empty();
@@ -205,6 +223,25 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
     $(document).on('click', '.dashboard_category_delete', function(e) {
         e.preventDefault();
         var dashboard_category_id = $(this).siblings('.dashboard_category_id').val();
-        dashboard_category_delete_button('/admin/homepage/dashboard_category/delete_category/delete_dashboard_category.php', dashboard_category_id);
+        dashboard_category_delete_button('/admin/homepage/dashboard_category/delete_dashboard_category/delete_dashboard_category.php', dashboard_category_id);
+    });
+
+    /*--------------------------------------------------------------- Showing modal when click on info icon ----------------------------------------------------------------------------*/
+    $(document).off('click', '.dashboard_category_view').on('click', '.dashboard_category_view', function(e) {
+        var dashboard_category_id = $(this).siblings('.dashboard_category_id').val();
+        $.ajax({
+            url: BASE_URL + "/admin/homepage/dashboard_category/dashboard_category_modal/dashboard_category_modal.php",
+            method: 'GET',
+            data: {
+                dashboard_category_id: dashboard_category_id
+            },
+            success: function(response) {
+                $('.modal-body').html(response);
+                $('#dashboard_category_modal').modal('show');
+            },
+            error: function() {
+                console.log(e);
+            }
+        });
     });
 </script>

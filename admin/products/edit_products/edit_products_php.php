@@ -73,9 +73,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    }
 
    if (empty($errors)) {
-      $check_sql = "SELECT * FROM products WHERE id = ? AND categories_type_id = ? AND name = ?";
+      $check_sql = "SELECT * FROM products WHERE id = ? AND categories_type_id = ?";
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
-      mysqli_stmt_bind_param($check_stmt, "iis", $edit_product_id, $edit_products_category_type, $edit_products_input_name);
+      mysqli_stmt_bind_param($check_stmt, "ii", $edit_product_id, $edit_products_category_type);
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
 

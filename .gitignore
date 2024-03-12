@@ -1,4 +1,7 @@
 .env
 .vscode
 .htaccess
-# /public/assets/product_images
+/public/assets/dashboard_category_images
+/public/assets/images
+/public/assets/product_images
+/public/assets/uploaded_fiels

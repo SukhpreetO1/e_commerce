@@ -23,7 +23,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
                <div class="form-group">
                   <label for="add_dashboard_category_images" class="form-label add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                  <input type="file" name="add_dashboard_category_images[]" id="add_dashboard_category_images" class="form-control add_dashboard_category_images mb-3" multiple accept="image/jpeg, image/png, image/jpg" onchange="upload_preview_images(event)">
+                  <input type="file" name="add_dashboard_category_images[]" id="add_dashboard_category_images" class="form-control add_dashboard_category_images mb-3" multiple accept="image/jpeg, image/png, image/jpg, image/webp" onchange="upload_preview_images(event)">
                   <span class="invalid-feedback add_dashboard_category_images_err" id="add_dashboard_category_images_err">
                      <?php echo $add_dashboard_category_images_err ?>
                   </span>

@@ -16,10 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $update_size_input_name = trim($_POST["edit_size_input_name"]);
       $edit_size_id = trim($_POST["edit_size_id"]);
 
-      $check_sql = "SELECT * FROM size WHERE name = ? WHERE id = ?";
+      $check_sql = "SELECT * FROM size WHERE id = ?";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
-      mysqli_stmt_bind_param($check_stmt, "si", $update_size_input_name, $edit_size_id);
+      mysqli_stmt_bind_param($check_stmt, "i", $edit_size_id);
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
 
