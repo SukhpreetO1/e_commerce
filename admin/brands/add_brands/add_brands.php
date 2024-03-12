@@ -90,6 +90,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                               setTimeout(function() {
                                  $('.alert').remove();
                               }, 2000);
+                              var new_url = window.location.href.replace('?tab=add_brands', '?tab=brands');
+                              history.pushState(null, null, new_url);
                            },
                            error: function(xhr, status, error) {
                               console.log(error);

@@ -85,9 +85,9 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                if (response.trim() === "") {
                   var alert_message = '<div class="alert alert-danger role_alert_dismissible" role="alert">Role name not saved.</div>';
                   $('#alert_container').append(alert_message);
-                  // setTimeout(function() {
-                  //    $('.alert').remove();
-                  // }, 3000);
+                  setTimeout(function() {
+                     $('.alert').remove();
+                  }, 3000);
                } else {
                   if (parsed_response) {
                      parsed_response = null;
@@ -96,9 +96,9 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                      if (parsed_response.error) {
                         var alert_message = '<div class="alert alert-danger role_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
                         $('#alert_container').append(alert_message);
-                        // setTimeout(function() {
-                        //    $('.alert').remove();
-                        // }, 3000);
+                        setTimeout(function() {
+                           $('.alert').remove();
+                        }, 3000);
                      } else {
                         $.ajax({
                            url: BASE_URL + '/admin/roles/roles.php',
@@ -108,9 +108,11 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                               $('.container').html(data);
                               var alert_message = '<div class="alert alert-success role_success_dismissible" role="alert">' + parsed_response.success + '</div>';
                               $('#alert_container').append(alert_message);
-                              // setTimeout(function() {
-                              //    $('.alert').remove();
-                              // }, 2000);
+                              setTimeout(function() {
+                                 $('.alert').remove();
+                              }, 2000);
+                              var new_url = window.location.href.replace('?tab=add_roles', '?tab=roles');
+                              history.pushState(null, null, new_url);
                            },
                            error: function(xhr, status, error) {
                               console.log(error);
