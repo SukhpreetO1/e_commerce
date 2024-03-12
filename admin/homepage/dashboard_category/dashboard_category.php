@@ -27,27 +27,27 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM categories";
+                    $query = "SELECT * FROM dashboard_category";
                     $result = mysqli_query($database_connection, $query);
 
-                    while ($category_data = mysqli_fetch_assoc($result)) {
+                    while ($dashboard_category = mysqli_fetch_assoc($result)) {
                     ?>
                         <tr scope="col">
                             <td>
-                                <?php echo $category_data['id']; ?>
+                                <?php echo $dashboard_category['id']; ?>
                             </td>
                             <td>
-                                <?php echo $category_data['name']; ?>
+                                <?php echo $dashboard_category['name']; ?>
                             </td>
                             <td>
-                                <?php echo date('d-m-Y', strtotime($category_data['created_at'])); ?>
+                                <?php echo date('d-m-Y', strtotime($dashboard_category['created_at'])); ?>
                             </td>
                             <td>
-                                <?php echo date('d-m-Y', strtotime($category_data['updated_at'])); ?>
+                                <?php echo date('d-m-Y', strtotime($dashboard_category['updated_at'])); ?>
                             </td>
                             <td>
                                 <div class="dashboard_category_action">
-                                    <input type="hidden" name="category_id" class="category_id" id="category_id" value="<?php echo $category_data['id']; ?>">
+                                    <input type="hidden" name="dashboard_category_id" class="dashboard_category_id" id="dashboard_category_id" value="<?php echo $dashboard_category['id']; ?>">
                                     <div class="dashboard_category_edit">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </div>
@@ -87,14 +87,14 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
     // redirection ajax for adding the category category
     $(document).off('click', '.dashboard_category_plus_icon').on('click', '.dashboard_category_plus_icon', function(e) {
         e.preventDefault();
-        dashboard_category_plus_icon('/admin/dashboard_category/add_dashboard_category/add_dashboard_category.php');
+        dashboard_category_plus_icon('/admin/homepage/dashboard_category/add_dashboard_category/add_dashboard_category.php');
     });
 
     /*--------------------------------------------------------------- Click on Edit Button JS ----------------------------------------------------------------------------*/
-    function dashboard_category_edit_icon(url, category_id) {
+    function dashboard_category_edit_icon(url, dashboard_category_id) {
         $.ajax({
             type: 'GET',
-            url: BASE_URL + url + '?category_id=' + category_id,
+            url: BASE_URL + url + '?dashboard_category_id=' + dashboard_category_id,
             success: function(data) {
                 $(".container").empty();
                 $('.container').html(data);
@@ -108,8 +108,8 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
     // redirection ajax for adding the category category
     $(document).off('click', '.dashboard_category_edit').on('click', '.dashboard_category_edit', function(e) {
         e.preventDefault();
-        var category_id = $(this).siblings('.category_id').val();
-        dashboard_category_edit_icon('/admin/dashboard_category/edit_dashboard_category/edit_dashboard_category.php', category_id);
+        var dashboard_category_id = $(this).siblings('.dashboard_category_id').val();
+        dashboard_category_edit_icon('/admin/homepage/dashboard_category/edit_dashboard_category/edit_dashboard_category.php', dashboard_category_id);
     });
 
     /*--------------------------------------------------------------- Back Button JS on dashboard ----------------------------------------------------------------------------*/
@@ -147,7 +147,7 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
     });
 
     /*--------------------------------------------------------------- Delete Button JS on ADD PAGES ----------------------------------------------------------------------------*/
-    function dashboard_category_delete_button(url, category_id) {
+    function dashboard_category_delete_button(url, dashboard_category_id) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -161,7 +161,7 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
                 var parsed_response = null;
                 $.ajax({
                     type: 'DELETE',
-                    url: BASE_URL + url + '?category_id=' + category_id,
+                    url: BASE_URL + url + '?dashboard_category_id=' + dashboard_category_id,
                     success: function(response) {
                         if (parsed_response) {
                             parsed_response = null;
@@ -204,7 +204,7 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
     // redirection ajax for delete button the category category
     $(document).on('click', '.dashboard_category_delete', function(e) {
         e.preventDefault();
-        var category_id = $(this).siblings('.category_id').val();
-        dashboard_category_delete_button('/admin/dashboard_category/delete_category/delete_dashboard_category.php', category_id);
+        var dashboard_category_id = $(this).siblings('.dashboard_category_id').val();
+        dashboard_category_delete_button('/admin/homepage/dashboard_category/delete_category/delete_dashboard_category.php', dashboard_category_id);
     });
 </script>

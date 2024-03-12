@@ -83,7 +83,9 @@
 .brands_alert_dismissible,
 .brands_success_dismissible,
 .brands_delete_alert_dismissible,
-.brands_delete_success_dismissible {
+.brands_delete_success_dismissible,
+.dashboard_category_alert_dismissible,
+.dashboard_category_success_dismissible {
   font-size: 15px;
   position: absolute;
   right: -8rem;
@@ -134,7 +136,9 @@
   width: 16rem;
 }
 
-.category_types_success_dismissible {
+.category_types_success_dismissible,
+.dashboard_category_alert_dismissible,
+.dashboard_category_success_dismissible {
   width: 21rem;
 }
 
@@ -318,7 +322,8 @@
 .add_brands_back_button,
 .edit_brands_back_button,
 .dashboard_category_back_button,
-.dashboard_category_plus_icon {
+.dashboard_category_plus_icon,
+.add_dashboard_category_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -429,7 +434,8 @@
 .add_discount_name_button,
 .edit_discount_name_button,
 .add_brands_name_button,
-.edit_brands_name_button {
+.edit_brands_name_button,
+.add_dashboard_category_name_button {
   text-align: center;
 }
 
@@ -545,7 +551,9 @@
 #edit_admin_password_err,
 #edit_admin_confirm_password_err,
 #add_brands_name_err,
-#edit_brands_name_err {
+#edit_brands_name_err,
+#add_dashboard_category_name_err,
+#add_dashboard_category_images_err {
   display: block;
   text-align: start;
 }
