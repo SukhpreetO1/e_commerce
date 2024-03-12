@@ -1,56 +1,57 @@
-<div class="dashboard_cards mt-4">
-    <div class="container_cards col-2">
-        <a href="#" class="card homepage_card">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-            </div>
-        </a>
+<?php
+require dirname(__DIR__, 3) . "/common/config/config.php";
+
+$sql = "SELECT dashboard_category_images.path, dashboard_category.name as dashboard_category_name
+        FROM dashboard_category_images 
+        JOIN dashboard_category ON dashboard_category_images.dashboard_category_id = dashboard_category.id
+        WHERE dashboard_category.id = $category_id";
+$result = $database_connection->query($sql);
+$cards = [];
+while ($row = $result->fetch_assoc()) {
+    $cards[] = $row;
+}
+$chunks = array_chunk($cards, 6);
+?>
+
+<div>
+    <?php
+    $category_name = $chunks[0][0]['dashboard_category_name'];
+    echo "<h4 class='dashboard_category_list'>$category_name</h4>";
+    ?>
+</div>
+
+<div class="dashboard_card_carousal">
+    <div id="medal_worthy_brands" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <?php
+            $key = 0;
+            while ($key < count($chunks)) {
+                $chunk = $chunks[$key];
+                echo "<div class='carousel-item " . ($key === 0 ? 'active' : '') . "'>";
+                echo "<div class='d-flex' data-bs-interval='5000'>";
+                $card_index = 0;
+                while ($card_index < count($chunk)) {
+                    $card = $chunk[$card_index];
+                    echo "<div class='card' style='width: 17.15vw;'>";
+                    echo "<img src='" . $_ENV['BASE_URL'] . "/public/assets/dashboard_category_images/" . $card['path'] . "' class='d-block' alt='Dashboard Category Image' style='height: 18rem; width: 17vw;'>";
+                    echo "</div>";
+                    $card_index++;
+                }
+                echo "</div>";
+                echo "</div>";
+                $key++;
+            }
+            ?>
+        </div>
     </div>
-    <div class="container_cards col-2">
-        <a href="#" class="card homepage_card">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-            </div>
-        </a>
-    </div>
-    <div class="container_cards col-2">
-        <a href="#" class="card homepage_card">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-            </div>
-        </a>
-    </div>
-    <div class="container_cards col-2">
-        <a href="#" class="card homepage_card">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-            </div>
-        </a>
-    </div>
-    <div class="container_cards col-2">
-        <a href="#" class="card homepage_card">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-            </div>
-        </a>
-    </div>
-    <div class="container_cards col-2">
-        <a href="#" class="card homepage_card">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-            </div>
-        </a>
+    <div class="carousel-indicators">
+        <?php
+        $indicator_index = 0;
+        while ($i < count($chunks)) {
+            $active_class = ($indicator_index === 0) ? 'active' : '';
+            echo "<button type='button' data-bs-target='#medal_worthy_brands' data-bs-slide-to=" . $indicator_index . "class='dashboard_category_carousel_button'" . $active_class . '" aria-current="' . ($indicator_index === 0 ? "true" : "false") . '"  aria-label="Slide "' . ($indicator_index + 1) . "'></button>";
+            $indicator_index++;
+        }
+        ?>
     </div>
 </div>

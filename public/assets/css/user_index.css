@@ -67,7 +67,7 @@
   font-size: 11px;
   font-weight: 100;
   left: 11vw;
-  top: 13vh;
+  top: 5rem;
 }
 
 .nav_item:hover .dropdown_content {
@@ -183,6 +183,12 @@ img.carousel_image {
   /* flex: 0 0 calc(16.666% - 1rem); */
 }
 
+.dashboard_category_carousel_button {
+  width: 5px !important;
+  height: 5px !important;
+  background-color: grey !important;
+}
+
 /* ------------------------------------ Login User ----------------------------------- */
 .logged_in_alert_dismissible {
   font-size: 15px;
@@ -194,4 +200,14 @@ img.carousel_image {
 
 .logged_in_alert_dismissible {
   width: 15rem;
+}
+
+.dashboard_category_list {
+  text-transform: uppercase;
+  color: #3e4152;
+  letter-spacing: 0.15em;
+  font-size: 1.8em;
+  margin: 50px 0 10px 30px;
+  max-height: 5em;
+  font-weight: 700;
 }

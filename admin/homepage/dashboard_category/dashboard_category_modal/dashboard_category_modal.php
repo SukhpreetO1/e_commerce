@@ -8,7 +8,10 @@ if ($result->num_rows > 0) {
    while ($dashboard_category_data = $result->fetch_assoc()) {
 ?>
       <div class="dashboard_category_images_description">
-         <div class="dashboard_category_name d-flex"><h5>Category Name : </h5><p style="font-size: 1.25rem; margin-left:3px; margin-top:-3px"><?php echo $dashboard_category_data['name']; ?></p></div>
+         <div class="dashboard_category_name d-flex">
+            <h5>Category Name : </h5>
+            <p style="font-size: 1.25rem; margin-left:3px; margin-top:-3px"><?php echo $dashboard_category_data['name']; ?></p>
+         </div>
          <div class="dashboard_category_images col-12">
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                <div class="carousel-inner">
