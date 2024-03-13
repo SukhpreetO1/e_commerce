@@ -28,7 +28,6 @@
 }
 
 /* ----------------------------------------------------------------------------------- */
-.logged_in_alert_dismissible,
 .category_title_alert_dismissible,
 .category_title_delete_alert_dismissible,
 .category_title_success_dismissible,
@@ -88,10 +87,18 @@
 .dashboard_category_success_dismissible,
 .dashboard_category_delete_alert_dismissible,
 .dashboard_category_uploaded_image_delete_alert_dismissible ,
-.dashboard_category_uploaded_image_delete_success_dismissible{
+.dashboard_category_uploaded_image_delete_success_dismissible {
   font-size: 15px;
   position: absolute;
   right: -8rem;
+  top: 6px;
+  z-index: 9;
+}
+
+.logged_in_alert_dismissible {
+  font-size: 15px;
+  position: absolute;
+  right: 1rem;
   top: 6px;
   z-index: 9;
 }

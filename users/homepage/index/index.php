@@ -31,7 +31,9 @@ require_once dirname(__DIR__, 3) . "/common/links.php";
 
             $file_paths = [
                 dirname(__DIR__, 2) . "/homepage/banner/banner.php",
-                dirname(__DIR__, 2) . "/homepage/content/content.php",
+                dirname(__DIR__, 2) . "/homepage/cards/cards_carousel.php",
+                dirname(__DIR__, 2) . "/homepage/cards/cards_carousel.php",
+                dirname(__DIR__, 2) . "/homepage/cards/cards.php",
             ];
 
             foreach ($category_ids as $index => $category_id) {
