@@ -1,7 +1,7 @@
 <?php
 require dirname(__DIR__, 3) . "/common/config/config.php";
 ?>
-<div id="dashboard_carousel_slider" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<div id="dashboard_carousel_slider" class="carousel carousel-dark slide" data-bs-ride="carousel" style="margin-top: 8rem;">
     <div class="carousel-inner">
         <?php
         $sql = "SELECT dashboard_category_images.*, dashboard_category.id as dashboard_category_id, dashboard_category.name as dashboard_category_name 
@@ -19,7 +19,7 @@ require dirname(__DIR__, 3) . "/common/config/config.php";
                 } else {
                     echo '<div class="carousel-item" data-bs-interval="2000">';
                 }
-                echo '<img src="' . $_ENV['BASE_URL'] . '/public/assets/dashboard_category_images/' . $dashboard_category_image['path'] . '" class="d-block" alt="Dashboard Category Image" style="width: 100vw; height: 39rem;">';
+                echo '<img src="' . $_ENV['BASE_URL'] . '/public/assets/dashboard_category_images/' . $dashboard_category_image['path'] . '" class="d-block" alt="Dashboard Category Image" style="width: 100vw; height: 30rem;">';
                 echo '</div>';
             }
         }

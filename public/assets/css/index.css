@@ -482,7 +482,6 @@
   cursor: pointer;
 }
 
-.add_category_name,
 .add_category_header_names,
 .edit_category_name,
 .edit_category_header_names,
@@ -574,9 +573,15 @@
 #add_dashboard_category_name_err,
 #edit_dashboard_category_name_err,
 #add_dashboard_category_images_err,
-#edit_dashboard_category_images_err {
+#edit_dashboard_category_images_err,
+#add_dashboard_category_categories_type_err,
+#add_dashboard_category_brand_err {
   display: block;
   text-align: start;
+}
+
+#add_dashboard_category_categories_type_err {
+  margin-left: 10vw;
 }
 
 .important_mark {
@@ -940,4 +945,17 @@ a.ui-datepicker-next.ui-corner-all {
 
 .color_name {
   padding-left: 5rem;
+}
+
+.add_dashboard_category_form {
+  width: 33vw;
+  margin-left: 17vw;
+}
+
+.dashboard_category_categories_types {
+  margin-right: 1rem;
+}
+
+.dashboard_category_brand {
+  width: 47% !important;
 }

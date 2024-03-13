@@ -1,5 +1,5 @@
 <?php
-include dirname(__DIR__, 3) . "/common/config/config.php";
+include dirname(__DIR__, 4) . "/common/config/config.php";
 ?>
 <div class="add_dashboard_category_page">
    <div class="alert_container" id="alert_container"></div>
@@ -21,9 +21,49 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                   <span class="invalid-feedback add_dashboard_category_name_err" id="add_dashboard_category_name_err"><?php echo $add_dashboard_category_name_err ?></php></span>
                </div>
 
+               <div class="categories_types_and_brands d-flex">
+                  <div class="form-group dashboard_category_categories_types col-6">
+                     <label for="add_dashboard_category_categories_type" class="add_dashboard_category_categories_types mt-2 mb-2">Category types <span class="important_mark">*</span></label>
+                     <select class="form-select add_dashboard_category_categories_type" id="add_dashboard_category_categories_type" aria-label="Select Category types name" name="add_dashboard_category_categories_type">
+                        <option hidden disabled selected>Select Category types name</option>
+                        <?php
+                        $sql = "SELECT * FROM categories_type";
+                        $result = $database_connection->query($sql);
+                        if ($result->num_rows > 0) {
+                           while ($categories_type = $result->fetch_assoc()) {
+                        ?>
+                              <option value="<?php echo $categories_type['id']; ?>"><?php echo $categories_type['name']; ?></option>
+                        <?php
+                           }
+                        }
+                        ?>
+                     </select>
+                     <span class="invalid-feedback add_dashboard_category_categories_type_err" id="add_dashboard_category_categories_type_err"><?php echo $add_dashboard_category_categories_type_err; ?></span>
+                  </div>
+
+                  <div class="form-group dashboard_category_brand col-5">
+                     <label for="add_dashboard_category_brand" class="add_dashboard_category_brands mt-2 mb-2">Brands <span class="important_mark">*</span></label>
+                     <select class="form-select add_dashboard_category_brand" id="add_dashboard_category_brand" aria-label="Select Brands Name" name="add_dashboard_category_brand">
+                        <option hidden disabled selected>Select Brands Name</option>
+                        <?php
+                        $sql = "SELECT * FROM brands";
+                        $result = $database_connection->query($sql);
+                        if ($result->num_rows > 0) {
+                           while ($brands = $result->fetch_assoc()) {
+                        ?>
+                              <option value="<?php echo $brands['id']; ?>"><?php echo $brands['name']; ?></option>
+                        <?php
+                           }
+                        }
+                        ?>
+                     </select>
+                     <span class="invalid-feedback add_dashboard_category_brand_err" id="add_dashboard_category_brand_err"><?php echo $add_dashboard_category_brand_err; ?></span>
+                  </div>
+               </div>
+
                <div class="form-group">
                   <label for="add_dashboard_category_images" class="form-label add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                  <input type="file" name="add_dashboard_category_images[]" id="add_dashboard_category_images" class="form-control add_dashboard_category_images mb-3" multiple accept="image/jpeg, image/png, image/jpg, image/webp" onchange="upload_preview_images(event)">
+                  <input type="file" name="add_dashboard_category_images[]" id="add_dashboard_category_images" class="form-control add_dashboard_category_images" accept="image/jpeg, image/png, image/jpg, image/webp" onchange="upload_preview_images(event)">
                   <span class="invalid-feedback add_dashboard_category_images_err" id="add_dashboard_category_images_err">
                      <?php echo $add_dashboard_category_images_err ?>
                   </span>
@@ -42,12 +82,12 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 <script>
    /*--------------------------------------------------------------- Validation for submit button and input in add files ----------------------------------------------------------------------------*/
    function validate_category_name() {
-      var category_name = $('#add_dashboard_category_input_name').val();
+      var category_name = $('.add_dashboard_category_input_name').val();
       var error_messages = '';
       if (category_name.trim() === '') {
          error_messages = 'Name is required.';
-      } else if (category_name.length < 3 || category_name.length > 25) {
-         error_messages = 'Name must be between 3 and 25 characters long.';
+      } else if (category_name.length < 3 || category_name.length > 30) {
+         error_messages = 'Name must be between 3 and 30 characters long.';
       } else if (!/^[a-zA-Z\s]+$/.test(category_name)) {
          error_messages = 'Only alphabets are allowed.';
       }
@@ -64,10 +104,29 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       return error_messages === '';
    }
 
+   function validate_category_type() {
+      var category_categories_type = $('.add_dashboard_category_categories_type').val();
+      var category_brand = $('.add_dashboard_category_brand').val();
+      var error_messages = '';
+      if (category_categories_type === '' || category_categories_type === null) {
+         if (category_brand === '' || category_brand === null) {
+            error_messages = 'Please select either category type or brand.';
+         } else {
+            error_messages = '';
+            $('.add_dashboard_category_brand_err').text(error_messages);
+         }
+      } 
+      $('.add_dashboard_category_categories_type_err').text(error_messages); 
+      return error_messages === '';
+   }
+
    // when submit the new category title file
    $(document).off('submit', '#add_dashboard_category_form').on('submit', '#add_dashboard_category_form', function(e) {
       e.preventDefault();
-      if (!validate_file_input()) {
+      var isNameValid = validate_category_name();
+      var isTypeValid = validate_category_type();
+      var isImagesValid = validate_file_input();
+      if (!isNameValid || !isTypeValid || !isImagesValid) {
          return false;
       } else {
          var formData = $(this).serialize();
@@ -141,14 +200,17 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
 
    // when click on the new category title input field
    $(document).on('click', '#add_dashboard_category_form', function(e) {
-      if (!validate_category_name()) {
+      var isNameValid = validate_category_name();
+      var isTypeValid = validate_category_type();
+      if (!isNameValid || !isTypeValid) {
          return false;
       }
    });
 
    // when input the new category title field
    $(document).on('input', '#add_dashboard_category_form', function(e) {
-      if (!validate_category_name()) {
+      var isNameValid = validate_category_name();
+      if (!isNameValid) {
          return false;
       }
    });
