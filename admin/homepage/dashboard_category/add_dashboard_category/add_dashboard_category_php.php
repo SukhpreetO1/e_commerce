@@ -1,5 +1,7 @@
 <?php
 include dirname(__DIR__, 4) . "/common/config/config.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $add_dashboard_category_input_name = $add_dashboard_category_name_err = "";
 $add_dashboard_category_categories_type = $add_dashboard_category_categories_type_err = "";
@@ -18,10 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $errors['add_dashboard_category_name'] = "Name must be between 3 and 25 characters long.";
    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $add_dashboard_category_input_name)) {
       $errors['add_dashboard_category_name'] = "Only alphabets are allowed.";
-   } 
+   }
 
    //  
-   
+
    if (empty($errors)) {
       $check_sql = "SELECT * FROM dashboard_category WHERE name = ?";
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
@@ -41,20 +43,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $dashboard_category_id = mysqli_insert_id($database_connection);
 
          if ($_POST["add_dashboard_category_categories_type"] !== "" && $_POST["add_dashboard_category_brand"] == "") {
+            $categories_types_array = explode(", ", $_POST["add_dashboard_category_categories_type"]);
             $insert_categories_type_sql = "INSERT INTO dashboard_category_types_brands (dashboard_category_id, categories_types_id) VALUES (?, ?)";
             $insert_categories_type_stmt = mysqli_prepare($database_connection, $insert_categories_type_sql);
-            mysqli_stmt_bind_param($insert_categories_type_stmt, "ii", $dashboard_category_id, $add_dashboard_category_categories_type);
-            mysqli_stmt_execute($insert_categories_type_stmt);
-         } else if ($_POST["add_dashboard_category_categories_type"] == "" && $_POST["add_dashboard_category_brand"] !== ""){
+
+            foreach ($categories_types_array as $category_type) {
+               mysqli_stmt_bind_param($insert_categories_type_stmt, "ii", $dashboard_category_id, $category_type);
+               mysqli_stmt_execute($insert_categories_type_stmt);
+            }
+         } else if ($_POST["add_dashboard_category_categories_type"] == "" && $_POST["add_dashboard_category_brand"] !== "") {
+            $brands_array = explode(", ", $_POST["add_dashboard_category_brand"]);
             $insert_categories_brand_sql = "INSERT INTO dashboard_category_types_brands (dashboard_category_id, brands_id) VALUES (?, ?)";
             $insert_categories_brand_stmt = mysqli_prepare($database_connection, $insert_categories_brand_sql);
-            mysqli_stmt_bind_param($insert_categories_brand_stmt, "ii", $dashboard_category_id, $add_dashboard_category_brand);
-            mysqli_stmt_execute($insert_categories_brand_stmt);
+
+            foreach ($brands_array as $brands) {
+               mysqli_stmt_bind_param($insert_categories_brand_stmt, "ii", $dashboard_category_id, $brands);
+               mysqli_stmt_execute($insert_categories_brand_stmt);
+            }
          } else {
+            $categoriesTypesArray = explode(", ", $_POST["add_dashboard_category_categories_type"]);
+            $brandsArray = explode(", ", $_POST["add_dashboard_category_brand"]);
+
             $insert_categories_types_brand_sql = "INSERT INTO dashboard_category_types_brands (dashboard_category_id, categories_types_id, brands_id) VALUES (?, ?, ?)";
             $insert_categories_types_brand_stmt = mysqli_prepare($database_connection, $insert_categories_types_brand_sql);
-            mysqli_stmt_bind_param($insert_categories_types_brand_stmt, "iii", $dashboard_category_id, $add_dashboard_category_categories_type, $add_dashboard_category_brand);
-            mysqli_stmt_execute($insert_categories_types_brand_stmt);
+
+            foreach ($categoriesTypesArray as $categoryType) {
+               foreach ($brandsArray as $brand) {
+                  mysqli_stmt_bind_param($insert_categories_types_brand_stmt, "iii", $dashboard_category_id, $categoryType, $brand);
+                  mysqli_stmt_execute($insert_categories_types_brand_stmt);
+               }
+            }
          }
 
          if (isset($_POST["image_file_names"])) {
@@ -74,15 +92,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                $image_name_without_space = str_replace(' ', '_', $image_name);
                $target_path = $image_directory . $image_name_without_space;
 
-               if (move_uploaded_file($_FILES["add_dashboard_category_images"]["tmp_name"][$key], $target_path)) {
-                  $image_paths[] = $target_path;
-                  $insert_image_sql = "INSERT INTO dashboard_category_images (dashboard_category_id, path) VALUES (?, ?)";
-                  $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
-                  mysqli_stmt_bind_param($insert_image_stmt, "is", $dashboard_category_id, $image_name_without_space);
-                  mysqli_stmt_execute($insert_image_stmt);
-               } else {
-                  $response['error'] = "Images not uploaded.";
+               foreach ($_FILES as $fileKey => $fileArray) {
+                  if (strpos($fileKey, 'add_dashboard_category_images_') !== false) {
+                     if (move_uploaded_file($fileArray["tmp_name"][$key], $target_path)) {
+                        $image_paths[] = $target_path;
+                        $insert_image_sql = "INSERT INTO dashboard_category_images (dashboard_category_id, path) VALUES (?, ?)";
+                        $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
+                        mysqli_stmt_bind_param($insert_image_stmt, "is", $dashboard_category_id, $image_name_without_space);
+                        mysqli_stmt_execute($insert_image_stmt);
+                     } else {
+                        $response['error'] = "Failed to move uploaded file.";
+                     }
+                  } else if (strpos($fileKey, 'add_dashboard_category_images') !== false) {
+                     if (move_uploaded_file($fileArray["tmp_name"][$key], $target_path)) {
+                        $image_paths[] = $target_path;
+                        $insert_image_sql = "INSERT INTO dashboard_category_images (dashboard_category_id, path) VALUES (?, ?)";
+                        $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
+                        mysqli_stmt_bind_param($insert_image_stmt, "is", $dashboard_category_id, $image_name_without_space);
+                        mysqli_stmt_execute($insert_image_stmt);
+                     } else {
+                        $response['error'] = "Failed to move uploaded file.";
+                     }
+                  }
                }
+
+               var_dump(move_uploaded_file($fileArray["tmp_name"][$key], $target_path));
+               die;
             }
          } else {
             $add_products_image = null;
@@ -94,7 +129,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       echo json_encode($response, JSON_UNESCAPED_SLASHES);
 
       mysqli_stmt_close($check_stmt);
-      mysqli_stmt_close($insert_stmt);
    }
    mysqli_close($database_connection);
 }

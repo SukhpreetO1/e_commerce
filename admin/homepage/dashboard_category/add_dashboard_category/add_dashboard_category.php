@@ -61,14 +61,26 @@ include dirname(__DIR__, 4) . "/common/config/config.php";
                   </div>
                </div>
 
-               <div class="form-group">
-                  <label for="add_dashboard_category_images" class="form-label add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                  <input type="file" name="add_dashboard_category_images[]" id="add_dashboard_category_images" class="form-control add_dashboard_category_images" accept="image/jpeg, image/png, image/jpg, image/webp" onchange="upload_preview_images(event)">
-                  <span class="invalid-feedback add_dashboard_category_images_err" id="add_dashboard_category_images_err">
-                     <?php echo $add_dashboard_category_images_err ?>
-                  </span>
-                  <div id="uploaded_image_preview" style="display: flex; flex-wrap: wrap; width: 23vw;"></div>
+               <div class="image_and_more_button">
+                  <div class="form-group col-12">
+                     <label for="add_dashboard_category_images" class="form-label add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
+                     <input type="file" name="add_dashboard_category_images" id="add_dashboard_category_images" class="form-control add_dashboard_category_images" accept="image/jpeg, image/png, image/jpg, image/webp" onchange="upload_preview_images(event)">
+                     <span class="invalid-feedback add_dashboard_category_images_err" id="add_dashboard_category_images_err">
+                        <?php echo $add_dashboard_category_images_err ?>
+                     </span>
+                     <div id="uploaded_image_preview" style="display: flex; flex-wrap: wrap; width: 23vw;"></div>
+                  </div>
+
+                  <div class="form-group">
+                     <div class="dashboard_category_more">
+                        <div onclick="add_more_fields()">
+                           <i class="fa-solid fa-plus"></i>
+                        </div>
+                     </div>
+                  </div>
                </div>
+
+               <div id="additional_fields_container" style="display: none;"></div>
 
                <div class="add_dashboard_category_name_button">
                   <button type="submit" name="create_category" class="btn btn-primary mt-2 create_category" id="create_category" value="Create Category">Create Category</button>
@@ -115,8 +127,8 @@ include dirname(__DIR__, 4) . "/common/config/config.php";
             error_messages = '';
             $('.add_dashboard_category_brand_err').text(error_messages);
          }
-      } 
-      $('.add_dashboard_category_categories_type_err').text(error_messages); 
+      }
+      $('.add_dashboard_category_categories_type_err').text(error_messages);
       return error_messages === '';
    }
 
@@ -130,17 +142,45 @@ include dirname(__DIR__, 4) . "/common/config/config.php";
          return false;
       } else {
          var formData = $(this).serialize();
-
          var form = this;
-         var fileInput = document.getElementById('add_dashboard_category_images');
-         var files = fileInput.files;
+         var originalFileInput = document.getElementById('add_dashboard_category_images');
+         var originalFiles = originalFileInput.files;
          var fileNames = [];
 
-         for (var i = 0; i < files.length; i++) {
-            fileNames.push(files[i].name);
+         for (var i = 0; i < originalFiles.length; i++) {
+            fileNames.push(originalFiles[i].name);
          }
 
+         for (var j = 1; j <= fieldCounter; j++) {
+            var fileInput = document.getElementById('add_dashboard_category_images_' + j);
+            if (fileInput && fileInput.files.length > 0) {
+               var files = fileInput.files;
+               for (var k = 0; k < files.length; k++) {
+                  fileNames.push(files[k].name);
+               }
+            }
+         }
+
+         // Append combined category values to FormData
          var formData = new FormData(form);
+         var combined_categories = formData.get('add_dashboard_category_categories_type') || '';
+         for (var l = 0; l <= fieldCounter; l++) {
+            var category_type_value = $('[name="add_dashboard_category_categories_type_' + l + '"]').val();
+            if (category_type_value) {
+               combined_categories += (combined_categories ? ', ' : '') + category_type_value;
+            }
+         }
+         formData.set('add_dashboard_category_categories_type', combined_categories);
+
+         var combined_brands = formData.get('add_dashboard_category_brand') || '';
+         for (var l = 0; l <= fieldCounter; l++) {
+            var category_brands_value = $('[name="add_dashboard_category_brand_' + l + '"]').val();
+            if (category_brands_value) {
+               combined_brands += (combined_brands ? ', ' : '') + category_brands_value;
+            }
+         }
+         formData.set('add_dashboard_category_brand', combined_brands);
+         
          formData.append('image_file_names', fileNames.join(','));
          var parsed_response = null;
 
@@ -292,5 +332,66 @@ include dirname(__DIR__, 4) . "/common/config/config.php";
       } else {
          fileInput.removeAttribute('data-file-count');
       }
+   }
+
+   /*--------------------------------------------------------------- Click on more button to add more category, types, images field ----------------------------------------------------------------------------*/
+   var fieldCounter = 1;
+
+   function add_more_fields() {
+      var container = document.getElementById('additional_fields_container');
+      container.style.display = 'block';
+      var new_fields = `
+        <div class="categories_types_and_brands d-flex">
+            <div class="form-group dashboard_category_categories_types col-6">
+                <label for="add_dashboard_category_categories_type_${fieldCounter}" class="add_dashboard_category_categories_types mt-2 mb-2">Category types <span class="important_mark">*</span></label>
+                <select class="form-select add_dashboard_category_categories_type" id="add_dashboard_category_categories_type_${fieldCounter}" aria-label="Select Category types name" name="add_dashboard_category_categories_type_${fieldCounter}">
+                    <option hidden disabled selected>Select Category types name</option>
+                    <?php
+                     $sql = "SELECT * FROM categories_type";
+                     $result = $database_connection->query($sql);
+                     if ($result->num_rows > 0) {
+                        while ($categories_type = $result->fetch_assoc()) {
+                     ?>
+                            <option value="<?php echo $categories_type['id']; ?>"><?php echo $categories_type['name']; ?></option>
+                    <?php
+                        }
+                     }
+                     ?>
+                </select>
+                <span class="invalid-feedback add_dashboard_category_categories_type_err"></span>
+            </div>
+
+            <div class="form-group dashboard_category_brand col-5">
+                <label for="add_dashboard_category_brand_${fieldCounter}" class="add_dashboard_category_brands mt-2 mb-2">Brands <span class="important_mark">*</span></label>
+                <select class="form-select add_dashboard_category_brand" id="add_dashboard_category_brand_${fieldCounter}" aria-label="Select Brands Name" name="add_dashboard_category_brand_${fieldCounter}">
+                    <option hidden disabled selected>Select Brands Name</option>
+                    <?php
+                     $sql = "SELECT * FROM brands";
+                     $result = $database_connection->query($sql);
+                     if ($result->num_rows > 0) {
+                        while ($brands = $result->fetch_assoc()) {
+                     ?>
+                            <option value="<?php echo $brands['id']; ?>"><?php echo $brands['name']; ?></option>
+                    <?php
+                        }
+                     }
+                     ?>
+                </select>
+                <span class="invalid-feedback add_dashboard_category_brand_err"></span>
+            </div>
+        </div>
+
+        <div class="image_and_more_button">
+            <div class="form-group col-12">
+                <label for="add_dashboard_category_images_${fieldCounter}" class="form-label add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
+                <input type="file" name="add_dashboard_category_images_${fieldCounter}" id="add_dashboard_category_images_${fieldCounter}" class="form-control add_dashboard_category_images_${fieldCounter}" accept="image/jpeg, image/png, image/jpg, image/webp" onchange="upload_preview_images(event)">
+                <span class="invalid-feedback add_dashboard_category_images_err"></span>
+                <div id="uploaded_image_preview_${fieldCounter}" style="display: flex; flex-wrap: wrap; width: 23vw;"></div>
+            </div>
+        </div>
+        <hr>
+    `;
+      container.insertAdjacentHTML('beforeend', new_fields);
+      fieldCounter++;
    }
 </script>

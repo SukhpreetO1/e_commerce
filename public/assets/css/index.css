@@ -338,7 +338,8 @@
 .dashboard_category_back_button,
 .dashboard_category_plus_icon,
 .add_dashboard_category_back_button,
-.edit_dashboard_category_back_button {
+.edit_dashboard_category_back_button,
+.dashboard_category_more {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -958,4 +959,22 @@ a.ui-datepicker-next.ui-corner-all {
 
 .dashboard_category_brand {
   width: 47% !important;
+}
+
+.image_and_more_button {
+  display: flex;
+}
+
+.dashboard_category_more {
+  margin: 8vh 0 0 3vh;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 50%;
+  padding: 8px 8px 0px 8px;
+}
+
+#additional_fields_container {
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  padding: 2%;
 }
