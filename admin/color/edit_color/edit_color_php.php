@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $color_name = $data['name']['value'];
    }
 
-   $check_sql = "SELECT * FROM color WHERE color_code = ? WHERE id = ?";
+   $check_sql = "SELECT * FROM color WHERE id = ?";
    $check_stmt = mysqli_prepare($database_connection, $check_sql);
-   mysqli_stmt_bind_param($check_stmt, "si", $edit_color_input_name, $edit_color_id);
+   mysqli_stmt_bind_param($check_stmt, "i", $edit_color_id);
    mysqli_stmt_execute($check_stmt);
    mysqli_stmt_store_result($check_stmt);
 

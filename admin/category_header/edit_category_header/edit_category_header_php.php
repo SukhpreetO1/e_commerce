@@ -23,11 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $update_category_header_input_name = trim($_POST["edit_category_header_input_name"]);
       $edit_category_id = trim($_POST["edit_category_id"]);
 
-      $check_sql = "SELECT * FROM categories_heading WHERE categories_id = ? AND name = ? AND id = ?";
+      $check_sql = "SELECT * FROM categories_heading WHERE categories_id = ? AND id = ?";
       $update_sql = "UPDATE categories_heading SET categories_id = ?, name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
-      mysqli_stmt_bind_param($check_stmt, "isi", $edit_category_header_input_title, $edit_category_header_input_name, $edit_category_id);
+      mysqli_stmt_bind_param($check_stmt, "ii", $edit_category_header_input_title, $edit_category_id);
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
       

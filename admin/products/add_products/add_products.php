@@ -179,8 +179,8 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
                </div>
 
                <div class="form-group">
-                  <label for="add_products_image" class="add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
-                  <input type="file" name="add_products_image[]" id="add_products_image" class="add_products_image" multiple accept="image/jpeg, image/png, image/jpg" onchange="upload_preview_images(event)">
+                  <label for="add_products_image" class="form-label add_product_image mt-2 mb-2">Images <span class="important_mark">*</span></label>
+                  <input type="file" name="add_products_image[]" id="add_products_image" class="form-control add_products_image" multiple accept="image/jpeg, image/png, image/jpg" onchange="upload_preview_images(event)">
                   <span class="invalid-feedback add_products_image_err" id="add_products_image_err">
                      <?php echo $add_products_image_err ?>
                   </span>
@@ -200,7 +200,7 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
    /*--------------------------------------------------------------- js for the custom dropdown ---------------------------------------------------------------*/
    $(document).ready(function() {
       $(document).on('click', '.custom_product_dropdown_option', function(event) {
-         event.stopPropagation(); 
+         event.stopPropagation();
          var dropdown = $(this).closest('.custom-dropdown');
          var options = dropdown.find('.options');
          options.toggle();
@@ -316,80 +316,94 @@ include dirname(__DIR__, 3) . "/common/config/config.php";
       return validate_input(product_price, /^(?!0+(\.0+)?$)\d+(\.\d+)?$/, 'Product price is required.', 'Only numbers are allowed.', null, '.add_products_price_err');
    }
 
+   function validate_file_input() {
+      var error_messages = '';
+      if (document.getElementById('add_products_image').files.length === 0) {
+         error_messages = 'Image field is required';
+      }
+      $('.add_products_image_err').text(error_messages);
+      return error_messages === '';
+   }
+
    // when submit the new products title file
    $(document).off('submit', '#add_products_form').on('submit', '#add_products_form', function(e) {
       e.preventDefault();
+      if (!validate_file_input()) {
+         return false;
+      } else {
+         if ($('#add_products_discount').val() === '') {
+            $('#add_products_discount option:eq(1)').prop('selected', true);
+         }
 
-      if ($('#add_products_discount').val() === '') {
-         $('#add_products_discount option:eq(1)').prop('selected', true);
-      }
+         var form = this;
+         var fileInput = document.getElementById('add_products_image');
+         var files = fileInput.files;
+         var fileNames = [];
 
-      var form = this;
-      var fileInput = document.getElementById('add_products_image');
-      var files = fileInput.files;
-      var fileNames = [];
+         for (var i = 0; i < files.length; i++) {
+            fileNames.push(files[i].name);
+         }
+         var selectedSizes = $('#add_products_size').val().join(',');
+         var selectedColorId = $('#add_products_color .options li.selected').attr('data-value');
 
-      for (var i = 0; i < files.length; i++) {
-         fileNames.push(files[i].name);
-      }
-      var selectedSizes = $('#add_products_size').val().join(',');
-      var selectedColorId = $('#add_products_color .options li.selected').attr('data-value');
+         var formData = new FormData(form);
+         formData.append('image_file_names', fileNames.join(','));
+         formData.append('add_products_size', selectedSizes);
+         formData.append('add_products_color', selectedColorId);
 
-      var formData = new FormData(form);
-      formData.append('image_file_names', fileNames.join(','));
-      formData.append('add_products_size', selectedSizes);
-      formData.append('add_products_color', selectedColorId);
-
-      var parsed_response = null;
-      $.ajax({
-         type: "POST",
-         url: BASE_URL + "/admin/products/add_products/add_products_php.php",
-         data: formData,
-         processData: false,
-         contentType: false,
-         success: function(response) {
-            if (response === "") {
-               var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">Product name not saved.</div>';
-               $('#alert_container').append(alert_message);
-               setTimeout(function() {
-                  $('.alert').remove();
-               }, 3000);
-            } else {
-               if (parsed_response) {
-                  parsed_response = null;
+         var parsed_response = null;
+         $.ajax({
+            type: "POST",
+            url: BASE_URL + "/admin/products/add_products/add_products_php.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+               if (response === "") {
+                  var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">Product name not saved.</div>';
+                  $('#alert_container').append(alert_message);
+                  setTimeout(function() {
+                     $('.alert').remove();
+                  }, 3000);
                } else {
-                  parsed_response = JSON.parse(response);
-                  if (parsed_response.error) {
-                     var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
-                     $('#alert_container').append(alert_message);
-                     setTimeout(function() {
-                        $('.alert').remove();
-                     }, 3000);
+                  if (parsed_response) {
+                     parsed_response = null;
                   } else {
-                     $.ajax({
-                        url: BASE_URL + '/admin/products/products.php',
-                        type: 'GET',
-                        success: function(data) {
-                           $(".container").empty();
-                           $('.container').html(data);
-                           var alert_message = '<div class="alert alert-success products_success_dismissible" role="alert">' + parsed_response.success + '</div>';
-                           $('#alert_container').append(alert_message);
-                           setTimeout(function() {
-                              $('.alert').remove();
-                           }, 2000);
-                        },
-                        error: function(xhr, status, error) {
-                           console.log(error);
-                        }
-                     });
+                     parsed_response = JSON.parse(response);
+                     if (parsed_response.error) {
+                        var alert_message = '<div class="alert alert-danger products_alert_dismissible" role="alert">' + parsed_response.error + '</div>';
+                        $('#alert_container').append(alert_message);
+                        setTimeout(function() {
+                           $('.alert').remove();
+                        }, 3000);
+                     } else {
+                        $.ajax({
+                           url: BASE_URL + '/admin/products/products.php',
+                           type: 'GET',
+                           success: function(data) {
+                              $(".container").empty();
+                              $('.container').html(data);
+                              var alert_message = '<div class="alert alert-success products_success_dismissible" role="alert">' + parsed_response.success + '</div>';
+                              $('#alert_container').append(alert_message);
+                              setTimeout(function() {
+                                 $('.alert').remove();
+                              }, 2000);
+                              var new_url = window.location.href.replace('?tab=add_products', '?tab=products');
+                              history.pushState(null, null, new_url);
+                           },
+                           error: function(xhr, status, error) {
+                              console.log(error);
+                           }
+                        });
+                     }
                   }
                }
+            },
+            error: function(xhr, status, error) {
+               console.log("Error" + error);
             }
-         },
-         error: function(xhr, status, error) {
-            console.log("Error" + error);
-         }
-      });
+         });
+      }
    });
 
    // when click on the new products title field

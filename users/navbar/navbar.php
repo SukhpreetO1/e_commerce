@@ -19,7 +19,7 @@
                         <div class="nav-link navbar_dropdown profile" role="button">
                             Profile
                             <ul class="dropdown-menu navbar_dropdown_menu">
-                                <li><a class="dropdown-item" href="<?php echo $_ENV['BASE_URL'] ?>/common/logout.php">Logout</a></li>
+                                <li style="width: 100%;"><a class="dropdown-item" href="<?php echo $_ENV['BASE_URL'] ?>/common/logout.php">Logout</a></li>
                             </ul>
                         </div>
                     </div>

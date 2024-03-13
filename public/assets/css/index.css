@@ -28,7 +28,6 @@
 }
 
 /* ----------------------------------------------------------------------------------- */
-.logged_in_alert_dismissible,
 .category_title_alert_dismissible,
 .category_title_delete_alert_dismissible,
 .category_title_success_dismissible,
@@ -83,10 +82,23 @@
 .brands_alert_dismissible,
 .brands_success_dismissible,
 .brands_delete_alert_dismissible,
-.brands_delete_success_dismissible {
+.brands_delete_success_dismissible,
+.dashboard_category_alert_dismissible,
+.dashboard_category_success_dismissible,
+.dashboard_category_delete_alert_dismissible,
+.dashboard_category_uploaded_image_delete_alert_dismissible ,
+.dashboard_category_uploaded_image_delete_success_dismissible {
   font-size: 15px;
   position: absolute;
   right: -8rem;
+  top: 6px;
+  z-index: 9;
+}
+
+.logged_in_alert_dismissible {
+  font-size: 15px;
+  position: absolute;
+  right: 1rem;
   top: 6px;
   z-index: 9;
 }
@@ -134,7 +146,12 @@
   width: 16rem;
 }
 
-.category_types_success_dismissible {
+.category_types_success_dismissible,
+.dashboard_category_alert_dismissible,
+.dashboard_category_success_dismissible,
+.dashboard_category_delete_alert_dismissible,
+.dashboard_category_uploaded_image_delete_alert_dismissible,
+.dashboard_category_uploaded_image_delete_success_dismissible {
   width: 21rem;
 }
 
@@ -228,7 +245,8 @@
 .discount_edit,
 .discount_toggle_button,
 .brands_edit,
-.dashboard_category_edit {
+.dashboard_category_edit,
+.dashboard_category_view {
   margin-right: 15px;
 }
 
@@ -318,7 +336,9 @@
 .add_brands_back_button,
 .edit_brands_back_button,
 .dashboard_category_back_button,
-.dashboard_category_plus_icon {
+.dashboard_category_plus_icon,
+.add_dashboard_category_back_button,
+.edit_dashboard_category_back_button {
   font-size: 1.5rem;
   padding: 5px;
   color: black;
@@ -360,7 +380,10 @@
 .discount_edit:hover,
 .discount_delete:hover,
 .brands_edit:hover,
-.brands_delete:hover {
+.brands_delete:hover,
+.dashboard_category_view:hover,
+.dashboard_category_edit:hover,
+.dashboard_category_delete:hover {
   cursor: pointer;
 }
 
@@ -429,7 +452,9 @@
 .add_discount_name_button,
 .edit_discount_name_button,
 .add_brands_name_button,
-.edit_brands_name_button {
+.edit_brands_name_button,
+.add_dashboard_category_name_button,
+.edit_dashboard_category_name_button {
   text-align: center;
 }
 
@@ -545,7 +570,11 @@
 #edit_admin_password_err,
 #edit_admin_confirm_password_err,
 #add_brands_name_err,
-#edit_brands_name_err {
+#edit_brands_name_err,
+#add_dashboard_category_name_err,
+#edit_dashboard_category_name_err,
+#add_dashboard_category_images_err,
+#edit_dashboard_category_images_err {
   display: block;
   text-align: start;
 }
@@ -749,12 +778,18 @@ a.ui-datepicker-next.ui-corner-all {
 }
 
 .product_review_user_uploded_images:hover,
-.product_uploded_images:hover {
+.product_uploded_images:hover,
+.dashboard_categories_images:hover {
   cursor: pointer;
 }
 
-.products_uploaded_images {
+.products_uploaded_images,
+.dashboard_category_uploaded_images {
   display: flex;
+}
+
+.dashboard_category_uploaded_images {
+  flex-wrap: wrap;
 }
 
 .product_selected_size {
@@ -903,6 +938,6 @@ a.ui-datepicker-next.ui-corner-all {
   height: 26px;
 }
 
-.color_name{
+.color_name {
   padding-left: 5rem;
 }

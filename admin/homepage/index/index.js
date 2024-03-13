@@ -81,6 +81,7 @@ $(document).ready(function () {
     var query_param_mappings = {
         'dashboard': ['/admin/homepage/dashboard/dashboard.php', '.dashboard'],
         'dashboard_category': ['/admin/homepage/dashboard_category/dashboard_category.php', '.dashboard_category'],
+        'add_dashboard_category': ['/admin/homepage/dashboard_category/add_dashboard_category/add_dashboard_category.php', '.dashboard_category'],
         'brands': ['/admin/brands/brands.php', '.brands'],
         'add_brands': ['/admin/brands/add_brands/add_brands.php', '.brands'],
         'size': ['/admin/size/size.php', '.size'],

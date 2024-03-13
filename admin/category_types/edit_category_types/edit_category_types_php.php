@@ -29,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $updated_category_types_input_name = trim($_POST["edit_category_types_input_name"]);
       $category_type_id = trim($_POST["category_type_id"]);
 
-      $check_sql = "SELECT * FROM categories_type WHERE name = ? AND id = ?";
+      $check_sql = "SELECT * FROM categories_type WHERE id = ?";
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
-      mysqli_stmt_bind_param($check_stmt, "si", $updated_category_types_input_name, $category_type_id);
+      mysqli_stmt_bind_param($check_stmt, "i", $category_type_id);
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
 

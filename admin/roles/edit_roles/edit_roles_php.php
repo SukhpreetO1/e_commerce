@@ -16,11 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $update_role_input_name = trim($_POST["edit_role_input_name"]);
       $edit_role_id = trim($_POST["edit_role_id"]);
 
-      $check_sql = "SELECT * FROM roles WHERE name = ? WHERE id = ?";
+      $check_sql = "SELECT * FROM roles WHERE id = ?";
       $update_sql = "UPDATE roles SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
 
       $check_stmt = mysqli_prepare($database_connection, $check_sql);
-      mysqli_stmt_bind_param($check_stmt, "si", $update_role_input_name, $edit_role_id);
+      mysqli_stmt_bind_param($check_stmt, "i", $edit_role_id);
       mysqli_stmt_execute($check_stmt);
       mysqli_stmt_store_result($check_stmt);
 
