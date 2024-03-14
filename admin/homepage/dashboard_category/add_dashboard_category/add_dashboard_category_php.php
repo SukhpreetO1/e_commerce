@@ -38,36 +38,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
          $dashboard_category_id = mysqli_insert_id($database_connection);
 
-         if ($_POST["add_dashboard_category_categories_type"] !== "" && $_POST["add_dashboard_category_brand"] == "") {
-            $categories_types_array = explode(", ", $_POST["add_dashboard_category_categories_type"]);
-            $insert_categories_type_sql = "INSERT INTO dashboard_category_types_brands (dashboard_category_id, categories_types_id) VALUES (?, ?)";
-            $insert_categories_type_stmt = mysqli_prepare($database_connection, $insert_categories_type_sql);
-
-            foreach ($categories_types_array as $category_type) {
-               mysqli_stmt_bind_param($insert_categories_type_stmt, "ii", $dashboard_category_id, $category_type);
-               mysqli_stmt_execute($insert_categories_type_stmt);
-            }
-         } else if ($_POST["add_dashboard_category_categories_type"] == "" && $_POST["add_dashboard_category_brand"] !== "") {
-            $brands_array = explode(", ", $_POST["add_dashboard_category_brand"]);
-            $insert_categories_brand_sql = "INSERT INTO dashboard_category_types_brands (dashboard_category_id, brands_id) VALUES (?, ?)";
-            $insert_categories_brand_stmt = mysqli_prepare($database_connection, $insert_categories_brand_sql);
-
-            foreach ($brands_array as $brands) {
-               mysqli_stmt_bind_param($insert_categories_brand_stmt, "ii", $dashboard_category_id, $brands);
-               mysqli_stmt_execute($insert_categories_brand_stmt);
-            }
-         } else {
+         if (isset($_POST["add_dashboard_category_categories_type"]) || isset($_POST["add_dashboard_category_brand"])) {
             $categoriesTypesArray = explode(", ", $_POST["add_dashboard_category_categories_type"]);
             $brandsArray = explode(", ", $_POST["add_dashboard_category_brand"]);
 
             $insert_categories_types_brand_sql = "INSERT INTO dashboard_category_types_brands (dashboard_category_id, categories_types_id, brands_id) VALUES (?, ?, ?)";
             $insert_categories_types_brand_stmt = mysqli_prepare($database_connection, $insert_categories_types_brand_sql);
 
-            foreach ($categoriesTypesArray as $categoryType) {
-               foreach ($brandsArray as $brand) {
-                  mysqli_stmt_bind_param($insert_categories_types_brand_stmt, "iii", $dashboard_category_id, $categoryType, $brand);
-                  mysqli_stmt_execute($insert_categories_types_brand_stmt);
-               }
+            $minLength = min(count($categoriesTypesArray), count($brandsArray));
+
+            for ($i = 0; $i < $minLength; $i++) {
+               $categoryTypeValue = ($categoriesTypesArray[$i] == '0') ? null : $categoriesTypesArray[$i];
+               $brandValue = ($brandsArray[$i] == '0') ? null : $brandsArray[$i];
+
+               mysqli_stmt_bind_param($insert_categories_types_brand_stmt, "iii", $dashboard_category_id, $categoryTypeValue, $brandValue);
+               mysqli_stmt_execute($insert_categories_types_brand_stmt);
             }
          }
 

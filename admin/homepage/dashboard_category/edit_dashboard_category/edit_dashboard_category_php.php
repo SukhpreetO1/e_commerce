@@ -2,9 +2,15 @@
 include dirname(__DIR__, 4) . "/common/config/config.php";
 
 $edit_dashboard_category_input_name = $edit_dashboard_category_name_err = "";
+$edit_dashboard_category_categories_type = $edit_dashboard_category_categories_type_err = "";
+$edit_dashboard_category_brand = $edit_dashboard_category_brand_err = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $edit_dashboard_category_input_name = trim($_POST["edit_dashboard_category_input_name"]);
+   $edit_dashboard_category_categories_type = trim($_POST["edit_dashboard_category_categories_type"]);
+   $edit_dashboard_category_brand = trim($_POST["edit_dashboard_category_brand"]);
+
+   $errors = array();
 
    if (empty($edit_dashboard_category_input_name)) {
       $edit_dashboard_category_name_err = "Name is required.";
@@ -12,7 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $edit_dashboard_category_name_err = "Name must be between 3 and 25 characters long.";
    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $edit_dashboard_category_input_name)) {
       $edit_dashboard_category_name_err = "Only alphabets are allowed.";
-   } else {
+   }
+
+   if (empty($errors)) {
       $update_dashboard_category_input_name = trim($_POST["edit_dashboard_category_input_name"]);
       $edit_dashboard_category_id = trim($_POST["edit_dashboard_category_id"]);
 
@@ -32,6 +40,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          mysqli_stmt_execute($update_stmt);
       }
 
+      if (isset($_POST["edit_dashboard_category_categories_type"]) || isset($_POST["edit_dashboard_category_brand"])) {
+         $categoriesTypesArray = explode(", ", $_POST["edit_dashboard_category_categories_type"]);
+         $brandsArray = explode(", ", $_POST["edit_dashboard_category_brand"]);
+
+         $update_categories_types_brand_sql = "UPDATE dashboard_category_types_brands SET dashboard_category_id = ?, categories_types_id = ?, brands_id = ?, updated_at = CURRENT_TIMESTAMP WHERE dashboard_category_id = ?";
+         $update_categories_types_brand_stmt = mysqli_prepare($database_connection, $update_categories_types_brand_sql);
+
+         $minLength = min(count($categoriesTypesArray), count($brandsArray));
+
+         for ($i = 0; $i < $minLength; $i++) {
+            $categoryTypeValue = ($categoriesTypesArray[$i] == '0') ? null : $categoriesTypesArray[$i];
+            $brandValue = ($brandsArray[$i] == '0') ? null : $brandsArray[$i];
+
+            mysqli_stmt_bind_param($update_categories_types_brand_stmt, "iii", $edit_dashboard_category_id, $categoryTypeValue, $brandValue);
+            mysqli_stmt_execute($update_categories_types_brand_stmt);
+         }
+      }
+
       if (isset($_POST["image_file_names"])) {
          $image_file_names = explode(',', $_POST["image_file_names"]);
          $image_paths = array();
@@ -39,25 +65,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $image_directory = dirname(__DIR__, 4) . '/public/assets/dashboard_category_images/';
             if (!file_exists($image_directory)) {
                mkdir($image_directory, 0777, true);
-               chmod($image_directory, 0777);
             }
-
+            
             $permissions = fileperms($image_directory);
             if (($permissions & 0777) !== 0777) {
                chmod($image_directory, 0777);
             }
-
-            $image_name_without_space = str_replace(' ', '_', $image_name);
-            $target_path = $image_directory . $image_name_without_space;
-
-            if (move_uploaded_file($_FILES["edit_dashboard_category_images"]["tmp_name"][$key], $target_path)) {
-               $image_paths[] = $target_path;
-               $insert_image_sql = "INSERT INTO dashboard_category_images (dashboard_category_id, path) VALUES (?, ?)";
-               $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
-               mysqli_stmt_bind_param($insert_image_stmt, "is", $edit_dashboard_category_id, $image_name_without_space);
-               mysqli_stmt_execute($insert_image_stmt);
+            
+            foreach ($_FILES as $fileKey => $fileArray) {
+               if (strpos($fileKey, 'edit_dashboard_category_images') !== false) {
+                  $image_name_without_space = str_replace(' ', '_', $fileArray['name']);
+                  $image_name_without_space = is_array($image_name_without_space) ? $image_name_without_space[0] : $image_name_without_space;
+                  $target_path = $image_directory . $image_name_without_space;
+                  if (move_uploaded_file($fileArray["tmp_name"][$key], $target_path)) {
+                     $image_paths[] = $target_path;
+                     $insert__image_sql = "INSERT INTO dashboard_category_images (dashboard_category_id, path) VALUES (?, ?)";
+                     $insert__image_stmt = mysqli_prepare($database_connection, $insert__image_sql);
+                     mysqli_stmt_bind_param($insert__image_stmt, "is", $edit_dashboard_category_id, $image_name_without_space);
+                     mysqli_stmt_execute($insert__image_stmt);
+                  }
+               }
             }
          }
+      } else {
+         $edit_products_image = null;
       }
 
       $response['success'] = "Dashboard category updated successfully.";

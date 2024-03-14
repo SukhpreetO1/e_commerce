@@ -484,7 +484,6 @@
 }
 
 .add_category_header_names,
-.edit_category_name,
 .edit_category_header_names,
 .add_role_name,
 .edit_role_name,
@@ -948,6 +947,7 @@ a.ui-datepicker-next.ui-corner-all {
   padding-left: 5rem;
 }
 
+.edit_category_name,
 .add_dashboard_category_form {
   width: 33vw;
   margin-left: 17vw;

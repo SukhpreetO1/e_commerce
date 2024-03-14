@@ -161,24 +161,27 @@ include dirname(__DIR__, 4) . "/common/config/config.php";
             }
          }
 
-         // Append combined category values to FormData
          var formData = new FormData(form);
-         var combined_categories = formData.get('add_dashboard_category_categories_type') || '';
+         var combined_categories = formData.get('add_dashboard_category_categories_type') || '0';
+         var combined_brands = formData.get('add_dashboard_category_brand') || '0';
+
          for (var l = 0; l <= fieldCounter; l++) {
             var category_type_value = $('[name="add_dashboard_category_categories_type_' + l + '"]').val();
-            if (category_type_value) {
-               combined_categories += (combined_categories ? ', ' : '') + category_type_value;
-            }
-         }
-         formData.set('add_dashboard_category_categories_type', combined_categories);
-
-         var combined_brands = formData.get('add_dashboard_category_brand') || '';
-         for (var l = 0; l <= fieldCounter; l++) {
             var category_brands_value = $('[name="add_dashboard_category_brand_' + l + '"]').val();
-            if (category_brands_value) {
+
+            if (category_type_value && category_brands_value) {
+               combined_categories += (combined_categories ? ', ' : '') + category_type_value;
+               combined_brands += (combined_brands ? ', ' : '0') + category_brands_value;
+            } else if (category_type_value) {
+               combined_categories += (combined_categories ? ', ' : '') + category_type_value;
+               combined_brands += (combined_brands ? ', ' : '0') + (category_brands_value ? category_brands_value : '0');
+            } else if (category_brands_value) {
+               combined_categories += (combined_categories ? ', ' : '0') + (category_type_value ? category_type_value : '0');
                combined_brands += (combined_brands ? ', ' : '') + category_brands_value;
             }
          }
+
+         formData.set('add_dashboard_category_categories_type', combined_categories);
          formData.set('add_dashboard_category_brand', combined_brands);
          
          formData.append('image_file_names', fileNames.join(','));
