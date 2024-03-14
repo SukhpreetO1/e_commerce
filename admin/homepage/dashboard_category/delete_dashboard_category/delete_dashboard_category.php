@@ -7,6 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
    $response = array();
    $result = mysqli_query($database_connection, "SELECT id FROM dashboard_category WHERE id = $dashboard_category_id");
    if (mysqli_num_rows($result) > 0) {
+      $category_types_brands_query = "SELECT id FROM dashboard_category_types_brands WHERE dashboard_category_id = $dashboard_category_id";
+      $category_types_brands_result = mysqli_query($database_connection, $category_types_brands_query);
+      while ($row = mysqli_fetch_assoc($category_types_brands_result)) {
+         mysqli_query($database_connection, "DELETE FROM dashboard_category_types_brands WHERE dashboard_category_id = $dashboard_category_id");
+      }
+
       $uploaded_image_query = "SELECT path FROM dashboard_category_images WHERE dashboard_category_id = $dashboard_category_id";
       $uploaded_image_result = mysqli_query($database_connection, $uploaded_image_query);
       while ($row = mysqli_fetch_assoc($uploaded_image_result)) {

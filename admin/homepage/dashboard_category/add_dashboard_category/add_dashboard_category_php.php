@@ -1,7 +1,5 @@
 <?php
 include dirname(__DIR__, 4) . "/common/config/config.php";
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 $add_dashboard_category_input_name = $add_dashboard_category_name_err = "";
 $add_dashboard_category_categories_type = $add_dashboard_category_categories_type_err = "";
@@ -16,13 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    if (empty($add_dashboard_category_input_name)) {
       $errors['add_dashboard_category_name'] = "Name is required.";
-   } elseif (strlen($add_dashboard_category_input_name) < 3 || strlen($add_dashboard_category_input_name) > 25) {
-      $errors['add_dashboard_category_name'] = "Name must be between 3 and 25 characters long.";
+   } elseif (strlen($add_dashboard_category_input_name) < 3 || strlen($add_dashboard_category_input_name) > 30) {
+      $errors['add_dashboard_category_name'] = "Name must be between 3 and 30 characters long.";
    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $add_dashboard_category_input_name)) {
       $errors['add_dashboard_category_name'] = "Only alphabets are allowed.";
    }
-
-   //  
 
    if (empty($errors)) {
       $check_sql = "SELECT * FROM dashboard_category WHERE name = ?";
@@ -89,35 +85,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   chmod($image_directory, 0777);
                }
 
-               $image_name_without_space = str_replace(' ', '_', $image_name);
-               $target_path = $image_directory . $image_name_without_space;
-
                foreach ($_FILES as $fileKey => $fileArray) {
-                  if (strpos($fileKey, 'add_dashboard_category_images_') !== false) {
-                     if (move_uploaded_file($fileArray["tmp_name"][$key], $target_path)) {
+                  if (strpos($fileKey, 'add_dashboard_category_images') !== false) {
+                     $image_name_without_space = str_replace(' ', '_', $fileArray['name']);
+                     $target_path = $image_directory . $image_name_without_space;
+                     if (move_uploaded_file($fileArray["tmp_name"], $target_path)) {
                         $image_paths[] = $target_path;
                         $insert_image_sql = "INSERT INTO dashboard_category_images (dashboard_category_id, path) VALUES (?, ?)";
                         $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
                         mysqli_stmt_bind_param($insert_image_stmt, "is", $dashboard_category_id, $image_name_without_space);
                         mysqli_stmt_execute($insert_image_stmt);
-                     } else {
-                        $response['error'] = "Failed to move uploaded file.";
-                     }
-                  } else if (strpos($fileKey, 'add_dashboard_category_images') !== false) {
-                     if (move_uploaded_file($fileArray["tmp_name"][$key], $target_path)) {
-                        $image_paths[] = $target_path;
-                        $insert_image_sql = "INSERT INTO dashboard_category_images (dashboard_category_id, path) VALUES (?, ?)";
-                        $insert_image_stmt = mysqli_prepare($database_connection, $insert_image_sql);
-                        mysqli_stmt_bind_param($insert_image_stmt, "is", $dashboard_category_id, $image_name_without_space);
-                        mysqli_stmt_execute($insert_image_stmt);
-                     } else {
-                        $response['error'] = "Failed to move uploaded file.";
                      }
                   }
                }
-
-               var_dump(move_uploaded_file($fileArray["tmp_name"][$key], $target_path));
-               die;
             }
          } else {
             $add_products_image = null;

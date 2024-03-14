@@ -9,8 +9,41 @@ if ($result->num_rows > 0) {
 ?>
       <div class="dashboard_category_images_description">
          <div class="dashboard_category_name d-flex">
-            <h5>Category Name : </h5>
-            <p style="font-size: 1.25rem; margin-left:3px; margin-top:-3px"><?php echo $dashboard_category_data['name']; ?></p>
+            <div class="col-4 d-flex">
+               <h5>Name : </h5>
+               <p style="font-size: 1.25rem; margin-left:3px; margin-top:-3px"><?php echo $dashboard_category_data['name']; ?></p>
+            </div>
+            <?php
+            $dashboard_category_id = $dashboard_category_data['id'];
+            $brand_sql = "SELECT dashboard_category_types_brands.* , brands.id as brands_id, brands.name as brands_name
+                              FROM dashboard_category_types_brands 
+                              JOIN brands ON dashboard_category_types_brands.brands_id = brands.id
+                              WHERE dashboard_category_id = $dashboard_category_id";
+            $result = $database_connection->query($brand_sql);
+            if ($result->num_rows > 0) {
+               while ($dashboard_category_brands = $result->fetch_assoc()) {
+                  echo "<div class='col-4 d-flex'>";
+                  echo "<h5>Brand Name : </h5>";
+                  echo "<p style='font-size: 1.25rem; margin-left:3px; margin-top:-3px'>" . $dashboard_category_brands['brands_name'] . "</p>";
+                  echo "</div>";
+               }
+            }
+
+            $category_type_sql = "SELECT dashboard_category_types_brands.* , categories_type.id as categories_type_id, categories_type.name as categories_type_name
+                              FROM dashboard_category_types_brands 
+                              JOIN categories_type ON dashboard_category_types_brands.categories_types_id = categories_type.id
+                              WHERE dashboard_category_id = $dashboard_category_id";
+            $result = $database_connection->query($category_type_sql);
+            if ($result->num_rows > 0) {
+               while ($dashboard_category_category_type = $result->fetch_assoc()) {
+                  echo "<div class='col-4 d-flex'>";
+                  echo "<h5>Category Type : </h5>";
+                  echo "<p style='font-size: 1.25rem; margin-left:3px; margin-top:-3px'>" . $dashboard_category_category_type['categories_type_name'] . "</p>";
+                  echo "</div>";
+               }
+            }
+            ?>
+
          </div>
          <div class="dashboard_category_images col-12">
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
